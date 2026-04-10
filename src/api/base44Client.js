@@ -1,14 +1,2 @@
-import { createClient } from '@base44/sdk';
-import { appParams } from '@/lib/app-params';
-
-const { appId, token, functionsVersion, appBaseUrl } = appParams;
-
-//Create a client with authentication required
-export const base44 = createClient({
-  appId,
-  token,
-  functionsVersion,
-  serverUrl: '',
-  requiresAuth: false,
-  appBaseUrl
-});
+// Base44 已移除，此檔案保留為空以避免 import 錯誤
+export default {};
