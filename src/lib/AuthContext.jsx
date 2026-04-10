@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
   const [userData, setUserData] = useState(null);
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
 
-  uuseEffect(() => {
+  useEffect(() => {
     // 處理 Google 登入跳轉回來的結果
     getRedirectResult(auth).catch((error) => {
       console.error("Redirect 登入失敗：", error);
