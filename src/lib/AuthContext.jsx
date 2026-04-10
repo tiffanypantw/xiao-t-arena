@@ -1,8 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth, googleProvider, db } from "./firebase";
 import {
-  signInWithRedirect,
-  getRedirectResult,
+  signInWithPopup,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
@@ -21,10 +20,6 @@ export function AuthProvider({ children }) {
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
 
   useEffect(() => {
-    // 處理 Google 登入跳轉回來的結果
-    getRedirectResult(auth).catch((error) => {
-      console.error("Redirect 登入失敗：", error);
-    });
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
@@ -52,18 +47,17 @@ export function AuthProvider({ children }) {
         photoURL: firebaseUser.photoURL,
         createdAt: serverTimestamp(),
         weeklyProgress: {},
+        collection: {},
       };
       await setDoc(userRef, newUser);
       setUserData(newUser);
     }
   };
 
-  const loginWithGoogle = async () => {
-    try {
-      await signInWithRedirect(auth, googleProvider);
-    } catch (error) {
+  const loginWithGoogle = () => {
+    signInWithPopup(auth, googleProvider).catch((error) => {
       console.error("登入失敗：", error);
-    }
+    });
   };
 
   const logout = async () => {
