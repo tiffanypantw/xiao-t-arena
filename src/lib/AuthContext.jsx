@@ -4,6 +4,9 @@ import {
   signInWithPopup,
   signOut,
   onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import {
   doc,
@@ -43,7 +46,7 @@ export function AuthProvider({ children }) {
       const newUser = {
         uid: firebaseUser.uid,
         email: firebaseUser.email,
-        displayName: firebaseUser.displayName,
+        displayName: firebaseUser.displayName || firebaseUser.email?.split('@')[0],
         photoURL: firebaseUser.photoURL,
         createdAt: serverTimestamp(),
         weeklyProgress: {},
@@ -56,8 +59,36 @@ export function AuthProvider({ children }) {
 
   const loginWithGoogle = () => {
     signInWithPopup(auth, googleProvider).catch((error) => {
-      console.error("登入失敗：", error);
+      console.error("Google 登入失敗：", error);
     });
+  };
+
+  const loginWithEmail = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      return { success: true };
+    } catch (error) {
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+        return { success: false, error: '電子郵件或密碼錯誤' };
+      }
+      return { success: false, error: '登入失敗，請再試一次' };
+    }
+  };
+
+  const registerWithEmail = async (email, password, displayName) => {
+    try {
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(result.user, { displayName });
+      return { success: true };
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        return { success: false, error: '這個電子郵件已經註冊過了' };
+      }
+      if (error.code === 'auth/weak-password') {
+        return { success: false, error: '密碼至少需要 6 個字元' };
+      }
+      return { success: false, error: '註冊失敗，請再試一次' };
+    }
   };
 
   const logout = async () => {
@@ -88,6 +119,15 @@ export function AuthProvider({ children }) {
     setUserData((prev) => ({ ...prev, weeklyProgress: updatedProgress }));
   };
 
+  const refreshUserData = async () => {
+    if (!user) return;
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+      setUserData(userSnap.data());
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -95,8 +135,11 @@ export function AuthProvider({ children }) {
         userData,
         isLoadingAuth,
         loginWithGoogle,
+        loginWithEmail,
+        registerWithEmail,
         logout,
         saveProgress,
+        refreshUserData,
       }}
     >
       {children}
