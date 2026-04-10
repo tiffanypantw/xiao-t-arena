@@ -6,6 +6,7 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import Login from '@/pages/Login';
 import Home from './pages/Home';
+import Passport from './pages/Passport';
 import Week1Practice from './pages/Week1Practice';
 import QuickChallenge from './pages/QuickChallenge';
 import ConceptPractice from './pages/ConceptPractice';
@@ -30,6 +31,7 @@ const AuthenticatedApp = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Home" element={<Home />} />
+      <Route path="/Passport" element={<Passport />} />
       <Route path="/Week1Practice" element={<Week1Practice />} />
       <Route path="/QuickChallenge" element={<QuickChallenge />} />
       <Route path="/ConceptPractice" element={<ConceptPractice />} />
