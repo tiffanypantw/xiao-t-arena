@@ -11,7 +11,29 @@ export const REDEEM_CODES = {
   "B-EQ-C3M7": { type: "badge", rewardId: "badge-exchange-questioner", maxUses: 5 },
   "B-EQ-A1K9": { type: "badge", rewardId: "badge-exchange-questioner", maxUses: 5 },
 
-  // 卡片碼 — 交換卡關點
+  // 徽章碼 — 貨幣溯源者 (Week 2)
+  "B-OS-K3M7": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-T1P9": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-N8A2": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-Z4J6": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-Q2W5": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-R7C1": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-H9X3": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-L5D8": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-V6G4": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-Y1B0": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-F3N9": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-U8K2": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-M4T7": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-E2R6": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-S9L1": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-C5Z3": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-W7A4": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-J0H8": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-D6Q5": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+  "B-OS-X1V2": { type: "badge", rewardId: "badge-origin-seeker", maxUses: 5 },
+
+  // 卡片碼 — 交換卡關點 (Week 1)
   "C-EF-K1U8": { type: "card", rewardId: "card-exchange-bottleneck", maxUses: 5 },
   "C-EF-J9T1": { type: "card", rewardId: "card-exchange-bottleneck", maxUses: 5 },
   "C-EF-H8S2": { type: "card", rewardId: "card-exchange-bottleneck", maxUses: 5 },
@@ -22,6 +44,28 @@ export const REDEEM_CODES = {
   "C-EF-C3M7": { type: "card", rewardId: "card-exchange-bottleneck", maxUses: 5 },
   "C-EF-B2L8": { type: "card", rewardId: "card-exchange-bottleneck", maxUses: 5 },
   "C-EF-A1K9": { type: "card", rewardId: "card-exchange-bottleneck", maxUses: 5 },
+
+  // 卡片碼 — 共識貨幣 (Week 2)
+  "C-CC-G8Y6": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-N1L5": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-R9J2": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-V5H4": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-L6T7": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-T8Q1": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-H3V4": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-W4D3": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-J7B1": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-B5Z7": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-F9K2": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-S8P3": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-Q2S9": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-D1R5": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-P2N6": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-X6F8": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-Z3M8": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-K4W9": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-Y4G6": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
+  "C-CC-M7X3": { type: "card", rewardId: "card-consensus-currency", maxUses: 5 },
 
   // 卡片碼 — 價格不等於價值（直播限定）
   "C-PV-A1K9": { type: "card", rewardId: "card-price-vs-value", maxUses: 5 },
@@ -35,7 +79,7 @@ export const REDEEM_CODES = {
   "C-PV-J9T1": { type: "card", rewardId: "card-price-vs-value", maxUses: 5 },
   "C-PV-K1U8": { type: "card", rewardId: "card-price-vs-value", maxUses: 5 },
 
-  // 徽章碼 — 價值觀察者
+  // 徽章碼 — 價值觀察者（直播限定）
   "B-VO-A7K2": { type: "badge", rewardId: "badge-value-observer", maxUses: 5 },
   "B-VO-B2L8": { type: "badge", rewardId: "badge-value-observer", maxUses: 5 },
   "B-VO-C8P4": { type: "badge", rewardId: "badge-value-observer", maxUses: 5 },
@@ -67,11 +111,18 @@ export const REWARDS = {
     week: 1,
     image: "/images/W1 交換提問者.png",
   },
+  "badge-origin-seeker": {
+    type: "badge",
+    name: "貨幣溯源者",
+    description: "完成 Week 2 財商概念測驗，理解金錢的起源與信任",
+    week: 2,
+    image: "/images/W2_貨幣溯源者徽章.png",
+  },
   "badge-value-observer": {
     type: "badge",
     name: "價值觀察者",
     description: "理解價值與價格的差異",
-    week: 2,
+    week: 0,
     image: "/images/財商思維啟航 直播體驗徽章 1.png",
   },
   "badge-beginner": {
@@ -86,6 +137,12 @@ export const REWARDS = {
     name: "交換的卡關點",
     description: "合作始於交換：我有什麼？需求未合、時間未合、價值難量",
     image: "/images/W1 交換的卡關點.png",
+  },
+  "card-consensus-currency": {
+    type: "card",
+    name: "共識貨幣",
+    description: "錢的樣子一直在變，但讓它成為錢的那件事，從來沒變過",
+    image: "/images/W2_共識貨幣_卡片.png",
   },
   "card-price-vs-value": {
     type: "card",
@@ -108,7 +165,7 @@ export const WEEKS = [
     id: "week2",
     title: "Week 2",
     question: "價格是什麼？它跟價值一樣嗎？",
-    badgeId: "badge-value-observer",
+    badgeId: "badge-origin-seeker",
     route: "/Week2Practice",
     available: false,
   },
