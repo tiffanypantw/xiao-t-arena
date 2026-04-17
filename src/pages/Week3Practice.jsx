@@ -109,12 +109,52 @@ function CardShell({ q, children }) {
 function QuestionCard({ q, onAnswer }) {
   const [selected, setSelected] = useState(null);
   const [revealed, setRevealed] = useState(false);
+  const isCorrect = selected === q.answer;
 
   const handleConfirm = () => {
     if (!selected) return;
     setRevealed(true);
-    setTimeout(() => onAnswer(selected === q.answer), 900);
   };
+
+  const handleNext = () => {
+    onAnswer(isCorrect);
+  };
+
+  return (
+    <CardShell q={q}>
+      <div className="space-y-2 mt-4">
+        {q.options.map((opt, i) => {
+          const isSelected = selected === opt;
+          const isOptCorrect = opt === q.answer;
+          let style = 'border-border bg-card text-foreground';
+          if (revealed) {
+            if (isOptCorrect) style = 'border-green-500 bg-green-50 text-green-800';
+            else if (isSelected && !isOptCorrect) style = 'border-red-400 bg-red-50 text-red-700';
+          } else if (isSelected) {
+            style = 'border-foreground bg-foreground text-background';
+          }
+          return (
+            <button key={opt} onClick={() => !revealed && setSelected(opt)}
+              className={`w-full text-left rounded-xl border-2 px-4 py-3 text-sm font-medium transition-all ${style}`}>
+              <span className="font-bold mr-2">{String.fromCharCode(65 + i)}.</span>{opt}
+            </button>
+          );
+        })}
+      </div>
+      {!revealed && selected && (
+        <Button onClick={handleConfirm} className="w-full mt-3">確認答案</Button>
+      )}
+      {revealed && (
+        <>
+          <FeedbackRow correct={isCorrect} correctLabel={q.answer} explanation={q.explanation} />
+          <Button onClick={handleNext} className="w-full mt-3">
+            下一題 →
+          </Button>
+        </>
+      )}
+    </CardShell>
+  );
+}
 
   return (
     <CardShell q={q}>
