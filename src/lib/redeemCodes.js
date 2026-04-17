@@ -116,7 +116,7 @@ export const REWARDS = {
     name: "貨幣溯源者",
     description: "完成 Week 2 財商概念測驗，理解金錢的起源與信任",
     week: 2,
-    image: "/images/W2_貨幣溯源者徽章.png",
+    image: "/images/W2 貨幣溯源者徽章.png",
   },
   "badge-value-observer": {
     type: "badge",
@@ -142,7 +142,7 @@ export const REWARDS = {
     type: "card",
     name: "共識貨幣",
     description: "錢的樣子一直在變，但讓它成為錢的那件事，從來沒變過",
-    image: "/images/W2_共識貨幣_卡片.png",
+    image: "/images/W2 共識貨幣 卡片.png",
   },
   "card-price-vs-value": {
     type: "card",
