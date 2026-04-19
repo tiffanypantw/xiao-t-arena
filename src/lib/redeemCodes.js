@@ -150,6 +150,13 @@ export const REWARDS = {
     description: "價格是數字，價值要看情境",
     image: "/images/財商思維啟航 直播卡片 1.png",
   },
+  "badge-value-detective": {
+    type: "badge",
+    name: "價值偵探",
+    description: "完成 VD-0419 直播限定測驗，理解機會成本與情境定價",
+    week: 0,
+    image: null,
+  },
 };
 
 export const WEEKS = [
