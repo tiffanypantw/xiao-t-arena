@@ -155,7 +155,7 @@ export const REWARDS = {
     name: "價值偵探",
     description: "完成 VD-0419 直播限定測驗，理解機會成本與情境定價",
     week: 0,
-    image: null,
+    image: "/images/VD-0419_價值偵探徽章.png",
   },
 };
 
