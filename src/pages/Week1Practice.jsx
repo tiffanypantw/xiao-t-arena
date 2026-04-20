@@ -178,7 +178,7 @@ function ResultScreen({ correct, total, onRetry }) {
             <li>寄到指定 email</li>
           </ol>
           <div className="pt-2 border-t border-border text-sm font-semibold text-foreground">
-            👉 你將獲得下一步解鎖碼 🎉
+            👉 你將獲得徽章＋卡片兌換碼 🎉
           </div>
         </div>
         <Button variant="outline" onClick={() => navigate('/Home')} className="w-full">返回首頁</Button>
@@ -192,6 +192,7 @@ function ResultScreen({ correct, total, onRetry }) {
         <div className="text-5xl">💪</div>
         <h2 className="text-xl font-black text-foreground">還差一點點，再試一次！</h2>
         <p className="text-3xl font-black text-muted-foreground">{correct} / {total}</p>
+        <p className="text-sm text-muted-foreground">10題全對才能獲得兌換碼！</p>
       </div>
       <div className="bg-muted/50 border border-border rounded-2xl p-5 space-y-3">
         <p className="text-sm font-bold text-foreground">👉 想一想這些問題：</p>
