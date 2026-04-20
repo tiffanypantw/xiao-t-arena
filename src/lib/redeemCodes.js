@@ -132,23 +132,23 @@ export const REWARDS = {
     week: 0,
     image: "/images/財商思維啟航 直播體驗徽章 1.png",
   },
-  "card-exchange-bottleneck": {
+ "card-exchange-bottleneck": {
     type: "card",
     name: "交換的卡關點",
     description: "合作始於交換：我有什麼？需求未合、時間未合、價值難量",
-    image: "/images/W1 交換的卡關點.png",
+    image: "/images/W1_交換的卡關點_v1_2.png",
   },
-  "card-consensus-currency": {
+ "card-consensus-currency": {
     type: "card",
     name: "共識貨幣",
     description: "錢的樣子一直在變，但讓它成為錢的那件事，從來沒變過",
-    image: "/images/W2 共識貨幣 卡片.png",
+    image: "/images/W2_共識貨幣_v1_2.png",
   },
-  "card-price-vs-value": {
+ "card-price-secret": {
     type: "card",
-    name: "價格不等於價值（直播限定）",
-    description: "價格是數字，價值要看情境",
-    image: "/images/財商思維啟航 直播卡片 1.png",
+    name: "價格的秘密",
+    description: "價格不是老闆隨便寫的，它是供給和需求互相拉扯出來的數字",
+    image: "/images/W3_價格的秘密_v1_2.png",
   },
   "badge-value-detective": {
     type: "badge",
