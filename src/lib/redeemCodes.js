@@ -45,6 +45,18 @@ export const REDEEM_CODES = {
   "B-OS-V7S0": { type: "badge", rewardId: "badge-value-discerner", maxUses: 5 },
   "B-OS-E6U3": { type: "badge", rewardId: "badge-value-discerner", maxUses: 5 },
 
+  // 徽章碼 — 成本偵探者 (Week 4)
+  "B-CD-2DY2": { type: "badge", rewardId: "badge-cost-detective", maxUses: 5 },
+  "B-CD-46A3": { type: "badge", rewardId: "badge-cost-detective", maxUses: 5 },
+  "B-CD-7UCV": { type: "badge", rewardId: "badge-cost-detective", maxUses: 5 },
+  "B-CD-AUGZ": { type: "badge", rewardId: "badge-cost-detective", maxUses: 5 },
+  "B-CD-GHTW": { type: "badge", rewardId: "badge-cost-detective", maxUses: 5 },
+  "B-CD-HRVJ": { type: "badge", rewardId: "badge-cost-detective", maxUses: 5 },
+  "B-CD-JHHE": { type: "badge", rewardId: "badge-cost-detective", maxUses: 5 },
+  "B-CD-QBAC": { type: "badge", rewardId: "badge-cost-detective", maxUses: 5 },
+  "B-CD-XDA2": { type: "badge", rewardId: "badge-cost-detective", maxUses: 5 },
+  "B-CD-XZUQ": { type: "badge", rewardId: "badge-cost-detective", maxUses: 5 },
+
   // 卡片碼 — 交換卡關點 (Week 1)
   "C-EF-K1U8": { type: "card", rewardId: "card-exchange-bottleneck", maxUses: 5 },
   "C-EF-J9T1": { type: "card", rewardId: "card-exchange-bottleneck", maxUses: 5 },
@@ -90,6 +102,18 @@ export const REDEEM_CODES = {
   "C-SP-Q8L5": { type: "card", rewardId: "card-price-secret", maxUses: 5 },
   "C-SP-V3N7": { type: "card", rewardId: "card-price-secret", maxUses: 5 },
   "C-SP-M2K4": { type: "card", rewardId: "card-price-secret", maxUses: 5 },
+
+  // 卡片碼 — 成本的真相 (Week 4)
+  "C-CT-4B2R": { type: "card", rewardId: "card-cost-truth", maxUses: 5 },
+  "C-CT-4FZQ": { type: "card", rewardId: "card-cost-truth", maxUses: 5 },
+  "C-CT-6NWJ": { type: "card", rewardId: "card-cost-truth", maxUses: 5 },
+  "C-CT-93MD": { type: "card", rewardId: "card-cost-truth", maxUses: 5 },
+  "C-CT-CPDN": { type: "card", rewardId: "card-cost-truth", maxUses: 5 },
+  "C-CT-CUK5": { type: "card", rewardId: "card-cost-truth", maxUses: 5 },
+  "C-CT-MJEG": { type: "card", rewardId: "card-cost-truth", maxUses: 5 },
+  "C-CT-NVGZ": { type: "card", rewardId: "card-cost-truth", maxUses: 5 },
+  "C-CT-UD8P": { type: "card", rewardId: "card-cost-truth", maxUses: 5 },
+  "C-CT-XW76": { type: "card", rewardId: "card-cost-truth", maxUses: 5 },
 
   // 卡片碼 — 價格不等於價值（直播限定）
   "C-PV-A1K9": { type: "card", rewardId: "card-price-vs-value", maxUses: 5 },
@@ -149,6 +173,13 @@ export const REWARDS = {
     week: 3,
     image: "/images/W3_價值分辨者_徽章.png",
   },
+  "badge-cost-detective": {
+    type: "badge",
+    name: "成本偵探者",
+    description: "完成 Week 4 財商概念測驗，理解成本與利潤的關係",
+    week: 4,
+    image: "/images/W4_成本偵探者_徽章.png",
+  },
   "badge-value-observer": {
     type: "badge",
     name: "價值觀察者",
@@ -188,6 +219,12 @@ export const REWARDS = {
     description: "價格不是老闆隨便寫的，它是供給和需求互相拉扯出來的數字",
     image: "/images/W3_價格的秘密_v1_2.png",
   },
+  "card-cost-truth": {
+    type: "card",
+    name: "成本的真相",
+    description: "收入不等於利潤。每一個價格背後，都藏著老闆在算的一本帳",
+    image: "/images/W4_成本的真相_卡片.png",
+  },
   "card-price-vs-value": {
     type: "card",
     name: "價格不等於價值（直播限定）",
@@ -219,6 +256,14 @@ export const WEEKS = [
     question: "為什麼有些東西貴但大家還是搶著買？",
     badgeId: "badge-value-discerner",
     route: "/Week3Practice",
+    available: false,
+  },
+  {
+    id: "week4",
+    title: "Week 4",
+    question: "老闆賣東西真的賺那麼多嗎？",
+    badgeId: "badge-cost-detective",
+    route: "/Week4Practice",
     available: false,
   },
 ];

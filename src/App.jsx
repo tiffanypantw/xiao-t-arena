@@ -10,6 +10,7 @@ import Passport from './pages/Passport';
 import Week1Practice from './pages/Week1Practice';
 import Week2Practice from './pages/Week2Practice';
 import Week3Practice from './pages/Week3Practice';
+import Week4Practice from './pages/Week4Practice';
 import VDPractice from './pages/VDPractice';
 import QuickChallenge from './pages/QuickChallenge';
 import ConceptPractice from './pages/ConceptPractice';
@@ -38,6 +39,7 @@ const AuthenticatedApp = () => {
       <Route path="/Week1Practice" element={<Week1Practice />} />
       <Route path="/Week2Practice" element={<Week2Practice />} />
       <Route path="/Week3Practice" element={<Week3Practice />} />
+      <Route path="/Week4Practice" element={<Week4Practice />} />
       <Route path="/VDPractice" element={<VDPractice />} />
       <Route path="/QuickChallenge" element={<QuickChallenge />} />
       <Route path="/ConceptPractice" element={<ConceptPractice />} />
