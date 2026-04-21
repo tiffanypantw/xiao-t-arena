@@ -171,7 +171,7 @@ export const REWARDS = {
     name: "價值分辨者",
     description: "完成 Week 3 財商概念測驗，理解價值與價格的差異",
     week: 3,
-    image: "/images/W3_價值分辨者_徽章.png",
+    image: "/images/W3 價值分辨者 徽章.png",
   },
   "badge-cost-detective": {
     type: "badge",
