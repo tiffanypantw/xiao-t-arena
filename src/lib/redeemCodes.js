@@ -149,9 +149,10 @@ export const REDEEM_CODES = {
 
   // 徽章碼 — 初學者徽章
   "X8F2K9Q": { type: "badge", rewardId: "badge-beginner", maxUses: 99 },
-};
-// 限量玩偶 — Mystical Guide Aether（2026年4月直播限定）
+  // 限量玩偶 — Mystical Guide Aether（2026年4月直播限定）
   "LIVE-W1W4-2604": { type: "card", rewardId: "card-aether-doll", maxUses: 9999 },
+};
+
 
 export const REWARDS = {
   "badge-exchange-questioner": {
