@@ -150,6 +150,8 @@ export const REDEEM_CODES = {
   // 徽章碼 — 初學者徽章
   "X8F2K9Q": { type: "badge", rewardId: "badge-beginner", maxUses: 99 },
 };
+// 限量玩偶 — Mystical Guide Aether（2026年4月直播限定）
+  "LIVE-W1W4-2604": { type: "card", rewardId: "card-aether-doll", maxUses: 9999 },
 
 export const REWARDS = {
   "badge-exchange-questioner": {
@@ -230,6 +232,12 @@ export const REWARDS = {
     name: "價格不等於價值（直播限定）",
     description: "價格是數字，價值要看情境",
     image: "/images/財商思維啟航 直播卡片 1.png",
+  },
+  "card-aether-doll": {
+    type: "card",
+    name: "Mystical Guide - Aether｜限量玩偶",
+    description: "2026年4月直播限定。感謝你來參加直播！",
+    image: "/images/2026_04每月直播_限量玩偶.png",
   },
 };
 
