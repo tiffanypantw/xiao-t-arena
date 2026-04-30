@@ -136,7 +136,13 @@ export const getPendingBadges = async () => {
 
 // 審核開放題（老師看見）
 export const approveOpenAnswer = async (progressId, encouragementMessage) => {
+  // 1) 先讀取這筆紀錄，拿到 userId 跟 weekNumber
   const ref = doc(db, "weeklyProgress", progressId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) throw new Error("找不到該筆進度紀錄");
+  const { userId, weekNumber } = snap.data();
+
+  // 2) 更新 weeklyProgress（原本就有的邏輯）
   await updateDoc(ref, {
     openAnswerSeenAt: serverTimestamp(),
     encouragementMessage,
@@ -144,6 +150,31 @@ export const approveOpenAnswer = async (progressId, encouragementMessage) => {
     badgeEarnedAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   });
+
+  // 3) 同步把徽章寫進 users.collection（讓學習護照看得到）
+  const weekToBadge = {
+    1: "badge-exchange-questioner",
+    2: "badge-origin-seeker",
+    3: "badge-value-discerner",
+    4: "badge-cost-detective",
+    5: "badge-need-decoder",
+  };
+  const badgeId = weekToBadge[weekNumber];
+  if (badgeId && userId) {
+    const userRef = doc(db, "users", userId);
+    await setDoc(
+      userRef,
+      {
+        collection: {
+          [badgeId]: {
+            unlockedAt: new Date().toISOString(),
+            source: "admin-review",
+          },
+        },
+      },
+      { merge: true }
+    );
+  }
 };
 
 // 取得所有待審核的任務（taskApprovedAt === null）
