@@ -19,6 +19,7 @@ import ConceptPractice from './pages/ConceptPractice';
 import DailyChallenge from './pages/DailyChallenge';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminLayout from './pages/admin/AdminLayout';
+import AdminQuick from './pages/admin/AdminQuick';
 
 const StudentApp = () => {
   const { user, isLoadingAuth } = useAuth();
@@ -69,7 +70,7 @@ function App() {
               }
             >
               <Route index element={<div className="text-slate-500 text-sm">請選擇上方的審核功能</div>} />
-              <Route path="quick" element={<div className="text-slate-500 text-sm">練習題審核（即將完成）</div>} />
+              <Route path="quick" element={<AdminQuick />} />
               <Route path="deep" element={<div className="text-slate-500 text-sm">任務審核（即將完成）</div>} />
             </Route>
 
