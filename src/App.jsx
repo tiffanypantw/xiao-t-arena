@@ -22,6 +22,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import AdminQuick from './pages/admin/AdminQuick';
 import AdminDeep from './pages/admin/AdminDeep';
 import AdminDeepDetail from './pages/admin/AdminDeepDetail';
+import WeekLearning from './pages/WeekLearning';
 
 const StudentApp = () => {
   const { user, isLoadingAuth } = useAuth();
@@ -46,6 +47,7 @@ const StudentApp = () => {
       <Route path="/Week3Practice" element={<Week3Practice />} />
       <Route path="/Week4Practice" element={<Week4Practice />} />
       <Route path="/Week5Practice" element={<Week5Practice />} />
+      <Route path="/week/:weekNumber" element={<WeekLearning />} />
       <Route path="/VDPractice" element={<VDPractice />} />
       <Route path="/QuickChallenge" element={<QuickChallenge />} />
       <Route path="/ConceptPractice" element={<ConceptPractice />} />

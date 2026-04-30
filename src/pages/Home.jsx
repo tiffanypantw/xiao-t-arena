@@ -129,7 +129,7 @@ export default function Home() {
                 transition={{ delay: idx * 0.08 + 0.15 }}
               >
                 <button
-                  onClick={() => unlocked && navigate(week.route)}
+                  onClick={() => unlocked && navigate(`/week/${idx + 1}`)}
                   disabled={!unlocked}
                   className={`w-full text-left rounded-2xl border-2 p-4 transition-all ${
                     completed
