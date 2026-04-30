@@ -147,6 +147,10 @@ export const REDEEM_CODES = {
   "B-VO-X9M4": { type: "badge", rewardId: "badge-value-observer", maxUses: 5 },
   "B-VO-Y4F6": { type: "badge", rewardId: "badge-value-observer", maxUses: 5 },
 
+  // 徽章碼 — 需求拆解員 (Week 5) 無限次
+  "B-ND-VW3N": { type: "badge", rewardId: "badge-need-decoder", maxUses: 9999 },
+  // 卡片碼 — 需求拆解員之證 (Week 5) 無限次
+  "C-ND-GATN": { type: "card", rewardId: "card-need-decoder-seal", maxUses: 9999 },
   // 徽章碼 — 初學者徽章
   "X8F2K9Q": { type: "badge", rewardId: "badge-beginner", maxUses: 99 },
   // 限量玩偶 — Mystical Guide Aether（2026年4月直播限定）
@@ -204,6 +208,13 @@ export const REWARDS = {
     week: 0,
     image: "/images/VD-0419_價值偵探徽章.png",
   },
+  "badge-need-decoder": {
+    type: "badge",
+    name: "需求拆解員",
+    description: "完成 Week 5 財商概念測驗，理解需要 vs 想要與馬斯洛五層需求",
+    week: 5,
+    image: "/images/W5_Badge_需求拆解員_NeedDecoder_Ch2.png",
+  },
   "card-exchange-bottleneck": {
     type: "card",
     name: "交換的卡關點",
@@ -233,6 +244,12 @@ export const REWARDS = {
     name: "價格不等於價值（直播限定）",
     description: "價格是數字，價值要看情境",
     image: "/images/財商思維啟航 直播卡片 1.png",
+  },
+  "card-need-decoder-seal": {
+    type: "card",
+    name: "需求拆解員之證",
+    description: "五層需求，從生理到夢想。每個想要，都值得被拆解。答案，要學會問自己。",
+    image: "/images/W5_Card_需求拆解員之證_NeedDecoder_Ch2_png.png",
   },
   "card-aether-doll": {
     type: "card",
@@ -279,7 +296,7 @@ export const WEEKS = [
     id: "week5",
     title: "Week 5",
     question: "你買東西是「需要」還是「想要」？",
-    badgeId: null,
+    badgeId: "badge-need-decoder",
     route: "/Week5Practice",
     available: false,
   },
