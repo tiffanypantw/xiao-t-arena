@@ -20,7 +20,7 @@ import DailyChallenge from './pages/DailyChallenge';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminLayout from './pages/admin/AdminLayout';
 
-const AuthenticatedApp = () => {
+const StudentApp = () => {
   const { user, isLoadingAuth } = useAuth();
 
   if (isLoadingAuth) {
@@ -31,13 +31,10 @@ const AuthenticatedApp = () => {
     );
   }
 
-  if (!user) {
-    return <Login />;
-  }
+  if (!user) return <Login />;
 
   return (
     <Routes>
-      {/* 學生端 */}
       <Route path="/" element={<Home />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/Passport" element={<Passport />} />
@@ -50,22 +47,6 @@ const AuthenticatedApp = () => {
       <Route path="/QuickChallenge" element={<QuickChallenge />} />
       <Route path="/ConceptPractice" element={<ConceptPractice />} />
       <Route path="/DailyChallenge" element={<DailyChallenge />} />
-
-      {/* 後台 */}
-      <Route path="/admin/login" element={<AdminLogin />} />
-      <Route
-        path="/admin"
-        element={
-          <AdminRoute>
-            <AdminLayout />
-          </AdminRoute>
-        }
-      >
-        <Route index element={<div className="text-slate-500 text-sm">請選擇左上方的審核功能</div>} />
-        <Route path="quick" element={<div className="text-slate-500 text-sm">練習題審核（即將完成）</div>} />
-        <Route path="deep" element={<div className="text-slate-500 text-sm">任務審核（即將完成）</div>} />
-      </Route>
-
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
@@ -76,7 +57,25 @@ function App() {
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
         <Router>
-          <AuthenticatedApp />
+          <Routes>
+            {/* 後台路由（獨立於學生端，不需要先登入學生帳號）*/}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route
+              path="/admin/*"
+              element={
+                <AdminRoute>
+                  <AdminLayout />
+                </AdminRoute>
+              }
+            >
+              <Route index element={<div className="text-slate-500 text-sm">請選擇上方的審核功能</div>} />
+              <Route path="quick" element={<div className="text-slate-500 text-sm">練習題審核（即將完成）</div>} />
+              <Route path="deep" element={<div className="text-slate-500 text-sm">任務審核（即將完成）</div>} />
+            </Route>
+
+            {/* 學生端路由 */}
+            <Route path="/*" element={<StudentApp />} />
+          </Routes>
         </Router>
         <Toaster />
       </QueryClientProvider>
