@@ -4,6 +4,7 @@ import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
+import AdminRoute from '@/components/AdminRoute';
 import Login from '@/pages/Login';
 import Home from './pages/Home';
 import Passport from './pages/Passport';
@@ -16,6 +17,8 @@ import VDPractice from './pages/VDPractice';
 import QuickChallenge from './pages/QuickChallenge';
 import ConceptPractice from './pages/ConceptPractice';
 import DailyChallenge from './pages/DailyChallenge';
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminLayout from './pages/admin/AdminLayout';
 
 const AuthenticatedApp = () => {
   const { user, isLoadingAuth } = useAuth();
@@ -34,6 +37,7 @@ const AuthenticatedApp = () => {
 
   return (
     <Routes>
+      {/* 學生端 */}
       <Route path="/" element={<Home />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/Passport" element={<Passport />} />
@@ -46,6 +50,22 @@ const AuthenticatedApp = () => {
       <Route path="/QuickChallenge" element={<QuickChallenge />} />
       <Route path="/ConceptPractice" element={<ConceptPractice />} />
       <Route path="/DailyChallenge" element={<DailyChallenge />} />
+
+      {/* 後台 */}
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <AdminLayout />
+          </AdminRoute>
+        }
+      >
+        <Route index element={<div className="text-slate-500 text-sm">請選擇左上方的審核功能</div>} />
+        <Route path="quick" element={<div className="text-slate-500 text-sm">練習題審核（即將完成）</div>} />
+        <Route path="deep" element={<div className="text-slate-500 text-sm">任務審核（即將完成）</div>} />
+      </Route>
+
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
