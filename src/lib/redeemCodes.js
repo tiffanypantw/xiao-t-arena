@@ -275,4 +275,12 @@ export const WEEKS = [
     route: "/Week4Practice",
     available: false,
   },
+  {
+    id: "week5",
+    title: "Week 5",
+    question: "你買東西是「需要」還是「想要」？",
+    badgeId: null,
+    route: "/Week5Practice",
+    available: false,
+  },
 ];
