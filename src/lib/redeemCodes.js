@@ -249,7 +249,7 @@ export const REWARDS = {
     type: "card",
     name: "需求拆解員之證",
     description: "五層需求，從生理到夢想。每個想要，都值得被拆解。答案，要學會問自己。",
-    image: "/images/W5_Card_需求拆解員之證_NeedDecoder_Ch2_png.png",
+    image: "/images/W5_Card_需求拆解員之證_NeedDecoder_Ch2.png",
   },
   "card-aether-doll": {
     type: "card",
