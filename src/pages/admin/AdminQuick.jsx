@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getPendingOpenAnswers, approveOpenAnswer } from '@/api/weeklyProgress';
+import { getPendingBadges, approveOpenAnswer } from '@/api/weeklyProgress';
 import { ENCOURAGEMENT_MESSAGES } from '@/lib/admin-config';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
@@ -7,15 +7,13 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 export default function AdminQuick() {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [processing, setProcessing] = useState(null); // 正在處理的 id
-  const [selectedMessages, setSelectedMessages] = useState({}); // 每筆選的鼓勵語
+  const [processing, setProcessing] = useState(null);
+  const [selectedMessages, setSelectedMessages] = useState({});
 
-  // 載入待審核的開放題
   const loadRecords = async () => {
     setLoading(true);
     try {
-      const data = await getPendingOpenAnswers();
-      // 同時撈用戶名字
+      const data = await getPendingBadges();
       const withNames = await Promise.all(
         data.map(async (record) => {
           try {
@@ -31,10 +29,10 @@ export default function AdminQuick() {
           }
         })
       );
-      // 按提交時間排序（最早的在最上面）
+      // 按提交時間排序
       withNames.sort((a, b) => {
-        const aTime = a.openAnswerSubmittedAt?.seconds || 0;
-        const bTime = b.openAnswerSubmittedAt?.seconds || 0;
+        const aTime = (a.openAnswerSubmittedAt?.seconds || a.quizCompletedAt?.seconds || 0);
+        const bTime = (b.openAnswerSubmittedAt?.seconds || b.quizCompletedAt?.seconds || 0);
         return aTime - bTime;
       });
       setRecords(withNames);
@@ -46,7 +44,6 @@ export default function AdminQuick() {
 
   useEffect(() => { loadRecords(); }, []);
 
-  // 初始化每筆的預設鼓勵語
   useEffect(() => {
     const defaults = {};
     records.forEach((r) => {
@@ -57,7 +54,6 @@ export default function AdminQuick() {
     setSelectedMessages((prev) => ({ ...defaults, ...prev }));
   }, [records]);
 
-  // 老師看見了
   const handleApprove = async (record) => {
     const message = selectedMessages[record.id] || ENCOURAGEMENT_MESSAGES[0];
     setProcessing(record.id);
@@ -71,7 +67,6 @@ export default function AdminQuick() {
     setProcessing(null);
   };
 
-  // 格式化時間
   const formatTime = (timestamp) => {
     if (!timestamp) return '-';
     const date = timestamp.seconds
@@ -83,6 +78,9 @@ export default function AdminQuick() {
     });
   };
 
+  // 判斷是 Week 1-4 還是 Week 5+
+  const isEarlyWeek = (record) => record.weekNumber <= 4;
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -93,14 +91,13 @@ export default function AdminQuick() {
 
   return (
     <div className="space-y-4">
-      {/* 標題列 */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-black text-slate-900">⚡ 練習題開放題審核</h1>
+          <h1 className="text-lg font-black text-slate-900">⚡ 練習題審核 / 開放題審核</h1>
           <p className="text-sm text-slate-500 mt-0.5">
             {records.length > 0
-              ? `${records.length} 筆待審核`
-              : '目前沒有待審核的開放題'}
+              ? `${records.length} 筆待發放徽章`
+              : '目前沒有待審核的記錄'}
           </p>
         </div>
         <button
@@ -111,7 +108,6 @@ export default function AdminQuick() {
         </button>
       </div>
 
-      {/* 空狀態 */}
       {records.length === 0 && (
         <div className="bg-white border border-slate-200 rounded-xl p-12 text-center">
           <div className="text-3xl mb-2">✨</div>
@@ -119,7 +115,6 @@ export default function AdminQuick() {
         </div>
       )}
 
-      {/* 表格 */}
       {records.length > 0 && (
         <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
           <table className="w-full text-sm">
@@ -127,8 +122,9 @@ export default function AdminQuick() {
               <tr className="border-b border-slate-100 bg-slate-50">
                 <th className="text-left px-4 py-3 font-semibold text-slate-600 w-28">孩子</th>
                 <th className="text-left px-4 py-3 font-semibold text-slate-600 w-16">週次</th>
-                <th className="text-left px-4 py-3 font-semibold text-slate-600">開放題內容</th>
-                <th className="text-left px-4 py-3 font-semibold text-slate-600 w-28">提交時間</th>
+                <th className="text-left px-4 py-3 font-semibold text-slate-600 w-24">類型</th>
+                <th className="text-left px-4 py-3 font-semibold text-slate-600">內容</th>
+                <th className="text-left px-4 py-3 font-semibold text-slate-600 w-28">時間</th>
                 <th className="text-left px-4 py-3 font-semibold text-slate-600 w-48">鼓勵語</th>
                 <th className="px-4 py-3 w-36"></th>
               </tr>
@@ -153,19 +149,42 @@ export default function AdminQuick() {
                     </span>
                   </td>
 
-                  {/* 開放題內容前 100 字 */}
+                  {/* 類型 */}
+                  <td className="px-4 py-3">
+                    {isEarlyWeek(record) ? (
+                      <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-full">
+                        練習題全對
+                      </span>
+                    ) : (
+                      <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded-full">
+                        開放題提交
+                      </span>
+                    )}
+                  </td>
+
+                  {/* 內容 */}
                   <td className="px-4 py-3 text-slate-700 leading-relaxed">
                     <div className="max-w-md">
-                      {record.openAnswerContent?.slice(0, 100)}
-                      {record.openAnswerContent?.length > 100 && (
-                        <span className="text-slate-400">...</span>
-                      )}
+                      {isEarlyWeek(record)
+                        ? `練習題於 ${formatTime(record.quizCompletedAt)} 全部答對 ✓`
+                        : (
+                          <>
+                            {record.openAnswerContent?.slice(0, 100)}
+                            {record.openAnswerContent?.length > 100 && (
+                              <span className="text-slate-400">...</span>
+                            )}
+                          </>
+                        )
+                      }
                     </div>
                   </td>
 
-                  {/* 提交時間 */}
+                  {/* 時間 */}
                   <td className="px-4 py-3 text-slate-500 text-xs">
-                    {formatTime(record.openAnswerSubmittedAt)}
+                    {isEarlyWeek(record)
+                      ? formatTime(record.quizCompletedAt)
+                      : formatTime(record.openAnswerSubmittedAt)
+                    }
                   </td>
 
                   {/* 鼓勵語選單 */}

@@ -106,15 +106,32 @@ export const revealTask = async (userId, weekNumber) => {
 // 後台用函式
 // ==================
 
-// 取得所有待審核的開放題（openAnswerSeenAt === null）
-export const getPendingOpenAnswers = async () => {
-  const q = query(
+// 取得所有待發放徽章的記錄
+// Week 1-4：練習題全對但還沒發徽章
+// Week 5+：開放題已提交但老師還沒看
+export const getPendingBadges = async () => {
+  const results = [];
+
+  // Week 1-4：quizCompleted = true, badgeEarned = false
+  const q1 = query(
+    collection(db, "weeklyProgress"),
+    where("quizCompleted", "==", true),
+    where("badgeEarned", "==", false),
+    where("weekNumber", "<=", 4)
+  );
+  const snap1 = await getDocs(q1);
+  snap1.docs.forEach((d) => results.push({ id: d.id, ...d.data() }));
+
+  // Week 5+：openAnswerSubmittedAt != null, openAnswerSeenAt = null
+  const q2 = query(
     collection(db, "weeklyProgress"),
     where("openAnswerSubmittedAt", "!=", null),
     where("openAnswerSeenAt", "==", null)
   );
-  const snap = await getDocs(q);
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  const snap2 = await getDocs(q2);
+  snap2.docs.forEach((d) => results.push({ id: d.id, ...d.data() }));
+
+  return results;
 };
 
 // 審核開放題（老師看見）
