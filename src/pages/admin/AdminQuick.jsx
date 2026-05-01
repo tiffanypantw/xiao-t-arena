@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getPendingBadges, approveOpenAnswer } from '@/api/weeklyProgress';
-import { ENCOURAGEMENT_MESSAGES } from '@/lib/admin-config';
+import { getEncouragementMessages } from '@/lib/admin-config';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 
@@ -48,14 +48,14 @@ export default function AdminQuick() {
     const defaults = {};
     records.forEach((r) => {
       if (!selectedMessages[r.id]) {
-        defaults[r.id] = ENCOURAGEMENT_MESSAGES[0];
+        defaults[r.id] = getEncouragementMessages(r.weekNumber)[0];
       }
     });
     setSelectedMessages((prev) => ({ ...defaults, ...prev }));
   }, [records]);
 
   const handleApprove = async (record) => {
-    const message = selectedMessages[record.id] || ENCOURAGEMENT_MESSAGES[0];
+    const message = selectedMessages[record.id] || getEncouragementMessages(record.weekNumber)[0];
     setProcessing(record.id);
     try {
       await approveOpenAnswer(record.id, message);
@@ -193,7 +193,7 @@ export default function AdminQuick() {
                   {/* 鼓勵語選單 */}
                   <td className="px-4 py-3">
                     <select
-                      value={selectedMessages[record.id] || ENCOURAGEMENT_MESSAGES[0]}
+                      value={selectedMessages[record.id] || getEncouragementMessages(record.weekNumber)[0]}
                       onChange={(e) =>
                         setSelectedMessages((prev) => ({
                           ...prev,
@@ -202,7 +202,7 @@ export default function AdminQuick() {
                       }
                       className="w-full text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white focus:outline-none focus:border-violet-400"
                     >
-                      {ENCOURAGEMENT_MESSAGES.map((msg) => (
+                      {getEncouragementMessages(record.weekNumber).map((msg) => (
                         <option key={msg} value={msg}>{msg}</option>
                       ))}
                     </select>
