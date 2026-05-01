@@ -20,10 +20,10 @@ export default function AdminQuick() {
             const userSnap = await getDocs(
               query(collection(db, 'users'), where('uid', '==', record.userId))
             );
-            const userName = userSnap.empty
-              ? record.userId.slice(0, 8)
-              : userSnap.docs[0].data().displayName || record.userId.slice(0, 8);
-            return { ...record, userName };
+            const userData = userSnap.empty ? null : userSnap.docs[0].data();
+            const userName = userData?.displayName || record.userId.slice(0, 8);
+            const userEmail = userData?.email || '';
+            return { ...record, userName, userEmail };
           } catch {
             return { ...record, userName: record.userId.slice(0, 8) };
           }
@@ -137,9 +137,12 @@ export default function AdminQuick() {
                     idx % 2 === 0 ? '' : 'bg-slate-50/50'
                   }`}
                 >
-                  {/* 孩子名字 */}
-                  <td className="px-4 py-3 font-medium text-slate-900">
-                    {record.userName}
+                  {/* 孩子名字 + email */}
+                  <td className="px-4 py-3">
+                    <div className="font-medium text-slate-900">{record.userName}</div>
+                    {record.userEmail && (
+                      <div className="text-xs text-slate-400 mt-0.5">{record.userEmail}</div>
+                    )}
                   </td>
 
                   {/* 週次 */}
