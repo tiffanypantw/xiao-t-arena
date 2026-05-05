@@ -104,7 +104,7 @@ const WEEK_DATA = {
     hasOpenQuestion: true,
     openQuestion: '回想一次你最近的消費，它是「需要」還是「想要」？它滿足了馬斯洛的哪一層需求？你覺得值得嗎？',
     taskTitle: '本週任務',
-    taskDescription: '記錄你這週的三筆消費（或想要購買的東西），並用馬斯洛的需求層次來分析：這是哪一層的需求？是身體的訊號還是腦袋的訊號？你覺得這個「想要」值得嗎？',
+    taskDescription: '🎯 在生活裡找到你自己的 3 個「想要」場景。\n\n針對每個「想要」，回答這 4 個問題：\n\n1️⃣ 這是什麼東西？（可以拍照、畫圖、或文字描述）\n\n2️⃣ 它是哪一層需求？（從 5 層裡挑：生理／安全／社交／自尊／自我實現）\n\n3️⃣ 是身體在說話？還是腦袋在說話？\n\n4️⃣ 拆解之後，你的判斷是？\n  □ 我還是想要，理由是 ＿＿＿\n  □ 我發現我其實不需要\n  □ 我要先放三天再說',
     quizType: 'multiple',
     quizQuestions: [
       { id: 1, block: '基礎記憶', question: '馬斯洛 (Maslow) 是一位什麼樣的人?', options: ['美國的數學家', '美國的心理學家，研究人類的需求層次', '台灣的老師', '英國的物理學家'], answer: '美國的心理學家，研究人類的需求層次', explanation: '馬斯洛是 1943 年的美國心理學家，他研究發現人有五個層次的需求。' },
@@ -507,7 +507,7 @@ export default function WeekLearning() {
           </div>
 
           <div className="bg-muted/40 rounded-xl p-4">
-            <p className="text-sm text-foreground leading-relaxed">{weekData.taskDescription}</p>
+            <p className="text-sm text-foreground leading-relaxed whitespace-pre-line">{weekData.taskDescription}</p>
           </div>
 
           {/* 鎖住 */}
