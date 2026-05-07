@@ -177,15 +177,18 @@ export const approveOpenAnswer = async (progressId, encouragementMessage) => {
   }
 };
 
-// 取得所有待審核的任務（taskApprovedAt === null）
+// 取得所有待審核的任務（已提交但還沒審核）
 export const getPendingTasks = async () => {
+  // 先撈所有「還沒審核」的紀錄（taskApprovedAt 為 null）
   const q = query(
     collection(db, "weeklyProgress"),
-    where("taskSubmittedAt", "!=", null),
     where("taskApprovedAt", "==", null)
   );
   const snap = await getDocs(q);
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  // 再用 JS 過濾出「有提交」的
+  return snap.docs
+    .map((d) => ({ id: d.id, ...d.data() }))
+    .filter((r) => r.taskSubmittedAt !== null && r.taskSubmittedAt !== undefined);
 };
 
 // 通過任務 → 同時寫進 users.collection 讓學習護照亮起卡片

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { REDEEM_CODES, REWARDS } from '@/lib/redeemCodes';
 import { db } from '@/lib/firebase';
-import { doc, updateDoc, increment, getDoc } from 'firebase/firestore';
+import { doc, updateDoc, increment, getDoc, setDoc } from 'firebase/firestore';
 import { ArrowLeft, Key, Award, CreditCard } from 'lucide-react';
 
 function RedeemModal({ onClose, onSuccess }) {
@@ -132,11 +132,30 @@ function RedeemModal({ onClose, onSuccess }) {
 
 export default function Passport() {
   const navigate = useNavigate();
-  const { userData } = useAuth();
+  const { user, userData } = useAuth();
   const [tab, setTab] = useState('badges');
   const [showRedeem, setShowRedeem] = useState(false);
+  const [freshCollection, setFreshCollection] = useState(null);
 
-  const collection = userData?.collection || {};
+  // 直接從 Firestore 讀取最新的 collection（避免 userData 快取沒更新）
+  useEffect(() => {
+    if (!user?.uid) return;
+    const loadCollection = async () => {
+      try {
+        const userRef = doc(db, 'users', user.uid);
+        const snap = await getDoc(userRef);
+        if (snap.exists()) {
+          setFreshCollection(snap.data().collection || {});
+        }
+      } catch (err) {
+        console.error('讀取收藏失敗', err);
+      }
+    };
+    loadCollection();
+  }, [user?.uid]);
+
+  // 優先用 Firestore 最新資料、退而求其次用 userData 快取
+  const collection = freshCollection || userData?.collection || {};
 
   const badges = Object.entries(REWARDS)
     .filter(([, r]) => r.type === 'badge')
