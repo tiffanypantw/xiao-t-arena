@@ -23,7 +23,7 @@ const WEEK_DATA = {
     question: '如果世界沒有錢，真的會更公平嗎？',
     hasOpenQuestion: false,
     taskTitle: '本週任務',
-    taskDescription: '去觀察你家附近或學校附近，有沒有人在做「交換」這件事。拍照或描述你看到的場景，並說說看：他們在交換什麼？你覺得這個交換公平嗎？',
+    taskDescription: '🎯 拍下 3 個你覺得與「交換」的案例類似的。\n\n你可以拍：\n• 品牌聯名商品\n• 店家和創作者合作的畫面\n• 平台和老師的課程頁面\n• 生活中不是用錢完成的交換情境\n\n每拍 1 張，請你回答 2 件事：\n\n1️⃣ 這是誰跟誰？\n\n2️⃣ 他們可能交換了什麼？(你不一定要知道正確答案，請盡量說明你的思考點)',
     quizType: 'multiple',
     quizQuestions: [
       { id: 1, block: '基礎理解', question: '小明用自己的漫畫書換同學的餅乾，這種行為最接近哪一種？', options: ['使用金錢交易', '以物易物（Barter）', '借貸', '投資'], answer: '以物易物（Barter）', explanation: '用物品直接交換物品，就是以物易物。' },
@@ -43,7 +43,7 @@ const WEEK_DATA = {
     question: '金錢是怎麼出現的？',
     hasOpenQuestion: false,
     taskTitle: '本週任務',
-    taskDescription: '去找一個你家裡用到的東西，想想看：這個東西從原料到你手上，中間經過了哪些人的手？試著畫出或描述這個「交換鏈」。',
+    taskDescription: '🎯 我身邊的支付世界地圖\n\n這週，去找 3 個你生活中看到的支付方式。\n\n可以是：\n• 便利商店收銀台旁的 LOGO 貼紙\n• 家裡大人手機裡的 APP\n• 或是找找看還有哪裡有在收銀台旁邊貼各種電子支付的標示\n\n再來，回答這個問題：\n\n1️⃣ 你去哪裡買東西？買用品嗎？去餐廳吃飯嗎？\n\n2️⃣ 支付的時候用什麼支付方式呢？電子支付嗎？現金嗎？或是有其他的支付方式呢？(禮券？)',
     quizType: 'multiple',
     quizQuestions: [
       { id: 1, block: '基礎記憶', question: '「商品貨幣」是指什麼？', options: ['政府印製的紙鈔', '用實體物品當作交換媒介的錢，例如鹽或貝殼', '銀行帳戶裡的數字', '金屬製作的硬幣'], answer: '用實體物品當作交換媒介的錢，例如鹽或貝殼', explanation: '商品貨幣是指用大家都認同有價值的實體物品來當錢。' },
@@ -63,7 +63,7 @@ const WEEK_DATA = {
     question: '為什麼有些東西貴但大家還是搶著買？',
     hasOpenQuestion: false,
     taskTitle: '本週任務',
-    taskDescription: '去超市或便利商店，找兩個功能類似但價格差很多的商品。觀察它們的差異，並思考：為什麼一個貴一個便宜？貴的東西有沒有「值得」的地方？',
+    taskDescription: '🎯 當一個「情境偵探」\n\n這週，請你當一個情境偵探。\n找出 3 個 在你生活中看到的例子——\n同一樣東西，因為情境不一樣，價值就不一樣了。\n\n你可以從這些地方找：\n🔍 便利商店｜同一個東西，在雨天、熱天、半夜、考試前，你有沒有過「突然覺得它超值」的時刻？\n🔍 網路上｜有沒有哪個商品，有人瘋搶、有人完全無感？(演唱會、球鞋、卡牌、周邊)\n🔍 家裡｜爸媽有沒有買過一個東西，他覺得超值、你覺得莫名其妙？或反過來？\n🔍 特殊地點｜機場、電影院、遊樂園、高鐵、球賽場邊——這裡的價格，和外面差在哪？\n\n回傳方式：\n每個案例請拍一張照(自己拍)，配上這 2 句話回答：\n\n1️⃣ 這是什麼？(誰 × 什麼東西)\n\n2️⃣ 在這個情境裡，誰覺得它超值？為什麼？',
     quizType: 'multiple',
     quizQuestions: [
       { id: 1, block: '基礎記憶', question: '「價值」最接近哪個意思？', options: ['東西的標價數字', '對你在某個時候有幫助的東西或服務', '東西的重量或大小', '老闆決定要賣多少錢'], answer: '對你在某個時候有幫助的東西或服務', explanation: '價值是指某樣東西在某個時間點、某個情境下，對你有沒有幫助。' },
@@ -83,7 +83,7 @@ const WEEK_DATA = {
     question: '老闆賣東西真的賺那麼多嗎？',
     hasOpenQuestion: false,
     taskTitle: '本週任務',
-    taskDescription: '訪問你身邊一位做生意的大人（爸媽、親戚、鄰居都可以），問他們：做生意最大的成本是什麼？有沒有什麼成本是顧客看不到的？把你聽到的記錄下來。',
+    taskDescription: '🎯 三家店偵查計畫 🕵️‍♂️\n\n挑 3 家你常去或你好奇的店，每家店偵查三個問題：\n\n1️⃣ 主題課程教過的三種成本：原料、人力、場地水電\n\n2️⃣ 還有哪些別種成本？設計、授權、品牌、配送系統、廣告⋯⋯\n\n3️⃣ 為什麼我願意來這家店花錢？有買嗎？值得嗎？\n\n完成之後，選你覺得最有趣的一家店，用語音或文字告訴老師你最意外的發現是什麼！',
     quizType: 'multiple',
     quizQuestions: [
       { id: 1, block: '基礎記憶', question: '老闆賣東西的時候，「成本」是指什麼?', options: ['客人付給老闆的錢', '老闆為了做生意花出去的錢', '商品的標價', '店裡還沒賣出去的商品'], answer: '老闆為了做生意花出去的錢', explanation: '成本就是老闆為了做生意必須先花掉的錢。' },
@@ -263,15 +263,13 @@ export default function WeekLearning() {
         await markQuizCompleted(user.uid, weekNum);
         setProgress((prev) => ({ ...prev, quizCompleted: true }));
       }
-      // Week 5+ 有開放題 → 滾動到開放題
-      // Week 1-4 沒有開放題 → 滾動到任務區
-      setTimeout(() => {
-        if (weekData.hasOpenQuestion) {
+      // W1-W4：答對之後不再自動滾動 — 孩子先看到「等老師審核」的訊息
+      // W5+：滾動到開放題
+      if (weekData.hasOpenQuestion) {
+        setTimeout(() => {
           openAnswerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-          taskRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 500);
+        }, 500);
+      }
     }
   };
 
@@ -345,11 +343,11 @@ export default function WeekLearning() {
   // 判斷各區段狀態
   const quizDone = progress?.quizCompleted || quizAllCorrect;
 
-  // Week 1-4：不需要開放題，全對後直接可提交任務
-  // Week 5+：需要開放題通過後才能提交任務
+  // W1-W4：練習題審核過（badgeEarned）後才能提交任務
+  // W5+：開放題審核過（openAnswerSeenAt）後才能提交任務
   const canSubmitTask = weekData.hasOpenQuestion
-    ? !!progress?.openAnswerSeenAt // 需要老師看見
-    : quizDone; // 只需要全對
+    ? !!progress?.openAnswerSeenAt
+    : !!progress?.badgeEarned;
 
   const openState = !weekData.hasOpenQuestion
     ? 'no-open'
@@ -419,14 +417,38 @@ export default function WeekLearning() {
             </div>
           )}
 
-          {/* 完成 */}
+          {/* 完成狀態 */}
           {quizDone && (
-            <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-center">
-              <p className="text-sm font-bold text-green-700">🎉 練習題全部答對！</p>
-              {!weekData.hasOpenQuestion && (
-                <p className="text-xs text-green-600 mt-1">繼續完成下方的任務吧！</p>
+            <>
+              {/* W1-W4：答對後等審核 */}
+              {!weekData.hasOpenQuestion && !progress?.badgeEarned && (
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-center space-y-2">
+                  <div className="text-2xl">⏳</div>
+                  <p className="text-sm font-bold text-amber-700">練習題全部答對！</p>
+                  <p className="text-xs text-amber-600">等待老師看見...</p>
+                  <p className="text-xs text-amber-600">老師審核後徽章會亮起，你就可以開始本週任務</p>
+                </div>
               )}
-            </div>
+
+              {/* W1-W4：徽章已獲得 */}
+              {!weekData.hasOpenQuestion && progress?.badgeEarned && (
+                <div className="bg-violet-50 border-2 border-violet-200 rounded-xl p-4 text-center space-y-2">
+                  <div className="text-3xl">🏅</div>
+                  <p className="text-sm font-black text-violet-700">老師看見你了！徽章已亮起</p>
+                  {progress?.encouragementMessage && (
+                    <p className="text-sm text-violet-600 italic">「{progress.encouragementMessage}」</p>
+                  )}
+                  <p className="text-xs text-violet-600 mt-2">繼續完成下方的任務吧！</p>
+                </div>
+              )}
+
+              {/* W5：保留原本訊息（會跳到開放題） */}
+              {weekData.hasOpenQuestion && (
+                <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-center">
+                  <p className="text-sm font-bold text-green-700">🎉 練習題全部答對！</p>
+                </div>
+              )}
+            </>
           )}
         </div>
 
@@ -514,7 +536,9 @@ export default function WeekLearning() {
           {taskState === 'locked' && (
             <div className="bg-muted/50 rounded-xl p-4 text-center">
               <p className="text-sm text-muted-foreground">
-                {weekData.hasOpenQuestion ? '完成開放題並等老師回應後，才能提交任務' : '完成練習題後才能提交任務'}
+                {weekData.hasOpenQuestion 
+                  ? '完成開放題並等老師回應後，才能提交任務' 
+                  : '練習題審核通過、徽章亮起後，才能開始本週任務'}
               </p>
             </div>
           )}

@@ -188,9 +188,15 @@ export const getPendingTasks = async () => {
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 };
 
-// 通過任務
+// 通過任務 → 同時寫進 users.collection 讓學習護照亮起卡片
 export const approveTask = async (progressId, feedback, cardCode) => {
+  // 1) 先讀取這筆紀錄、拿到 userId 和 weekNumber
   const ref = doc(db, "weeklyProgress", progressId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) throw new Error("找不到該筆進度紀錄");
+  const { userId, weekNumber } = snap.data();
+
+  // 2) 更新 weeklyProgress
   await updateDoc(ref, {
     taskFeedback: feedback,
     taskCardCode: cardCode,
@@ -199,6 +205,31 @@ export const approveTask = async (progressId, feedback, cardCode) => {
     cardEarnedAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   });
+
+  // 3) 同步寫進 users.collection（讓學習護照看得到卡片）
+  const weekToCard = {
+    1: "card-exchange-bottleneck",
+    2: "card-consensus-currency",
+    3: "card-price-secret",
+    4: "card-cost-truth",
+    5: "card-need-decoder-seal",
+  };
+  const cardId = weekToCard[weekNumber];
+  if (cardId && userId) {
+    const userRef = doc(db, "users", userId);
+    await setDoc(
+      userRef,
+      {
+        collection: {
+          [cardId]: {
+            unlockedAt: new Date().toISOString(),
+            source: "admin-task-review",
+          },
+        },
+      },
+      { merge: true }
+    );
+  }
 };
 
 // 退回任務
