@@ -155,6 +155,10 @@ export const REDEEM_CODES = {
   "X8F2K9Q": { type: "badge", rewardId: "badge-beginner", maxUses: 99 },
   // 限量玩偶 — Mystical Guide Aether（2026年4月直播限定）
   "LIVE-W1W4-2604": { type: "card", rewardId: "card-aether-doll", maxUses: 9999 },
+  // 徽章碼 — 稀缺辨識者 (Week 6) 無限次
+  "B-SI-K7M3": { type: "badge", rewardId: "badge-scarcity-decoder", maxUses: 9999 },
+  // 卡片碼 — 稀缺辨識者之證 (Week 6) 無限次
+  "C-SI-Q4R8": { type: "card", rewardId: "card-scarcity-decoder-seal", maxUses: 9999 },
 };
 
 

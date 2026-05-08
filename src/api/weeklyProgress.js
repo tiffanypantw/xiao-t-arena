@@ -158,6 +158,7 @@ export const approveOpenAnswer = async (progressId, encouragementMessage) => {
     3: "badge-value-discerner",
     4: "badge-cost-detective",
     5: "badge-need-decoder",
+    6: "badge-scarcity-decoder",
   };
   const badgeId = weekToBadge[weekNumber];
   if (badgeId && userId) {
@@ -216,6 +217,7 @@ export const approveTask = async (progressId, feedback, cardCode) => {
     3: "card-price-secret",
     4: "card-cost-truth",
     5: "card-need-decoder-seal",
+    6: "card-scarcity-decoder-seal",
   };
   const cardId = weekToCard[weekNumber];
   if (cardId && userId) {
