@@ -139,16 +139,28 @@ export default function Passport() {
 
   // 直接從 Firestore 讀取最新的 collection（避免 userData 快取沒更新）
   useEffect(() => {
-    if (!user?.uid) return;
+    console.log('🔍 Passport useEffect, user.uid:', user?.uid);
+    if (!user?.uid) {
+      console.log('⚠️ user.uid 是空的、useEffect 提早 return');
+      return;
+    }
     const loadCollection = async () => {
       try {
+        console.log('📡 開始讀 Firestore...');
         const userRef = doc(db, 'users', user.uid);
         const snap = await getDoc(userRef);
+        console.log('📦 snap.exists:', snap.exists());
         if (snap.exists()) {
-          setFreshCollection(snap.data().collection || {});
+          const data = snap.data();
+          console.log('📋 Firestore collection 完整內容:', data.collection);
+          console.log('📊 Firestore 徽章數:', Object.keys(data.collection || {}).filter(k => k.startsWith('badge-')).length);
+          setFreshCollection(data.collection || {});
+          console.log('✅ setFreshCollection 完成');
+        } else {
+          console.log('❌ Firestore 找不到這個 user 的文件');
         }
       } catch (err) {
-        console.error('讀取收藏失敗', err);
+        console.error('❌ 讀取收藏失敗', err);
       }
     };
     loadCollection();
