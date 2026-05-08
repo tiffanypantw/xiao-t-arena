@@ -261,6 +261,19 @@ export const REWARDS = {
     description: "2026年4月直播限定。感謝你來參加直播！",
     image: "/images/2026_04每月直播_限量玩偶.png",
   },
+  "badge-scarcity-decoder": {
+    type: "badge",
+    name: "稀缺辨識者",
+    description: "完成 Week 6 財商概念測驗，理解真實稀缺與行銷稀缺",
+    week: 6,
+    image: "/images/W6_Badge_稀缺辨識者_ScarcityDecoder_Ch2.png",
+  },
+  "card-scarcity-decoder-seal": {
+    type: "card",
+    name: "稀缺辨識者之證",
+    description: "這個少，是真的少？還是被設計成少？看見少之前，先看見自己",
+    image: "/images/W6_Card_稀缺辨識者之證_ScarcityDecoder_Ch2.png",
+  },
 };
 
 export const WEEKS = [
