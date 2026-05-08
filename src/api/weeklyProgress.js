@@ -111,25 +111,35 @@ export const revealTask = async (userId, weekNumber) => {
 // Week 5+：開放題已提交但老師還沒看
 export const getPendingBadges = async () => {
   const results = [];
+  const seenIds = new Set();
 
-  // Week 1-4：quizCompleted = true, badgeEarned = false
+  // 路徑 1：所有「答對全部練習題、但徽章還沒拿到」的紀錄（W1-W4 + W6+ 沒有開放題的週次）
   const q1 = query(
     collection(db, "weeklyProgress"),
     where("quizCompleted", "==", true),
-    where("badgeEarned", "==", false),
-    where("weekNumber", "<=", 4)
+    where("badgeEarned", "==", false)
   );
   const snap1 = await getDocs(q1);
-  snap1.docs.forEach((d) => results.push({ id: d.id, ...d.data() }));
+  snap1.docs.forEach((d) => {
+    if (!seenIds.has(d.id)) {
+      results.push({ id: d.id, ...d.data() });
+      seenIds.add(d.id);
+    }
+  });
 
-  // Week 5+：openAnswerSubmittedAt != null, openAnswerSeenAt = null
+  // 路徑 2：W5（有開放題）— 開放題已提交但老師還沒看
   const q2 = query(
     collection(db, "weeklyProgress"),
     where("openAnswerSubmittedAt", "!=", null),
     where("openAnswerSeenAt", "==", null)
   );
   const snap2 = await getDocs(q2);
-  snap2.docs.forEach((d) => results.push({ id: d.id, ...d.data() }));
+  snap2.docs.forEach((d) => {
+    if (!seenIds.has(d.id)) {
+      results.push({ id: d.id, ...d.data() });
+      seenIds.add(d.id);
+    }
+  });
 
   return results;
 };
