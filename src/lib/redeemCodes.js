@@ -304,4 +304,12 @@ export const WEEKS = [
     route: "/Week5Practice",
     available: false,
   },
+  {
+    id: "week6",
+    title: "Week 6",
+    question: "這個少，是真的少？還是被設計成少？",
+    badgeId: "badge-scarcity-decoder",
+    route: "/Week6Practice",
+    available: false,
+  },
 ];

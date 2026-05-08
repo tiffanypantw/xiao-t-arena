@@ -194,7 +194,7 @@ export default function Home() {
         <div className="mt-6 bg-muted/40 border border-border rounded-2xl p-4 flex items-start gap-3">
           <BookOpen className="w-4 h-4 text-muted-foreground shrink-0 mt-0.5" />
           <p className="text-xs text-muted-foreground leading-relaxed">
-            完成測驗後截圖，寄給老師即可獲得兌換碼。輸入兌換碼解鎖徽章，才能進入下一週！
+            完成練習題與本週任務後，老師會審核並給你回饋。徽章與卡片會自動亮起在學習護照裡 ✨
           </p>
         </div>
 
