@@ -1,0 +1,24 @@
+{
+  "name": "小T財商概念競技場",
+  "short_name": "小T 競技場",
+  "description": "Tiffany老師陪孩子學財商。每週一個大問題，讓孩子學會思考金錢與價值。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f0eb",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
