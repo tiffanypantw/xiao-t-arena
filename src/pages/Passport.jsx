@@ -10,7 +10,7 @@ import { ArrowLeft, Key, Award, CreditCard } from 'lucide-react';
 function RedeemModal({ onClose, onSuccess }) {
   const { user, userData, saveProgress } = useAuth();
   const [code, setCode] = useState('');
-  const [status, setStatus] = useState(null); // null | 'loading' | 'success' | 'error'
+  const [status, setStatus] = useState(null);
   const [message, setMessage] = useState('');
 
   const handleRedeem = async () => {
@@ -26,7 +26,6 @@ function RedeemModal({ onClose, onSuccess }) {
       return;
     }
 
-    // 確認用戶沒有已經兌換過這個獎勵
     const rewardId = codeData.rewardId;
     const alreadyOwned = userData?.collection?.[rewardId];
     if (alreadyOwned) {
@@ -35,7 +34,6 @@ function RedeemModal({ onClose, onSuccess }) {
       return;
     }
 
-    // 確認這個碼還有剩餘次數
     const codeRef = doc(db, 'redeemCodes', trimmed);
     const codeSnap = await getDoc(codeRef);
 
@@ -50,16 +48,12 @@ function RedeemModal({ onClose, onSuccess }) {
       return;
     }
 
-    // 兌換成功！更新 Firestore
     try {
-      // 記錄碼的使用次數
       await updateDoc(codeRef, { uses: increment(1) }).catch(async () => {
-        // 如果文件不存在，先建立
         const { setDoc } = await import('firebase/firestore');
         await setDoc(codeRef, { uses: 1, code: trimmed });
       });
 
-      // 把獎勵加到用戶的收藏
       const userRef = doc(db, 'users', user.uid);
       const { setDoc: setDocFn } = await import('firebase/firestore');
       await setDocFn(
@@ -137,24 +131,22 @@ export default function Passport() {
   const [showRedeem, setShowRedeem] = useState(false);
   const [freshCollection, setFreshCollection] = useState(null);
 
-  // 直接從 Firestore 讀取最新的 collection（避免 userData 快取沒更新）
   useEffect(() => {
-  if (!user?.uid) return;
-  const loadCollection = async () => {
-    try {
-      const userRef = doc(db, 'users', user.uid);
-      const snap = await getDoc(userRef);
-      if (snap.exists()) {
-        setFreshCollection(snap.data().collection || {});
+    if (!user?.uid) return;
+    const loadCollection = async () => {
+      try {
+        const userRef = doc(db, 'users', user.uid);
+        const snap = await getDoc(userRef);
+        if (snap.exists()) {
+          setFreshCollection(snap.data().collection || {});
+        }
+      } catch (err) {
+        console.error('讀取收藏失敗', err);
       }
-    } catch (err) {
-      console.error('讀取收藏失敗', err);
-    }
-  };
-  loadCollection();
-}, [user?.uid]);
+    };
+    loadCollection();
+  }, [user?.uid]);
 
-  // 優先用 Firestore 最新資料、退而求其次用 userData 快取
   const collection = freshCollection || userData?.collection || {};
 
   const badges = Object.entries(REWARDS)
@@ -202,7 +194,7 @@ export default function Passport() {
             嗨，{userData?.displayName?.split(' ')[0] || '同學'}陪孩子學財商！
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            輸入兌換碼，收集你的學習徽章和卡片吧！
+            輸入兌換碼，收集你的學習徽章和卡片吧!
           </p>
         </motion.div>
 
@@ -269,13 +261,11 @@ export default function Passport() {
                 ) : (
                   <div className="text-4xl">🔒</div>
                 )}
-                {/* 週次標籤 */}
                 {badge.owned && badge.weekLabel && (
                   <div className="absolute top-2 left-2 bg-violet-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                     {badge.weekLabel}
                   </div>
                 )}
-                {/* 章節標籤 */}
                 {badge.owned && badge.chapter && (
                   <div className="absolute top-2 right-2 bg-white/90 text-violet-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
                     {badge.chapter}
@@ -304,13 +294,11 @@ export default function Passport() {
                 ) : (
                   <div className="text-4xl">🔒</div>
                 )}
-                {/* 週次標籤 */}
                 {card.owned && card.weekLabel && (
                   <div className="absolute top-2 left-2 bg-teal-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                     {card.weekLabel}
                   </div>
                 )}
-                {/* 章節標籤 */}
                 {card.owned && card.chapter && (
                   <div className="absolute top-2 right-2 bg-white/90 text-teal-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
                     {card.chapter}
@@ -327,6 +315,7 @@ export default function Passport() {
             </div>
           ))}
         </div>
+      </div>
 
       {/* 兌換碼 Modal */}
       <AnimatePresence>
