@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { WEEKS, REWARDS } from '@/lib/redeemCodes';
-import { Lock, ChevronRight, Award, BookOpen, Zap } from 'lucide-react';
+import { Lock, ChevronRight, Award, Settings, BookOpen, Zap } from 'lucide-react';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -43,6 +43,13 @@ export default function Home() {
             >
               <Award className="w-3.5 h-3.5" />
               學習護照
+            </button>
+            <button
+              onClick={() => navigate('/Profile')}
+              className="w-8 h-8 border border-border rounded-xl flex items-center justify-center hover:bg-muted transition-all"
+              title="個人資料"
+            >
+              <Settings className="w-3.5 h-3.5 text-muted-foreground" />
             </button>
             <button
               onClick={logout}
