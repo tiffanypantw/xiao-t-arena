@@ -5,7 +5,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { REDEEM_CODES, REWARDS } from '@/lib/redeemCodes';
 import { db } from '@/lib/firebase';
 import { doc, updateDoc, increment, getDoc, setDoc } from 'firebase/firestore';
-import { ArrowLeft, Key, Award, CreditCard } from 'lucide-react';
+import { ArrowLeft, Key, Award, CreditCard, Settings } from 'lucide-react';
 
 function RedeemModal({ onClose, onSuccess }) {
   const { user, userData, saveProgress } = useAuth();
@@ -168,17 +168,26 @@ export default function Passport() {
     <div className="min-h-screen bg-[#f5f0eb]">
       <div className="max-w-md mx-auto px-4 py-6">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-6">
-          <button
-            onClick={() => navigate('/Home')}
-            className="w-9 h-9 rounded-xl border border-border flex items-center justify-center hover:bg-muted transition-colors bg-white"
-          >
-            <ArrowLeft className="w-4 h-4" />
-          </button>
-          <div>
-            <p className="text-xs text-muted-foreground">學習護照</p>
-            <p className="text-sm font-black text-foreground">我的收藏</p>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate('/Home')}
+              className="w-9 h-9 rounded-xl border border-border flex items-center justify-center hover:bg-muted transition-colors bg-white"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+            <div>
+              <p className="text-xs text-muted-foreground">學習護照</p>
+              <p className="text-sm font-black text-foreground">我的收藏</p>
+            </div>
           </div>
+          <button
+            onClick={() => navigate('/Profile')}
+            className="w-9 h-9 rounded-xl border border-border flex items-center justify-center hover:bg-muted transition-colors bg-white"
+            title="個人資料設定"
+          >
+            <Settings className="w-4 h-4" />
+          </button>
         </div>
 
         {/* 問候 */}
