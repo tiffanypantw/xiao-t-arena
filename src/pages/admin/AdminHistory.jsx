@@ -24,9 +24,14 @@ export default function AdminHistory() {
             const userSnap = await getDocs(
               query(collection(db, 'users'), where('uid', '==', record.userId))
             );
-            const userName = userSnap.empty
-              ? record.userId.slice(0, 8)
-              : userSnap.docs[0].data().displayName || record.userId.slice(0, 8);
+            let userName = record.userId.slice(0, 8);
+            if (!userSnap.empty) {
+              const userData = userSnap.docs[0].data();
+              userName =
+                userData.displayName ||
+                (userData.email && userData.email.split("@")[0]) ||
+                record.userId.slice(0, 8);
+            }
             return { ...record, userName };
           } catch {
             return { ...record, userName: record.userId.slice(0, 8) };

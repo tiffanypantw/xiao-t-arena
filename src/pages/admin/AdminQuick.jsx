@@ -21,7 +21,10 @@ export default function AdminQuick() {
               query(collection(db, 'users'), where('uid', '==', record.userId))
             );
             const userData = userSnap.empty ? null : userSnap.docs[0].data();
-            const userName = userData?.displayName || record.userId.slice(0, 8);
+            const userName =
+              userData?.displayName ||
+              (userData?.email && userData.email.split("@")[0]) ||
+              record.userId.slice(0, 8);
             const userEmail = userData?.email || '';
             return { ...record, userName, userEmail };
           } catch {

@@ -43,14 +43,30 @@ export function AuthProvider({ children }) {
 
     if (userSnap.exists()) {
       const existingData = userSnap.data();
-      // 檢查是否需要遷移
-      const migrated = await migrateIfNeeded(firebaseUser, existingData, userRef);
-      if (migrated) {
-        const updatedSnap = await getDoc(userRef);
-        setUserData(updatedSnap.data());
-      } else {
-        setUserData(existingData);
+
+      // 🆕 每次登入時、回填 displayName / email / photoURL（避免舊用戶沒有這些欄位）
+      const needsBackfill =
+        !existingData.displayName ||
+        !existingData.email ||
+        !existingData.uid;
+      if (needsBackfill) {
+        const backfillData = {
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName:
+            firebaseUser.displayName ||
+            firebaseUser.email?.split("@")[0] ||
+            firebaseUser.uid.slice(0, 8),
+          photoURL: firebaseUser.photoURL || null,
+        };
+        await setDoc(userRef, backfillData, { merge: true });
+        console.log(`✅ 回填用戶名字：${backfillData.displayName}`);
       }
+
+      // 檢查是否需要遷移
+      await migrateIfNeeded(firebaseUser, existingData, userRef);
+      const updatedSnap = await getDoc(userRef);
+      setUserData(updatedSnap.data());
     } else {
       // 新用戶 — 建立資料並檢查是否有舊資料需要遷移
       const newUser = {
@@ -72,22 +88,18 @@ export function AuthProvider({ children }) {
   };
 
   const migrateIfNeeded = async (firebaseUser, existingData, userRef) => {
-    // 已經遷移過就跳過
     if (existingData.migrated) return false;
 
     const email = firebaseUser.email?.toLowerCase();
     const migrationRecord = MIGRATION_DATA[email];
 
-    // 沒有舊資料就跳過
     if (!migrationRecord) {
       await setDoc(userRef, { migrated: true }, { merge: true });
       return false;
     }
 
-    // 建立遷移的 collection
     const migratedCollection = { ...existingData.collection };
 
-    // 加入舊徽章
     for (const badgeId of migrationRecord.badges) {
       if (!migratedCollection[badgeId]) {
         migratedCollection[badgeId] = {
@@ -97,7 +109,6 @@ export function AuthProvider({ children }) {
       }
     }
 
-    // 加入舊卡片
     for (const cardId of migrationRecord.cards) {
       if (!migratedCollection[cardId]) {
         migratedCollection[cardId] = {
@@ -107,7 +118,6 @@ export function AuthProvider({ children }) {
       }
     }
 
-    // 寫入 Firebase
     await setDoc(
       userRef,
       { collection: migratedCollection, migrated: true },

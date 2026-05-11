@@ -33,7 +33,12 @@ export default function AdminDeepDetail() {
             query(collection(db, 'users'), where('uid', '==', data.userId))
           );
           if (!userSnap.empty) {
-            setUserName(userSnap.docs[0].data().displayName || data.userId.slice(0, 8));
+            const userData = userSnap.docs[0].data();
+            setUserName(
+              userData.displayName ||
+              (userData.email && userData.email.split("@")[0]) ||
+              data.userId.slice(0, 8)
+            );
           }
         }
         if (cards.length > 0) setSelectedCard(cards[0].id);
