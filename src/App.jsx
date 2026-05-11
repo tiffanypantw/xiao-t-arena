@@ -22,6 +22,8 @@ import AdminLayout from './pages/admin/AdminLayout';
 import AdminQuick from './pages/admin/AdminQuick';
 import AdminDeep from './pages/admin/AdminDeep';
 import AdminDeepDetail from './pages/admin/AdminDeepDetail';
+import AdminConversations from './pages/admin/AdminConversations';
+import AdminHistory from './pages/admin/AdminHistory';
 import WeekLearning from './pages/WeekLearning';
 
 const StudentApp = () => {
@@ -77,6 +79,8 @@ function App() {
               <Route path="quick" element={<AdminQuick />} />
               <Route path="deep" element={<AdminDeep />} />
               <Route path="deep/:id" element={<AdminDeepDetail />} />
+              <Route path="conversations" element={<AdminConversations />} />
+              <Route path="history" element={<AdminHistory />} />
             </Route>
 
             {/* 學生端路由 */}

@@ -7,6 +7,7 @@ import {
   collection,
   query,
   where,
+  orderBy,
   getDocs,
   serverTimestamp,
 } from "firebase/firestore";
@@ -23,7 +24,6 @@ export const getOrCreateProgress = async (userId, weekNumber) => {
 
   if (snap.exists()) return { id, ...snap.data() };
 
-  // 建立新進度文件
   const newProgress = {
     userId,
     weekNumber,
@@ -49,7 +49,10 @@ export const getOrCreateProgress = async (userId, weekNumber) => {
     cardEarned: false,
     cardEarnedAt: null,
 
-    // metadata
+    // 對話區
+    conversation: [],
+    hasUnreadChildReply: false,
+
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   };
@@ -103,12 +106,90 @@ export const revealTask = async (userId, weekNumber) => {
 };
 
 // ==================
+// 對話功能
+// ==================
+
+// 孩子提交回應給老師
+export const submitChildReply = async (progressId, content) => {
+  if (!content || content.trim().length < 10) {
+    throw new Error("回應內容至少要 10 個字");
+  }
+
+  const ref = doc(db, "weeklyProgress", progressId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) throw new Error("找不到該筆進度紀錄");
+
+  const existing = snap.data().conversation || [];
+  const newEntry = {
+    role: "child",
+    content: content.trim(),
+    timestamp: new Date().toISOString(),
+  };
+
+  await updateDoc(ref, {
+    conversation: [...existing, newEntry],
+    hasUnreadChildReply: true,
+    updatedAt: serverTimestamp(),
+  });
+};
+
+// 老師寫新的回覆
+export const submitTeacherReply = async (progressId, content) => {
+  if (!content || content.trim().length < 30) {
+    throw new Error("回覆至少要 30 個字");
+  }
+
+  const ref = doc(db, "weeklyProgress", progressId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) throw new Error("找不到該筆進度紀錄");
+
+  const existing = snap.data().conversation || [];
+  const newEntry = {
+    role: "teacher",
+    content: content.trim(),
+    timestamp: new Date().toISOString(),
+  };
+
+  await updateDoc(ref, {
+    conversation: [...existing, newEntry],
+    hasUnreadChildReply: false,
+    updatedAt: serverTimestamp(),
+  });
+};
+
+// 撈所有有未讀孩子回應的對話
+export const getPendingConversations = async () => {
+  const q = query(
+    collection(db, "weeklyProgress"),
+    where("hasUnreadChildReply", "==", true)
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+};
+
+// 撈所有審核紀錄（給審核歷史頁面用）
+export const getAllReviewHistory = async () => {
+  // 撈所有已被審核過的紀錄
+  const q = query(
+    collection(db, "weeklyProgress"),
+    where("taskApprovedAt", "!=", null)
+  );
+  const snap = await getDocs(q);
+  // 在 JS 排序、避免要建複合索引
+  return snap.docs
+    .map((d) => ({ id: d.id, ...d.data() }))
+    .sort((a, b) => {
+      const aTime = a.updatedAt?.seconds || 0;
+      const bTime = b.updatedAt?.seconds || 0;
+      return bTime - aTime;
+    });
+};
+
+// ==================
 // 後台用函式
 // ==================
 
 // 取得所有待發放徽章的記錄
-// Week 1-4：練習題全對但還沒發徽章
-// Week 5+：開放題已提交但老師還沒看
 export const getPendingBadges = async () => {
   const results = [];
   const seenIds = new Set();
@@ -146,13 +227,11 @@ export const getPendingBadges = async () => {
 
 // 審核開放題（老師看見）
 export const approveOpenAnswer = async (progressId, encouragementMessage) => {
-  // 1) 先讀取這筆紀錄，拿到 userId 跟 weekNumber
   const ref = doc(db, "weeklyProgress", progressId);
   const snap = await getDoc(ref);
   if (!snap.exists()) throw new Error("找不到該筆進度紀錄");
   const { userId, weekNumber } = snap.data();
 
-  // 2) 更新 weeklyProgress（原本就有的邏輯）
   await updateDoc(ref, {
     openAnswerSeenAt: serverTimestamp(),
     encouragementMessage,
@@ -161,7 +240,6 @@ export const approveOpenAnswer = async (progressId, encouragementMessage) => {
     updatedAt: serverTimestamp(),
   });
 
-  // 3) 同步把徽章寫進 users.collection（讓學習護照看得到）
   const weekToBadge = {
     1: "badge-exchange-questioner",
     2: "badge-origin-seeker",
@@ -190,13 +268,11 @@ export const approveOpenAnswer = async (progressId, encouragementMessage) => {
 
 // 取得所有待審核的任務（已提交但還沒審核）
 export const getPendingTasks = async () => {
-  // 先撈所有「還沒審核」的紀錄（taskApprovedAt 為 null）
   const q = query(
     collection(db, "weeklyProgress"),
     where("taskApprovedAt", "==", null)
   );
   const snap = await getDocs(q);
-  // 再用 JS 過濾出「有提交」的
   return snap.docs
     .map((d) => ({ id: d.id, ...d.data() }))
     .filter((r) => r.taskSubmittedAt !== null && r.taskSubmittedAt !== undefined);
@@ -204,23 +280,29 @@ export const getPendingTasks = async () => {
 
 // 通過任務 → 同時寫進 users.collection 讓學習護照亮起卡片
 export const approveTask = async (progressId, feedback, cardCode) => {
-  // 1) 先讀取這筆紀錄、拿到 userId 和 weekNumber
   const ref = doc(db, "weeklyProgress", progressId);
   const snap = await getDoc(ref);
   if (!snap.exists()) throw new Error("找不到該筆進度紀錄");
   const { userId, weekNumber } = snap.data();
 
-  // 2) 更新 weeklyProgress
+  // 同時把 feedback 寫進 conversation 陣列（變成對話起點）
+  const firstMessage = {
+    role: "teacher",
+    content: feedback,
+    timestamp: new Date().toISOString(),
+  };
+
   await updateDoc(ref, {
     taskFeedback: feedback,
     taskCardCode: cardCode,
     taskApprovedAt: serverTimestamp(),
     cardEarned: true,
     cardEarnedAt: serverTimestamp(),
+    conversation: [firstMessage],
+    hasUnreadChildReply: false,
     updatedAt: serverTimestamp(),
   });
 
-  // 3) 同步寫進 users.collection（讓學習護照看得到卡片）
   const weekToCard = {
     1: "card-exchange-bottleneck",
     2: "card-consensus-currency",

@@ -18,7 +18,6 @@ export default function AdminDeepDetail() {
   const [processing, setProcessing] = useState(false);
   const [lightboxImg, setLightboxImg] = useState(null);
 
-  // 取得卡片列表
   const cards = Object.entries(REWARDS)
     .filter(([, r]) => r.type === 'card')
     .map(([id, r]) => ({ id, name: r.name }));
@@ -29,7 +28,6 @@ export default function AdminDeepDetail() {
       try {
         const data = await getProgressById(id);
         setRecord(data);
-        // 撈用戶名字
         if (data?.userId) {
           const userSnap = await getDocs(
             query(collection(db, 'users'), where('uid', '==', data.userId))
@@ -38,7 +36,6 @@ export default function AdminDeepDetail() {
             setUserName(userSnap.docs[0].data().displayName || data.userId.slice(0, 8));
           }
         }
-        // 預設選第一張卡片
         if (cards.length > 0) setSelectedCard(cards[0].id);
       } catch (err) {
         console.error('載入失敗', err);
@@ -59,10 +56,9 @@ export default function AdminDeepDetail() {
     });
   };
 
-  // 通過任務
   const handleApprove = async () => {
-    if (feedback.length < 100) {
-      alert('回饋至少需要 100 字！');
+    if (feedback.length < 50) {
+      alert('回饋至少需要 50 字！');
       return;
     }
     if (!selectedCard) {
@@ -80,7 +76,6 @@ export default function AdminDeepDetail() {
     setProcessing(false);
   };
 
-  // 退回任務
   const handleReject = async () => {
     if (!rejectReason.trim()) {
       alert('請填寫退回原因！');
@@ -113,7 +108,6 @@ export default function AdminDeepDetail() {
 
   return (
     <div className="space-y-4">
-      {/* 返回按鈕 */}
       <button
         onClick={() => navigate('/admin/deep')}
         className="text-sm text-slate-500 hover:text-slate-800 flex items-center gap-1"
@@ -124,7 +118,6 @@ export default function AdminDeepDetail() {
       <div className="grid grid-cols-2 gap-6">
         {/* 左半邊：孩子提交的內容 */}
         <div className="space-y-4">
-          {/* 基本資訊 */}
           <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
             <h2 className="font-black text-slate-900">📋 提交內容</h2>
             <div className="grid grid-cols-3 gap-3 text-sm">
@@ -145,15 +138,13 @@ export default function AdminDeepDetail() {
             </div>
           </div>
 
-          {/* 任務文字 */}
           <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
             <h3 className="font-bold text-slate-700 text-sm">任務文字</h3>
-            <p className="text-slate-700 leading-relaxed text-sm whitespace-pre-wrap">
+            <p className="text-slate-700 leading-relaxed text-sm whitespace-pre-wrap break-words">
               {record.taskText}
             </p>
           </div>
 
-          {/* 圖片畫廊 */}
           {record.taskImageUrls?.length > 0 && (
             <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
               <h3 className="font-bold text-slate-700 text-sm">
@@ -179,26 +170,27 @@ export default function AdminDeepDetail() {
           <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-4">
             <h2 className="font-black text-slate-900">✍️ 老師回饋</h2>
 
-            {/* 回饋 textarea */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label className="text-sm font-semibold text-slate-700">
                   你的回饋
                 </label>
-                <span className={`text-xs ${feedback.length >= 100 ? 'text-green-600' : 'text-slate-400'}`}>
-                  {feedback.length} / 100 字（最少）
+                <span className={`text-xs ${feedback.length >= 50 ? 'text-green-600' : 'text-slate-400'}`}>
+                  {feedback.length} / 50 字（最少）
                 </span>
               </div>
               <textarea
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
-                placeholder="給孩子的具體回饋，至少 100 字..."
-                rows={8}
+                placeholder="給孩子的具體回饋，至少 50 字。可以提出一個問題引導孩子再思考、開啟對話..."
+                rows={6}
                 className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-slate-400 resize-none leading-relaxed"
               />
+              <p className="text-xs text-slate-500 leading-relaxed">
+                💡 小提示：可以在回饋裡問一個問題、邀請孩子回應你。孩子之後可以在他的任務頁面繼續跟你對話。
+              </p>
             </div>
 
-            {/* 卡片選擇 */}
             <div className="space-y-1.5">
               <label className="text-sm font-semibold text-slate-700">
                 給孩子的卡片
@@ -216,16 +208,14 @@ export default function AdminDeepDetail() {
               </select>
             </div>
 
-            {/* 通過按鈕 */}
             <button
               onClick={handleApprove}
-              disabled={processing || feedback.length < 100}
+              disabled={processing || feedback.length < 50}
               className="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {processing ? '處理中...' : '✅ 通過並發送'}
             </button>
 
-            {/* 退回區 */}
             {!showReject ? (
               <button
                 onClick={() => setShowReject(true)}
@@ -266,7 +256,6 @@ export default function AdminDeepDetail() {
         </div>
       </div>
 
-      {/* 圖片放大 Lightbox */}
       {lightboxImg && (
         <div
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-8"

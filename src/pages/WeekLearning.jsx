@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Upload, X } from 'lucide-react';
+import { ArrowLeft, Upload, X, MessageCircle, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/AuthContext';
 import { storage } from '@/lib/firebase';
@@ -12,6 +12,7 @@ import {
   submitOpenAnswer,
   submitTask,
   revealTask,
+  submitChildReply,
 } from '@/api/weeklyProgress';
 
 // ==================
@@ -202,7 +203,122 @@ function MultipleChoiceQuestion({ q, onAnswer }) {
     </div>
   );
 }
+// ==================
+// 對話元件（雙向對話 thread + 回覆框）
+// ==================
+function ConversationThread({ conversation, onReply }) {
+  const [replyText, setReplyText] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [showReplyBox, setShowReplyBox] = useState(false);
 
+  // 判斷是否可以回覆（最後一則必須是老師的訊息）
+  const lastMessage = conversation[conversation.length - 1];
+  const canReply = lastMessage?.role === 'teacher';
+
+  const handleReplySubmit = async () => {
+    if (replyText.trim().length < 10) return;
+    setSubmitting(true);
+    try {
+      await onReply(replyText.trim());
+      setReplyText('');
+      setShowReplyBox(false);
+    } catch (err) {
+      alert(err.message || '送出失敗，請再試一次');
+    }
+    setSubmitting(false);
+  };
+
+  return (
+    <div className="space-y-3">
+      {/* 對話列表 */}
+      <div className="space-y-3">
+        {conversation.map((msg, idx) => {
+          const isTeacher = msg.role === 'teacher';
+          return (
+            <div
+              key={idx}
+              className={`rounded-xl p-4 ${
+                isTeacher
+                  ? 'bg-violet-50 border border-violet-100'
+                  : 'bg-amber-50 border border-amber-100 ml-6'
+              }`}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-sm font-bold">
+                  {isTeacher ? '👩‍🏫 Tiffany 老師' : '💬 你'}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  {new Date(msg.timestamp).toLocaleDateString('zh-TW', {
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                </span>
+              </div>
+              <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap break-words">
+                {msg.content}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* 回覆區 */}
+      {canReply && !showReplyBox && (
+        <button
+          onClick={() => setShowReplyBox(true)}
+          className="w-full border-2 border-dashed border-violet-200 text-violet-600 font-bold py-3 rounded-xl hover:bg-violet-50 transition-all flex items-center justify-center gap-2"
+        >
+          <MessageCircle className="w-4 h-4" />
+          回覆 Tiffany 老師
+        </button>
+      )}
+
+      {canReply && showReplyBox && (
+        <div className="bg-violet-50 border-2 border-violet-200 rounded-xl p-4 space-y-3">
+          <p className="text-xs text-violet-700 font-semibold">
+            💬 你的回應（讓 Tiffany 老師看到你的想法）
+          </p>
+          <textarea
+            value={replyText}
+            onChange={(e) => setReplyText(e.target.value)}
+            placeholder="把你的想法寫給 Tiffany 老師..."
+            rows={4}
+            className="w-full border border-violet-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-violet-400 resize-none leading-relaxed bg-white"
+          />
+          <div className="flex items-center justify-between">
+            <span className={`text-xs ${replyText.trim().length >= 10 ? 'text-green-600' : 'text-muted-foreground'}`}>
+              {replyText.trim().length} / 10 字
+            </span>
+            <div className="flex gap-2">
+              <button
+                onClick={() => {
+                  setShowReplyBox(false);
+                  setReplyText('');
+                }}
+                className="text-sm text-muted-foreground px-3 py-1.5 hover:text-foreground"
+              >
+                取消
+              </button>
+              <button
+                onClick={handleReplySubmit}
+                disabled={replyText.trim().length < 10 || submitting}
+                className="bg-violet-600 text-white text-sm font-bold px-4 py-1.5 rounded-lg hover:bg-violet-700 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                {submitting ? '送出中...' : (<><Send className="w-3.5 h-3.5" />送出</>)}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {!canReply && conversation.length > 0 && (
+        <div className="bg-amber-50 border border-amber-100 rounded-xl p-3 text-center">
+          <p className="text-xs text-amber-700">⏳ 已送出、等待 Tiffany 老師回覆...</p>
+        </div>
+      )}
+    </div>
+  );
+}
 // ==================
 // 主頁面
 // ==================
@@ -637,17 +753,38 @@ export default function WeekLearning() {
             </div>
           )}
 
-          {/* 已揭曉 */}
+          {/* 已揭曉 — 顯示卡片 + 對話 thread */}
           {taskState === 'card-revealed' && (
-            <div className="space-y-3">
+            <div className="space-y-4">
               <div className="bg-teal-50 border-2 border-teal-200 rounded-xl p-4 text-center space-y-2">
                 <div className="text-3xl">🎴</div>
                 <p className="text-sm font-black text-teal-700">任務完成！卡片已解鎖！</p>
               </div>
-              {progress?.taskFeedback && (
-                <div className="bg-muted/50 rounded-xl p-4 space-y-1">
-                  <p className="text-xs text-muted-foreground font-semibold">老師的回饋</p>
-                  <p className="text-sm text-foreground leading-relaxed">{progress.taskFeedback}</p>
+
+              {/* 你提交的內容（小提醒、可以對照） */}
+              {progress?.taskText && (
+                <div className="bg-muted/30 rounded-xl p-3 space-y-1">
+                  <p className="text-xs text-muted-foreground font-semibold">你提交的內容</p>
+                  <p className="text-xs text-foreground leading-relaxed line-clamp-3">{progress.taskText}</p>
+                </div>
+              )}
+
+              {/* 對話 thread */}
+              {progress?.conversation && progress.conversation.length > 0 ? (
+                <ConversationThread
+                  conversation={progress.conversation}
+                  onReply={async (content) => {
+                    await submitChildReply(progress.id, content);
+                    // 重新讀取進度
+                    const updated = await getOrCreateProgress(user.uid, weekNum);
+                    setProgress(updated);
+                  }}
+                />
+              ) : progress?.taskFeedback && (
+                // 舊資料相容：如果是舊版只有 taskFeedback、沒有 conversation
+                <div className="bg-violet-50 border border-violet-100 rounded-xl p-4 space-y-1">
+                  <p className="text-xs text-violet-700 font-semibold">👩‍🏫 Tiffany 老師的回饋</p>
+                  <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap break-words">{progress.taskFeedback}</p>
                 </div>
               )}
             </div>
