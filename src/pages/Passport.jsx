@@ -259,7 +259,7 @@ export default function Passport() {
         <div className="grid grid-cols-2 gap-3">
           {tab === 'badges' && badges.map((badge) => (
             <div key={badge.id} className={`bg-white rounded-2xl overflow-hidden ${!badge.owned ? 'opacity-40' : ''}`}>
-              <div className="aspect-square bg-muted flex items-center justify-center">
+              <div className="aspect-square bg-muted flex items-center justify-center relative">
                 {badge.owned ? (
                   badge.image ? (
                     <img src={badge.image} alt={badge.name} className="w-full h-full object-cover" />
@@ -268,6 +268,18 @@ export default function Passport() {
                   )
                 ) : (
                   <div className="text-4xl">🔒</div>
+                )}
+                {/* 週次標籤 */}
+                {badge.owned && badge.weekLabel && (
+                  <div className="absolute top-2 left-2 bg-violet-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    {badge.weekLabel}
+                  </div>
+                )}
+                {/* 章節標籤 */}
+                {badge.owned && badge.chapter && (
+                  <div className="absolute top-2 right-2 bg-white/90 text-violet-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    {badge.chapter}
+                  </div>
                 )}
               </div>
               <div className="p-3">
@@ -282,7 +294,7 @@ export default function Passport() {
 
           {tab === 'cards' && cards.map((card) => (
             <div key={card.id} className={`bg-white rounded-2xl overflow-hidden ${!card.owned ? 'opacity-40' : ''}`}>
-              <div className="aspect-square bg-muted flex items-center justify-center">
+              <div className="aspect-square bg-muted flex items-center justify-center relative">
                 {card.owned ? (
                   card.image ? (
                     <img src={card.image} alt={card.name} className="w-full h-full object-cover" />
@@ -291,6 +303,18 @@ export default function Passport() {
                   )
                 ) : (
                   <div className="text-4xl">🔒</div>
+                )}
+                {/* 週次標籤 */}
+                {card.owned && card.weekLabel && (
+                  <div className="absolute top-2 left-2 bg-teal-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    {card.weekLabel}
+                  </div>
+                )}
+                {/* 章節標籤 */}
+                {card.owned && card.chapter && (
+                  <div className="absolute top-2 right-2 bg-white/90 text-teal-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    {card.chapter}
+                  </div>
                 )}
               </div>
               <div className="p-3">
@@ -303,7 +327,6 @@ export default function Passport() {
             </div>
           ))}
         </div>
-      </div>
 
       {/* 兌換碼 Modal */}
       <AnimatePresence>
