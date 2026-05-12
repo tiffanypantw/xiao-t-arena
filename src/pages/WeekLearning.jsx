@@ -16,9 +16,10 @@ import {
 } from '@/api/weeklyProgress';
 
 // ==================
-// 週次資料
+// 週次資料（M1.7 之後會從 Firestore 讀，這裡的 hardcoded 資料會被刪除）
+// 目前暫時 export 給 migration script 用
 // ==================
-const WEEK_DATA = {
+export const WEEK_DATA = {
   1: {
     title: 'Week 1',
     question: '如果世界沒有錢，真的會更公平嗎？',
