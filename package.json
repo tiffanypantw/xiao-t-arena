@@ -5,7 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:tiffany": "vite --mode tiffany",
+    "dev:ngfa": "vite --mode ngfa",
     "build": "vite build",
+    "build:tiffany": "vite build --mode tiffany",
+    "build:ngfa": "vite build --mode ngfa",
     "lint": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc -p ./jsconfig.json",
