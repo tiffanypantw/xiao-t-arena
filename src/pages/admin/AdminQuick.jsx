@@ -1,14 +1,23 @@
 import { useState, useEffect } from 'react';
 import { getPendingBadges, approveOpenAnswer } from '@/api/weeklyProgress';
-import { getEncouragementMessages } from '@/lib/admin-config';
+import { useBrand } from '@/lib/BrandContext';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export default function AdminQuick() {
+  const brand = useBrand();
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(null);
   const [selectedMessages, setSelectedMessages] = useState({});
+
+  // 從 brand.encouragementMessages 取對應週次的鼓勵語
+  // 保持原本「W1-W4 用 quiz 版、W5+ 用 open 版」的 heuristic
+  const getMessages = (weekNumber) => {
+    const messages = brand?.encouragementMessages;
+    if (!messages) return [];
+    return weekNumber <= 4 ? (messages.quiz || []) : (messages.open || []);
+  };
 
   const loadRecords = async () => {
     setLoading(true);
@@ -51,14 +60,16 @@ export default function AdminQuick() {
     const defaults = {};
     records.forEach((r) => {
       if (!selectedMessages[r.id]) {
-        defaults[r.id] = getEncouragementMessages(r.weekNumber)[0];
+        const list = getMessages(r.weekNumber);
+        if (list.length > 0) defaults[r.id] = list[0];
       }
     });
     setSelectedMessages((prev) => ({ ...defaults, ...prev }));
-  }, [records]);
+  }, [records, brand]);
 
   const handleApprove = async (record) => {
-    const message = selectedMessages[record.id] || getEncouragementMessages(record.weekNumber)[0];
+    const list = getMessages(record.weekNumber);
+    const message = selectedMessages[record.id] || list[0] || '';
     setProcessing(record.id);
     try {
       await approveOpenAnswer(record.id, message);
@@ -196,7 +207,7 @@ export default function AdminQuick() {
                   {/* 鼓勵語選單 */}
                   <td className="px-4 py-3">
                     <select
-                      value={selectedMessages[record.id] || getEncouragementMessages(record.weekNumber)[0]}
+                      value={selectedMessages[record.id] || getMessages(record.weekNumber)[0] || ''}
                       onChange={(e) =>
                         setSelectedMessages((prev) => ({
                           ...prev,
@@ -205,7 +216,7 @@ export default function AdminQuick() {
                       }
                       className="w-full text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white focus:outline-none focus:border-violet-400"
                     >
-                      {getEncouragementMessages(record.weekNumber).map((msg) => (
+                      {getMessages(record.weekNumber).map((msg) => (
                         <option key={msg} value={msg}>{msg}</option>
                       ))}
                     </select>

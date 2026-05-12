@@ -240,15 +240,10 @@ export const approveOpenAnswer = async (progressId, encouragementMessage) => {
     updatedAt: serverTimestamp(),
   });
 
-  const weekToBadge = {
-    1: "badge-exchange-questioner",
-    2: "badge-origin-seeker",
-    3: "badge-value-discerner",
-    4: "badge-cost-detective",
-    5: "badge-need-decoder",
-    6: "badge-scarcity-decoder",
-  };
-  const badgeId = weekToBadge[weekNumber];
+  // 從 week doc 反查 badgeId（取代舊的 weekToBadge 對照表）
+  const weekSnap = await getDoc(doc(db, "weeks", String(weekNumber)));
+  const badgeId = weekSnap.exists() ? weekSnap.data().badgeId : null;
+
   if (badgeId && userId) {
     const userRef = doc(db, "users", userId);
     await setDoc(
@@ -303,15 +298,10 @@ export const approveTask = async (progressId, feedback, cardCode) => {
     updatedAt: serverTimestamp(),
   });
 
-  const weekToCard = {
-    1: "card-exchange-bottleneck",
-    2: "card-consensus-currency",
-    3: "card-price-secret",
-    4: "card-cost-truth",
-    5: "card-need-decoder-seal",
-    6: "card-scarcity-decoder-seal",
-  };
-  const cardId = weekToCard[weekNumber];
+  // 從 week doc 反查 cardId（取代舊的 weekToCard 對照表）
+  const weekSnap = await getDoc(doc(db, "weeks", String(weekNumber)));
+  const cardId = weekSnap.exists() ? weekSnap.data().cardId : null;
+
   if (cardId && userId) {
     const userRef = doc(db, "users", userId);
     await setDoc(
