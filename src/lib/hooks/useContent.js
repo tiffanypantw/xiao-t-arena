@@ -16,7 +16,9 @@ import {
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
-const STALE = 5 * 60 * 1000; // 5 min
+// staleTime = 0 配合 refetchOnWindowFocus = true → 跨 tab / 跨瀏覽器切焦點時，
+// 學員 / admin 都會立刻看到別人的更新。Firestore read 成本可控（這些 collection 小）。
+const STALE = 0;
 
 // ============================================================================
 // useWeeks — 所有 published weeks，照 weekNumber 排序

@@ -17,6 +17,8 @@ import AdminDeep from './pages/admin/AdminDeep';
 import AdminDeepDetail from './pages/admin/AdminDeepDetail';
 import AdminConversations from './pages/admin/AdminConversations';
 import AdminHistory from './pages/admin/AdminHistory';
+import AdminContent from './pages/admin/AdminContent';
+import AdminContentEdit from './pages/admin/AdminContentEdit';
 import WeekLearning from './pages/WeekLearning';
 import Profile from './pages/Profile';
 
@@ -69,6 +71,8 @@ function App() {
               <Route path="deep/:id" element={<AdminDeepDetail />} />
               <Route path="conversations" element={<AdminConversations />} />
               <Route path="history" element={<AdminHistory />} />
+              <Route path="content" element={<AdminContent />} />
+              <Route path="content/:weekNumber" element={<AdminContentEdit />} />
             </Route>
 
             {/* 學生端路由 */}
