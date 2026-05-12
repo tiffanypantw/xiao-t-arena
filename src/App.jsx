@@ -4,6 +4,7 @@ import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
+import { BrandProvider } from '@/lib/BrandContext';
 import AdminRoute from '@/components/AdminRoute';
 import Login from '@/pages/Login';
 import Home from './pages/Home';
@@ -49,8 +50,9 @@ const StudentApp = () => {
 function App() {
   return (
     <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <Router>
+      <BrandProvider>
+        <QueryClientProvider client={queryClientInstance}>
+          <Router>
           <Routes>
             {/* 後台路由（獨立於學生端，不需要先登入學生帳號）*/}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -74,9 +76,10 @@ function App() {
             {/* 學生端路由 */}
             <Route path="/*" element={<StudentApp />} />
           </Routes>
-        </Router>
-        <Toaster />
-      </QueryClientProvider>
+          </Router>
+          <Toaster />
+        </QueryClientProvider>
+      </BrandProvider>
     </AuthProvider>
   );
 }
