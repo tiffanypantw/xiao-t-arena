@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Upload, X, MessageCircle, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/AuthContext';
+import { useBrand } from '@/lib/BrandContext';
+import { useWeek } from '@/lib/hooks/useContent';
 import { storage } from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {
@@ -14,6 +16,14 @@ import {
   revealTask,
   submitChildReply,
 } from '@/api/weeklyProgress';
+
+// 把 YouTube watch URL 轉成 embed URL（支援 youtu.be 短網址）
+function getEmbedUrl(url) {
+  if (!url) return null;
+  const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?#]+)/);
+  if (ytMatch) return `https://www.youtube.com/embed/${ytMatch[1]}`;
+  return url; // 已經是 embed URL 或 Vimeo 等
+}
 
 // ==================
 // 週次資料（M1.7 之後會從 Firestore 讀，這裡的 hardcoded 資料會被刪除）
@@ -208,6 +218,11 @@ function MultipleChoiceQuestion({ q, onAnswer }) {
 // 對話元件（雙向對話 thread + 回覆框）
 // ==================
 function ConversationThread({ conversation, onReply }) {
+  const brand = useBrand();
+  const teacherName = brand?.teacherName || 'Tiffany 老師';
+  const teacherEmoji = brand?.teacherEmoji || '👩‍🏫';
+  const locale = brand?.locale || 'zh-TW';
+
   const [replyText, setReplyText] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [showReplyBox, setShowReplyBox] = useState(false);
@@ -246,10 +261,10 @@ function ConversationThread({ conversation, onReply }) {
             >
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-sm font-bold">
-                  {isTeacher ? '👩‍🏫 Tiffany 老師' : '💬 你'}
+                  {isTeacher ? `${teacherEmoji} ${teacherName}` : '💬 你'}
                 </span>
                 <span className="text-xs text-muted-foreground">
-                  {new Date(msg.timestamp).toLocaleDateString('zh-TW', {
+                  {new Date(msg.timestamp).toLocaleDateString(locale, {
                     month: 'short',
                     day: 'numeric',
                   })}
@@ -270,19 +285,19 @@ function ConversationThread({ conversation, onReply }) {
           className="w-full border-2 border-dashed border-violet-200 text-violet-600 font-bold py-3 rounded-xl hover:bg-violet-50 transition-all flex items-center justify-center gap-2"
         >
           <MessageCircle className="w-4 h-4" />
-          回覆 Tiffany 老師
+          回覆 {teacherName}
         </button>
       )}
 
       {canReply && showReplyBox && (
         <div className="bg-violet-50 border-2 border-violet-200 rounded-xl p-4 space-y-3">
           <p className="text-xs text-violet-700 font-semibold">
-            💬 你的回應（讓 Tiffany 老師看到你的想法）
+            💬 你的回應（讓 {teacherName} 看到你的想法）
           </p>
           <textarea
             value={replyText}
             onChange={(e) => setReplyText(e.target.value)}
-            placeholder="把你的想法寫給 Tiffany 老師..."
+            placeholder={`把你的想法寫給 ${teacherName}...`}
             rows={4}
             className="w-full border border-violet-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-violet-400 resize-none leading-relaxed bg-white"
           />
@@ -314,7 +329,7 @@ function ConversationThread({ conversation, onReply }) {
 
       {!canReply && conversation.length > 0 && (
         <div className="bg-amber-50 border border-amber-100 rounded-xl p-3 text-center">
-          <p className="text-xs text-amber-700">⏳ 已送出、等待 Tiffany 老師回覆...</p>
+          <p className="text-xs text-amber-700">⏳ 已送出、等待 {teacherName} 回覆...</p>
         </div>
       )}
     </div>
@@ -327,8 +342,11 @@ export default function WeekLearning() {
   const { weekNumber } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const brand = useBrand();
   const weekNum = parseInt(weekNumber);
-  const weekData = WEEK_DATA[weekNum];
+
+  // 從 Firestore 讀取這週的內容
+  const { data: weekData, isLoading: weekLoading } = useWeek(weekNum);
 
   const [progress, setProgress] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -365,6 +383,16 @@ export default function WeekLearning() {
     load();
   }, [user, weekNum]);
 
+  // 內容還在抓 / 學員進度還在抓 → 全頁 loading
+  if (weekLoading || loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  // 找不到這週 → 鎖住畫面
   if (!weekData) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -373,14 +401,6 @@ export default function WeekLearning() {
           <p className="font-black text-foreground">這週的內容還沒開放</p>
           <button onClick={() => navigate('/Home')} className="text-sm text-muted-foreground underline">回到首頁</button>
         </div>
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin" />
       </div>
     );
   }
@@ -518,6 +538,26 @@ export default function WeekLearning() {
             <p className="text-sm font-black text-foreground leading-snug">{weekData.question}</p>
           </div>
         </div>
+
+        {/* 影片 embed（brand toggle 開 + 該週有 videoUrl 才顯示） */}
+        {brand?.features?.enableVideo && weekData.videoUrl && (
+          <div className="bg-card border-2 border-border rounded-2xl overflow-hidden">
+            <div className="aspect-video w-full bg-black">
+              <iframe
+                src={getEmbedUrl(weekData.videoUrl)}
+                title={`${weekData.title} video`}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            {weekData.videoCaption && (
+              <p className="px-4 py-3 text-xs text-muted-foreground leading-relaxed">
+                {weekData.videoCaption}
+              </p>
+            )}
+          </div>
+        )}
 
         {/* ==================
             練習題區
