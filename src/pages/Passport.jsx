@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
-import { REDEEM_CODES, REWARDS } from '@/lib/redeemCodes';
+import { useBrand } from '@/lib/BrandContext';
+import { useRewards } from '@/lib/hooks/useContent';
 import { db } from '@/lib/firebase';
 import { doc, updateDoc, increment, getDoc, setDoc } from 'firebase/firestore';
 import { ArrowLeft, Key, Award, CreditCard, Settings } from 'lucide-react';
 
 function RedeemModal({ onClose, onSuccess }) {
-  const { user, userData, saveProgress } = useAuth();
+  const { user, userData } = useAuth();
   const [code, setCode] = useState('');
   const [status, setStatus] = useState(null);
   const [message, setMessage] = useState('');
@@ -19,44 +20,39 @@ function RedeemModal({ onClose, onSuccess }) {
 
     setStatus('loading');
 
-    const codeData = REDEEM_CODES[trimmed];
-    if (!codeData) {
-      setStatus('error');
-      setMessage('找不到這個兌換碼，請確認後再試');
-      return;
-    }
-
-    const rewardId = codeData.rewardId;
-    const alreadyOwned = userData?.collection?.[rewardId];
-    if (alreadyOwned) {
-      setStatus('error');
-      setMessage('你已經擁有這個獎勵了！');
-      return;
-    }
-
-    const codeRef = doc(db, 'redeemCodes', trimmed);
-    const codeSnap = await getDoc(codeRef);
-
-    let currentUses = 0;
-    if (codeSnap.exists()) {
-      currentUses = codeSnap.data().uses || 0;
-    }
-
-    if (currentUses >= codeData.maxUses) {
-      setStatus('error');
-      setMessage('這個兌換碼已達使用上限');
-      return;
-    }
-
     try {
-      await updateDoc(codeRef, { uses: increment(1) }).catch(async () => {
-        const { setDoc } = await import('firebase/firestore');
-        await setDoc(codeRef, { uses: 1, code: trimmed });
-      });
+      // 從 Firestore 讀 code（之前是 hardcoded REDEEM_CODES lookup）
+      const codeRef = doc(db, 'redeemCodes', trimmed);
+      const codeSnap = await getDoc(codeRef);
+
+      if (!codeSnap.exists()) {
+        setStatus('error');
+        setMessage('找不到這個兌換碼，請確認後再試');
+        return;
+      }
+
+      const codeData = codeSnap.data();
+      const rewardId = codeData.rewardId;
+
+      const alreadyOwned = userData?.collection?.[rewardId];
+      if (alreadyOwned) {
+        setStatus('error');
+        setMessage('你已經擁有這個獎勵了！');
+        return;
+      }
+
+      const currentUses = codeData.uses || 0;
+      if (currentUses >= codeData.maxUses) {
+        setStatus('error');
+        setMessage('這個兌換碼已達使用上限');
+        return;
+      }
+
+      // 通過所有檢查，執行兌換
+      await updateDoc(codeRef, { uses: increment(1) });
 
       const userRef = doc(db, 'users', user.uid);
-      const { setDoc: setDocFn } = await import('firebase/firestore');
-      await setDocFn(
+      await setDoc(
         userRef,
         {
           collection: {
@@ -69,13 +65,18 @@ function RedeemModal({ onClose, onSuccess }) {
         { merge: true }
       );
 
+      // 抓 reward name 顯示在成功訊息
+      const rewardSnap = await getDoc(doc(db, 'rewards', rewardId));
+      const rewardName = rewardSnap.exists() ? rewardSnap.data().name : '獎勵';
+
       setStatus('success');
-      setMessage(`🎉 成功解鎖：${REWARDS[rewardId].name}！`);
+      setMessage(`🎉 成功解鎖：${rewardName}！`);
       setTimeout(() => {
         onSuccess();
         onClose();
       }, 2000);
     } catch (err) {
+      console.error('Redeem error:', err);
       setStatus('error');
       setMessage('發生錯誤，請再試一次');
     }
@@ -127,6 +128,9 @@ function RedeemModal({ onClose, onSuccess }) {
 export default function Passport() {
   const navigate = useNavigate();
   const { user, userData } = useAuth();
+  const brand = useBrand();
+  const { data: rewards = {}, isLoading: rewardsLoading } = useRewards();
+
   const [tab, setTab] = useState('badges');
   const [showRedeem, setShowRedeem] = useState(false);
   const [freshCollection, setFreshCollection] = useState(null);
@@ -149,11 +153,11 @@ export default function Passport() {
 
   const collection = freshCollection || userData?.collection || {};
 
-  const badges = Object.entries(REWARDS)
+  const badges = Object.entries(rewards)
     .filter(([, r]) => r.type === 'badge')
     .map(([id, r]) => ({ id, ...r, owned: !!collection[id] }));
 
-  const cards = Object.entries(REWARDS)
+  const cards = Object.entries(rewards)
     .filter(([, r]) => r.type === 'card')
     .map(([id, r]) => ({ id, ...r, owned: !!collection[id] }));
 
@@ -164,8 +168,19 @@ export default function Passport() {
     window.location.reload();
   };
 
+  const showRedeemButton = brand?.features?.showRedeemCodes ?? true;
+  const passportBg = brand?.backgroundColor || '#f5f0eb';
+
+  if (rewardsLoading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#f5f0eb]">
+    <div className="min-h-screen" style={{ backgroundColor: passportBg }}>
       <div className="max-w-md mx-auto px-4 py-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -203,7 +218,9 @@ export default function Passport() {
             嗨，{userData?.displayName?.split(' ')[0] || '同學'}陪孩子學財商！
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            輸入兌換碼，收集你的學習徽章和卡片吧!
+            {showRedeemButton
+              ? '輸入兌換碼，收集你的學習徽章和卡片吧!'
+              : '完成每週任務，收集你的學習徽章和卡片！'}
           </p>
         </motion.div>
 
@@ -225,14 +242,16 @@ export default function Passport() {
           </div>
         </div>
 
-        {/* 兌換碼按鈕 */}
-        <button
-          onClick={() => setShowRedeem(true)}
-          className="w-full bg-violet-600 text-white font-black rounded-2xl py-4 flex items-center justify-center gap-2 mb-3 hover:opacity-90 transition-all"
-        >
-          <Key className="w-5 h-5" />
-          輸入兌換碼
-        </button>
+        {/* 兌換碼按鈕（受 brand feature toggle 控制） */}
+        {showRedeemButton && (
+          <button
+            onClick={() => setShowRedeem(true)}
+            className="w-full bg-violet-600 text-white font-black rounded-2xl py-4 flex items-center justify-center gap-2 mb-3 hover:opacity-90 transition-all"
+          >
+            <Key className="w-5 h-5" />
+            輸入兌換碼
+          </button>
+        )}
 
         {/* Tab */}
         <div className="grid grid-cols-2 bg-white rounded-2xl p-1 mb-4">
