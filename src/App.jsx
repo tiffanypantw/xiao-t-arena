@@ -8,15 +8,7 @@ import AdminRoute from '@/components/AdminRoute';
 import Login from '@/pages/Login';
 import Home from './pages/Home';
 import Passport from './pages/Passport';
-import Week1Practice from './pages/Week1Practice';
-import Week2Practice from './pages/Week2Practice';
-import Week3Practice from './pages/Week3Practice';
-import Week4Practice from './pages/Week4Practice';
-import Week5Practice from './pages/Week5Practice';
 import VDPractice from './pages/VDPractice';
-import QuickChallenge from './pages/QuickChallenge';
-import ConceptPractice from './pages/ConceptPractice';
-import DailyChallenge from './pages/DailyChallenge';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminQuick from './pages/admin/AdminQuick';
@@ -46,16 +38,8 @@ const StudentApp = () => {
       <Route path="/Home" element={<Home />} />
       <Route path="/Passport" element={<Passport />} />
       <Route path="/Profile" element={<Profile />} />
-      <Route path="/Week1Practice" element={<Week1Practice />} />
-      <Route path="/Week2Practice" element={<Week2Practice />} />
-      <Route path="/Week3Practice" element={<Week3Practice />} />
-      <Route path="/Week4Practice" element={<Week4Practice />} />
-      <Route path="/Week5Practice" element={<Week5Practice />} />
       <Route path="/week/:weekNumber" element={<WeekLearning />} />
       <Route path="/VDPractice" element={<VDPractice />} />
-      <Route path="/QuickChallenge" element={<QuickChallenge />} />
-      <Route path="/ConceptPractice" element={<ConceptPractice />} />
-      <Route path="/DailyChallenge" element={<DailyChallenge />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
