@@ -35,9 +35,6 @@ export default function AdminLayout() {
             <NavLink to="/admin/history" className={navLinkClass}>
               📚 審核歷史
             </NavLink>
-            <NavLink to="/admin/migrate" className={navLinkClass}>
-              🚀 內容遷移
-            </NavLink>
           </nav>
         </div>
         <div className="flex items-center gap-3">

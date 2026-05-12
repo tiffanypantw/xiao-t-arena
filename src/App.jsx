@@ -17,7 +17,6 @@ import AdminDeep from './pages/admin/AdminDeep';
 import AdminDeepDetail from './pages/admin/AdminDeepDetail';
 import AdminConversations from './pages/admin/AdminConversations';
 import AdminHistory from './pages/admin/AdminHistory';
-import AdminMigrate from './pages/admin/AdminMigrate';
 import WeekLearning from './pages/WeekLearning';
 import Profile from './pages/Profile';
 
@@ -70,7 +69,6 @@ function App() {
               <Route path="deep/:id" element={<AdminDeepDetail />} />
               <Route path="conversations" element={<AdminConversations />} />
               <Route path="history" element={<AdminHistory />} />
-              <Route path="migrate" element={<AdminMigrate />} />
             </Route>
 
             {/* 學生端路由 */}

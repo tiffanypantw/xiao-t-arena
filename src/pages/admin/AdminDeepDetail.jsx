@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProgressById, approveTask, rejectTask } from '@/api/weeklyProgress';
-import { REWARDS } from '@/lib/redeemCodes';
+import { useRewards } from '@/lib/hooks/useContent';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export default function AdminDeepDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { data: rewards = {} } = useRewards();
   const [record, setRecord] = useState(null);
   const [userName, setUserName] = useState('');
   const [loading, setLoading] = useState(true);
@@ -18,9 +19,9 @@ export default function AdminDeepDetail() {
   const [processing, setProcessing] = useState(false);
   const [lightboxImg, setLightboxImg] = useState(null);
 
-  const cards = Object.entries(REWARDS)
+  const cards = Object.entries(rewards)
     .filter(([, r]) => r.type === 'card')
-    .map(([id, r]) => ({ id, name: r.name }));
+    .map(([cardId, r]) => ({ id: cardId, name: r.name }));
 
   useEffect(() => {
     const load = async () => {
@@ -41,7 +42,6 @@ export default function AdminDeepDetail() {
             );
           }
         }
-        if (cards.length > 0) setSelectedCard(cards[0].id);
       } catch (err) {
         console.error('載入失敗', err);
       }
@@ -49,6 +49,13 @@ export default function AdminDeepDetail() {
     };
     load();
   }, [id]);
+
+  // rewards 載入後設定預設 selected card
+  useEffect(() => {
+    if (cards.length > 0 && !selectedCard) {
+      setSelectedCard(cards[0].id);
+    }
+  }, [cards.length, selectedCard]);
 
   const formatTime = (timestamp) => {
     if (!timestamp) return '-';
