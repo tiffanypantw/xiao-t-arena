@@ -1,0 +1,47 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "weeklyProgress",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "badgeEarned",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "quizCompleted",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "weekNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "weeklyProgress",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "openAnswerSeenAt",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "openAnswerSubmittedAt",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    }
+  ],
+  "fieldOverrides": []
+}

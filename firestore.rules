@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Admin 白名單
+    function isAdmin() {
+      return request.auth != null &&
+             request.auth.token.email in [
+               'tiffanypantw@gmail.com'
+             ];
+    }
+
+    // Brand 設定：任何登入者可讀（學員端要主題色 + brand 名稱），admin 才能寫
+    match /brandSettings/{settingId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // 週次內容：任何登入者可讀（學員看課程），admin 才能寫
+    match /weeks/{weekId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // 獎勵（徽章/卡片）：任何登入者可讀（Passport 顯示），admin 才能寫
+    match /rewards/{rewardId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // 使用者資料：本人可讀寫、admin 也可讀寫（為了發卡片/徽章）
+    match /users/{userId} {
+      allow read: if request.auth != null && 
+                     (request.auth.uid == userId || isAdmin());
+      allow write: if request.auth != null && 
+                      (request.auth.uid == userId || isAdmin());
+      
+      // 子集合
+      match /{subcollection=**} {
+        allow read, write: if request.auth != null && 
+                              (request.auth.uid == userId || isAdmin());
+      }
+    }
+    
+    // 兌換碼：登入者可以讀（驗證用）和更新 uses 次數,但不能新增或刪除
+    match /redeemCodes/{codeId} {
+      allow read: if request.auth != null;
+      allow update: if request.auth != null;
+      allow create, delete: if false;
+    }
+    
+    // 週進度:登入者可以讀寫自己相關的進度、admin 可全寫（為了審核）
+    match /weeklyProgress/{progressId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
