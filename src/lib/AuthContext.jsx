@@ -14,7 +14,6 @@ import {
   setDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { MIGRATION_DATA } from "./migrationData";
 
 const AuthContext = createContext(null);
 
@@ -91,7 +90,23 @@ export function AuthProvider({ children }) {
     if (existingData.migrated) return false;
 
     const email = firebaseUser.email?.toLowerCase();
-    const migrationRecord = MIGRATION_DATA[email];
+    if (!email) {
+      await setDoc(userRef, { migrated: true }, { merge: true });
+      return false;
+    }
+
+    // 從 Firestore base44Migrations collection 讀（取代舊的 hardcoded MIGRATION_DATA）
+    const migrationRef = doc(db, "base44Migrations", email);
+    let migrationRecord = null;
+    try {
+      const migrationSnap = await getDoc(migrationRef);
+      if (migrationSnap.exists()) {
+        migrationRecord = migrationSnap.data();
+      }
+    } catch (err) {
+      // rules 可能擋住（例如 base44Migrations collection 尚未建立）→ 視為「無遷移紀錄」處理
+      console.warn("Migration record read failed (treating as no record):", err.message);
+    }
 
     if (!migrationRecord) {
       await setDoc(userRef, { migrated: true }, { merge: true });
@@ -100,7 +115,7 @@ export function AuthProvider({ children }) {
 
     const migratedCollection = { ...existingData.collection };
 
-    for (const badgeId of migrationRecord.badges) {
+    for (const badgeId of migrationRecord.badges || []) {
       if (!migratedCollection[badgeId]) {
         migratedCollection[badgeId] = {
           unlockedAt: new Date().toISOString(),
@@ -109,7 +124,7 @@ export function AuthProvider({ children }) {
       }
     }
 
-    for (const cardId of migrationRecord.cards) {
+    for (const cardId of migrationRecord.cards || []) {
       if (!migratedCollection[cardId]) {
         migratedCollection[cardId] = {
           unlockedAt: new Date().toISOString(),

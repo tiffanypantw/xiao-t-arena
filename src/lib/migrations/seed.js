@@ -18,6 +18,7 @@ import {
   ENCOURAGEMENT_MESSAGES_OPEN,
 } from "@/lib/admin-config";
 import { WEEK_DATA } from "@/pages/WeekLearning";
+import { MIGRATION_DATA } from "@/lib/migrationData";
 
 // ============================================================================
 // 共用 helper：寫 brandSettings/main
@@ -199,6 +200,41 @@ export async function seedTiffany(log = console.log) {
   log("");
   log(`✅ Tiffany seed 完成：${JSON.stringify(stats)}`);
   return stats;
+}
+
+// ============================================================================
+// PII 搬家：MIGRATION_DATA → Firestore base44Migrations collection
+// 只對 Tiffany brand 有意義（NGFA 沒有 base44 歷史）
+// ============================================================================
+
+export async function seedMigrationData(log = console.log) {
+  const entries = Object.entries(MIGRATION_DATA);
+  log(`📋 搬移 ${entries.length} 筆 base44 遷移紀錄到 Firestore...`);
+
+  // Firestore batch 上限 500 個 op；30+ 筆遠遠夠用
+  const batch = writeBatch(db);
+  let count = 0;
+  for (const [email, record] of entries) {
+    // doc ID = email（小寫，避免 case mismatch）
+    const id = email.toLowerCase();
+    batch.set(
+      doc(db, "base44Migrations", id),
+      {
+        email: id,
+        badges: record.badges || [],
+        cards: record.cards || [],
+        source: "base44-2026-04-17",
+        createdAt: serverTimestamp(),
+      },
+      { merge: true }
+    );
+    count++;
+  }
+  await batch.commit();
+  log(`  ✓ ${count} 筆遷移紀錄寫好`);
+  log("");
+  log(`✅ Migration data seed 完成`);
+  return { migrations: count };
 }
 
 // ============================================================================

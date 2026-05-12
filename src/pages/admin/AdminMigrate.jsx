@@ -10,45 +10,41 @@
 
 import { useState } from "react";
 import { BRAND } from "@/lib/firebase";
-import { seedTiffany, seedNgfa } from "@/lib/migrations/seed";
+import { seedTiffany, seedNgfa, seedMigrationData } from "@/lib/migrations/seed";
 
 export default function AdminMigrate() {
-  const [running, setRunning] = useState(false);
+  const [running, setRunning] = useState(null); // 'content' | 'pii' | null
   const [log, setLog] = useState([]);
-  const [done, setDone] = useState(false);
+  const [doneType, setDoneType] = useState(null); // 'content' | 'pii' | null
   const [error, setError] = useState(null);
 
   const isTiffany = BRAND === "tiffany";
   const isNgfa = BRAND === "ngfa";
 
-  const handleSeed = async () => {
-    setRunning(true);
+  const appendLog = (msg) =>
+    setLog((prev) => [...prev, { time: new Date(), msg }]);
+
+  const runJob = async (jobType, fn) => {
+    setRunning(jobType);
     setLog([]);
-    setDone(false);
+    setDoneType(null);
     setError(null);
-
-    const appendLog = (msg) =>
-      setLog((prev) => [...prev, { time: new Date(), msg }]);
-
     try {
-      if (isTiffany) {
-        const stats = await seedTiffany(appendLog);
-        appendLog(`Final stats: ${JSON.stringify(stats)}`);
-      } else if (isNgfa) {
-        const stats = await seedNgfa(appendLog);
-        appendLog(`Final stats: ${JSON.stringify(stats)}`);
-      } else {
-        throw new Error(`Unknown BRAND: ${BRAND}`);
-      }
-      setDone(true);
+      const stats = await fn(appendLog);
+      appendLog(`Final stats: ${JSON.stringify(stats)}`);
+      setDoneType(jobType);
     } catch (e) {
       console.error("Migration failed:", e);
       setError(e.message || String(e));
       appendLog(`❌ Error: ${e.message || e}`);
     } finally {
-      setRunning(false);
+      setRunning(null);
     }
   };
+
+  const handleContentSeed = () =>
+    runJob("content", isTiffany ? seedTiffany : seedNgfa);
+  const handlePiiSeed = () => runJob("pii", seedMigrationData);
 
   return (
     <div className="space-y-4">
@@ -87,21 +83,21 @@ export default function AdminMigrate() {
         </div>
       </div>
 
-      {/* Seed 按鈕 */}
+      {/* 內容 seed 按鈕 */}
       <button
-        onClick={handleSeed}
-        disabled={running || done}
+        onClick={handleContentSeed}
+        disabled={running !== null || doneType === "content"}
         className={`w-full font-black text-base rounded-xl py-4 transition-all ${
-          done
+          doneType === "content"
             ? "bg-green-100 text-green-700 cursor-not-allowed"
-            : running
+            : running === "content"
             ? "bg-slate-200 text-slate-500 cursor-wait"
             : "bg-slate-900 text-white hover:opacity-90"
         }`}
       >
-        {done
-          ? "✅ 已完成 — 去 Firebase Console 檢查 Firestore"
-          : running
+        {doneType === "content"
+          ? "✅ 內容已 seed — 去 Firestore Console 檢查"
+          : running === "content"
           ? "⏳ 寫入中... 請勿關閉視窗"
           : isTiffany
           ? "🇹🇼 Seed Tiffany 完整內容"
@@ -109,6 +105,34 @@ export default function AdminMigrate() {
           ? "🌎 Seed NGFA Placeholder"
           : "❓ Brand 不對，請檢查 .env"}
       </button>
+
+      {/* PII 搬家按鈕（只在 Tiffany brand 顯示——NGFA 沒有 base44 歷史） */}
+      {isTiffany && (
+        <div className="space-y-2">
+          <div className="border-t border-slate-200 pt-4">
+            <p className="text-xs font-semibold text-slate-600 mb-2">
+              🔒 PII 搬家：MIGRATION_DATA (30+ 個學員 email) → Firestore
+            </p>
+          </div>
+          <button
+            onClick={handlePiiSeed}
+            disabled={running !== null || doneType === "pii"}
+            className={`w-full font-black text-base rounded-xl py-4 transition-all ${
+              doneType === "pii"
+                ? "bg-green-100 text-green-700 cursor-not-allowed"
+                : running === "pii"
+                ? "bg-slate-200 text-slate-500 cursor-wait"
+                : "bg-amber-600 text-white hover:opacity-90"
+            }`}
+          >
+            {doneType === "pii"
+              ? "✅ PII 已搬到 Firestore"
+              : running === "pii"
+              ? "⏳ 寫入中..."
+              : "🔒 搬 MIGRATION_DATA 進 Firestore"}
+          </button>
+        </div>
+      )}
 
       {/* Log 區 */}
       {log.length > 0 && (

@@ -28,6 +28,14 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // Base44 遷移資料（PII：email → 已擁有的 reward 對照）
+    // 只有本人能讀自己的遷移紀錄（登入時自動套用）；admin 可讀寫全部
+    match /base44Migrations/{email} {
+      allow read: if request.auth != null &&
+                     (request.auth.token.email == email || isAdmin());
+      allow write: if isAdmin();
+    }
+
     // 使用者資料：本人可讀寫、admin 也可讀寫（為了發卡片/徽章）
     match /users/{userId} {
       allow read: if request.auth != null && 
