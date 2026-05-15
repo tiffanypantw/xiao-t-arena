@@ -19,6 +19,7 @@ import AdminConversations from './pages/admin/AdminConversations';
 import AdminHistory from './pages/admin/AdminHistory';
 import AdminContent from './pages/admin/AdminContent';
 import AdminContentEdit from './pages/admin/AdminContentEdit';
+import AdminUploadW7 from './pages/admin/AdminUploadW7';
 import WeekLearning from './pages/WeekLearning';
 import Profile from './pages/Profile';
 
@@ -73,6 +74,7 @@ function App() {
               <Route path="history" element={<AdminHistory />} />
               <Route path="content" element={<AdminContent />} />
               <Route path="content/:weekNumber" element={<AdminContentEdit />} />
+              <Route path="upload-w7" element={<AdminUploadW7 />} />
             </Route>
 
             {/* 學生端路由 */}
