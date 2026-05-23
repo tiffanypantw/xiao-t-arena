@@ -20,6 +20,7 @@ import AdminHistory from './pages/admin/AdminHistory';
 import AdminContent from './pages/admin/AdminContent';
 import AdminContentEdit from './pages/admin/AdminContentEdit';
 import AdminUploadW7 from './pages/admin/AdminUploadW7';
+import AdminUploadW8 from './pages/admin/AdminUploadW8';
 import WeekLearning from './pages/WeekLearning';
 import Profile from './pages/Profile';
 
@@ -75,6 +76,7 @@ function App() {
               <Route path="content" element={<AdminContent />} />
               <Route path="content/:weekNumber" element={<AdminContentEdit />} />
               <Route path="upload-w7" element={<AdminUploadW7 />} />
+              <Route path="upload-w8" element={<AdminUploadW8 />} />
             </Route>
 
             {/* 學生端路由 */}
