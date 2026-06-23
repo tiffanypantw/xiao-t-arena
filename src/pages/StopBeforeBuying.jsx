@@ -36,10 +36,10 @@ export default function StopBeforeBuying() {
 
   const Q = ({ n, title, hint, children }) => (
     <div className="mb-4 bg-card border border-border rounded-2xl p-4">
-      <p className="text-sm font-black text-foreground">
+      <p className="text-base font-black text-foreground">
         <span className="text-primary mr-1.5">{n}</span>{title}
       </p>
-      {hint && <p className="text-xs text-muted-foreground mt-1 mb-3">{hint}</p>}
+      {hint && <p className="text-sm text-muted-foreground mt-1 mb-3">{hint}</p>}
       {!hint && <div className="mb-3" />}
       {children}
     </div>
@@ -67,7 +67,7 @@ export default function StopBeforeBuying() {
             </div>
             <div>
               <h1 className="text-xl font-black text-foreground leading-tight">買之前先停一下</h1>
-              <p className="text-xs text-muted-foreground">想花錢的時候，先問自己 4 個問題</p>
+              <p className="text-sm text-muted-foreground">想花錢的時候，先問自己 4 個問題</p>
             </div>
           </div>
         </motion.div>
@@ -120,7 +120,7 @@ export default function StopBeforeBuying() {
 
         {/* 決定 */}
         <div className="mb-4 bg-primary/5 border-2 border-primary/30 rounded-2xl p-4">
-          <p className="text-sm font-black text-primary mb-3">我的決定</p>
+          <p className="text-base font-black text-primary mb-3">我的決定</p>
           <div className="flex gap-2 mb-3">
             {['買', '不買', '再想想'].map((d) => (
               <button
@@ -142,7 +142,7 @@ export default function StopBeforeBuying() {
           />
         </div>
 
-        <p className="text-center text-xs text-muted-foreground mt-2">停下來想一想，你就是金錢的主人 ✨</p>
+        <p className="text-center text-sm text-muted-foreground mt-2">停下來想一想，你就是金錢的主人 ✨</p>
         <div className="h-6" />
       </div>
     </div>

@@ -140,7 +140,7 @@ export default function MoneyJars() {
             </div>
             <div>
               <h1 className="text-xl font-black text-foreground leading-tight">我的 5 罐子記帳</h1>
-              <p className="text-xs text-muted-foreground">{monthKey.replace("-", " 年 ")} 月</p>
+              <p className="text-sm text-muted-foreground">{monthKey.replace("-", " 年 ")} 月</p>
             </div>
           </div>
         </motion.div>
@@ -156,7 +156,7 @@ export default function MoneyJars() {
             <div key={k} className="mb-3 last:mb-0">
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-2.5 h-2.5 rounded-full" style={{ background: color }} />
-                <span className="text-xs font-bold text-foreground">{label}</span>
+                <span className="text-sm font-bold text-foreground">{label}</span>
               </div>
               <input
                 value={month.goals[k] || ""}
@@ -170,7 +170,7 @@ export default function MoneyJars() {
 
         {/* 5 罐子設定 */}
         <Section title="5 罐子設定" desc="填這個月的零用錢，再決定每個罐子的比例。">
-          <label className="block text-xs font-bold text-muted-foreground mb-1">這個月的零用錢</label>
+          <label className="block text-sm font-bold text-muted-foreground mb-1">這個月的零用錢</label>
           <div className="flex items-center gap-2 mb-4">
             <input
               type="number"
@@ -192,7 +192,7 @@ export default function MoneyJars() {
                 >
                   {j.label}
                 </div>
-                <span className="text-xs text-muted-foreground w-16 shrink-0">{j.job}</span>
+                <span className="text-sm text-muted-foreground w-16 shrink-0">{j.job}</span>
                 <input
                   type="number"
                   inputMode="numeric"
@@ -200,7 +200,7 @@ export default function MoneyJars() {
                   onChange={(e) => setPercent(j.key, e.target.value)}
                   className="w-16 text-sm px-2 py-1.5 rounded-lg border border-border bg-card text-center focus:outline-none focus:border-primary"
                 />
-                <span className="text-xs text-muted-foreground">%</span>
+                <span className="text-sm text-muted-foreground">%</span>
                 <span className="text-sm font-bold text-foreground ml-auto">
                   {yen(calc.planned[j.key])}
                 </span>
@@ -209,7 +209,7 @@ export default function MoneyJars() {
           </div>
 
           <div
-            className={`mt-3 flex items-center gap-2 text-xs font-bold ${
+            className={`mt-3 flex items-center gap-2 text-sm font-bold ${
               calc.pctSum === 100 ? "text-accent" : "text-destructive"
             }`}
           >
@@ -242,7 +242,7 @@ export default function MoneyJars() {
             <Stat label="結餘" value={yen(calc.balance)} highlight={calc.balance >= 0} />
           </div>
 
-          <div className="mt-3 bg-muted/40 border border-border rounded-xl p-3 text-xs text-muted-foreground space-y-1.5">
+          <div className="mt-3 bg-muted/40 border border-border rounded-xl p-3 text-sm text-muted-foreground space-y-1.5">
             <div className="flex items-center justify-between">
               <span>我這個月有「先存」嗎？</span>
               <span className="font-bold text-foreground">{calc.saved > 0 ? `有，存了 ${yen(calc.saved)}` : "還沒"}</span>
@@ -268,8 +268,8 @@ function Section({ title, desc, children }) {
       animate={{ opacity: 1, y: 0 }}
       className="mb-4 bg-card border border-border rounded-2xl p-4"
     >
-      <h2 className="text-base font-black text-foreground">{title}</h2>
-      {desc && <p className="text-xs text-muted-foreground mt-0.5 mb-3">{desc}</p>}
+      <h2 className="text-lg font-black text-foreground">{title}</h2>
+      {desc && <p className="text-sm text-muted-foreground mt-0.5 mb-3">{desc}</p>}
       {!desc && <div className="mb-3" />}
       {children}
     </motion.div>
@@ -292,8 +292,8 @@ function Row({ label, values, muted }) {
 function Stat({ label, value, highlight }) {
   return (
     <div className="bg-muted/50 rounded-xl p-2.5 text-center">
-      <div className="text-[11px] text-muted-foreground">{label}</div>
-      <div className={`text-sm font-black mt-0.5 ${highlight ? "text-accent" : "text-foreground"}`}>{value}</div>
+      <div className="text-xs text-muted-foreground">{label}</div>
+      <div className={`text-base font-black mt-0.5 ${highlight ? "text-accent" : "text-foreground"}`}>{value}</div>
     </div>
   );
 }
@@ -393,7 +393,7 @@ function DailyLedger({ month, setMonth }) {
       {/* 列表 */}
       <div className="mt-4 space-y-2">
         {(month.entries || []).length === 0 && (
-          <p className="text-xs text-muted-foreground text-center py-4">還沒有紀錄，記下第一筆吧！</p>
+          <p className="text-sm text-muted-foreground text-center py-4">還沒有紀錄，記下第一筆吧！</p>
         )}
         {(month.entries || []).map((e) => {
           const j = jarOf(e.jar);
