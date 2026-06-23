@@ -130,16 +130,16 @@ export default function Home() {
               <PiggyBank className="w-5 h-5 text-white" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-black text-foreground">我的 5 罐子記帳</p>
-              <p className="text-xs text-muted-foreground mt-0.5">把零用錢分配好，照顧現在也照顧未來</p>
+              <p className="text-base font-black text-foreground">我的 5 罐子記帳</p>
+              <p className="text-sm text-muted-foreground mt-0.5">把零用錢分配好，照顧現在也照顧未來</p>
             </div>
             <ChevronRight className="w-4 h-4 text-muted-foreground shrink-0" />
           </div>
           <div className="flex gap-2 mt-3">
             {JAR_DOTS.map((j) => (
               <div key={j.label} className="flex-1 bg-card border border-border rounded-xl py-2 text-center">
-                <div className="w-3 h-3 rounded-full mx-auto mb-1" style={{ background: j.color }} />
-                <div className="text-[11px] font-bold text-foreground">{j.label}</div>
+                <div className="w-3.5 h-3.5 rounded-full mx-auto mb-1" style={{ background: j.color }} />
+                <div className="text-sm font-bold text-foreground">{j.label}</div>
               </div>
             ))}
           </div>
@@ -154,7 +154,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             onClick={arenaTileClick}
-            className={`relative text-left rounded-2xl border p-4 min-h-[118px] flex flex-col justify-between transition-all hover:opacity-90 active:scale-[0.98] ${
+            className={`relative text-left rounded-2xl border p-4 min-h-[130px] flex flex-col justify-between transition-all hover:opacity-90 active:scale-[0.98] ${
               arenaUnlocked ? 'border-border bg-card' : 'border-dashed border-violet-300 bg-violet-50/50'
             }`}
           >
@@ -167,8 +167,8 @@ export default function Home() {
               <Trophy className="w-4 h-4 text-violet-600" />
             </div>
             <div>
-              <p className="text-sm font-black text-foreground leading-tight">概念競技場</p>
-              <p className="text-xs text-muted-foreground mt-0.5">
+              <p className="text-base font-black text-foreground leading-tight">概念競技場</p>
+              <p className="text-sm text-muted-foreground mt-0.5">
                 {arenaUnlocked ? '每週練習題・拿徽章' : '俱樂部加購會員專屬'}
               </p>
             </div>
@@ -183,7 +183,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.06 + 0.16 }}
                 onClick={t.onClick}
-                className="relative text-left rounded-2xl border border-border bg-card p-4 min-h-[118px] flex flex-col justify-between hover:opacity-90 active:scale-[0.98] transition-all"
+                className="relative text-left rounded-2xl border border-border bg-card p-4 min-h-[130px] flex flex-col justify-between hover:opacity-90 active:scale-[0.98] transition-all"
               >
                 {t.external && (
                   <span className="absolute top-3 right-3 flex items-center gap-1 bg-sky-50 text-sky-700 text-[10px] font-bold px-2 py-0.5 rounded-lg">
@@ -194,8 +194,8 @@ export default function Home() {
                   <Icon className={`w-4 h-4 ${t.iconColor}`} />
                 </div>
                 <div>
-                  <p className="text-sm font-black text-foreground leading-tight">{t.title}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">{t.sub}</p>
+                  <p className="text-base font-black text-foreground leading-tight">{t.title}</p>
+                  <p className="text-sm text-muted-foreground mt-0.5">{t.sub}</p>
                 </div>
               </motion.button>
             );
@@ -236,7 +236,7 @@ export default function Home() {
         )}
 
         {/* 品牌掛名 */}
-        <div className="text-center text-xs font-bold text-violet-700 mt-6">
+        <div className="text-center text-sm font-bold text-violet-700 mt-6">
           goodwhale × tiffany陪孩子學財商
         </div>
 
