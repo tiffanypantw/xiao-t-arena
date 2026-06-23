@@ -26,6 +26,9 @@ import AdminUploadW10 from './pages/admin/AdminUploadW10';
 import AdminUploadW11 from './pages/admin/AdminUploadW11';
 import WeekLearning from './pages/WeekLearning';
 import Profile from './pages/Profile';
+import MoneyJars from './pages/MoneyJars';
+import ArenaPractice from './pages/ArenaPractice';
+import StopBeforeBuying from './pages/StopBeforeBuying';
 
 const StudentApp = () => {
   const { user, isLoadingAuth } = useAuth();
@@ -48,6 +51,9 @@ const StudentApp = () => {
       <Route path="/Profile" element={<Profile />} />
       <Route path="/week/:weekNumber" element={<WeekLearning />} />
       <Route path="/VDPractice" element={<VDPractice />} />
+      <Route path="/money" element={<MoneyJars />} />
+      <Route path="/arena" element={<ArenaPractice />} />
+      <Route path="/stop" element={<StopBeforeBuying />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
