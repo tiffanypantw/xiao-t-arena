@@ -33,6 +33,7 @@ import ArenaBands from './pages/ArenaBands';
 import ArenaThemes from './pages/ArenaThemes';
 import StopBeforeBuying from './pages/StopBeforeBuying';
 import Trivia from './pages/Trivia';
+import Leaderboard from './pages/Leaderboard';
 
 const StudentApp = () => {
   const { user, isLoadingAuth } = useAuth();
@@ -61,6 +62,7 @@ const StudentApp = () => {
       <Route path="/arena/weeks" element={<ArenaPractice />} />
       <Route path="/stop" element={<StopBeforeBuying />} />
       <Route path="/trivia" element={<Trivia />} />
+      <Route path="/leaderboard" element={<Leaderboard />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

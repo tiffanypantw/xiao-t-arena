@@ -6,6 +6,7 @@ import { useAuth } from "@/lib/AuthContext";
 import { db } from "@/lib/firebase";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { pickRound } from "@/data/trivia";
+import { writeTriviaScore } from "@/lib/triviaScore";
 
 const ROUND_SIZE = 5;
 
@@ -75,6 +76,7 @@ export default function Trivia() {
         },
         { merge: true }
       );
+      await writeTriviaScore(user.uid, pts); // 寫入排行榜（本週累積）
       await refreshUserData();
     } catch (e) {
       console.error("save trivia failed", e);
@@ -99,6 +101,7 @@ export default function Trivia() {
           <button onClick={start} className="bg-primary text-primary-foreground text-base font-black px-6 py-3 rounded-2xl shadow-[0_4px_0_#5b32b6] active:translate-y-0.5 active:shadow-[0_2px_0_#5b32b6] transition-all">
             開始挑戰 →
           </button>
+          <button onClick={() => navigate("/leaderboard")} className="mt-3 text-sm font-bold text-violet-700">🏆 看本週排行榜</button>
         </div>
       </Shell>
     );
@@ -124,6 +127,7 @@ export default function Trivia() {
           <p className="text-xs text-muted-foreground mb-5 max-w-[300px]">
             這些冷知識背後都有道理——想真的學會用錢嗎？你的學習在等你 →
           </p>
+          <button onClick={() => navigate("/leaderboard")} className="mb-3 text-sm font-bold text-violet-700">🏆 看本週排行榜</button>
           <div className="flex gap-2">
             <button onClick={start} className="bg-primary text-primary-foreground text-sm font-black px-5 py-2.5 rounded-2xl shadow-[0_4px_0_#5b32b6] active:translate-y-0.5 transition-all">再玩一次 ↺</button>
             <button onClick={() => navigate("/")} className="border border-border text-sm font-bold px-5 py-2.5 rounded-2xl text-muted-foreground">回首頁</button>
