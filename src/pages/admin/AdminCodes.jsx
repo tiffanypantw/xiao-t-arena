@@ -1,11 +1,16 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { db } from "@/lib/firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp, collection, getDocs } from "firebase/firestore";
 import { ARENA_BANDS } from "@/data/arenaStructure";
 
 // 不含容易看錯的字（去掉 I O L 0 1）
 const ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 const rand = (n) => Array.from({ length: n }, () => ALPHABET[Math.floor(Math.random() * ALPHABET.length)]).join("");
+
+// themeId → 顯示名稱
+const THEME_NAMES = {};
+ARENA_BANDS.forEach((b) => b.themes.forEach((t) => { THEME_NAMES[t.id] = `${b.name} · ${t.name}`; }));
+const fmtDate = (ts) => (ts && ts.seconds ? new Date(ts.seconds * 1000).toLocaleDateString("zh-TW") : "—");
 
 export default function AdminCodes() {
   // 把所有「需要開通碼」的主題攤平成下拉選單
@@ -24,6 +29,26 @@ export default function AdminCodes() {
   const [busy, setBusy] = useState(false);
   const [generated, setGenerated] = useState([]);
   const [msg, setMsg] = useState("");
+
+  const [history, setHistory] = useState([]);
+  const [loadingHist, setLoadingHist] = useState(true);
+  const [showAll, setShowAll] = useState(false);
+
+  const loadHistory = async () => {
+    setLoadingHist(true);
+    try {
+      const snap = await getDocs(collection(db, "redeemCodes"));
+      const rows = snap.docs
+        .map((d) => ({ id: d.id, ...d.data() }))
+        .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+      setHistory(rows);
+    } catch (e) {
+      console.error("load code history failed", e);
+    } finally {
+      setLoadingHist(false);
+    }
+  };
+  useEffect(() => { loadHistory(); }, []);
 
   const theme = themes.find((t) => t.id === themeId);
 
@@ -48,6 +73,7 @@ export default function AdminCodes() {
       }
       setGenerated((g) => [...made, ...g]);
       setNote("");
+      loadHistory();
     } catch (e) {
       setMsg("產生失敗：" + (e.message || e));
     } finally {
@@ -126,6 +152,49 @@ export default function AdminCodes() {
           <p className="text-xs text-slate-400 mt-3">這些碼已經寫進系統，隨時可以發。重新整理後清單會清空，但碼仍然有效。</p>
         </div>
       )}
+
+      {/* 歷史紀錄 */}
+      <div className="mt-9">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-base font-black text-slate-900">📜 開通碼紀錄</h2>
+          <div className="flex items-center gap-2">
+            <button onClick={() => setShowAll((v) => !v)} className="text-xs text-slate-500 border border-slate-200 px-2 py-1 rounded hover:bg-slate-50">
+              {showAll ? "只看主題碼" : "看全部"}
+            </button>
+            <button onClick={loadHistory} className="text-xs text-slate-500 border border-slate-200 px-2 py-1 rounded hover:bg-slate-50">↻ 重新整理</button>
+          </div>
+        </div>
+
+        {loadingHist ? (
+          <p className="text-sm text-slate-400 py-4">載入中…</p>
+        ) : (() => {
+          const shown = history.filter((r) => showAll || r.type === "theme-access");
+          if (shown.length === 0) return <p className="text-sm text-slate-400 py-4">還沒有紀錄。</p>;
+          return (
+            <>
+              <div className="space-y-1.5">
+                {shown.map((r) => {
+                  const used = (r.uses || 0) >= (r.maxUses || 1);
+                  const what = r.type === "theme-access" ? (THEME_NAMES[r.themeId] || r.themeId || "主題") : (r.type || "—");
+                  return (
+                    <div key={r.id} className="bg-white border border-slate-200 rounded-lg px-3.5 py-2 flex items-center gap-3 text-sm">
+                      <span className="font-mono font-bold text-slate-900 w-28 shrink-0 truncate">{r.code || r.id}</span>
+                      <span className="text-xs text-slate-500 flex-1 truncate">
+                        {what}{r.generatedFor ? ` · ${r.generatedFor}` : ""}
+                      </span>
+                      <span className="text-xs text-slate-400 shrink-0 hidden sm:inline">{fmtDate(r.createdAt)}</span>
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded shrink-0 ${used ? "bg-slate-100 text-slate-400" : "bg-emerald-50 text-emerald-600"}`}>
+                        {used ? "已用" : "未用"}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="text-xs text-slate-400 mt-2">共 {shown.length} 筆{showAll ? "（全部）" : "（主題開通碼）"}</p>
+            </>
+          );
+        })()}
+      </div>
     </div>
   );
 }
