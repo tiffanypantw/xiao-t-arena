@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { useBrand } from '@/lib/BrandContext';
-import { Award, Settings, ChevronRight, Trophy, PiggyBank, HelpCircle, ExternalLink, Lightbulb } from 'lucide-react';
+import { Award, Settings, ChevronRight, Trophy, PiggyBank, HelpCircle, ExternalLink, Lightbulb, Facebook, Instagram, Youtube, Mic, Mail } from 'lucide-react';
 
 const SKOOL_URL = 'https://www.skool.com/next-gen-finance-7415/about';
 
@@ -12,6 +12,14 @@ const JAR_DOTS = [
   { label: '學', color: '#1C7C4C' },
   { label: '投', color: '#1B5FA0' },
   { label: '給', color: '#9C3F7E' },
+];
+
+const SOCIALS = [
+  { label: '臉書', url: 'https://www.facebook.com/ms.tiffany.finlit/', icon: Facebook, color: '#1877F2' },
+  { label: 'IG', url: 'https://www.instagram.com/ms.tiffany.finlit/', icon: Instagram, color: '#E1306C' },
+  { label: 'YouTube', url: 'https://www.youtube.com/@Ms.Tiffany.FinLit', icon: Youtube, color: '#FF0000' },
+  { label: 'Podcast', url: 'https://reurl.cc/A3DL5Y', icon: Mic, color: '#7C3AED' },
+  { label: '電子報', url: 'https://mstiffanyfinlit.kit.com/wednesday_ai_finlit_live', icon: Mail, color: '#1FAE78' },
 ];
 
 export default function Home() {
@@ -172,6 +180,25 @@ export default function Home() {
               </motion.button>
             );
           })}
+        </div>
+
+        {/* 找到 Tiffany 老師 */}
+        <div className="mt-7">
+          <p className="text-center text-xs font-bold text-muted-foreground mb-2.5">找到 Tiffany 老師</p>
+          <div className="flex justify-center flex-wrap gap-2">
+            {SOCIALS.map((s) => {
+              const Icon = s.icon;
+              return (
+                <button
+                  key={s.label}
+                  onClick={() => window.open(s.url, '_blank', 'noopener')}
+                  className="flex items-center gap-1.5 border border-border bg-card rounded-full px-3 py-1.5 text-xs font-bold text-muted-foreground hover:opacity-90 active:scale-95 transition-all"
+                >
+                  <Icon className="w-3.5 h-3.5" style={{ color: s.color }} /> {s.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* 品牌掛名 */}
