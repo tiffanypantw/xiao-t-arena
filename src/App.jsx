@@ -28,6 +28,8 @@ import WeekLearning from './pages/WeekLearning';
 import Profile from './pages/Profile';
 import MoneyJars from './pages/MoneyJars';
 import ArenaPractice from './pages/ArenaPractice';
+import ArenaBands from './pages/ArenaBands';
+import ArenaThemes from './pages/ArenaThemes';
 import StopBeforeBuying from './pages/StopBeforeBuying';
 import Trivia from './pages/Trivia';
 
@@ -53,7 +55,9 @@ const StudentApp = () => {
       <Route path="/week/:weekNumber" element={<WeekLearning />} />
       <Route path="/VDPractice" element={<VDPractice />} />
       <Route path="/money" element={<MoneyJars />} />
-      <Route path="/arena" element={<ArenaPractice />} />
+      <Route path="/arena" element={<ArenaBands />} />
+      <Route path="/arena/band/:bandId" element={<ArenaThemes />} />
+      <Route path="/arena/weeks" element={<ArenaPractice />} />
       <Route path="/stop" element={<StopBeforeBuying />} />
       <Route path="/trivia" element={<Trivia />} />
       <Route path="*" element={<PageNotFound />} />

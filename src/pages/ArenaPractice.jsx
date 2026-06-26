@@ -55,10 +55,10 @@ export default function ArenaPractice() {
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/arena/band/l1')}
             className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-all"
           >
-            <ChevronLeft className="w-4 h-4" /> 首頁
+            <ChevronLeft className="w-4 h-4" /> L1 體驗
           </button>
           <button
             onClick={() => navigate('/Passport')}
@@ -71,9 +71,9 @@ export default function ArenaPractice() {
 
         {/* 標題 */}
         <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="mb-5">
-          <div className="text-3xl mb-2">🏆</div>
-          <h1 className="text-2xl font-black text-foreground tracking-tight leading-tight">概念競技場</h1>
-          <p className="text-sm text-muted-foreground mt-1">每週一個大問題，完成練習題拿徽章</p>
+          <div className="text-3xl mb-2">📚</div>
+          <h1 className="text-2xl font-black text-foreground tracking-tight leading-tight">第一季</h1>
+          <p className="text-sm text-muted-foreground mt-1">L1 體驗 · W1–W12 · 完成練習題拿徽章</p>
         </motion.div>
 
         {/* 直播限定特別區塊 */}
