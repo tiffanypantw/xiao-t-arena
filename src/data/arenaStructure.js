@@ -30,6 +30,7 @@ export const ARENA_BANDS = [
     iconColor: "text-violet-600",
     themes: [
       { id: "l1-season1", name: "第一季", weeks: "W1–W12", live: true, gated: true, codePrefix: "S1", route: "/arena/weeks" },
+      { id: "l1-g1", name: "G1 價值與交換", weeks: "12 週主題", live: true, gated: true, codePrefix: "G1", route: "/arena/road/l1-g1" },
     ],
   },
   {
