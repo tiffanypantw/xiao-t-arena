@@ -73,7 +73,7 @@ export function hasThemeAccess(userData, themeId) {
 }
 
 // 兌換「某個主題」的開通碼：redeemCodes 裡 type=theme-access、帶 themeId
-export async function redeemThemeCode(uid, rawCode) {
+export async function redeemThemeCode(uid, rawCode, expectedThemeId) {
   const code = (rawCode || "").trim().toUpperCase();
   if (!code) return { success: false, error: "請輸入開通碼" };
   if (!uid) return { success: false, error: "尚未登入" };
@@ -89,6 +89,9 @@ export async function redeemThemeCode(uid, rawCode) {
       const data = snap.data();
       if (data.type !== "theme-access") throw new Error("這不是主題課程的開通碼");
       if (!data.themeId) throw new Error("這組碼沒有對應的主題，請聯絡老師");
+      if (expectedThemeId && data.themeId !== expectedThemeId) {
+        throw new Error("這組碼不是這個主題的開通碼，請確認你買的是哪一個主題");
+      }
       const uses = data.uses || 0;
       const maxUses = data.maxUses || 1;
       if (uses >= maxUses) throw new Error("這組開通碼已經被使用過了");

@@ -21,7 +21,7 @@ export default function ArenaThemes() {
   const submitCode = async () => {
     if (!openTheme) return;
     setErr(""); setBusy(true);
-    const res = await redeemThemeCode(user?.uid, code);
+    const res = await redeemThemeCode(user?.uid, code, openTheme?.id);
     setBusy(false);
     if (res.success) {
       await refreshUserData();
