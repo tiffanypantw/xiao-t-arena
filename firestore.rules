@@ -61,11 +61,5 @@ service cloud.firestore {
     match /weeklyProgress/{progressId} {
       allow read, write: if request.auth != null;
     }
-
-    // 金錢冷知識排行榜分數:登入者都能讀（排名用），各自寫自己的那筆
-    match /triviaScores/{userId} {
-      allow read: if request.auth != null;
-      allow write: if request.auth != null && request.auth.uid == userId;
-    }
   }
 }
