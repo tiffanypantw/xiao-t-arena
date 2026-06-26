@@ -19,6 +19,7 @@ import AdminConversations from './pages/admin/AdminConversations';
 import AdminHistory from './pages/admin/AdminHistory';
 import AdminContent from './pages/admin/AdminContent';
 import AdminContentEdit from './pages/admin/AdminContentEdit';
+import AdminCodes from './pages/admin/AdminCodes';
 import AdminUploadW7 from './pages/admin/AdminUploadW7';
 import AdminUploadW8 from './pages/admin/AdminUploadW8';
 import AdminUploadW9 from './pages/admin/AdminUploadW9';
@@ -90,6 +91,7 @@ function App() {
               <Route path="history" element={<AdminHistory />} />
               <Route path="content" element={<AdminContent />} />
               <Route path="content/:weekNumber" element={<AdminContentEdit />} />
+              <Route path="codes" element={<AdminCodes />} />
               <Route path="upload-w7" element={<AdminUploadW7 />} />
               <Route path="upload-w8" element={<AdminUploadW8 />} />
               <Route path="upload-w9" element={<AdminUploadW9 />} />

@@ -38,6 +38,9 @@ export default function AdminLayout() {
             <NavLink to="/admin/content" className={navLinkClass}>
               📝 內容管理
             </NavLink>
+            <NavLink to="/admin/codes" className={navLinkClass}>
+              🔑 開通碼
+            </NavLink>
           </nav>
         </div>
         <div className="flex items-center gap-3">

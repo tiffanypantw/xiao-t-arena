@@ -29,7 +29,7 @@ export const ARENA_BANDS = [
     iconBg: "bg-violet-50",
     iconColor: "text-violet-600",
     themes: [
-      { id: "l1-season1", name: "第一季", weeks: "W1–W12", live: true, gated: true, route: "/arena/weeks" },
+      { id: "l1-season1", name: "第一季", weeks: "W1–W12", live: true, gated: true, codePrefix: "S1", route: "/arena/weeks" },
     ],
   },
   {
