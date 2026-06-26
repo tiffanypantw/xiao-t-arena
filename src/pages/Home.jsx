@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { useBrand } from '@/lib/BrandContext';
-import { Award, Settings, ChevronRight, Trophy, PiggyBank, HelpCircle, ExternalLink, Lock, KeyRound } from 'lucide-react';
+import { Award, Settings, ChevronRight, Trophy, PiggyBank, HelpCircle, ExternalLink, Lock, KeyRound, Lightbulb } from 'lucide-react';
 import { hasArenaAccess, redeemArenaCode } from '@/api/arenaAccess';
 
 const SKOOL_URL = 'https://www.skool.com/next-gen-finance-7415/about';
@@ -48,6 +48,15 @@ export default function Home() {
   };
 
   const tiles = [
+    {
+      key: 'trivia',
+      title: '金錢冷知識',
+      sub: '好玩的世界知識・拿積分',
+      icon: Lightbulb,
+      iconBg: 'bg-amber-50',
+      iconColor: 'text-amber-500',
+      onClick: () => navigate('/trivia'),
+    },
     {
       key: 'passport',
       title: '學習護照',

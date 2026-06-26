@@ -29,6 +29,7 @@ import Profile from './pages/Profile';
 import MoneyJars from './pages/MoneyJars';
 import ArenaPractice from './pages/ArenaPractice';
 import StopBeforeBuying from './pages/StopBeforeBuying';
+import Trivia from './pages/Trivia';
 
 const StudentApp = () => {
   const { user, isLoadingAuth } = useAuth();
@@ -54,6 +55,7 @@ const StudentApp = () => {
       <Route path="/money" element={<MoneyJars />} />
       <Route path="/arena" element={<ArenaPractice />} />
       <Route path="/stop" element={<StopBeforeBuying />} />
+      <Route path="/trivia" element={<Trivia />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
