@@ -5,7 +5,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { useBrand } from '@/lib/BrandContext';
 import { useWeeks } from '@/lib/hooks/useContent';
 import { Lock, ChevronRight, ChevronLeft, Award, Zap } from 'lucide-react';
-import { hasArenaAccess } from '@/api/arenaAccess';
+import { hasThemeAccess } from '@/api/arenaAccess';
 
 // 概念競技場：每週練習題清單（原本的首頁內容搬到這裡）
 export default function ArenaPractice() {
@@ -14,9 +14,9 @@ export default function ArenaPractice() {
   const brand = useBrand();
   const { data: allWeeks = [], isLoading: weeksLoading } = useWeeks();
 
-  // 沒有開通的帳號不能用網址直接進來 → 退回首頁（首頁有開通碼入口）
+  // 沒開通「第一季」的帳號不能用網址直接進來 → 退回主題列表（那裡有開通碼入口）
   useEffect(() => {
-    if (userData && !hasArenaAccess(userData)) navigate('/');
+    if (userData && !hasThemeAccess(userData, 'l1-season1')) navigate('/arena/band/l1');
   }, [userData, navigate]);
 
   const collection = userData?.collection || {};

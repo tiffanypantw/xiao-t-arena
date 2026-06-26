@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { useBrand } from '@/lib/BrandContext';
-import { Award, Settings, ChevronRight, Trophy, PiggyBank, HelpCircle, ExternalLink, Lock, KeyRound, Lightbulb } from 'lucide-react';
-import { hasArenaAccess, redeemArenaCode } from '@/api/arenaAccess';
+import { Award, Settings, ChevronRight, Trophy, PiggyBank, HelpCircle, ExternalLink, Lightbulb } from 'lucide-react';
 
 const SKOOL_URL = 'https://www.skool.com/next-gen-finance-7415/about';
 
@@ -18,34 +16,8 @@ const JAR_DOTS = [
 
 export default function Home() {
   const navigate = useNavigate();
-  const { user, userData, logout, refreshUserData } = useAuth();
+  const { userData, logout } = useAuth();
   const brand = useBrand();
-
-  const arenaUnlocked = hasArenaAccess(userData);
-  const [gateOpen, setGateOpen] = useState(false);
-  const [code, setCode] = useState('');
-  const [gateError, setGateError] = useState('');
-  const [gateBusy, setGateBusy] = useState(false);
-
-  const submitCode = async () => {
-    setGateError('');
-    setGateBusy(true);
-    const res = await redeemArenaCode(user?.uid, code);
-    setGateBusy(false);
-    if (res.success) {
-      await refreshUserData();
-      setGateOpen(false);
-      setCode('');
-      navigate('/arena');
-    } else {
-      setGateError(res.error || '開通失敗');
-    }
-  };
-
-  const arenaTileClick = () => {
-    if (arenaUnlocked) navigate('/arena');
-    else setGateOpen((v) => !v);
-  };
 
   const tiles = [
     {
@@ -157,29 +129,20 @@ export default function Home() {
         {/* 區塊 grid */}
         <div className="grid grid-cols-2 gap-3">
 
-          {/* 概念競技場（可能上鎖） */}
+          {/* 概念競技場 */}
           <motion.button
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            onClick={arenaTileClick}
-            className={`relative text-left rounded-2xl border p-4 min-h-[130px] flex flex-col justify-between transition-all hover:opacity-90 active:scale-[0.98] ${
-              arenaUnlocked ? 'border-border bg-card' : 'border-dashed border-violet-300 bg-violet-50/50'
-            }`}
+            onClick={() => navigate('/arena')}
+            className="relative text-left rounded-2xl border border-border bg-card p-4 min-h-[130px] flex flex-col justify-between transition-all hover:opacity-90 active:scale-[0.98]"
           >
-            {!arenaUnlocked && (
-              <span className="absolute top-3 right-3 flex items-center gap-1 bg-violet-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-lg">
-                <Lock className="w-2.5 h-2.5" /> 開通碼
-              </span>
-            )}
             <div className="w-9 h-9 rounded-xl bg-violet-50 flex items-center justify-center">
               <Trophy className="w-4 h-4 text-violet-600" />
             </div>
             <div>
               <p className="text-base font-black text-foreground leading-tight">概念競技場</p>
-              <p className="text-sm text-muted-foreground mt-0.5">
-                {arenaUnlocked ? '每週練習題・拿徽章' : '俱樂部加購會員專屬'}
-              </p>
+              <p className="text-sm text-muted-foreground mt-0.5">選年齡段・每週練習題</p>
             </div>
           </motion.button>
 
@@ -210,39 +173,6 @@ export default function Home() {
             );
           })}
         </div>
-
-        {/* 開通碼輸入面板 */}
-        {gateOpen && !arenaUnlocked && (
-          <motion.div
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-3 border border-violet-200 bg-violet-50 rounded-2xl p-4"
-          >
-            <p className="text-sm font-black text-violet-700 flex items-center gap-1.5">
-              <KeyRound className="w-4 h-4" /> 輸入概念競技場開通碼
-            </p>
-            <p className="text-xs text-muted-foreground mt-1 mb-3">
-              概念競技場是俱樂部加購會員的資格。輸入你拿到的開通碼就能解鎖每週練習題。
-            </p>
-            <div className="flex gap-2">
-              <input
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter' && !e.nativeEvent.isComposing) submitCode(); }}
-                placeholder="輸入開通碼"
-                className="flex-1 text-sm px-3 py-2 rounded-xl border border-border bg-card tracking-wider focus:outline-none focus:border-primary"
-              />
-              <button
-                onClick={submitCode}
-                disabled={gateBusy}
-                className="bg-violet-600 text-white text-sm font-bold px-4 rounded-xl hover:opacity-90 disabled:opacity-50 transition-all"
-              >
-                {gateBusy ? '…' : '解鎖'}
-              </button>
-            </div>
-            {gateError && <p className="text-xs text-destructive font-bold mt-2">{gateError}</p>}
-          </motion.div>
-        )}
 
         {/* 品牌掛名 */}
         <div className="text-center text-sm font-bold text-violet-700 mt-6">

@@ -1,20 +1,11 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Award } from "lucide-react";
-import { useAuth } from "@/lib/AuthContext";
-import { hasArenaAccess } from "@/api/arenaAccess";
 import { ARENA_BANDS } from "@/data/arenaStructure";
 
-// 概念競技場第一層：選年齡段（分齡）
+// 概念競技場第一層：選年齡段（分齡）。可自由瀏覽，鎖在各主題課程上。
 export default function ArenaBands() {
   const navigate = useNavigate();
-  const { userData } = useAuth();
-
-  // 沒開通的帳號不能用網址直接進來
-  useEffect(() => {
-    if (userData && !hasArenaAccess(userData)) navigate("/");
-  }, [userData, navigate]);
 
   return (
     <div className="min-h-screen bg-background">
