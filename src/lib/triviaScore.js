@@ -67,3 +67,13 @@ export async function fetchWeeklyLeaderboard(limitN = 50) {
     .sort((a, b) => (b.weeklyPoints || 0) - (a.weeklyPoints || 0))
     .slice(0, limitN);
 }
+
+// 抓總排行榜（不分週，讀全部分數依累積總分排序）
+export async function fetchAllTimeLeaderboard(limitN = 50) {
+  const snap = await getDocs(collection(db, "triviaScores"));
+  return snap.docs
+    .map((d) => d.data())
+    .filter((r) => (r.allTimePoints || 0) > 0)
+    .sort((a, b) => (b.allTimePoints || 0) - (a.allTimePoints || 0))
+    .slice(0, limitN);
+}
