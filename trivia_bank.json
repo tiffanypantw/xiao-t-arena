@@ -1,0 +1,5032 @@
+{
+  "meta": {
+    "name": "小T冷知識競技場 · 題庫",
+    "purpose": "獨立的冷知識 trivia 遊戲（非每週練習題）。孩子自選難度遊玩，sudoku 式入口。",
+    "themeScope": "財商為主（金融/經濟/商業/理財/投資）＋ 生活雜學、歷史故事、名人故事",
+    "difficultyLevels": [
+      "easy",
+      "intermediate",
+      "hard",
+      "challenge"
+    ],
+    "verificationNote": "每題盡量查證、避開常見迷思。flag 標 ⚠️ 者為『容易傳錯、特別斟酌過』的題。",
+    "batch": "bank: easy=100, intermediate=50, hard=50, challenge=50 (total 250)",
+    "schemaFields": {
+      "id": "唯一編號",
+      "difficulty": "easy | intermediate | hard | challenge",
+      "category": "顯示用小標籤",
+      "categoryEmoji": "標籤前的 emoji",
+      "type": "multiple_choice",
+      "question": "題幹",
+      "options": "4 個選項（字串陣列）",
+      "answer": "正解字串（需與 options 之一完全相同，沿用 weeks.quizQuestions 慣例）",
+      "explanation": "答完顯示的 💡 主說明（揭曉卡片放大的那段）",
+      "triviaBonus": "選填：💡冷知識額外彩蛋框，沒有就 null",
+      "illustration": "選填：SVG/圖，沒有就 null（卡片自動隱藏）",
+      "storyLink": "選填：Skool 故事冊連結，只有相關題目才填",
+      "flag": "選填：⚠️ 註記，沒有就 null"
+    }
+  },
+  "questions": [
+    {
+      "id": "triv-e-001",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "🏦",
+      "type": "multiple_choice",
+      "question": "把錢存進銀行，過一段時間銀行通常會多給你一點點錢。這個「多出來的錢」叫什麼？",
+      "options": [
+        "租金",
+        "罰款",
+        "利息",
+        "稅金"
+      ],
+      "answer": "利息",
+      "explanation": "錢存在銀行，銀行會付你「利息」當作謝禮。存越久、利率越高，多出來的就越多。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-002",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "📝",
+      "type": "multiple_choice",
+      "question": "「預算」是什麼意思？",
+      "options": [
+        "一種貨幣的名字",
+        "一家很大的銀行",
+        "一種要繳的稅",
+        "事先計畫好錢要怎麼花"
+      ],
+      "answer": "事先計畫好錢要怎麼花",
+      "explanation": "預算就是「先想好錢要花在哪」。有了預算，比較不會花到一半發現錢不夠。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-003",
+      "difficulty": "easy",
+      "category": "你不知道的錢",
+      "categoryEmoji": "💳",
+      "type": "multiple_choice",
+      "question": "用信用卡買東西，其實是先發生了什麼事？",
+      "options": [
+        "先把錢存進去才能用",
+        "先跟銀行借錢，之後再還",
+        "直接拿現金付掉",
+        "用一次就不用還"
+      ],
+      "answer": "先跟銀行借錢，之後再還",
+      "explanation": "刷卡是「先借後還」。銀行先幫你付，帳單來的時候你要把錢還給銀行——所以信用卡其實是在借錢。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-004",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🏷️",
+      "type": "multiple_choice",
+      "question": "一件衣服「打 8 折」，你要付的是原價的多少？",
+      "options": [
+        "比原價還多",
+        "原價的 8%",
+        "原價的 80%（八成）",
+        "原價的 20%"
+      ],
+      "answer": "原價的 80%（八成）",
+      "explanation": "在台灣，「打 8 折」＝付原價的八成（80%），等於便宜了 20%。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-005",
+      "difficulty": "easy",
+      "category": "工作與錢",
+      "categoryEmoji": "💼",
+      "type": "multiple_choice",
+      "question": "大人去公司上班，每個月固定領到的那筆錢，通常叫什麼？",
+      "options": [
+        "零用錢",
+        "薪水",
+        "利息",
+        "獎金"
+      ],
+      "answer": "薪水",
+      "explanation": "公司每個月固定付給員工的錢叫「薪水」。額外表現好才多給的才叫「獎金」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-006",
+      "difficulty": "easy",
+      "category": "錢的歷史",
+      "categoryEmoji": "🔄",
+      "type": "multiple_choice",
+      "question": "在還沒有發明「錢」以前，人們想要別人的東西，最常用什麼方法？",
+      "options": [
+        "網路購物",
+        "向銀行借",
+        "以物易物（拿東西換東西）",
+        "刷卡"
+      ],
+      "answer": "以物易物（拿東西換東西）",
+      "explanation": "古早沒有錢的時候，大家用「以物易物」——我用雞蛋換你的米。後來覺得太麻煩，才慢慢發明了錢。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-007",
+      "difficulty": "easy",
+      "category": "世界的錢",
+      "categoryEmoji": "🌍",
+      "type": "multiple_choice",
+      "question": "美國人日常用的錢，叫什麼？",
+      "options": [
+        "歐元",
+        "英鎊",
+        "日圓",
+        "美元"
+      ],
+      "answer": "美元",
+      "explanation": "美國用的是「美元」。歐元是很多歐洲國家用的、日圓是日本的、英鎊是英國的。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-008",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "🐷",
+      "type": "multiple_choice",
+      "question": "「儲蓄」這個詞，意思最接近下面哪一個？",
+      "options": [
+        "把錢丟掉",
+        "把錢存起來、先不花掉",
+        "把錢借給別人",
+        "把錢一次花光"
+      ],
+      "answer": "把錢存起來、先不花掉",
+      "explanation": "儲蓄就是「現在先存著，留給以後用」。存下來的錢，未來才有底氣。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-009",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🛒",
+      "type": "multiple_choice",
+      "question": "把自己用不到的二手玩具拿出來賣，換成錢，最像下面哪一種地方？",
+      "options": [
+        "股票市場",
+        "超級市場",
+        "跳蚤市場",
+        "菜市場"
+      ],
+      "answer": "跳蚤市場",
+      "explanation": "「跳蚤市場」就是大家把家裡的二手好物拿出來賣的地方。把用不到的東西變成錢，是很棒的理財習慣。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-010",
+      "difficulty": "easy",
+      "category": "你不知道的錢",
+      "categoryEmoji": "💰",
+      "type": "multiple_choice",
+      "question": "下面哪一個台灣的硬幣，面額最大？",
+      "options": [
+        "10 元",
+        "1 元",
+        "5 元",
+        "50 元"
+      ],
+      "answer": "50 元",
+      "explanation": "台灣常用的硬幣有 1、5、10、20、50 元，其中面額最大的是 50 元硬幣。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-011",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "🐷",
+      "type": "multiple_choice",
+      "question": "存錢筒（撲滿）為什麼常常做成「只進不出」、不容易把錢拿出來？",
+      "options": [
+        "裝飾用",
+        "讓你不要太容易把錢拿出來花掉",
+        "為了好看",
+        "怕錢生鏽"
+      ],
+      "answer": "讓你不要太容易把錢拿出來花掉",
+      "explanation": "只進不出的設計，是幫你忍住、把錢留下來。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-012",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "💡",
+      "type": "multiple_choice",
+      "question": "「先存錢、再花剩下的」和「先花、剩下才存」，哪一種比較容易存到錢？",
+      "options": [
+        "都存不到",
+        "先花再存",
+        "兩個一樣",
+        "先存再花"
+      ],
+      "answer": "先存再花",
+      "explanation": "先把要存的留起來，剩下的才花，最不容易把存款花光。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-013",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "🎯",
+      "type": "multiple_choice",
+      "question": "把存錢的目標寫下來貼起來，最大的好處是？",
+      "options": [
+        "沒有用",
+        "可以炫耀",
+        "提醒自己、比較容易堅持",
+        "比較好看"
+      ],
+      "answer": "提醒自己、比較容易堅持",
+      "explanation": "看得到目標，就比較不會半路放棄。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-014",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🍭",
+      "type": "multiple_choice",
+      "question": "零用錢一拿到就馬上全部花光，最可能發生什麼？",
+      "options": [
+        "會變更有錢",
+        "沒差",
+        "真正需要用錢時卻沒得用",
+        "存款變多"
+      ],
+      "answer": "真正需要用錢時卻沒得用",
+      "explanation": "花光了，急用的時候就只能乾著急。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-015",
+      "difficulty": "easy",
+      "category": "需要與想要",
+      "categoryEmoji": "🍚",
+      "type": "multiple_choice",
+      "question": "下面哪一個比較像「需要」（沒有它生活會有困難）？",
+      "options": [
+        "最新款的玩具",
+        "扭蛋",
+        "限量貼紙",
+        "每天吃的食物"
+      ],
+      "answer": "每天吃的食物",
+      "explanation": "需要是維持生活必須的；其他比較像「想要」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-016",
+      "difficulty": "easy",
+      "category": "需要與想要",
+      "categoryEmoji": "🎮",
+      "type": "multiple_choice",
+      "question": "下面哪一個比較像「想要」（沒有也能好好過生活）？",
+      "options": [
+        "最新款的電動遊戲",
+        "乾淨的飲用水",
+        "保暖的衣服",
+        "看病的錢"
+      ],
+      "answer": "最新款的電動遊戲",
+      "explanation": "想要是錦上添花，需要是生活必須。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-017",
+      "difficulty": "easy",
+      "category": "需要與想要",
+      "categoryEmoji": "⏳",
+      "type": "multiple_choice",
+      "question": "看到很想買的東西，先「等一天再決定」這招的好處是？",
+      "options": [
+        "避免衝動亂買、冷靜想清楚",
+        "沒有好處",
+        "讓東西變便宜",
+        "錯過就好"
+      ],
+      "answer": "避免衝動亂買、冷靜想清楚",
+      "explanation": "睡一覺再看，常常就沒那麼想買了。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-018",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🛒",
+      "type": "multiple_choice",
+      "question": "同樣的餅乾，A 店賣 30 元、B 店賣 25 元，想省錢該買哪家？",
+      "options": [
+        "都買",
+        "B 店",
+        "A 店",
+        "都不買"
+      ],
+      "answer": "B 店",
+      "explanation": "一樣的東西，當然挑便宜的——這就是聰明消費。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-019",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🔍",
+      "type": "multiple_choice",
+      "question": "「比價」是什麼意思？",
+      "options": [
+        "比誰買得多",
+        "買之前先比較不同地方的價錢",
+        "隨便亂買",
+        "只看最貴的"
+      ],
+      "answer": "買之前先比較不同地方的價錢",
+      "explanation": "多比一下，常常能用更少的錢買到一樣的東西。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-020",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "📦",
+      "type": "multiple_choice",
+      "question": "同樣的東西買「大包裝」常常每一份更便宜，這代表？",
+      "options": [
+        "小包裝最省",
+        "大包裝比較貴",
+        "沒有差別",
+        "買多一點比較划算"
+      ],
+      "answer": "買多一點比較划算",
+      "explanation": "不過也要真的用得完，不然反而浪費。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-021",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "💵",
+      "type": "multiple_choice",
+      "question": "結帳時，店員多付給你的那些錢叫什麼？",
+      "options": [
+        "找零",
+        "小費",
+        "利息",
+        "稅金"
+      ],
+      "answer": "找零",
+      "explanation": "你給的比價錢多，店員會把多的「找」給你。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-022",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🧮",
+      "type": "multiple_choice",
+      "question": "買 100 元的東西，給店員 500 元，應該找你多少？",
+      "options": [
+        "500 元",
+        "400 元",
+        "300 元",
+        "100 元"
+      ],
+      "answer": "400 元",
+      "explanation": "500 減 100 等於 400，這就是要找回的錢。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-023",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🎁",
+      "type": "multiple_choice",
+      "question": "「買一送一」等於每一個東西的價錢大約變成？",
+      "options": [
+        "免費",
+        "兩倍",
+        "不變",
+        "原本的一半"
+      ],
+      "answer": "原本的一半",
+      "explanation": "花一個的錢拿到兩個，平均一個就只要一半價。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-024",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "✂️",
+      "type": "multiple_choice",
+      "question": "「打對折」是付原價的多少？",
+      "options": [
+        "兩成",
+        "一半（50%）",
+        "八成",
+        "全部"
+      ],
+      "answer": "一半（50%）",
+      "explanation": "對折＝砍一半，付原價的 50%。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-025",
+      "difficulty": "easy",
+      "category": "商業小故事",
+      "categoryEmoji": "🔁",
+      "type": "multiple_choice",
+      "question": "商店常在換季時打折出清，主要是為了？",
+      "options": [
+        "沒有原因",
+        "把舊貨賣掉、空出位子放新貨",
+        "虧本給你",
+        "慶祝節日"
+      ],
+      "answer": "把舊貨賣掉、空出位子放新貨",
+      "explanation": "換季出清對你划算，對商店也清了庫存。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-026",
+      "difficulty": "easy",
+      "category": "工作與錢",
+      "categoryEmoji": "🧹",
+      "type": "multiple_choice",
+      "question": "想多賺一點零用錢，下面哪個方法最實在？",
+      "options": [
+        "等天上掉下來",
+        "跟人要",
+        "用借的",
+        "主動幫忙做家事來換取"
+      ],
+      "answer": "主動幫忙做家事來換取",
+      "explanation": "用付出換報酬，是最踏實的賺錢方式。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-027",
+      "difficulty": "easy",
+      "category": "工作與錢",
+      "categoryEmoji": "🎨",
+      "type": "multiple_choice",
+      "question": "把自己做的手工卡片拿去賣，你是用什麼換到錢的？",
+      "options": [
+        "自己的時間和創意",
+        "別人的東西",
+        "借來的錢",
+        "運氣"
+      ],
+      "answer": "自己的時間和創意",
+      "explanation": "靠本事和努力賺錢，最有成就感。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-028",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "🤝",
+      "type": "multiple_choice",
+      "question": "跟別人借了錢，最重要的一件事是什麼？",
+      "options": [
+        "記得要還",
+        "趕快花掉",
+        "假裝忘記",
+        "再借更多"
+      ],
+      "answer": "記得要還",
+      "explanation": "有借有還，再借不難；不還會失去別人的信任。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-029",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "📵",
+      "type": "multiple_choice",
+      "question": "如果一直借錢卻都不還，最可能發生什麼？",
+      "options": [
+        "沒有影響",
+        "會變有錢",
+        "別人更喜歡你",
+        "別人不再相信你、不肯再借你"
+      ],
+      "answer": "別人不再相信你、不肯再借你",
+      "explanation": "信用一旦壞了，要很久才修得回來。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-030",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "🏦",
+      "type": "multiple_choice",
+      "question": "把錢放在銀行，比放在家裡的一個好處是？",
+      "options": [
+        "會變少",
+        "比較安全、不怕弄丟或被偷",
+        "比較危險",
+        "沒有差"
+      ],
+      "answer": "比較安全、不怕弄丟或被偷",
+      "explanation": "還可能有一點利息，比塞在抽屜好。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-031",
+      "difficulty": "easy",
+      "category": "你不知道的錢",
+      "categoryEmoji": "💳",
+      "type": "multiple_choice",
+      "question": "提款卡（金融卡）主要是用來做什麼？",
+      "options": [
+        "當書籤",
+        "當尺用",
+        "收集",
+        "領錢或付款"
+      ],
+      "answer": "領錢或付款",
+      "explanation": "它連著你的銀行帳戶，可以領錢、刷卡付款。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-032",
+      "difficulty": "easy",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🔒",
+      "type": "multiple_choice",
+      "question": "在 ATM 領錢前，要先輸入什麼來確認是你本人？",
+      "options": [
+        "密碼",
+        "生日",
+        "電話",
+        "名字"
+      ],
+      "answer": "密碼",
+      "explanation": "密碼是你的鑰匙，千萬不能告訴別人。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-033",
+      "difficulty": "easy",
+      "category": "世界的錢",
+      "categoryEmoji": "🇹🇼",
+      "type": "multiple_choice",
+      "question": "台灣平常使用的錢，正式名稱叫什麼？",
+      "options": [
+        "美元",
+        "人民幣",
+        "新台幣",
+        "日圓"
+      ],
+      "answer": "新台幣",
+      "explanation": "我們口袋裡的鈔票硬幣，就是新台幣。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-034",
+      "difficulty": "easy",
+      "category": "世界的錢",
+      "categoryEmoji": "🇯🇵",
+      "type": "multiple_choice",
+      "question": "日本人日常使用的錢叫什麼？",
+      "options": [
+        "韓元",
+        "歐元",
+        "日圓",
+        "美元"
+      ],
+      "answer": "日圓",
+      "explanation": "去日本玩，要把台幣換成日圓才好用。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-035",
+      "difficulty": "easy",
+      "category": "世界的錢",
+      "categoryEmoji": "🇪🇺",
+      "type": "multiple_choice",
+      "question": "很多歐洲國家「共同使用」的同一種錢叫什麼？",
+      "options": [
+        "英鎊",
+        "歐分",
+        "歐元",
+        "法郎"
+      ],
+      "answer": "歐元",
+      "explanation": "不少歐洲國家用同一種錢，跨國買東西更方便。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-036",
+      "difficulty": "easy",
+      "category": "世界的錢",
+      "categoryEmoji": "✈️",
+      "type": "multiple_choice",
+      "question": "出國前把台幣換成當地的錢，這個動作叫什麼？",
+      "options": [
+        "存款",
+        "捐款",
+        "換匯（兌換外幣）",
+        "投資"
+      ],
+      "answer": "換匯（兌換外幣）",
+      "explanation": "不同國家用不同的錢，所以要先換。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-037",
+      "difficulty": "easy",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🔢",
+      "type": "multiple_choice",
+      "question": "硬幣上的數字越大，通常代表這個硬幣？",
+      "options": [
+        "面額越大、越值錢",
+        "越小",
+        "越舊",
+        "越輕"
+      ],
+      "answer": "面額越大、越值錢",
+      "explanation": "50 元硬幣就比 1 元硬幣值錢得多。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-038",
+      "difficulty": "easy",
+      "category": "錢的歷史",
+      "categoryEmoji": "🐚",
+      "type": "multiple_choice",
+      "question": "古時候有些地方用「貝殼」當錢，主要因為貝殼？",
+      "options": [
+        "很重",
+        "可以吃",
+        "到處都有",
+        "漂亮又不容易取得"
+      ],
+      "answer": "漂亮又不容易取得",
+      "explanation": "稀少又大家都想要的東西，容易被當成錢。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-039",
+      "difficulty": "easy",
+      "category": "錢的歷史",
+      "categoryEmoji": "📜",
+      "type": "multiple_choice",
+      "question": "最早的錢是金屬做的硬幣，後來才發明比較輕便的什麼？",
+      "options": [
+        "紙鈔",
+        "信用卡",
+        "手機支付",
+        "金條"
+      ],
+      "answer": "紙鈔",
+      "explanation": "金屬錢太重，紙鈔輕又好帶，是一大進步。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-040",
+      "difficulty": "easy",
+      "category": "錢的歷史",
+      "categoryEmoji": "🧠",
+      "type": "multiple_choice",
+      "question": "為什麼大家願意用「一張紙（鈔票）」去換真正的東西？",
+      "options": [
+        "因為大家都相信它有價值",
+        "因為紙很值錢",
+        "因為被規定",
+        "因為紙很漂亮"
+      ],
+      "answer": "因為大家都相信它有價值",
+      "explanation": "錢的價值，來自大家共同的「相信」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-041",
+      "difficulty": "easy",
+      "category": "商業小故事",
+      "categoryEmoji": "🍬",
+      "type": "multiple_choice",
+      "question": "商店把糖果餅乾放在收銀台旁邊，主要是希望你？",
+      "options": [
+        "排隊結帳時順手多買",
+        "怕你找不到",
+        "比較好拿",
+        "沒有原因"
+      ],
+      "answer": "排隊結帳時順手多買",
+      "explanation": "結帳區的小東西，最容易讓人衝動入手。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-042",
+      "difficulty": "easy",
+      "category": "商業小故事",
+      "categoryEmoji": "🥛",
+      "type": "multiple_choice",
+      "question": "超市常把牛奶、雞蛋放在「最裡面」，常見的說法是為了？",
+      "options": [
+        "沒有原因",
+        "比較好放",
+        "讓你走過更多貨架、看到更多商品",
+        "比較涼"
+      ],
+      "answer": "讓你走過更多貨架、看到更多商品",
+      "explanation": "逛得越久，越容易多買幾樣。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-043",
+      "difficulty": "easy",
+      "category": "商業小故事",
+      "categoryEmoji": "9️⃣",
+      "type": "multiple_choice",
+      "question": "商品標價常寫「99 元」而不是「100 元」，是想讓你覺得？",
+      "options": [
+        "限量",
+        "品質好",
+        "比較便宜",
+        "比較貴"
+      ],
+      "answer": "比較便宜",
+      "explanation": "只差 1 元，感覺卻像便宜了一截，這是小心機。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-044",
+      "difficulty": "easy",
+      "category": "商業小故事",
+      "categoryEmoji": "📺",
+      "type": "multiple_choice",
+      "question": "看廣告時要記得，廣告最主要的目的是？",
+      "options": [
+        "純粹娛樂",
+        "幫你省錢",
+        "讓你想買它的東西",
+        "教你知識"
+      ],
+      "answer": "讓你想買它的東西",
+      "explanation": "廣告會放大優點，買之前還是要自己想一想。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-045",
+      "difficulty": "easy",
+      "category": "分享與價值",
+      "categoryEmoji": "❤️",
+      "type": "multiple_choice",
+      "question": "把零用錢的一小部分捐出去幫助別人，這叫什麼？",
+      "options": [
+        "捐款（分享）",
+        "投資",
+        "借錢",
+        "浪費"
+      ],
+      "answer": "捐款（分享）",
+      "explanation": "錢除了花在自己身上，也能拿來溫暖別人。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-046",
+      "difficulty": "easy",
+      "category": "分享與價值",
+      "categoryEmoji": "🌟",
+      "type": "multiple_choice",
+      "question": "「有些東西，再多錢也買不到」——下面哪個最符合？",
+      "options": [
+        "一雙鞋",
+        "一支手機",
+        "一杯飲料",
+        "家人的陪伴"
+      ],
+      "answer": "家人的陪伴",
+      "explanation": "友情、健康、時間，都是錢買不到的寶物。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-047",
+      "difficulty": "easy",
+      "category": "分享與價值",
+      "categoryEmoji": "🤔",
+      "type": "multiple_choice",
+      "question": "一個東西「比較貴」，就一定「比較好、比較適合你」嗎？",
+      "options": [
+        "不一定",
+        "一定是",
+        "越貴越好",
+        "當然"
+      ],
+      "answer": "不一定",
+      "explanation": "適不適合自己，比價錢高低更重要。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-048",
+      "difficulty": "easy",
+      "category": "理財規劃",
+      "categoryEmoji": "📅",
+      "type": "multiple_choice",
+      "question": "想買 300 元的玩具，每週存 50 元，大約幾週能存到？",
+      "options": [
+        "2 週",
+        "6 週",
+        "10 週",
+        "3 週"
+      ],
+      "answer": "6 週",
+      "explanation": "300 除以 50 等於 6，存 6 週就夠了。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-049",
+      "difficulty": "easy",
+      "category": "理財規劃",
+      "categoryEmoji": "🗓️",
+      "type": "multiple_choice",
+      "question": "每天存 10 元，一個星期（7 天）能存多少？",
+      "options": [
+        "70 元",
+        "17 元",
+        "100 元",
+        "10 元"
+      ],
+      "answer": "70 元",
+      "explanation": "10 乘以 7 等於 70，積少成多。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-050",
+      "difficulty": "easy",
+      "category": "理財規劃",
+      "categoryEmoji": "🌱",
+      "type": "multiple_choice",
+      "question": "「積少成多」用在存錢，是什麼意思？",
+      "options": [
+        "一點一點存，最後變成一大筆",
+        "越存越少",
+        "一次存很多",
+        "沒有意思"
+      ],
+      "answer": "一點一點存，最後變成一大筆",
+      "explanation": "別小看小錢，時間久了會很可觀。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-051",
+      "difficulty": "easy",
+      "category": "工作與錢",
+      "categoryEmoji": "🩺",
+      "type": "multiple_choice",
+      "question": "醫生、老師工作後領到薪水，是用什麼換來的？",
+      "options": [
+        "借來的",
+        "別人的錢",
+        "運氣",
+        "他們的專業和時間"
+      ],
+      "answer": "他們的專業和時間",
+      "explanation": "學得越專精、越難被取代，價值通常越高。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-052",
+      "difficulty": "easy",
+      "category": "工作與錢",
+      "categoryEmoji": "📚",
+      "type": "multiple_choice",
+      "question": "想以後做喜歡又能賺錢的工作，現在最該做的是？",
+      "options": [
+        "什麼都不做",
+        "只想著賺錢",
+        "等運氣",
+        "好好學習、培養能力"
+      ],
+      "answer": "好好學習、培養能力",
+      "explanation": "現在累積的本事，是未來賺錢的底氣。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-053",
+      "difficulty": "easy",
+      "category": "稅與公共",
+      "categoryEmoji": "🛣️",
+      "type": "multiple_choice",
+      "question": "公園、馬路、路燈這些大家都能用的東西，錢主要來自？",
+      "options": [
+        "天上掉的",
+        "大家繳的稅",
+        "政府印的",
+        "商店捐的"
+      ],
+      "answer": "大家繳的稅",
+      "explanation": "我們繳稅，政府用來蓋大家共用的建設。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-054",
+      "difficulty": "easy",
+      "category": "數字感",
+      "categoryEmoji": "🔟",
+      "type": "multiple_choice",
+      "question": "「1 萬元」等於幾個「1 千元」？",
+      "options": [
+        "5 個",
+        "2 個",
+        "100 個",
+        "10 個"
+      ],
+      "answer": "10 個",
+      "explanation": "1 千的 10 倍就是 1 萬。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-055",
+      "difficulty": "easy",
+      "category": "數字感",
+      "categoryEmoji": "💴",
+      "type": "multiple_choice",
+      "question": "一疊 100 張的百元鈔票，總共是多少錢？",
+      "options": [
+        "1 千元",
+        "10 萬元",
+        "100 元",
+        "1 萬元"
+      ],
+      "answer": "1 萬元",
+      "explanation": "100 張乘以 100 元等於 10000 元。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-056",
+      "difficulty": "easy",
+      "category": "錢的安全",
+      "categoryEmoji": "👮",
+      "type": "multiple_choice",
+      "question": "在路上撿到一個裝著錢的錢包，最好的做法是？",
+      "options": [
+        "丟掉",
+        "花掉",
+        "自己留著",
+        "交給警察或失物招領"
+      ],
+      "answer": "交給警察或失物招領",
+      "explanation": "拾金不昧，丟錢包的人會很感謝你。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-057",
+      "difficulty": "easy",
+      "category": "錢的安全",
+      "categoryEmoji": "🚫",
+      "type": "multiple_choice",
+      "question": "有陌生人說「告訴我你的提款卡密碼就送你錢」，你應該？",
+      "options": [
+        "考慮一下",
+        "馬上告訴他",
+        "告訴一半",
+        "絕對不告訴他"
+      ],
+      "answer": "絕對不告訴他",
+      "explanation": "密碼是天大的祕密，這種話幾乎都是詐騙。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-058",
+      "difficulty": "easy",
+      "category": "錢的安全",
+      "categoryEmoji": "🎣",
+      "type": "multiple_choice",
+      "question": "網路上看到「點這裡馬上免費領大獎」，最可能是？",
+      "options": [
+        "詐騙",
+        "學校活動",
+        "銀行通知",
+        "真的好運"
+      ],
+      "answer": "詐騙",
+      "explanation": "天下沒有白吃的午餐，太好康的常常是陷阱。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-059",
+      "difficulty": "easy",
+      "category": "記帳",
+      "categoryEmoji": "📒",
+      "type": "multiple_choice",
+      "question": "「記帳」是把什麼記錄下來？",
+      "options": [
+        "自己花了多少、賺了多少",
+        "別人的祕密",
+        "作業",
+        "天氣"
+      ],
+      "answer": "自己花了多少、賺了多少",
+      "explanation": "記下收支，才看得清錢的去向。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-060",
+      "difficulty": "easy",
+      "category": "記帳",
+      "categoryEmoji": "🔎",
+      "type": "multiple_choice",
+      "question": "記帳最大的好處是？",
+      "options": [
+        "讓錢變多",
+        "浪費時間",
+        "看清楚錢花到哪裡去了",
+        "沒有好處"
+      ],
+      "answer": "看清楚錢花到哪裡去了",
+      "explanation": "看清楚，才知道哪裡可以省。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-061",
+      "difficulty": "easy",
+      "category": "交換概念",
+      "categoryEmoji": "🖊️",
+      "type": "multiple_choice",
+      "question": "用 10 元買一支筆，是「錢」換到了什麼？",
+      "options": [
+        "一支筆（商品）",
+        "找零",
+        "利息",
+        "稅"
+      ],
+      "answer": "一支筆（商品）",
+      "explanation": "你付出錢，得到想要的東西，這就是交換。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-062",
+      "difficulty": "easy",
+      "category": "交換概念",
+      "categoryEmoji": "⚖️",
+      "type": "multiple_choice",
+      "question": "你付錢、店家給你商品，這是一種公平的什麼？",
+      "options": [
+        "捐贈",
+        "交換",
+        "借貸",
+        "投資"
+      ],
+      "answer": "交換",
+      "explanation": "雙方都拿到想要的，買賣才成立。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-063",
+      "difficulty": "easy",
+      "category": "交換概念",
+      "categoryEmoji": "💡",
+      "type": "multiple_choice",
+      "question": "大家發明「錢」來交換，而不繼續以物易物，因為錢？",
+      "options": [
+        "比較重",
+        "比較稀有",
+        "更方便、好分、好攜帶",
+        "比較漂亮"
+      ],
+      "answer": "更方便、好分、好攜帶",
+      "explanation": "用錢買賣，比拿雞換米方便太多了。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-064",
+      "difficulty": "easy",
+      "category": "投資啟蒙",
+      "categoryEmoji": "🌳",
+      "type": "multiple_choice",
+      "question": "種下一顆種子、耐心照顧讓它長成果樹——這跟「投資」很像，因為都需要？",
+      "options": [
+        "別人幫忙",
+        "時間和等待",
+        "運氣",
+        "很多錢"
+      ],
+      "answer": "時間和等待",
+      "explanation": "投資就像種樹，種得早、等得久，收穫才大。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-065",
+      "difficulty": "easy",
+      "category": "投資啟蒙",
+      "categoryEmoji": "⚠️",
+      "type": "multiple_choice",
+      "question": "投資有機會賺錢，但也有可能會怎樣？",
+      "options": [
+        "變不見",
+        "一定賺",
+        "沒有風險",
+        "賠錢（有風險）"
+      ],
+      "answer": "賠錢（有風險）",
+      "explanation": "天下沒有穩賺不賠，投資前要先懂風險。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-066",
+      "difficulty": "easy",
+      "category": "品牌與消費",
+      "categoryEmoji": "🎒",
+      "type": "multiple_choice",
+      "question": "同功能的書包，名牌的比較貴，多付的錢有一部分是付給？",
+      "options": [
+        "運費",
+        "品牌（牌子）",
+        "拉鍊",
+        "布料"
+      ],
+      "answer": "品牌（牌子）",
+      "explanation": "名牌貴在牌子，買之前想想值不值得。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-067",
+      "difficulty": "easy",
+      "category": "品牌與消費",
+      "categoryEmoji": "🧐",
+      "type": "multiple_choice",
+      "question": "買東西前先問「我是真的需要，還是只是想要」，可以幫你？",
+      "options": [
+        "花更多",
+        "少亂花錢",
+        "沒幫助",
+        "變窮"
+      ],
+      "answer": "少亂花錢",
+      "explanation": "一個小問題，幫你擋掉很多衝動消費。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-068",
+      "difficulty": "easy",
+      "category": "數位錢",
+      "categoryEmoji": "📱",
+      "type": "multiple_choice",
+      "question": "用手機「嗶」一下付款，花掉的是不是真正的錢？",
+      "options": [
+        "是，真正的錢",
+        "不是真的錢",
+        "遊戲幣",
+        "假的錢"
+      ],
+      "answer": "是，真正的錢",
+      "explanation": "看不到現金，但帳戶裡真的會少，要有感覺。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-069",
+      "difficulty": "easy",
+      "category": "數位錢",
+      "categoryEmoji": "😵",
+      "type": "multiple_choice",
+      "question": "電子支付很方便，但也容易讓人怎樣？",
+      "options": [
+        "變小氣",
+        "花錢沒感覺、不小心花過頭",
+        "算術變好",
+        "存更多錢"
+      ],
+      "answer": "花錢沒感覺、不小心花過頭",
+      "explanation": "越方便越要記帳，才不會花到超出預算。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-070",
+      "difficulty": "easy",
+      "category": "數位錢",
+      "categoryEmoji": "🕹️",
+      "type": "multiple_choice",
+      "question": "遊戲裡用真錢買的「寶物、點數」，花的是？",
+      "options": [
+        "假的錢",
+        "真的錢",
+        "別人的",
+        "免費的"
+      ],
+      "answer": "真的錢",
+      "explanation": "虛擬寶物，可是用真鈔換來的，別手滑。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-071",
+      "difficulty": "easy",
+      "category": "理財規劃",
+      "categoryEmoji": "🎯",
+      "type": "multiple_choice",
+      "question": "設定存錢目標時，「具體一點」（例如存 500 元買書）比「隨便存存」更容易？",
+      "options": [
+        "花光",
+        "忘記",
+        "達成",
+        "失敗"
+      ],
+      "answer": "達成",
+      "explanation": "目標越清楚，越知道自己在為什麼努力。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-072",
+      "difficulty": "easy",
+      "category": "信用",
+      "categoryEmoji": "✅",
+      "type": "multiple_choice",
+      "question": "答應別人的事都做到、借錢都準時還，會慢慢累積你的什麼？",
+      "options": [
+        "身高",
+        "運氣",
+        "信用",
+        "體重"
+      ],
+      "answer": "信用",
+      "explanation": "信用是看不見卻很值錢的資產。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-073",
+      "difficulty": "easy",
+      "category": "基礎鞏固",
+      "categoryEmoji": "➕",
+      "type": "multiple_choice",
+      "question": "這個月「賺進來的錢」比「花出去的錢」多，就會有？",
+      "options": [
+        "負債",
+        "結餘（存下來的錢）",
+        "罰款",
+        "虧損"
+      ],
+      "answer": "結餘（存下來的錢）",
+      "explanation": "收入大於支出，才存得到錢。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-074",
+      "difficulty": "easy",
+      "category": "基礎鞏固",
+      "categoryEmoji": "➖",
+      "type": "multiple_choice",
+      "question": "如果「花的」比「賺的」還多，會發生什麼？",
+      "options": [
+        "存款變多",
+        "沒有影響",
+        "會變有錢",
+        "入不敷出，要借錢或動用存款"
+      ],
+      "answer": "入不敷出，要借錢或動用存款",
+      "explanation": "長期這樣，錢只會越來越少。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-075",
+      "difficulty": "easy",
+      "category": "基礎鞏固",
+      "categoryEmoji": "🔑",
+      "type": "multiple_choice",
+      "question": "理財最基本的一句話，最接近下面哪一個？",
+      "options": [
+        "越貴越買",
+        "賺多少花多少",
+        "花得比賺得少",
+        "能借就借"
+      ],
+      "answer": "花得比賺得少",
+      "explanation": "守住這一條，財富就有機會慢慢長大。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-076",
+      "difficulty": "easy",
+      "category": "需要與想要",
+      "categoryEmoji": "🥤",
+      "type": "multiple_choice",
+      "question": "下面哪一個情況，最像是「衝動購物」？",
+      "options": [
+        "經過飲料店突然很想喝就買了",
+        "計畫好要買的鞋子",
+        "每天的午餐",
+        "繳學費"
+      ],
+      "answer": "經過飲料店突然很想喝就買了",
+      "explanation": "沒計畫、靠一時衝動買的，最容易後悔。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-077",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🧾",
+      "type": "multiple_choice",
+      "question": "收據（發票）除了對獎，還有什麼用處？",
+      "options": [
+        "當垃圾",
+        "沒有用",
+        "當作買過東西的證明，方便退換貨",
+        "當書籤"
+      ],
+      "answer": "當作買過東西的證明，方便退換貨",
+      "explanation": "留好收據，東西有問題才好處理。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-078",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "💧",
+      "type": "multiple_choice",
+      "question": "買「真的需要的東西」和「一時想要的東西」，哪個比較該優先花錢？",
+      "options": [
+        "都不買",
+        "一時想要的東西",
+        "都先買",
+        "真的需要的東西"
+      ],
+      "answer": "真的需要的東西",
+      "explanation": "錢有限，先顧需要，再考慮想要。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-079",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "🫙",
+      "type": "multiple_choice",
+      "question": "把錢分成「要花的、要存的、要分享的」幾個罐子，這種做法主要幫你？",
+      "options": [
+        "花更多",
+        "有計畫地管理每一塊錢",
+        "忘記錢",
+        "把錢藏起來"
+      ],
+      "answer": "有計畫地管理每一塊錢",
+      "explanation": "分配清楚，每塊錢都有它的任務。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-080",
+      "difficulty": "easy",
+      "category": "工作與錢",
+      "categoryEmoji": "⌛",
+      "type": "multiple_choice",
+      "question": "為什麼有些工作薪水比較高？",
+      "options": [
+        "老闆喜歡",
+        "需要的專業或本事比較難、別人不容易取代",
+        "運氣好",
+        "隨便給"
+      ],
+      "answer": "需要的專業或本事比較難、別人不容易取代",
+      "explanation": "越稀有、越難取代的能力，通常越值錢。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-081",
+      "difficulty": "easy",
+      "category": "錢的歷史",
+      "categoryEmoji": "🏛️",
+      "type": "multiple_choice",
+      "question": "古時候用「鹽、貝殼、牲畜」當錢，說明錢其實可以是？",
+      "options": [
+        "大家都同意拿來交換的任何東西",
+        "只能是金子",
+        "只能是紙",
+        "只能是硬幣"
+      ],
+      "answer": "大家都同意拿來交換的任何東西",
+      "explanation": "只要大家都接受，它就能當錢用。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-082",
+      "difficulty": "easy",
+      "category": "數字感",
+      "categoryEmoji": "0️⃣",
+      "type": "multiple_choice",
+      "question": "「100 萬」這個數字，後面有幾個 0？",
+      "options": [
+        "3 個",
+        "8 個",
+        "4 個",
+        "6 個"
+      ],
+      "answer": "6 個",
+      "explanation": "1,000,000 後面跟著 6 個 0。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-083",
+      "difficulty": "easy",
+      "category": "分享與價值",
+      "categoryEmoji": "🎈",
+      "type": "multiple_choice",
+      "question": "把舊玩具捐給需要的小朋友，而不是丟掉，這麼做？",
+      "options": [
+        "很浪費",
+        "讓東西繼續發揮價值、幫助別人",
+        "沒意義",
+        "會變窮"
+      ],
+      "answer": "讓東西繼續發揮價值、幫助別人",
+      "explanation": "你的舊玩具，可能是別人的新寶貝。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-084",
+      "difficulty": "easy",
+      "category": "商業小故事",
+      "categoryEmoji": "🏷️",
+      "type": "multiple_choice",
+      "question": "「限時特價、只剩最後一天」這種話，常是想讓你？",
+      "options": [
+        "別買",
+        "慢慢考慮",
+        "趕快買、不要多想",
+        "比價"
+      ],
+      "answer": "趕快買、不要多想",
+      "explanation": "越催你「快」，越要先停下來想一想。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-085",
+      "difficulty": "easy",
+      "category": "商業小故事",
+      "categoryEmoji": "🎟️",
+      "type": "multiple_choice",
+      "question": "集點換贈品、蓋章送一杯，商店這樣做是希望你？",
+      "options": [
+        "幫忙打掃",
+        "只來一次",
+        "常常回來消費",
+        "別再來"
+      ],
+      "answer": "常常回來消費",
+      "explanation": "用小贈品，把你變成常客。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-086",
+      "difficulty": "easy",
+      "category": "理財基礎",
+      "categoryEmoji": "🧊",
+      "type": "multiple_choice",
+      "question": "「急用金（緊急預備金）」是指平常先存一筆錢，用來？",
+      "options": [
+        "出國玩",
+        "應付突然發生、需要用錢的狀況",
+        "買最新玩具",
+        "隨便花"
+      ],
+      "answer": "應付突然發生、需要用錢的狀況",
+      "explanation": "留一手，遇到意外才不會慌。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-087",
+      "difficulty": "easy",
+      "category": "世界的錢",
+      "categoryEmoji": "🌐",
+      "type": "multiple_choice",
+      "question": "不同國家用不同的錢，所以一塊美元換成台幣，會有一個？",
+      "options": [
+        "折扣",
+        "稅率",
+        "匯率（兌換的比例）",
+        "利率"
+      ],
+      "answer": "匯率（兌換的比例）",
+      "explanation": "匯率決定你的錢換成外幣後有多少。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-088",
+      "difficulty": "easy",
+      "category": "投資啟蒙",
+      "categoryEmoji": "🐔",
+      "type": "multiple_choice",
+      "question": "「不要把所有雞蛋放在同一個籃子」用在錢上，是提醒我們最好？",
+      "options": [
+        "通通花掉",
+        "全部放一起",
+        "藏起來",
+        "分開放、不要把錢全壓在一個地方"
+      ],
+      "answer": "分開放、不要把錢全壓在一個地方",
+      "explanation": "分散一點，萬一出事才不會全沒了。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-089",
+      "difficulty": "easy",
+      "category": "基礎鞏固",
+      "categoryEmoji": "📊",
+      "type": "multiple_choice",
+      "question": "想知道自己有沒有亂花錢，最直接的方法是？",
+      "options": [
+        "把每一筆花費記下來檢查",
+        "不用管",
+        "問別人",
+        "用猜的"
+      ],
+      "answer": "把每一筆花費記下來檢查",
+      "explanation": "記帳是照妖鏡，亂花的錢無所遁形。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-090",
+      "difficulty": "easy",
+      "category": "需要與想要",
+      "categoryEmoji": "🛍️",
+      "type": "multiple_choice",
+      "question": "逛街看到「打折」就忍不住買了用不到的東西，這其實是？",
+      "options": [
+        "很會省錢",
+        "必要花費",
+        "被折扣吸引的亂花錢",
+        "聰明消費"
+      ],
+      "answer": "被折扣吸引的亂花錢",
+      "explanation": "用不到的東西，再便宜都是浪費。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-091",
+      "difficulty": "easy",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🔋",
+      "type": "multiple_choice",
+      "question": "買東西時除了看價錢，也要看「耐不耐用」，因為？",
+      "options": [
+        "便宜最重要",
+        "貴最好",
+        "沒關係",
+        "耐用的東西長期下來可能更省"
+      ],
+      "answer": "耐用的東西長期下來可能更省",
+      "explanation": "便宜卻很快壞，反而要一直再買。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-092",
+      "difficulty": "easy",
+      "category": "工作與錢",
+      "categoryEmoji": "🌟",
+      "type": "multiple_choice",
+      "question": "「天下沒有白吃的午餐」這句話，是想提醒我們？",
+      "options": [
+        "午餐很貴",
+        "想得到，通常要先付出",
+        "別吃午餐",
+        "可以不勞而獲"
+      ],
+      "answer": "想得到，通常要先付出",
+      "explanation": "好東西多半要靠努力換來。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-093",
+      "difficulty": "easy",
+      "category": "錢的安全",
+      "categoryEmoji": "🔐",
+      "type": "multiple_choice",
+      "question": "保護自己的錢，下面哪個習慣最好？",
+      "options": [
+        "到處留卡號",
+        "什麼都點",
+        "密碼不外洩、不隨便點奇怪連結",
+        "密碼告訴好朋友"
+      ],
+      "answer": "密碼不外洩、不隨便點奇怪連結",
+      "explanation": "守好祕密，是保護錢的第一步。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-094",
+      "difficulty": "easy",
+      "category": "理財規劃",
+      "categoryEmoji": "🪜",
+      "type": "multiple_choice",
+      "question": "把「存一萬元」這種大目標，拆成「每週存兩百」這種小步驟，會讓人？",
+      "options": [
+        "更困難",
+        "覺得比較做得到、不會放棄",
+        "沒有差",
+        "更想放棄"
+      ],
+      "answer": "覺得比較做得到、不會放棄",
+      "explanation": "大目標拆小，一步一步就到得了。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-095",
+      "difficulty": "easy",
+      "category": "分享與價值",
+      "categoryEmoji": "🤲",
+      "type": "multiple_choice",
+      "question": "「取之社會、用之社會」這句話，比較接近哪種行為？",
+      "options": [
+        "賺到錢後也拿一部分回饋、幫助別人",
+        "藏起來",
+        "把錢全留給自己",
+        "亂花錢"
+      ],
+      "answer": "賺到錢後也拿一部分回饋、幫助別人",
+      "explanation": "有能力時拉別人一把，社會更溫暖。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-096",
+      "difficulty": "easy",
+      "category": "數位錢",
+      "categoryEmoji": "🧾",
+      "type": "multiple_choice",
+      "question": "用電子支付也要記得做什麼，才不會花過頭？",
+      "options": [
+        "越花越多",
+        "關掉通知",
+        "定期看帳單、記帳",
+        "完全不管"
+      ],
+      "answer": "定期看帳單、記帳",
+      "explanation": "看不到現金，更要主動掌握花了多少。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-097",
+      "difficulty": "easy",
+      "category": "商業小故事",
+      "categoryEmoji": "🆓",
+      "type": "multiple_choice",
+      "question": "店家說「免費試用、免費體驗」，常常其實是想？",
+      "options": [
+        "讓你用了喜歡、之後願意付錢",
+        "純粹送你",
+        "虧本",
+        "沒有目的"
+      ],
+      "answer": "讓你用了喜歡、之後願意付錢",
+      "explanation": "免費是入口，目的還是希望你掏錢。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-098",
+      "difficulty": "easy",
+      "category": "基礎鞏固",
+      "categoryEmoji": "💰",
+      "type": "multiple_choice",
+      "question": "下面哪一個是「收入」？",
+      "options": [
+        "借出去的錢",
+        "幫鄰居遛狗拿到的 100 元",
+        "弄丟的 50 元",
+        "買零食花掉的 30 元"
+      ],
+      "answer": "幫鄰居遛狗拿到的 100 元",
+      "explanation": "賺進來的錢叫收入，花出去的叫支出。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-099",
+      "difficulty": "easy",
+      "category": "基礎鞏固",
+      "categoryEmoji": "🛒",
+      "type": "multiple_choice",
+      "question": "下面哪一個是「支出」？",
+      "options": [
+        "存款利息",
+        "賣二手書收到的錢",
+        "領到的零用錢",
+        "買文具花掉的 50 元"
+      ],
+      "answer": "買文具花掉的 50 元",
+      "explanation": "花出去的錢就是支出。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-e-100",
+      "difficulty": "easy",
+      "category": "需要與想要",
+      "categoryEmoji": "📝",
+      "type": "multiple_choice",
+      "question": "要分辨「需要」還是「想要」，最好的方法是？",
+      "options": [
+        "看價錢",
+        "看顏色",
+        "問別人想不想要",
+        "問自己「沒有它，生活會不會有困難」"
+      ],
+      "answer": "問自己「沒有它，生活會不會有困難」",
+      "explanation": "會有困難的是需要，只是錦上添花的是想要。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-001",
+      "difficulty": "intermediate",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🏧",
+      "type": "multiple_choice",
+      "question": "世界上第一台自動提款機（ATM），1967 年最早出現在哪個國家？",
+      "options": [
+        "日本",
+        "英國",
+        "德國",
+        "美國"
+      ],
+      "answer": "英國",
+      "explanation": "第一台 ATM 在 1967 年裝在英國倫敦的一家銀行外面。在那之前，要領錢只能在銀行營業時間排隊。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-002",
+      "difficulty": "intermediate",
+      "category": "生活雜學",
+      "categoryEmoji": "👖",
+      "type": "multiple_choice",
+      "question": "牛仔褲右邊口袋裡那個「小小的口袋」，最早是設計來放什麼的？",
+      "options": [
+        "火柴",
+        "鑰匙",
+        "銅板",
+        "懷錶"
+      ],
+      "answer": "懷錶",
+      "explanation": "那個小口袋以前是用來放「懷錶」的，所以又叫 watch pocket。現在大家很少用懷錶了，但這個口袋一直留到今天。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-003",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🔫",
+      "type": "multiple_choice",
+      "question": "1974 年，世界上第一個被收銀機掃描的「商品條碼」，掃的是什麼東西？",
+      "options": [
+        "一瓶可樂",
+        "一盒牛奶",
+        "一條麵包",
+        "一包口香糖"
+      ],
+      "answer": "一包口香糖",
+      "explanation": "史上第一個被掃描的條碼商品，是美國一家超市裡的一包口香糖。從此買東西結帳「嗶」一聲就搞定。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-004",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🥤",
+      "type": "multiple_choice",
+      "question": "可口可樂把它的祕密配方保護得超級嚴，據說鎖在美國哪個城市的金庫裡？",
+      "options": [
+        "巴黎",
+        "東京",
+        "亞特蘭大",
+        "紐約"
+      ],
+      "answer": "亞特蘭大",
+      "explanation": "可口可樂的祕方鎖在它總部所在的城市——亞特蘭大的一個專屬金庫裡，還成了觀光景點。把「祕密」當成最值錢的資產。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-005",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🧱",
+      "type": "multiple_choice",
+      "question": "如果用「數量」來算，世界上做最多『輪胎』的公司，其實是哪一家？",
+      "options": [
+        "普利司通",
+        "米其林",
+        "固特異",
+        "樂高（LEGO）"
+      ],
+      "answer": "樂高（LEGO）",
+      "explanation": "樂高每年生產的小小玩具輪胎數量，比任何真正的輪胎廠都多。看數量它就是世界最大的輪胎製造商！",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-006",
+      "difficulty": "intermediate",
+      "category": "經濟大事件",
+      "categoryEmoji": "🎩",
+      "type": "multiple_choice",
+      "question": "桌遊「大富翁（Monopoly）」最早被發明出來，其實是想讓人們體會什麼？",
+      "options": [
+        "怎麼蓋房子",
+        "怎麼快速變有錢",
+        "怎麼開公司",
+        "壟斷（一個人霸佔全部）有多不公平"
+      ],
+      "answer": "壟斷（一個人霸佔全部）有多不公平",
+      "explanation": "大富翁的原型由一位女性設計，本意是要讓大家體會「一個人壟斷土地、其他人都付不起房租」有多糟。後來反而變成最受歡迎的賺錢遊戲。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-007",
+      "difficulty": "intermediate",
+      "category": "貨幣史",
+      "categoryEmoji": "⚙️",
+      "type": "multiple_choice",
+      "question": "古希臘時代就出現的「世界第一台自動販賣機」，投錢進去會掉出什麼？",
+      "options": [
+        "可樂",
+        "聖水",
+        "報紙",
+        "糖果"
+      ],
+      "answer": "聖水",
+      "explanation": "約兩千年前，一位希臘發明家做出投幣後會流出「聖水」的機器，放在神廟裡。這大概是史上第一台自動販賣機。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-008",
+      "difficulty": "intermediate",
+      "category": "投資入門",
+      "categoryEmoji": "🌶️",
+      "type": "multiple_choice",
+      "question": "世界上第一家「公開讓大家買股票」的公司，主要是做什麼生意的？",
+      "options": [
+        "香料貿易（荷蘭東印度公司）",
+        "做衣服",
+        "石油",
+        "鐵路"
+      ],
+      "answer": "香料貿易（荷蘭東印度公司）",
+      "explanation": "1602 年的荷蘭東印度公司，第一次讓一般人可以買它的「股票」、一起出錢做香料生意、一起分賺到的錢。這就是股票市場的起點。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-009",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🍔",
+      "type": "multiple_choice",
+      "question": "有人說麥當勞「與其說在賣漢堡，不如說在做另一門生意」。是哪一門？",
+      "options": [
+        "房地產（土地和店面）",
+        "拍廣告",
+        "飲料",
+        "玩具"
+      ],
+      "answer": "房地產（土地和店面）",
+      "explanation": "麥當勞擁有大量店面的土地，把它租給加盟店，光是租金就賺很多。所以有人說它其實是一家很會賺錢的「房地產公司」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-010",
+      "difficulty": "intermediate",
+      "category": "生活雜學",
+      "categoryEmoji": "🛋️",
+      "type": "multiple_choice",
+      "question": "IKEA 賣場故意設計成「要繞一大圈才能走到出口」，最主要的商業理由是？",
+      "options": [
+        "怕你迷路",
+        "讓你看到更多商品、更容易想買",
+        "法律規定",
+        "為了省電"
+      ],
+      "answer": "讓你看到更多商品、更容易想買",
+      "explanation": "繞一圈的動線，會讓你經過更多商品，看久了就容易順手帶走。這是商店「用設計影響你花錢」的小心機。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-011",
+      "difficulty": "intermediate",
+      "category": "名人故事",
+      "categoryEmoji": "🪙",
+      "type": "multiple_choice",
+      "question": "美國 1 美元紙鈔上印的人是誰？",
+      "options": [
+        "羅斯福",
+        "林肯",
+        "富蘭克林",
+        "華盛頓"
+      ],
+      "answer": "華盛頓",
+      "explanation": "他是美國第一任總統，被印在最常用的 1 美元鈔票上。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-012",
+      "difficulty": "intermediate",
+      "category": "名人故事",
+      "categoryEmoji": "🟤",
+      "type": "multiple_choice",
+      "question": "美國 1 美分（penny）硬幣上印的人是誰？",
+      "options": [
+        "林肯",
+        "傑佛遜",
+        "富蘭克林",
+        "華盛頓"
+      ],
+      "answer": "林肯",
+      "explanation": "美國最小的硬幣 1 美分上，印的是林肯總統。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-013",
+      "difficulty": "intermediate",
+      "category": "世界的錢",
+      "categoryEmoji": "👑",
+      "type": "multiple_choice",
+      "question": "英國的鈔票上，長年印著哪一種人物的肖像？",
+      "options": [
+        "運動明星",
+        "首相",
+        "在位的國王或女王",
+        "發明家"
+      ],
+      "answer": "在位的國王或女王",
+      "explanation": "英國鈔票傳統上印當時在位的君主肖像。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-014",
+      "difficulty": "intermediate",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🧲",
+      "type": "multiple_choice",
+      "question": "信用卡背面那條黑黑的「磁條」是用來做什麼的？",
+      "options": [
+        "裝飾",
+        "當尺用",
+        "儲存你的帳戶資料",
+        "防水"
+      ],
+      "answer": "儲存你的帳戶資料",
+      "explanation": "刷卡時機器讀磁條，就知道要從哪個帳戶扣錢。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-015",
+      "difficulty": "intermediate",
+      "category": "貨幣史",
+      "categoryEmoji": "🇦🇺",
+      "type": "multiple_choice",
+      "question": "哪個國家最早全面改用「塑膠（聚合物）做的鈔票」？",
+      "options": [
+        "法國",
+        "日本",
+        "澳洲",
+        "美國"
+      ],
+      "answer": "澳洲",
+      "explanation": "澳洲在 1980 年代率先推出聚合物鈔票，更耐用、更難偽造。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-016",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🥤",
+      "type": "multiple_choice",
+      "question": "可口可樂剛問世時，最早是在藥局被當成什麼賣的？",
+      "options": [
+        "咳嗽糖漿",
+        "清潔劑",
+        "提神的飲料",
+        "汽水玩具"
+      ],
+      "answer": "提神的飲料",
+      "explanation": "可口可樂一開始在藥局販售，被當成提神的飲品。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-017",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "📝",
+      "type": "multiple_choice",
+      "question": "便利貼（Post-it）的發明，其實來自一個什麼樣的意外？",
+      "options": [
+        "一次爆炸",
+        "一款黏不太牢的失敗膠水",
+        "一場大火",
+        "一個夢"
+      ],
+      "answer": "一款黏不太牢的失敗膠水",
+      "explanation": "本來想做超強膠水卻失敗，沒想到「黏不牢」反而做成了便利貼。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-018",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🎴",
+      "type": "multiple_choice",
+      "question": "任天堂（Nintendo）創立時，最早是做什麼產品的？",
+      "options": [
+        "花牌（紙牌）",
+        "電動遊戲",
+        "電視",
+        "汽車"
+      ],
+      "answer": "花牌（紙牌）",
+      "explanation": "任天堂 1889 年從做紙牌起家，後來才變成遊戲巨人。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-019",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "📄",
+      "type": "multiple_choice",
+      "question": "手機大廠諾基亞（Nokia）一開始是做什麼生意的？",
+      "options": [
+        "賣手機",
+        "種田",
+        "造紙",
+        "開銀行"
+      ],
+      "answer": "造紙",
+      "explanation": "諾基亞最早是一家造紙廠，後來才一路轉型到通訊。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-020",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🍜",
+      "type": "multiple_choice",
+      "question": "三星（Samsung）最早做的是什麼生意？",
+      "options": [
+        "拍電影",
+        "賣食品雜貨與貿易",
+        "蓋房子",
+        "做手機"
+      ],
+      "answer": "賣食品雜貨與貿易",
+      "explanation": "三星一開始是賣乾貨、麵條的貿易公司，後來才跨入電子。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-021",
+      "difficulty": "intermediate",
+      "category": "生活雜學",
+      "categoryEmoji": "🧩",
+      "type": "multiple_choice",
+      "question": "風靡全球的玩具「魔術方塊」，是哪一國的發明家發明的？",
+      "options": [
+        "日本",
+        "德國",
+        "匈牙利",
+        "美國"
+      ],
+      "answer": "匈牙利",
+      "explanation": "魔術方塊由匈牙利的魯比克發明，原本是用來教學生空間概念。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-022",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "💎",
+      "type": "multiple_choice",
+      "question": "「鑽石恆久遠，一顆永流傳」這句超有名的話，原本是什麼？",
+      "options": [
+        "一家鑽石公司的廣告",
+        "一部電影台詞",
+        "一句古詩",
+        "一首歌"
+      ],
+      "answer": "一家鑽石公司的廣告",
+      "explanation": "這是行銷金句，成功讓鑽石和「永恆的愛」綁在一起。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-023",
+      "difficulty": "intermediate",
+      "category": "貨幣史",
+      "categoryEmoji": "🥇",
+      "type": "multiple_choice",
+      "question": "黃金幾千年來一直被當成寶物，主要原因之一是它？",
+      "options": [
+        "很軟",
+        "稀少又不會生鏽",
+        "很輕",
+        "到處都有"
+      ],
+      "answer": "稀少又不會生鏽",
+      "explanation": "稀有、穩定不變質、又好分割，讓黃金成為公認的財富。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-024",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🏬",
+      "type": "multiple_choice",
+      "question": "好市多（Costco）要先付「會員費」才能進去買，這對它最大的好處是？",
+      "options": [
+        "不用付員工薪水",
+        "不用進貨",
+        "可以賣比較貴",
+        "先穩穩收一筆錢、綁住客人"
+      ],
+      "answer": "先穩穩收一筆錢、綁住客人",
+      "explanation": "會員費本身就是一筆穩定收入，也讓人會想「來都來了多買點」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-025",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🔴",
+      "type": "multiple_choice",
+      "question": "為什麼很多速食店的招牌愛用紅色和黃色？",
+      "options": [
+        "這些顏色常被認為能引起食慾、吸引注意",
+        "老闆喜歡",
+        "比較便宜",
+        "規定要這樣"
+      ],
+      "answer": "這些顏色常被認為能引起食慾、吸引注意",
+      "explanation": "紅黃配色搶眼又「勾胃口」，是常見的行銷說法。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-026",
+      "difficulty": "intermediate",
+      "category": "世界的錢",
+      "categoryEmoji": "💯",
+      "type": "multiple_choice",
+      "question": "1 美元等於幾「美分（cent）」？",
+      "options": [
+        "100",
+        "50",
+        "10",
+        "1000"
+      ],
+      "answer": "100",
+      "explanation": "就像 1 元等於 100 分，美元也是 100 美分。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-027",
+      "difficulty": "intermediate",
+      "category": "投資入門",
+      "categoryEmoji": "📊",
+      "type": "multiple_choice",
+      "question": "買一家公司的「股票」，代表你擁有這家公司的什麼？",
+      "options": [
+        "債務",
+        "商品",
+        "一小部分（股份）",
+        "全部"
+      ],
+      "answer": "一小部分（股份）",
+      "explanation": "持股就是當這家公司的小小老闆，公司賺錢你也有份。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-028",
+      "difficulty": "intermediate",
+      "category": "投資入門",
+      "categoryEmoji": "📣",
+      "type": "multiple_choice",
+      "question": "一家公司「上市」是什麼意思？",
+      "options": [
+        "搬家",
+        "換老闆",
+        "關門大吉",
+        "把股票公開讓大家買賣"
+      ],
+      "answer": "把股票公開讓大家買賣",
+      "explanation": "上市後，一般人也能在股市買到這家公司的股票。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-029",
+      "difficulty": "intermediate",
+      "category": "投資入門",
+      "categoryEmoji": "🇳🇱",
+      "type": "multiple_choice",
+      "question": "歷史最悠久的證券交易所之一，位於哪個城市？",
+      "options": [
+        "阿姆斯特丹",
+        "東京",
+        "巴黎",
+        "北京"
+      ],
+      "answer": "阿姆斯特丹",
+      "explanation": "荷蘭的阿姆斯特丹早在 400 多年前就有了股票交易。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-030",
+      "difficulty": "intermediate",
+      "category": "金融名詞",
+      "categoryEmoji": "🏙️",
+      "type": "multiple_choice",
+      "question": "美國很多大銀行聚集、被當成金融中心象徵的那條街叫什麼？",
+      "options": [
+        "唐人街",
+        "華爾街",
+        "百老匯",
+        "第五大道"
+      ],
+      "answer": "華爾街",
+      "explanation": "「華爾街」幾乎成了全球金融市場的代名詞。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-031",
+      "difficulty": "intermediate",
+      "category": "經濟大事件",
+      "categoryEmoji": "🖨️",
+      "type": "multiple_choice",
+      "question": "為什麼國家不能「想印多少錢就印多少錢」？",
+      "options": [
+        "印太多會讓錢變不值錢（通膨）",
+        "紙不夠",
+        "法律不准印",
+        "印鈔機會壞"
+      ],
+      "answer": "印太多會讓錢變不值錢（通膨）",
+      "explanation": "錢變多但東西沒變多，物價就會狂飆，錢反而變薄。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-032",
+      "difficulty": "intermediate",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🚗",
+      "type": "multiple_choice",
+      "question": "為什麼一輛新車「一開出車行」價值就掉了一截？",
+      "options": [
+        "變舊了",
+        "油用掉了",
+        "顏色變了",
+        "立刻變成中古車，二手賣價較低"
+      ],
+      "answer": "立刻變成中古車，二手賣價較低",
+      "explanation": "這種一用就掉價的現象，叫做「折舊」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-033",
+      "difficulty": "intermediate",
+      "category": "金融名詞",
+      "categoryEmoji": "🛟",
+      "type": "multiple_choice",
+      "question": "「保險」的基本概念是什麼？",
+      "options": [
+        "免費送錢",
+        "保證一定賺錢",
+        "大家先各繳一點，出事的人能拿到理賠",
+        "政府發的補助"
+      ],
+      "answer": "大家先各繳一點，出事的人能拿到理賠",
+      "explanation": "很多人一起分擔風險，誰倒楣了就由大家一起幫忙。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-034",
+      "difficulty": "intermediate",
+      "category": "你不知道的錢",
+      "categoryEmoji": "➗",
+      "type": "multiple_choice",
+      "question": "信用卡「分期付款」聽起來輕鬆，但常常要額外多付什麼？",
+      "options": [
+        "押金",
+        "稅金",
+        "小費",
+        "利息或手續費"
+      ],
+      "answer": "利息或手續費",
+      "explanation": "把一筆錢拆成好幾期，方便之外通常要付代價。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-035",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "✈️",
+      "type": "multiple_choice",
+      "question": "為什麼同一班飛機，早買和晚買的機票價格常常不一樣？",
+      "options": [
+        "航空公司會依需求隨時調整價格",
+        "規定每天漲",
+        "看心情",
+        "隨機亂跳"
+      ],
+      "answer": "航空公司會依需求隨時調整價格",
+      "explanation": "需求高就漲、想清位子就降，這叫「動態定價」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-036",
+      "difficulty": "intermediate",
+      "category": "經濟大事件",
+      "categoryEmoji": "🎫",
+      "type": "multiple_choice",
+      "question": "演唱會門票一開賣就秒殺、黃牛能高價轉賣，主要因為？",
+      "options": [
+        "想要的人遠多於票數（供不應求）",
+        "場地太小",
+        "明星不紅",
+        "票太貴"
+      ],
+      "answer": "想要的人遠多於票數（供不應求）",
+      "explanation": "東西少、想要的人多，價格自然被推高。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-037",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "📱",
+      "type": "multiple_choice",
+      "question": "為什麼很多手機 App「免費下載」卻還能賺大錢？",
+      "options": [
+        "政府補助",
+        "賣使用者的手機",
+        "不用賺錢",
+        "靠廣告或 App 內購買"
+      ],
+      "answer": "靠廣告或 App 內購買",
+      "explanation": "免費是吸引你進來，再靠廣告和內購賺錢。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-038",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🔁",
+      "type": "multiple_choice",
+      "question": "「訂閱制」（每個月固定付費）對公司最大的好處是？",
+      "options": [
+        "有穩定、持續的收入",
+        "只賺一次",
+        "可以漲價",
+        "不用服務客戶"
+      ],
+      "answer": "有穩定、持續的收入",
+      "explanation": "每月固定進帳，比一次性買賣好預測多了。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-039",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "⌚",
+      "type": "multiple_choice",
+      "question": "世界上第一支電視廣告（1941 年），賣的是什麼商品？",
+      "options": [
+        "汽車",
+        "可樂",
+        "手錶",
+        "香菸"
+      ],
+      "answer": "手錶",
+      "explanation": "史上第一支電視廣告只有幾秒，賣的是手錶品牌。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-040",
+      "difficulty": "intermediate",
+      "category": "經濟大事件",
+      "categoryEmoji": "🛒",
+      "type": "multiple_choice",
+      "question": "購物節「雙 11」最早是哪家公司炒熱成全民購物日的？",
+      "options": [
+        "蘋果",
+        "亞馬遜",
+        "沃爾瑪",
+        "阿里巴巴"
+      ],
+      "answer": "阿里巴巴",
+      "explanation": "中國的阿里巴巴把 11 月 11 日打造成超大型購物節。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-041",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "✨",
+      "type": "multiple_choice",
+      "question": "為什麼「限量」、「聯名」商品特別容易被搶？",
+      "options": [
+        "限量製造了稀有感，讓人更想要",
+        "送的比較多",
+        "品質一定比較好",
+        "比較便宜"
+      ],
+      "answer": "限量製造了稀有感，讓人更想要",
+      "explanation": "「買不到」反而讓人更想擁有，是常見的行銷招數。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-042",
+      "difficulty": "intermediate",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🧨",
+      "type": "multiple_choice",
+      "question": "「先買後付」很方便，但最大的風險是什麼？",
+      "options": [
+        "容易不知不覺超支",
+        "要排隊",
+        "東西比較貴",
+        "不能退貨"
+      ],
+      "answer": "容易不知不覺超支",
+      "explanation": "付款被往後延，很容易買超過自己還得起的程度。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-043",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "👀",
+      "type": "multiple_choice",
+      "question": "超市常把「賣得好、利潤高」的商品放在哪個位置最好賣？",
+      "options": [
+        "和視線同高、最容易拿到的層架",
+        "最角落",
+        "倉庫裡",
+        "最底層"
+      ],
+      "answer": "和視線同高、最容易拿到的層架",
+      "explanation": "「與眼睛同高」的位置最搶手，是貨架上的黃金地段。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-044",
+      "difficulty": "intermediate",
+      "category": "世界的錢",
+      "categoryEmoji": "💱",
+      "type": "multiple_choice",
+      "question": "出國把台幣換成外幣時，決定能換到多少的「比例」叫什麼？",
+      "options": [
+        "利率",
+        "匯率",
+        "稅率",
+        "折扣率"
+      ],
+      "answer": "匯率",
+      "explanation": "匯率高低，直接影響你的錢換成外幣後變多還變少。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-045",
+      "difficulty": "intermediate",
+      "category": "貨幣史",
+      "categoryEmoji": "🟡",
+      "type": "multiple_choice",
+      "question": "黃金用「盎司」計重，那「鑽石」的重量單位是什麼？",
+      "options": [
+        "克拉",
+        "公升",
+        "盎司",
+        "公斤"
+      ],
+      "answer": "克拉",
+      "explanation": "鑽石用「克拉」計重，1 克拉等於 0.2 公克。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-046",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🌙",
+      "type": "multiple_choice",
+      "question": "為什麼很多便利商店要 24 小時不打烊？",
+      "options": [
+        "怕小偷",
+        "電費比較便宜",
+        "想抓住深夜也有人購物的需求",
+        "規定不能關"
+      ],
+      "answer": "想抓住深夜也有人購物的需求",
+      "explanation": "只要深夜的客人夠多，多開的時段就值得。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-047",
+      "difficulty": "intermediate",
+      "category": "生活裡的錢",
+      "categoryEmoji": "🔨",
+      "type": "multiple_choice",
+      "question": "「拍賣會」上大家輪流喊價，東西最後賣給誰？",
+      "options": [
+        "老闆的朋友",
+        "出價最高的人",
+        "最早到的人",
+        "抽籤決定"
+      ],
+      "answer": "出價最高的人",
+      "explanation": "價高者得，是拍賣最基本的規則。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-048",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🌟",
+      "type": "multiple_choice",
+      "question": "大公司花大錢請名人代言產品，主要是想？",
+      "options": [
+        "沒有原因",
+        "幫名人賺錢",
+        "純粹做公益",
+        "借名人的人氣，讓你更想買"
+      ],
+      "answer": "借名人的人氣，讓你更想買",
+      "explanation": "你喜歡的明星用的東西，你也更容易想擁有。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-049",
+      "difficulty": "intermediate",
+      "category": "投資入門",
+      "categoryEmoji": "🛡️",
+      "type": "multiple_choice",
+      "question": "為什麼黃金在世界各地幾乎都被接受、常被當「避險」工具？",
+      "options": [
+        "政府強迫使用",
+        "大家普遍相信它能保值",
+        "可以吃",
+        "它會發電"
+      ],
+      "answer": "大家普遍相信它能保值",
+      "explanation": "遇到亂世或股市大跌，很多人會躲進黃金求安心。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-i-050",
+      "difficulty": "intermediate",
+      "category": "商業小故事",
+      "categoryEmoji": "🍔",
+      "type": "multiple_choice",
+      "question": "麥當勞的「兒童餐」附贈玩具，主要的商業目的是？",
+      "options": [
+        "清掉舊玩具",
+        "湊重量",
+        "吸引小孩，帶動全家一起來",
+        "做公益"
+      ],
+      "answer": "吸引小孩，帶動全家一起來",
+      "explanation": "小孩想要玩具，常常就把全家都帶進了店裡。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-001",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "⏳",
+      "type": "multiple_choice",
+      "question": "理財上有個方便的「72 法則」，它可以幫你快速估算什麼？",
+      "options": [
+        "房子值多少錢",
+        "錢大約幾年會翻一倍",
+        "一個月該存多少",
+        "要繳多少稅"
+      ],
+      "answer": "錢大約幾年會翻一倍",
+      "explanation": "72 法則：用 72 除以年利率，就能估「錢翻倍大概要幾年」。例如年報酬 6%，72÷6＝12，大約 12 年翻一倍。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-002",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "📈",
+      "type": "multiple_choice",
+      "question": "「本金生出利息，利息又再生利息，越滾越大」——這種威力在理財上叫什麼？",
+      "options": [
+        "複利",
+        "通膨",
+        "折舊",
+        "單利"
+      ],
+      "answer": "複利",
+      "explanation": "複利就是「利滾利」。今年賺的利息，明年也會一起幫你賺錢，時間越久差距越驚人。這是長期投資最重要的概念。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-003",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🐂",
+      "type": "multiple_choice",
+      "question": "股票市場裡說的「牛市」，是指什麼情況？",
+      "options": [
+        "行情一直下跌",
+        "股市暫停交易",
+        "股價都不動",
+        "行情一直上漲"
+      ],
+      "answer": "行情一直上漲",
+      "explanation": "「牛市」＝上漲行情（牛角往上頂）；相反的「熊市」＝下跌行情（熊掌往下拍）。記住方向就不會搞混。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-004",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🏛️",
+      "type": "multiple_choice",
+      "question": "一個國家負責「發行鈔票、決定利率」的銀行，通常叫什麼？",
+      "options": [
+        "世界銀行",
+        "商業銀行",
+        "投資銀行",
+        "中央銀行"
+      ],
+      "answer": "中央銀行",
+      "explanation": "中央銀行是「銀行的銀行」，負責管理一國的貨幣和利率。台灣的就叫『中央銀行』。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-005",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "🧺",
+      "type": "multiple_choice",
+      "question": "「不要把所有雞蛋放在同一個籃子裡」這句投資名言，是在提醒人們什麼？",
+      "options": [
+        "要多買一點雞蛋",
+        "越省越好",
+        "分散風險，別把錢全壓在一個地方",
+        "借錢來投資"
+      ],
+      "answer": "分散風險，別把錢全壓在一個地方",
+      "explanation": "一個籃子摔了，蛋就全破。錢也一樣——分開放在不同地方，萬一其中一個出事，不會全部賠光。這叫「分散投資」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-006",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "💵",
+      "type": "multiple_choice",
+      "question": "公司賺錢之後，分給「股東（買股票的人）」的那一份錢，叫什麼？",
+      "options": [
+        "稅金",
+        "利息",
+        "薪水",
+        "股息（股利）"
+      ],
+      "answer": "股息（股利）",
+      "explanation": "你買了一家公司的股票就成了股東，公司賺錢時可能會分你一份，這份錢叫「股息」。等於公司賺錢，你也跟著分。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-007",
+      "difficulty": "hard",
+      "category": "經濟大事件",
+      "categoryEmoji": "📉",
+      "type": "multiple_choice",
+      "question": "1929 年美國股市大崩盤，引發長達十年的全球經濟衰退，歷史上稱為什麼？",
+      "options": [
+        "工業革命",
+        "經濟大蕭條",
+        "網路泡沫",
+        "石油危機"
+      ],
+      "answer": "經濟大蕭條",
+      "explanation": "1929 年股市崩盤後，許多人失業、銀行倒閉，世界經濟低迷了十年，史稱「經濟大蕭條」。是 20 世紀最嚴重的一場經濟危機。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-008",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🧮",
+      "type": "multiple_choice",
+      "question": "衡量「一個國家一年總共生產了多少價值」最常用的指標，英文縮寫是？",
+      "options": [
+        "VIP",
+        "ATM",
+        "GDP",
+        "CEO"
+      ],
+      "answer": "GDP",
+      "explanation": "GDP（國內生產毛額）就像一個國家的「年度成績單」，數字越大，通常代表這一年生產的東西和服務越多。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-009",
+      "difficulty": "hard",
+      "category": "名人故事",
+      "categoryEmoji": "🪙",
+      "type": "multiple_choice",
+      "question": "美國 100 元美鈔上印的人，並不是總統。他是誰？",
+      "options": [
+        "華盛頓",
+        "羅斯福",
+        "班傑明・富蘭克林",
+        "林肯"
+      ],
+      "answer": "班傑明・富蘭克林",
+      "explanation": "100 元美鈔上是富蘭克林——他是科學家、發明家、美國開國元勳，卻從沒當過總統。他也說過很多理財名言，像「省一分就是賺一分」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-010",
+      "difficulty": "hard",
+      "category": "商業小故事",
+      "categoryEmoji": "🏦",
+      "type": "multiple_choice",
+      "question": "世界上「最古老、而且到現在還在營業」的銀行，位於哪個國家？",
+      "options": [
+        "美國",
+        "英國",
+        "義大利",
+        "中國"
+      ],
+      "answer": "義大利",
+      "explanation": "義大利一家 1472 年就成立的銀行，到今天都還在營業，是公認世界最古老、仍在運作的銀行。已經五百多歲了。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-011",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🔀",
+      "type": "multiple_choice",
+      "question": "「你選了 A，就等於放棄了 B 本來能帶來的好處」——這個被放棄的價值叫什麼？",
+      "options": [
+        "沉沒成本",
+        "機會成本",
+        "固定成本",
+        "邊際成本"
+      ],
+      "answer": "機會成本",
+      "explanation": "你做選擇時放棄掉的「最好的另一個選項」，就是機會成本。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-012",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🕳️",
+      "type": "multiple_choice",
+      "question": "「已經花掉、再也收不回來，不該再影響你決定」的成本叫什麼？",
+      "options": [
+        "利息",
+        "沉沒成本",
+        "本金",
+        "機會成本"
+      ],
+      "answer": "沉沒成本",
+      "explanation": "像潑出去的水，收不回來了，就別讓它綁架你接下來的選擇。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-013",
+      "difficulty": "hard",
+      "category": "名人故事",
+      "categoryEmoji": "🧠",
+      "type": "multiple_choice",
+      "question": "主張「經濟不好時，政府該帶頭多花錢刺激經濟」的著名經濟學家是？",
+      "options": [
+        "馬克思",
+        "亞當・斯密",
+        "凱因斯",
+        "牛頓"
+      ],
+      "answer": "凱因斯",
+      "explanation": "凱因斯的想法，影響了現代許多國家面對不景氣的做法。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-014",
+      "difficulty": "hard",
+      "category": "名人故事",
+      "categoryEmoji": "✋",
+      "type": "multiple_choice",
+      "question": "被稱為「經濟學之父」的亞當・斯密，用哪個比喻形容市場會自我調節？",
+      "options": [
+        "看不見的牆",
+        "黃金法則",
+        "蝴蝶效應",
+        "看不見的手"
+      ],
+      "answer": "看不見的手",
+      "explanation": "每個人各自追求利益，最後彷彿被一隻「看不見的手」推動著整體運作。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-015",
+      "difficulty": "hard",
+      "category": "經濟大事件",
+      "categoryEmoji": "🪙",
+      "type": "multiple_choice",
+      "question": "二戰後建立、讓各國貨幣跟美元掛鉤、美元再跟黃金掛鉤的制度叫什麼？",
+      "options": [
+        "金本位制",
+        "馬歇爾計畫",
+        "歐元區",
+        "布列敦森林體系"
+      ],
+      "answer": "布列敦森林體系",
+      "explanation": "1944 年訂下的這套制度，撐起了戰後幾十年的世界金融。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-016",
+      "difficulty": "hard",
+      "category": "貨幣史",
+      "categoryEmoji": "🥇",
+      "type": "multiple_choice",
+      "question": "「金本位制」是指一國的貨幣價值，跟什麼綁在一起？",
+      "options": [
+        "白銀",
+        "石油",
+        "小麥",
+        "黃金"
+      ],
+      "answer": "黃金",
+      "explanation": "金本位下，鈔票理論上可以拿去換對應的黃金，讓錢比較穩定。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-017",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🐻",
+      "type": "multiple_choice",
+      "question": "股市裡說的「熊市」，是指什麼情況？",
+      "options": [
+        "行情一直上漲",
+        "暫停交易",
+        "股價不動",
+        "行情一直下跌"
+      ],
+      "answer": "行情一直下跌",
+      "explanation": "熊掌往下拍＝下跌；相對的「牛市」則是上漲。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-018",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "💨",
+      "type": "multiple_choice",
+      "question": "「通貨膨脹」發生時，你放著不動的現金會怎麼樣？",
+      "options": [
+        "完全不變",
+        "購買力下降、越來越不值錢",
+        "變成黃金",
+        "自動變多"
+      ],
+      "answer": "購買力下降、越來越不值錢",
+      "explanation": "同樣的錢能買的東西變少，等於錢悄悄變薄了。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-019",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "📉",
+      "type": "multiple_choice",
+      "question": "和通膨相反，「物價普遍下跌」的現象叫什麼？",
+      "options": [
+        "折舊",
+        "升息",
+        "通貨膨脹",
+        "通貨緊縮"
+      ],
+      "answer": "通貨緊縮",
+      "explanation": "聽起來像變便宜很好，但長期通縮其實會讓經濟陷入麻煩。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-020",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "⬆️",
+      "type": "multiple_choice",
+      "question": "中央銀行想讓大家少借錢、為過熱的經濟降溫，通常會怎麼做？",
+      "options": [
+        "印更多錢",
+        "降稅",
+        "升息（提高利率）",
+        "發更多現金"
+      ],
+      "answer": "升息（提高利率）",
+      "explanation": "借錢變貴，大家就會少借少花，經濟跟著降溫。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-021",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🏷️",
+      "type": "multiple_choice",
+      "question": "「利率」最簡單的理解，是什麼的「價格」？",
+      "options": [
+        "借錢或存錢的價格",
+        "房子的價格",
+        "股票的價格",
+        "黃金的價格"
+      ],
+      "answer": "借錢或存錢的價格",
+      "explanation": "利率就是「使用錢」要付的代價或得到的報酬。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-022",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "💰",
+      "type": "multiple_choice",
+      "question": "投資時說的「本金」是指什麼？",
+      "options": [
+        "賺到的利潤",
+        "借來的錢",
+        "要繳的稅",
+        "一開始投入的那筆錢"
+      ],
+      "answer": "一開始投入的那筆錢",
+      "explanation": "本金是你的起點，後面的利息、報酬都從它長出來。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-023",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "🧺",
+      "type": "multiple_choice",
+      "question": "「ETF」用白話講，比較像什麼？",
+      "options": [
+        "把一籃子股票打包成一檔，幫你分散",
+        "一張彩券",
+        "單一一家公司的股票",
+        "一種存款"
+      ],
+      "answer": "把一籃子股票打包成一檔，幫你分散",
+      "explanation": "買一檔 ETF，等於一次買進一整籃的股票，自動分散風險。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-024",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "📈",
+      "type": "multiple_choice",
+      "question": "投資人「做多」是指他預期價格會怎樣？",
+      "options": [
+        "不動",
+        "消失",
+        "上漲",
+        "下跌"
+      ],
+      "answer": "上漲",
+      "explanation": "看好會漲就先買進，等漲了再賺價差，這叫做多。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-025",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "📊",
+      "type": "multiple_choice",
+      "question": "一家公司的「市值」是指什麼？",
+      "options": [
+        "欠的債",
+        "全部股票加起來的總價值",
+        "員工人數",
+        "一年賺的錢"
+      ],
+      "answer": "全部股票加起來的總價值",
+      "explanation": "市值＝股價 × 股票總數，用來衡量公司有多大。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-026",
+      "difficulty": "hard",
+      "category": "經濟大事件",
+      "categoryEmoji": "🌊",
+      "type": "multiple_choice",
+      "question": "1997 年重創泰國、韓國等地的危機，歷史上稱為什麼？",
+      "options": [
+        "網路泡沫",
+        "大蕭條",
+        "金融海嘯",
+        "亞洲金融風暴"
+      ],
+      "answer": "亞洲金融風暴",
+      "explanation": "1997 年這場風暴讓許多亞洲國家的貨幣和股市重摔。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-027",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🏦",
+      "type": "multiple_choice",
+      "question": "各國都有中央銀行，美國的中央銀行體系俗稱什麼？",
+      "options": [
+        "聯準會（Fed）",
+        "世界銀行",
+        "白宮",
+        "華爾街"
+      ],
+      "answer": "聯準會（Fed）",
+      "explanation": "美國聯準會一升息或降息，全球金融市場都跟著緊張。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-028",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "⏳",
+      "type": "multiple_choice",
+      "question": "「複利」要發揮最驚人的威力，最關鍵的條件是什麼？",
+      "options": [
+        "利率超高",
+        "時間夠長",
+        "運氣很好",
+        "本金很大"
+      ],
+      "answer": "時間夠長",
+      "explanation": "時間越久，利滾利的雪球滾得越大，這是年輕人最大的優勢。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-029",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "🔁",
+      "type": "multiple_choice",
+      "question": "「定期定額」投資是指怎麼做？",
+      "options": [
+        "看高點才買",
+        "固定時間投入固定金額",
+        "一次全部投入",
+        "隨便亂買"
+      ],
+      "answer": "固定時間投入固定金額",
+      "explanation": "不管漲跌都規律投入，能攤平成本、避免追高殺低。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-030",
+      "difficulty": "hard",
+      "category": "名人故事",
+      "categoryEmoji": "🧓",
+      "type": "multiple_choice",
+      "question": "被稱為「股神」的價值投資大師華倫・巴菲特，是哪一國人？",
+      "options": [
+        "美國",
+        "英國",
+        "德國",
+        "日本"
+      ],
+      "answer": "美國",
+      "explanation": "巴菲特以「長期持有好公司」聞名，是史上最成功的投資人之一。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-031",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🔄",
+      "type": "multiple_choice",
+      "question": "經濟會繁榮一陣子、又衰退一陣子，這樣交替出現的現象叫什麼？",
+      "options": [
+        "複利",
+        "折舊",
+        "景氣循環",
+        "通貨膨脹"
+      ],
+      "answer": "景氣循環",
+      "explanation": "經濟有起有落，了解循環能幫你在低谷時不慌、不亂。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-032",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "📛",
+      "type": "multiple_choice",
+      "question": "「失業率」上升，通常代表整體景氣？",
+      "options": [
+        "變好",
+        "變差",
+        "在膨脹",
+        "沒影響"
+      ],
+      "answer": "變差",
+      "explanation": "找不到工作的人變多，常是經濟轉壞的訊號之一。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-033",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🏛️",
+      "type": "multiple_choice",
+      "question": "政府用「減稅、增加公共建設支出」來救經濟，這類做法叫什麼？",
+      "options": [
+        "財政政策",
+        "貨幣政策",
+        "產業政策",
+        "匯率政策"
+      ],
+      "answer": "財政政策",
+      "explanation": "政府從「收稅和花錢」這一端著手，就是財政政策。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-034",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "💴",
+      "type": "multiple_choice",
+      "question": "中央銀行用「調整利率、控制貨幣多寡」來影響經濟，這叫什麼？",
+      "options": [
+        "貿易政策",
+        "財政政策",
+        "稅務政策",
+        "貨幣政策"
+      ],
+      "answer": "貨幣政策",
+      "explanation": "央行從「錢的鬆緊」這一端調控，就是貨幣政策。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-035",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "🏠",
+      "type": "multiple_choice",
+      "question": "在理財書裡，「資產」和「負債」最簡單的分別是？",
+      "options": [
+        "負債比較舊",
+        "資產比較貴",
+        "沒有差別",
+        "資產帶來收入或價值，負債讓你不斷支出"
+      ],
+      "answer": "資產帶來收入或價值，負債讓你不斷支出",
+      "explanation": "多累積能生錢的資產、少背會吃錢的負債，是理財的核心。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-036",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🧮",
+      "type": "multiple_choice",
+      "question": "一個人的「淨值（身價）」大致怎麼算出來？",
+      "options": [
+        "把薪水加起來",
+        "看他開什麼車",
+        "全部資產減掉全部負債",
+        "看他有多少現金"
+      ],
+      "answer": "全部資產減掉全部負債",
+      "explanation": "扣掉欠的債之後真正屬於你的，才是你的身價。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-037",
+      "difficulty": "hard",
+      "category": "經濟大事件",
+      "categoryEmoji": "📅",
+      "type": "multiple_choice",
+      "question": "1929 年引爆全球經濟大蕭條的導火線，是什麼？",
+      "options": [
+        "石油漲價",
+        "銀行被搶",
+        "一場戰爭",
+        "美國股市大崩盤"
+      ],
+      "answer": "美國股市大崩盤",
+      "explanation": "1929 年股市崩盤後，失業、倒閉接連發生，世界低迷了十年。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-038",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "💵",
+      "type": "multiple_choice",
+      "question": "公司賺錢後分給股東的那一份錢，正式名稱叫什麼？",
+      "options": [
+        "佣金",
+        "股利（股息）",
+        "薪水",
+        "利息"
+      ],
+      "answer": "股利（股息）",
+      "explanation": "當股東不只能賺價差，公司賺錢時還可能分你一份股利。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-039",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "🐌",
+      "type": "multiple_choice",
+      "question": "長期投資人最常被提醒「不要做」的事是什麼？",
+      "options": [
+        "分散投資",
+        "追高殺低、頻繁進出",
+        "定期定額",
+        "長期持有"
+      ],
+      "answer": "追高殺低、頻繁進出",
+      "explanation": "追著漲跌跑，常常買在高點、賣在低點，越忙越賠。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-040",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🌍",
+      "type": "multiple_choice",
+      "question": "一個國家手上握有的外國貨幣存量，叫什麼？",
+      "options": [
+        "外匯存底",
+        "公積金",
+        "稅收",
+        "國庫券"
+      ],
+      "answer": "外匯存底",
+      "explanation": "外匯存底像國家的「外幣存款」，是對外交易和應急的底氣。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-041",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🟢",
+      "type": "multiple_choice",
+      "question": "股票的「本益比」大致是在比較哪兩件事？",
+      "options": [
+        "股價，和黃金價格",
+        "股價，和公司名氣",
+        "公司大小，和員工數",
+        "股價，和公司每年賺的錢"
+      ],
+      "answer": "股價，和公司每年賺的錢",
+      "explanation": "本益比幫你看「現在的股價，相對公司賺錢能力貴不貴」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-042",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "🪙",
+      "type": "multiple_choice",
+      "question": "「殖利率」大致是在算什麼？",
+      "options": [
+        "公司有多大",
+        "欠多少債",
+        "每年領到的股息，占你投入金額的比例",
+        "股價漲多少"
+      ],
+      "answer": "每年領到的股息，占你投入金額的比例",
+      "explanation": "殖利率讓你看「這筆投資每年大概能配回多少」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-043",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "📵",
+      "type": "multiple_choice",
+      "question": "「升息」最直接的影響之一是什麼？",
+      "options": [
+        "股票一定漲",
+        "薪水變多",
+        "物價一定下跌",
+        "借錢（像房貸）會變貴"
+      ],
+      "answer": "借錢（像房貸）會變貴",
+      "explanation": "利率升高，背房貸、車貸的人每月要還的利息就增加。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-044",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🔻",
+      "type": "multiple_choice",
+      "question": "一國貨幣「貶值」，對「出口商」通常是？",
+      "options": [
+        "比較有利，東西在國外變便宜好賣",
+        "非常不利",
+        "會被罰款",
+        "完全沒影響"
+      ],
+      "answer": "比較有利，東西在國外變便宜好賣",
+      "explanation": "貨幣變便宜，本國商品在外國更有價格競爭力。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-045",
+      "difficulty": "hard",
+      "category": "經濟大事件",
+      "categoryEmoji": "💻",
+      "type": "multiple_choice",
+      "question": "2000 年前後，大量網路公司股價暴漲又崩盤，這段歷史叫什麼？",
+      "options": [
+        "大蕭條",
+        "網路（科技）泡沫",
+        "石油危機",
+        "金融海嘯"
+      ],
+      "answer": "網路（科技）泡沫",
+      "explanation": "當年只要沾上「.com」股價就飛天，泡沫破掉後一地雞毛。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-046",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🧯",
+      "type": "multiple_choice",
+      "question": "「分散投資」之所以能降低風險，是因為？",
+      "options": [
+        "會自動賺錢",
+        "資產越多越安全",
+        "不同資產通常不會同時一起大跌",
+        "政府會保證"
+      ],
+      "answer": "不同資產通常不會同時一起大跌",
+      "explanation": "這個跌、那個撐著，整體就不會一次重摔。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-047",
+      "difficulty": "hard",
+      "category": "投資入門",
+      "categoryEmoji": "🧊",
+      "type": "multiple_choice",
+      "question": "股市在短時間內「大幅崩跌」，常被稱為什麼？",
+      "options": [
+        "盤整",
+        "除息",
+        "牛市",
+        "股災"
+      ],
+      "answer": "股災",
+      "explanation": "股災時人人恐慌賣出，價格雪崩——但也常是長期投資的轉機。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-048",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🏚️",
+      "type": "multiple_choice",
+      "question": "2008 金融海嘯的源頭「次級房貸」，大致是指借錢給什麼樣的人？",
+      "options": [
+        "外國人",
+        "政府",
+        "還款能力較差的人",
+        "超級有錢人"
+      ],
+      "answer": "還款能力較差的人",
+      "explanation": "把錢大量借給還不太起的人，最後一起出事，引爆了危機。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-049",
+      "difficulty": "hard",
+      "category": "名人故事",
+      "categoryEmoji": "📚",
+      "type": "multiple_choice",
+      "question": "暢銷理財書《富爸爸，窮爸爸》的核心觀念是什麼？",
+      "options": [
+        "要讓資產幫你賺錢，而不只靠薪水",
+        "只買房子",
+        "快點借錢",
+        "越省越好"
+      ],
+      "answer": "要讓資產幫你賺錢，而不只靠薪水",
+      "explanation": "與其只用時間換薪水，不如累積能持續生錢的資產。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-h-050",
+      "difficulty": "hard",
+      "category": "金融名詞",
+      "categoryEmoji": "🏦",
+      "type": "multiple_choice",
+      "question": "你存進銀行的錢，銀行其實大部分會拿去做什麼？",
+      "options": [
+        "鎖在金庫裡不動",
+        "燒掉",
+        "拿去投資房地產自用",
+        "借給其他人或企業"
+      ],
+      "answer": "借給其他人或企業",
+      "explanation": "銀行靠「低利吸收存款、較高利放款」中間賺利差。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-001",
+      "difficulty": "challenge",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🤯",
+      "type": "multiple_choice",
+      "question": "人類史上「面額最大的一張鈔票」，是哪個國家印出來的？（多到數字後面一長串零）",
+      "options": [
+        "美國",
+        "德國",
+        "匈牙利",
+        "辛巴威"
+      ],
+      "answer": "匈牙利",
+      "explanation": "1946 年的匈牙利通膨失控，印出一張面額是「1 後面接 20 個 0」的鈔票，是金氏世界紀錄裡面額最大的鈔票。錢印到這種地步，其實幾乎一文不值。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-002",
+      "difficulty": "challenge",
+      "category": "世界的錢",
+      "categoryEmoji": "🃏",
+      "type": "multiple_choice",
+      "question": "三百多年前，哪個地方因為硬幣不夠用，竟然把「撲克牌」剪一剪當錢花？",
+      "options": [
+        "加拿大",
+        "埃及",
+        "中國",
+        "拉斯維加斯"
+      ],
+      "answer": "加拿大",
+      "explanation": "1685 年的新法蘭西（今天的加拿大），因為從歐洲運來的硬幣遲遲不到，官員乾脆在撲克牌背面簽名、蓋章，當成臨時的錢用。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-003",
+      "difficulty": "challenge",
+      "category": "經濟大事件",
+      "categoryEmoji": "🔥",
+      "type": "multiple_choice",
+      "question": "1920 年代，哪個國家發生嚴重的惡性通膨，鈔票多到被拿來生火、貼壁紙？",
+      "options": [
+        "美國",
+        "法國",
+        "德國",
+        "英國"
+      ],
+      "answer": "德國",
+      "explanation": "1920 年代的德國（威瑪共和）拼命印錢，錢變得超不值錢，紙鈔比柴火還便宜，乾脆拿來燒。這是歷史上最有名的惡性通膨之一。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-004",
+      "difficulty": "challenge",
+      "category": "商業小故事",
+      "categoryEmoji": "🧀",
+      "type": "multiple_choice",
+      "question": "義大利有銀行接受一種「食物」當抵押品借錢給你，還幫你放在倉庫保管。是哪種食物？",
+      "options": [
+        "橄欖油",
+        "義大利麵",
+        "紅酒",
+        "帕馬森起司"
+      ],
+      "answer": "帕馬森起司",
+      "explanation": "義大利一家銀行真的收「帕馬森起司」當抵押品——因為這種起司要熟成好幾年、很值錢。銀行幫農夫保管整輪起司，農夫先借到錢周轉。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-005",
+      "difficulty": "challenge",
+      "category": "世界的錢",
+      "categoryEmoji": "0️⃣",
+      "type": "multiple_choice",
+      "question": "印度曾經出現一種「面額 0 元」的鈔票，它被印出來是為了做什麼？",
+      "options": [
+        "拿來抗議貪污、拒絕賄賂",
+        "慶祝節日",
+        "測試印鈔機",
+        "給小孩玩"
+      ],
+      "answer": "拿來抗議貪污、拒絕賄賂",
+      "explanation": "印度一個民間反貪團體印了「0 盧比」的鈔票，讓民眾在被要求賄賂時拿出來——意思是「我一毛都不會給」。用一張沒有面額的鈔票，表達一個態度。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-006",
+      "difficulty": "challenge",
+      "category": "名人故事",
+      "categoryEmoji": "🪙",
+      "type": "multiple_choice",
+      "question": "2009 年發明「比特幣」、身分到現在都還是個謎的人（或團體），用的化名是什麼？",
+      "options": [
+        "伊隆・馬斯克",
+        "比爾・蓋茲",
+        "中本聰（Satoshi Nakamoto）",
+        "圖靈"
+      ],
+      "answer": "中本聰（Satoshi Nakamoto）",
+      "explanation": "比特幣由化名「中本聰」的人在 2009 年推出，但這個人到底是誰、是不是一個人，至今沒人確定，是科技史上最大的謎團之一。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-007",
+      "difficulty": "challenge",
+      "category": "經濟大事件",
+      "categoryEmoji": "🌊",
+      "type": "multiple_choice",
+      "question": "1720 年英國有一場著名的金融泡沫，連科學家牛頓都在裡面賠了大錢。它跟哪家公司有關？",
+      "options": [
+        "福特",
+        "蘋果",
+        "東印度公司",
+        "南海公司"
+      ],
+      "answer": "南海公司",
+      "explanation": "「南海泡沫」中，股價被瘋狂炒高又突然崩盤。牛頓也賠了錢，傳說他感嘆：「我能算出天體運行，卻算不出人們的瘋狂。」",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-008",
+      "difficulty": "challenge",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🍕",
+      "type": "multiple_choice",
+      "question": "2010 年有人用 10000 枚比特幣買了東西，後來大家都覺得「他買貴了」。他買的是什麼？",
+      "options": [
+        "一輛車",
+        "兩個披薩",
+        "一台電腦",
+        "一棟房子"
+      ],
+      "answer": "兩個披薩",
+      "explanation": "2010 年有人用 10000 枚比特幣換了兩個披薩，這是比特幣第一次拿來買真東西。後來比特幣大漲，那兩個披薩等於變成天價——所以每年 5/22 被叫做「比特幣披薩日」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-009",
+      "difficulty": "challenge",
+      "category": "名人故事",
+      "categoryEmoji": "🛢️",
+      "type": "multiple_choice",
+      "question": "歷史上公認「世界第一個身價破十億」的超級富豪，是靠什麼生意起家的？",
+      "options": [
+        "石油",
+        "電腦",
+        "鐵路",
+        "鑽石"
+      ],
+      "answer": "石油",
+      "explanation": "美國的洛克斐勒靠石油生意，在 1916 年左右成為史上第一個「億萬（十億）富翁」。他壟斷了當時幾乎全美國的煉油，富可敵國。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-010",
+      "difficulty": "challenge",
+      "category": "世界的錢",
+      "categoryEmoji": "🧂",
+      "type": "multiple_choice",
+      "question": "在古代非洲（像衣索比亞一帶），人們曾經把哪一種「廚房裡也有的東西」切成磚塊當錢用？",
+      "options": [
+        "胡椒",
+        "糖",
+        "鹽",
+        "麵粉"
+      ],
+      "answer": "鹽",
+      "explanation": "古代非洲有些地方把「鹽」壓成一塊塊鹽磚當錢用，因為鹽能保存食物、又不好取得，非常珍貴。英文「薪水 salary」也和「鹽 sal」這個字有關。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-011",
+      "difficulty": "challenge",
+      "category": "貨幣史",
+      "categoryEmoji": "💲",
+      "type": "multiple_choice",
+      "question": "美元符號「$」的由來，最被接受的說法跟哪一種錢有關？",
+      "options": [
+        "西班牙的銀幣（披索）",
+        "英鎊",
+        "古羅馬硬幣",
+        "黃金條"
+      ],
+      "answer": "西班牙的銀幣（披索）",
+      "explanation": "最多人接受的說法是它來自西班牙銀幣，由 P、S 慢慢寫成一個符號——但仍是推測，沒有定論。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": "⚠️ 符號由來有多種說法，已用『最被接受的說法』措辭。"
+    },
+    {
+      "id": "triv-c-012",
+      "difficulty": "challenge",
+      "category": "名人故事",
+      "categoryEmoji": "🖼️",
+      "type": "multiple_choice",
+      "question": "曾以約 4.5 億美元（史上最貴）拍出的一幅畫，出自哪位畫家之手？",
+      "options": [
+        "莫內",
+        "畢卡索",
+        "梵谷",
+        "達文西"
+      ],
+      "answer": "達文西",
+      "explanation": "達文西的《救世主》在 2017 年拍出天價，創下藝術拍賣紀錄。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-013",
+      "difficulty": "challenge",
+      "category": "商業小故事",
+      "categoryEmoji": "🔢",
+      "type": "multiple_choice",
+      "question": "科技巨頭「Google」的名字，其實來自一個數學上的大數字，它代表？",
+      "options": [
+        "搜尋的意思",
+        "世界第一",
+        "1 後面接 100 個 0",
+        "眼鏡"
+      ],
+      "answer": "1 後面接 100 個 0",
+      "explanation": "這個數字叫 googol，象徵 Google 想整理「海量」的資訊。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-014",
+      "difficulty": "challenge",
+      "category": "名人故事",
+      "categoryEmoji": "📦",
+      "type": "multiple_choice",
+      "question": "亞馬遜（Amazon）創辦人最早在車庫裡創業時，賣的是什麼？",
+      "options": [
+        "書",
+        "玩具",
+        "手機",
+        "食物"
+      ],
+      "answer": "書",
+      "explanation": "亞馬遜從網路賣書起家，後來才變成什麼都賣的巨頭。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-015",
+      "difficulty": "challenge",
+      "category": "名人故事",
+      "categoryEmoji": "🪑",
+      "type": "multiple_choice",
+      "question": "以超有錢卻「極度節儉」聞名的 IKEA 創辦人，傳說出差都搭什麼？",
+      "options": [
+        "經濟艙",
+        "遊艇",
+        "私人飛機",
+        "頭等艙"
+      ],
+      "answer": "經濟艙",
+      "explanation": "他開舊車、搭經濟艙，把「省」的精神也帶進了 IKEA 的平價路線。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-016",
+      "difficulty": "challenge",
+      "category": "商業小故事",
+      "categoryEmoji": "👜",
+      "type": "multiple_choice",
+      "question": "愛馬仕的「柏金包」出了名難買，有些人甚至把它當成什麼？",
+      "options": [
+        "普通包包",
+        "贈品",
+        "會增值的投資品",
+        "收藏垃圾"
+      ],
+      "answer": "會增值的投資品",
+      "explanation": "因為限量又保值，二手價有時還高於原價，被當成另類投資。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-017",
+      "difficulty": "challenge",
+      "category": "經濟大事件",
+      "categoryEmoji": "🌊",
+      "type": "multiple_choice",
+      "question": "和英國「南海泡沫」幾乎同期，法國也有一場著名泡沫，跟哪條河有關？",
+      "options": [
+        "泰晤士河",
+        "尼羅河",
+        "密西西比河",
+        "亞馬遜河"
+      ],
+      "answer": "密西西比河",
+      "explanation": "「密西西比泡沫」和南海泡沫同年破滅，都是早期瘋狂炒作的慘例。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-018",
+      "difficulty": "challenge",
+      "category": "經濟大事件",
+      "categoryEmoji": "🌷",
+      "type": "multiple_choice",
+      "question": "荷蘭「鬱金香狂熱」最瘋的時候，一顆稀有球根據說可以換到什麼？",
+      "options": [
+        "一袋米",
+        "一棟房子",
+        "一本書",
+        "一隻雞"
+      ],
+      "answer": "一棟房子",
+      "explanation": "當時一顆名貴球根的價格被炒到天價，足以買下一棟房子。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-019",
+      "difficulty": "challenge",
+      "category": "商業小故事",
+      "categoryEmoji": "🍺",
+      "type": "multiple_choice",
+      "question": "世界上最早登記的「商標」之一，是一個紅色三角形，屬於哪種飲料？",
+      "options": [
+        "牛奶",
+        "啤酒",
+        "可樂",
+        "咖啡"
+      ],
+      "answer": "啤酒",
+      "explanation": "英國一家啤酒廠的紅三角，是公認最早註冊的商標之一。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-020",
+      "difficulty": "challenge",
+      "category": "你不知道的錢",
+      "categoryEmoji": "💻",
+      "type": "multiple_choice",
+      "question": "全世界的「錢」，其實大部分不是現金，而是以什麼形式存在？",
+      "options": [
+        "硬幣",
+        "銀行系統裡的數字",
+        "金條",
+        "紙鈔"
+      ],
+      "answer": "銀行系統裡的數字",
+      "explanation": "真正印出來的現金只是一小部分，多數的錢只是帳戶裡的數字。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-021",
+      "difficulty": "challenge",
+      "category": "貨幣史",
+      "categoryEmoji": "⚔️",
+      "type": "multiple_choice",
+      "question": "中世紀歐洲的「聖殿騎士團」，除了打仗，竟然也經營一種早期的？",
+      "options": [
+        "劇院",
+        "銀行（跨國匯兌）",
+        "學校",
+        "醫院"
+      ],
+      "answer": "銀行（跨國匯兌）",
+      "explanation": "他們讓人在這國存錢、到另一國領出，是早期的跨國金融服務。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-022",
+      "difficulty": "challenge",
+      "category": "貨幣史",
+      "categoryEmoji": "🪙",
+      "type": "multiple_choice",
+      "question": "比特幣的「總量」被設計成最多只有多少枚？",
+      "options": [
+        "100 枚",
+        "2100 萬枚",
+        "10 億枚",
+        "無限"
+      ],
+      "answer": "2100 萬枚",
+      "explanation": "正因為數量有上限、不能無限增發，它常被拿來和黃金相比。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-023",
+      "difficulty": "challenge",
+      "category": "名人故事",
+      "categoryEmoji": "📰",
+      "type": "multiple_choice",
+      "question": "第一個被「挖出來」的比特幣區塊裡，藏了一句當天的什麼？",
+      "options": [
+        "報紙標題",
+        "一段密碼詩",
+        "一張照片",
+        "一首歌"
+      ],
+      "answer": "報紙標題",
+      "explanation": "中本聰在創世區塊裡留下一句報紙頭條，像是替比特幣「蓋下時間戳」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-024",
+      "difficulty": "challenge",
+      "category": "世界的錢",
+      "categoryEmoji": "🌺",
+      "type": "multiple_choice",
+      "question": "曾比同重量黃金還貴的香料，是下面哪一種？",
+      "options": [
+        "肉桂",
+        "香草",
+        "番紅花",
+        "胡椒"
+      ],
+      "answer": "番紅花",
+      "explanation": "番紅花要靠人手摘花蕊，產量極少，貴到被稱為「紅色黃金」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-025",
+      "difficulty": "challenge",
+      "category": "貨幣史",
+      "categoryEmoji": "🌶️",
+      "type": "multiple_choice",
+      "question": "在古代，「胡椒」珍貴到曾經被人們拿來做什麼？",
+      "options": [
+        "當藥",
+        "當燃料",
+        "當錢用、付租金或贖金",
+        "當染料"
+      ],
+      "answer": "當錢用、付租金或贖金",
+      "explanation": "胡椒在中世紀歐洲貴如黃金，甚至能拿來抵債、付房租。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-026",
+      "difficulty": "challenge",
+      "category": "貨幣史",
+      "categoryEmoji": "📮",
+      "type": "multiple_choice",
+      "question": "美國南北戰爭時硬幣不夠用，人們一度拿什麼來找零當錢？",
+      "options": [
+        "樹葉",
+        "郵票",
+        "石頭",
+        "鈕扣"
+      ],
+      "answer": "郵票",
+      "explanation": "因為小額硬幣短缺，郵票一度被當成零錢來流通使用。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-027",
+      "difficulty": "challenge",
+      "category": "世界的錢",
+      "categoryEmoji": "🚬",
+      "type": "multiple_choice",
+      "question": "二次大戰的戰俘營裡沒有錢，戰俘之間竟然用什麼當「貨幣」？",
+      "options": [
+        "鈕扣",
+        "樹葉",
+        "石頭",
+        "香菸"
+      ],
+      "answer": "香菸",
+      "explanation": "香菸數量穩定、人人想要，自然變成營區裡的「通用貨幣」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-028",
+      "difficulty": "challenge",
+      "category": "世界的錢",
+      "categoryEmoji": "🍜",
+      "type": "multiple_choice",
+      "question": "在現代美國的一些監獄裡，取代香菸成為熱門「貨幣」的是什麼？",
+      "options": [
+        "巧克力",
+        "電池",
+        "郵票",
+        "泡麵"
+      ],
+      "answer": "泡麵",
+      "explanation": "禁菸後，方便又人人愛的泡麵，成了監獄裡的新硬通貨。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-029",
+      "difficulty": "challenge",
+      "category": "經濟大事件",
+      "categoryEmoji": "🚦",
+      "type": "multiple_choice",
+      "question": "「黑色星期五」這個名稱，最早其實跟打折無關，而是形容什麼？",
+      "options": [
+        "停電",
+        "城市裡擁擠混亂的人潮車潮",
+        "一部電影",
+        "股市大跌"
+      ],
+      "answer": "城市裡擁擠混亂的人潮車潮",
+      "explanation": "它原本形容感恩節後街上的混亂，後來才被商家重新包裝成購物節。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-030",
+      "difficulty": "challenge",
+      "category": "貨幣史",
+      "categoryEmoji": "🧩",
+      "type": "multiple_choice",
+      "question": "西班牙銀元因為可以剪成八小塊使用，被取了個有名的綽號叫什麼？",
+      "options": [
+        "碎銀王",
+        "銀八卦",
+        "八片（pieces of eight）",
+        "八仙幣"
+      ],
+      "answer": "八片（pieces of eight）",
+      "explanation": "它能剪成八份找零，這也是「八片」這個海盜片常聽到的名字由來。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-031",
+      "difficulty": "challenge",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🎰",
+      "type": "multiple_choice",
+      "question": "賭場再怎麼包裝，數學上長期下來「穩定賺錢」的通常是誰？",
+      "options": [
+        "觀眾",
+        "荷官",
+        "賭場",
+        "玩家"
+      ],
+      "answer": "賭場",
+      "explanation": "每種遊戲都暗藏對賭場有利的機率，玩越久越站在它那邊。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-032",
+      "difficulty": "challenge",
+      "category": "你不知道的錢",
+      "categoryEmoji": "⚡",
+      "type": "multiple_choice",
+      "question": "中樂透頭獎的機率，常被拿來和什麼「超低機率事件」相比？",
+      "options": [
+        "塞車",
+        "被閃電打到",
+        "下雨",
+        "中暑"
+      ],
+      "answer": "被閃電打到",
+      "explanation": "中頭獎的機會極低，所以理財上常說「別把退休計畫押在彩券上」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-033",
+      "difficulty": "challenge",
+      "category": "名人故事",
+      "categoryEmoji": "🕵️",
+      "type": "multiple_choice",
+      "question": "史上最大的「龐氏騙局」之一，騙了投資人數百億美元，主謀是誰？",
+      "options": [
+        "巴菲特",
+        "賈伯斯",
+        "馬多夫",
+        "洛克斐勒"
+      ],
+      "answer": "馬多夫",
+      "explanation": "馬多夫用後金補前金的手法撐了多年，最後崩盤震驚全球。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-034",
+      "difficulty": "challenge",
+      "category": "經濟大事件",
+      "categoryEmoji": "🔁",
+      "type": "multiple_choice",
+      "question": "「龐氏騙局」的核心手法是什麼？",
+      "options": [
+        "印假鈔",
+        "用後面投資人的錢，假裝成前面人的獲利",
+        "真的拿去投資賺錢",
+        "跟銀行借錢"
+      ],
+      "answer": "用後面投資人的錢，假裝成前面人的獲利",
+      "explanation": "它根本沒在賺錢，只要新錢一斷、騙局就垮——名字來自騙徒龐茲。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-035",
+      "difficulty": "challenge",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🔢",
+      "type": "multiple_choice",
+      "question": "據說第一台 ATM 的密碼（PIN）會設計成「4 位數」，是因為發明人的？",
+      "options": [
+        "法律規定",
+        "機器只能顯示 4 位",
+        "太太只記得住 4 位",
+        "老闆規定"
+      ],
+      "answer": "太太只記得住 4 位",
+      "explanation": "這是流傳很廣的小故事：本想用 6 位，因太太記不住才改成 4 位。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": "⚠️ 屬發明者本人轉述的軼事，已用『據說』措辭。"
+    },
+    {
+      "id": "triv-c-036",
+      "difficulty": "challenge",
+      "category": "理財心理",
+      "categoryEmoji": "💵",
+      "type": "multiple_choice",
+      "question": "心理學研究發現，「用現金付錢」比「刷卡」更容易讓人怎樣？",
+      "options": [
+        "花得更多",
+        "完全沒差",
+        "比較捨不得花、花得少",
+        "忘記買過"
+      ],
+      "answer": "比較捨不得花、花得少",
+      "explanation": "看著現金一張張離手會「有點痛」，刷卡無感反而容易超支。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-037",
+      "difficulty": "challenge",
+      "category": "生活雜學",
+      "categoryEmoji": "🎲",
+      "type": "multiple_choice",
+      "question": "據說全世界「大富翁遊戲鈔票」的印製量，比什麼還多？",
+      "options": [
+        "撲克牌",
+        "樂高積木",
+        "郵票",
+        "真正流通的美鈔"
+      ],
+      "answer": "真正流通的美鈔",
+      "explanation": "這是常被引用的趣聞：玩具鈔票印太多，數量竟超過真鈔。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": "⚠️ 屬廣為流傳的趣聞，已用『據說』措辭。"
+    },
+    {
+      "id": "triv-c-038",
+      "difficulty": "challenge",
+      "category": "貨幣史",
+      "categoryEmoji": "🪑",
+      "type": "multiple_choice",
+      "question": "英文「銀行 bank」這個字，源自義大利商人做生意時坐的什麼？",
+      "options": [
+        "桌子",
+        "船",
+        "金庫",
+        "長板凳"
+      ],
+      "answer": "長板凳",
+      "explanation": "商人在板凳（banca）上換錢做買賣；做不下去板凳被打破，就成了「破產」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-039",
+      "difficulty": "challenge",
+      "category": "名人故事",
+      "categoryEmoji": "🍬",
+      "type": "multiple_choice",
+      "question": "著名的「先別急著吃棉花糖」實驗，測的是小孩的哪一種能力？",
+      "options": [
+        "數學",
+        "記憶",
+        "運動",
+        "忍住不馬上吃（延遲享受）"
+      ],
+      "answer": "忍住不馬上吃（延遲享受）",
+      "explanation": "能忍住、為更大獎勵等待的孩子，被認為和未來的成就有關——這和存錢很像。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-040",
+      "difficulty": "challenge",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🪙",
+      "type": "multiple_choice",
+      "question": "為什麼有些國家想取消面額最小的硬幣（像 1 分、1 元）？",
+      "options": [
+        "沒人喜歡",
+        "顏色不好看",
+        "製造一個的成本比它的面額還高",
+        "太重"
+      ],
+      "answer": "製造一個的成本比它的面額還高",
+      "explanation": "做一個賠一個，乾脆取消，找零改用四捨五入。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-041",
+      "difficulty": "challenge",
+      "category": "貨幣史",
+      "categoryEmoji": "🏝️",
+      "type": "multiple_choice",
+      "question": "太平洋雅浦島的巨大石幣，最大的一塊重達多少？",
+      "options": [
+        "幾公斤",
+        "跟硬幣一樣輕",
+        "好幾噸（要好幾個人搬）",
+        "幾百公斤"
+      ],
+      "answer": "好幾噸（要好幾個人搬）",
+      "explanation": "最大的石幣比人還高、重達數噸，根本搬不動——靠大家「記得它屬於誰」來流通。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-042",
+      "difficulty": "challenge",
+      "category": "名人故事",
+      "categoryEmoji": "🎖️",
+      "type": "multiple_choice",
+      "question": "炸藥發明人諾貝爾設立「諾貝爾獎」，傳說是因為報紙誤登了他的什麼？",
+      "options": [
+        "破產消息",
+        "訃聞，罵他是『死亡商人』",
+        "結婚消息",
+        "得獎消息"
+      ],
+      "answer": "訃聞，罵他是『死亡商人』",
+      "explanation": "據說這篇提早的訃聞讓他大受刺激，決定把財產拿來設獎、留下好名聲。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-043",
+      "difficulty": "challenge",
+      "category": "貨幣史",
+      "categoryEmoji": "🧊",
+      "type": "multiple_choice",
+      "question": "古代有些地方因為缺乏金屬，竟然用什麼又冷又硬的東西當過錢？",
+      "options": [
+        "玻璃",
+        "冰塊",
+        "木頭",
+        "大塊的鹽磚"
+      ],
+      "answer": "大塊的鹽磚",
+      "explanation": "鹽能保存食物又難取得，被壓成磚塊當錢——「薪水 salary」也和「鹽」有關。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-044",
+      "difficulty": "challenge",
+      "category": "貨幣史",
+      "categoryEmoji": "💳",
+      "type": "multiple_choice",
+      "question": "世界上第一張塑膠「信用卡」普及前，最早的卡片其實是用什麼做的？",
+      "options": [
+        "木頭",
+        "紙板或金屬",
+        "布",
+        "塑膠"
+      ],
+      "answer": "紙板或金屬",
+      "explanation": "早期的簽帳卡是紙板或金屬牌，後來才換成今天常見的塑膠卡。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-045",
+      "difficulty": "challenge",
+      "category": "經濟大事件",
+      "categoryEmoji": "🇺🇸",
+      "type": "multiple_choice",
+      "question": "1971 年宣布美元和黃金「正式脫鉤」、結束金本位時代的美國總統是誰？",
+      "options": [
+        "羅斯福",
+        "甘迺迪",
+        "林肯",
+        "尼克森"
+      ],
+      "answer": "尼克森",
+      "explanation": "這個決定讓今天的錢不再靠黃金撐腰，純粹靠國家信用，影響至今。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-046",
+      "difficulty": "challenge",
+      "category": "你不知道的錢",
+      "categoryEmoji": "🏦",
+      "type": "multiple_choice",
+      "question": "現代銀行只把你存款的「一小部分」留著，其餘拿去放貸，這種制度叫什麼？",
+      "options": [
+        "黃金本位",
+        "以物易物",
+        "全額保管制度",
+        "部分準備金制度"
+      ],
+      "answer": "部分準備金制度",
+      "explanation": "正因如此，如果大家同時去領錢（擠兌），銀行可能一下子拿不出來。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-047",
+      "difficulty": "challenge",
+      "category": "名人故事",
+      "categoryEmoji": "🛢️",
+      "type": "multiple_choice",
+      "question": "歷史上公認「世界第一個身價破十億」的超級富豪，靠什麼生意起家？",
+      "options": [
+        "電腦",
+        "石油",
+        "鑽石",
+        "鐵路"
+      ],
+      "answer": "石油",
+      "explanation": "美國的洛克斐勒靠石油在 1916 年左右成為史上第一位十億富翁。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-048",
+      "difficulty": "challenge",
+      "category": "世界的錢",
+      "categoryEmoji": "🃏",
+      "type": "multiple_choice",
+      "question": "三百多年前，哪個地方因為硬幣不夠，竟然把「撲克牌」簽名蓋章當錢？",
+      "options": [
+        "埃及",
+        "加拿大",
+        "中國",
+        "拉斯維加斯"
+      ],
+      "answer": "加拿大",
+      "explanation": "當年的新法蘭西（今加拿大）硬幣遲遲沒運到，官員只好拿撲克牌應急。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-049",
+      "difficulty": "challenge",
+      "category": "商業小故事",
+      "categoryEmoji": "🧀",
+      "type": "multiple_choice",
+      "question": "義大利有銀行接受用一種「食物」當抵押品借錢，還幫你保管。是哪種？",
+      "options": [
+        "帕馬森起司",
+        "義大利麵",
+        "橄欖油",
+        "紅酒"
+      ],
+      "answer": "帕馬森起司",
+      "explanation": "這種起司要熟成多年、很值錢，銀行收它當抵押，農夫先借錢周轉。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    },
+    {
+      "id": "triv-c-050",
+      "difficulty": "challenge",
+      "category": "世界的錢",
+      "categoryEmoji": "0️⃣",
+      "type": "multiple_choice",
+      "question": "印度曾出現一種「面額 0 元」的鈔票，它被印出來是為了？",
+      "options": [
+        "慶祝節日",
+        "抗議貪污、拒絕賄賂",
+        "測試印鈔機",
+        "給小孩玩"
+      ],
+      "answer": "抗議貪污、拒絕賄賂",
+      "explanation": "民間反貪團體印它，讓人在被索賄時拿出來，表達「我一毛都不給」。",
+      "triviaBonus": null,
+      "illustration": null,
+      "storyLink": null,
+      "flag": null
+    }
+  ]
+}
