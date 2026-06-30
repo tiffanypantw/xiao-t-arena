@@ -1,10 +1,14 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { useBrand } from '@/lib/BrandContext';
+import { fetchAllTimeLeaderboard } from '@/lib/triviaScore';
 import { Award, Settings, ChevronRight, Trophy, PiggyBank, HelpCircle, ExternalLink, Lightbulb, Facebook, Instagram, Youtube, Mic, Mail } from 'lucide-react';
 
 const SKOOL_URL = 'https://www.skool.com/next-gen-finance-7415/about';
+
+const MEDAL = ['🥇', '🥈', '🥉'];
 
 const JAR_DOTS = [
   { label: '花', color: '#B25E1B' },
@@ -26,6 +30,15 @@ export default function Home() {
   const navigate = useNavigate();
   const { userData, logout } = useAuth();
   const brand = useBrand();
+
+  const [top3, setTop3] = useState([]);
+  useEffect(() => {
+    let cancelled = false;
+    fetchAllTimeLeaderboard(3)
+      .then((r) => { if (!cancelled) setTop3(r); })
+      .catch((e) => console.error('home leaderboard load failed', e));
+    return () => { cancelled = true; };
+  }, []);
 
   const tiles = [
     {
@@ -181,6 +194,37 @@ export default function Home() {
             );
           })}
         </div>
+
+        {/* 冷知識排行榜・動向 */}
+        {top3.length > 0 && (
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            onClick={() => navigate('/leaderboard', { state: { tab: 'allTime' } })}
+            className="w-full text-left rounded-2xl border border-border bg-card p-4 mt-4 hover:opacity-90 active:scale-[0.99] transition-all"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <Trophy className="w-4 h-4 text-violet-600" />
+                <p className="text-base font-black text-foreground">冷知識排行榜</p>
+              </div>
+              <span className="flex items-center gap-0.5 text-xs font-bold text-violet-600">
+                看全部 <ChevronRight className="w-3.5 h-3.5" />
+              </span>
+            </div>
+            <div className="space-y-1.5">
+              {top3.map((r, i) => (
+                <div key={r.uid} className="flex items-center gap-3">
+                  <div className="w-6 text-center text-sm shrink-0">{MEDAL[i]}</div>
+                  <div className="w-7 h-7 rounded-full bg-violet-50 flex items-center justify-center text-base shrink-0">{r.avatar}</div>
+                  <div className="flex-1 text-sm font-bold text-foreground truncate">{r.nickname}</div>
+                  <div className="text-sm font-black text-violet-700 shrink-0">{r.allTimePoints}</div>
+                </div>
+              ))}
+            </div>
+          </motion.button>
+        )}
 
         {/* 找到 Tiffany 老師 */}
         <div className="mt-7">

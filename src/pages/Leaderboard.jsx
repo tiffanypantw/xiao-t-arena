@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { useAuth } from "@/lib/AuthContext";
 import { fetchWeeklyLeaderboard, fetchAllTimeLeaderboard, triviaIdentity } from "@/lib/triviaScore";
@@ -8,8 +8,9 @@ const MEDAL = ["🥇", "🥈", "🥉"];
 
 export default function Leaderboard() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
-  const [tab, setTab] = useState("weekly"); // "weekly" | "allTime"
+  const [tab, setTab] = useState(location.state?.tab === "allTime" ? "allTime" : "weekly"); // "weekly" | "allTime"
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
 
