@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronLeft } from "lucide-react";
+import PageHeader from "@/components/PageHeader";
 import { useAuth } from "@/lib/AuthContext";
 import { hasThemeAccess } from "@/api/arenaAccess";
 import { getRoadTheme, bloomColor, bloomKey, bloomLabel, BLOOM_STAGES } from "@/data/roadThemes";
@@ -23,9 +23,7 @@ export default function LearningRoad() {
     return (
       <div className="min-h-screen bg-background">
         <div className="max-w-md mx-auto px-4 py-6">
-          <button onClick={() => navigate("/arena")} className="flex items-center gap-1 text-sm text-muted-foreground">
-            <ChevronLeft className="w-4 h-4" /> 概念競技場
-          </button>
+          <PageHeader backTo="/arena/band/l1" backLabel="L1 體驗" />
           <p className="text-sm text-muted-foreground mt-8 text-center">找不到這個主題。</p>
         </div>
       </div>
@@ -37,9 +35,7 @@ export default function LearningRoad() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-md mx-auto px-4 py-6">
-        <button onClick={() => navigate("/arena/band/l1")} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-all mb-3">
-          <ChevronLeft className="w-4 h-4" /> L1 體驗
-        </button>
+        <PageHeader backTo="/arena/band/l1" backLabel="L1 體驗" />
 
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-3">
           <h1 className="text-xl font-black text-foreground">{theme.emoji} {theme.themeName}</h1>

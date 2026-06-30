@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { useBrand } from '@/lib/BrandContext';
 import { useWeeks } from '@/lib/hooks/useContent';
-import { Lock, ChevronRight, ChevronLeft, Award, Zap } from 'lucide-react';
+import { Lock, ChevronRight, Award, Zap } from 'lucide-react';
+import PageHeader from '@/components/PageHeader';
 import { hasThemeAccess } from '@/api/arenaAccess';
 
 // 概念競技場：每週練習題清單（原本的首頁內容搬到這裡）
@@ -53,21 +54,19 @@ export default function ArenaPractice() {
       <div className="max-w-md mx-auto px-4 py-6">
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-5">
-          <button
-            onClick={() => navigate('/arena/band/l1')}
-            className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-all"
-          >
-            <ChevronLeft className="w-4 h-4" /> L1 體驗
-          </button>
-          <button
-            onClick={() => navigate('/Passport')}
-            className="flex items-center gap-1.5 bg-violet-100 text-violet-700 text-xs font-bold px-3 py-2 rounded-xl hover:opacity-90 transition-all"
-          >
-            <Award className="w-3.5 h-3.5" />
-            學習護照
-          </button>
-        </div>
+        <PageHeader
+          backTo="/arena/band/l1"
+          backLabel="L1 體驗"
+          right={
+            <button
+              onClick={() => navigate('/Passport')}
+              className="flex items-center gap-1.5 bg-violet-100 text-violet-700 text-xs font-bold px-3 py-2 rounded-xl hover:opacity-90 transition-all"
+            >
+              <Award className="w-3.5 h-3.5" />
+              學習護照
+            </button>
+          }
+        />
 
         {/* 標題 */}
         <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="mb-5">

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Lock, KeyRound } from "lucide-react";
+import { ChevronRight, Lock, KeyRound } from "lucide-react";
+import PageHeader from "@/components/PageHeader";
 import { useAuth } from "@/lib/AuthContext";
 import { hasThemeAccess, redeemThemeCode } from "@/api/arenaAccess";
 import { findBand } from "@/data/arenaStructure";
@@ -37,9 +38,7 @@ export default function ArenaThemes() {
     return (
       <div className="min-h-screen bg-background">
         <div className="max-w-md mx-auto px-4 py-6">
-          <button onClick={() => navigate("/arena")} className="flex items-center gap-1 text-sm text-muted-foreground">
-            <ChevronLeft className="w-4 h-4" /> 概念競技場
-          </button>
+          <PageHeader backTo="/arena" backLabel="概念競技場" />
           <p className="text-sm text-muted-foreground mt-8 text-center">找不到這個年齡段。</p>
         </div>
       </div>
@@ -49,11 +48,7 @@ export default function ArenaThemes() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-md mx-auto px-4 py-6">
-        <div className="mb-5">
-          <button onClick={() => navigate("/arena")} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-all">
-            <ChevronLeft className="w-4 h-4" /> 概念競技場
-          </button>
-        </div>
+        <PageHeader backTo="/arena" backLabel="概念競技場" />
 
         <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="mb-5">
           <div className={`w-12 h-12 rounded-2xl ${band.iconBg} flex items-center justify-center text-2xl mb-2`}>{band.emoji}</div>

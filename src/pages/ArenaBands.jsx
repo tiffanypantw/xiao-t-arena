@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Award } from "lucide-react";
+import { ChevronRight, Award } from "lucide-react";
+import PageHeader from "@/components/PageHeader";
 import { ARENA_BANDS } from "@/data/arenaStructure";
 
 // 概念競技場第一層：選年齡段（分齡）。可自由瀏覽，鎖在各主題課程上。
@@ -10,14 +11,13 @@ export default function ArenaBands() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-md mx-auto px-4 py-6">
-        <div className="flex items-center justify-between mb-5">
-          <button onClick={() => navigate("/")} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-all">
-            <ChevronLeft className="w-4 h-4" /> 首頁
-          </button>
-          <button onClick={() => navigate("/Passport")} className="flex items-center gap-1.5 bg-violet-100 text-violet-700 text-xs font-bold px-3 py-2 rounded-xl hover:opacity-90 transition-all">
-            <Award className="w-3.5 h-3.5" /> 學習護照
-          </button>
-        </div>
+        <PageHeader
+          right={
+            <button onClick={() => navigate("/Passport")} className="flex items-center gap-1.5 bg-violet-100 text-violet-700 text-xs font-bold px-3 py-2 rounded-xl hover:opacity-90 transition-all">
+              <Award className="w-3.5 h-3.5" /> 學習護照
+            </button>
+          }
+        />
 
         <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="mb-5">
           <div className="text-3xl mb-2">🏆</div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import PageHeader from "@/components/PageHeader";
 import { useAuth } from "@/lib/AuthContext";
 import { fetchWeeklyLeaderboard, fetchAllTimeLeaderboard, triviaIdentity } from "@/lib/triviaScore";
 
@@ -43,9 +43,7 @@ export default function Leaderboard() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-md mx-auto px-4 py-6">
-        <button onClick={() => navigate("/trivia")} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-all mb-4">
-          <ChevronLeft className="w-4 h-4" /> 金錢冷知識
-        </button>
+        <PageHeader backTo="/trivia" backLabel="金錢冷知識" />
 
         <div className="text-center mb-3">
           <div className="text-4xl">🏆</div>
