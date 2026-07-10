@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/AuthContext';
 import { useBrand } from '@/lib/BrandContext';
 import { useWeek } from '@/lib/hooks/useContent';
+import { hasThemeAccess } from '@/api/arenaAccess';
 import { storage } from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {
@@ -88,6 +89,392 @@ function MultipleChoiceQuestion({ q, onAnswer }) {
     </div>
   );
 }
+// ==================
+// 是非題元件
+// ==================
+function TrueFalseQuestion({ q, onAnswer }) {
+  const [selected, setSelected] = useState(null); // true / false
+  const [revealed, setRevealed] = useState(false);
+  const isCorrect = selected === q.answer;
+
+  const handleConfirm = () => {
+    if (selected === null) return;
+    setRevealed(true);
+    setTimeout(() => onAnswer(q.id, selected === q.answer), 900);
+  };
+
+  const opts = [
+    { val: true, label: '⭕️ 對' },
+    { val: false, label: '❌ 錯' },
+  ];
+
+  return (
+    <div className={`rounded-xl border-2 p-4 transition-all ${
+      revealed
+        ? isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'
+        : 'border-border bg-card'
+    }`}>
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold">{q.block}</span>
+        <span className="text-xs text-muted-foreground">Q{q.id} · 是非題</span>
+      </div>
+      <p className="text-sm font-bold text-foreground leading-snug mb-3">{q.question}</p>
+      <div className="grid grid-cols-2 gap-2">
+        {opts.map((opt) => {
+          const isSelected = selected === opt.val;
+          const isOptCorrect = opt.val === q.answer;
+          let style = 'border-border bg-card text-foreground';
+          if (revealed) {
+            if (isOptCorrect) style = 'border-green-500 bg-green-50 text-green-800';
+            else if (isSelected && !isOptCorrect) style = 'border-red-400 bg-red-50 text-red-700';
+          } else if (isSelected) {
+            style = 'border-foreground bg-foreground text-background';
+          }
+          return (
+            <button
+              key={String(opt.val)}
+              onClick={() => !revealed && setSelected(opt.val)}
+              className={`rounded-xl border-2 px-3 py-3 text-sm font-bold text-center transition-all ${style}`}
+            >
+              {opt.label}
+            </button>
+          );
+        })}
+      </div>
+      {!revealed && selected !== null && (
+        <Button onClick={handleConfirm} className="w-full mt-3" size="sm">確認答案</Button>
+      )}
+      {revealed && (
+        <motion.p
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-2 text-xs text-slate-600 leading-relaxed"
+        >
+          {isCorrect ? '✓ ' : '✗ '}{q.explanation}
+        </motion.p>
+      )}
+    </div>
+  );
+}
+
+// ==================
+// 配對題元件（點左邊的詞 → 點右邊的描述）
+// ==================
+function MatchingQuestion({ q, onAnswer }) {
+  // 右邊描述洗牌一次
+  const [rights] = useState(() => {
+    const arr = q.pairs.map((p) => p.right);
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  });
+  const [activeLeft, setActiveLeft] = useState(null); // 左邊被選中的 index
+  const [links, setLinks] = useState({}); // leftIndex -> right 字串
+  const [revealed, setRevealed] = useState(false);
+
+  const allLinked = Object.keys(links).length === q.pairs.length;
+  const isCorrect = q.pairs.every((p, i) => links[i] === p.right);
+
+  const linkedLeftOf = (right) => {
+    const found = Object.entries(links).find(([, r]) => r === right);
+    return found ? Number(found[0]) : null;
+  };
+
+  const tapLeft = (i) => {
+    if (revealed) return;
+    setActiveLeft(activeLeft === i ? null : i);
+  };
+
+  const tapRight = (right) => {
+    if (revealed) return;
+    const already = linkedLeftOf(right);
+    const next = { ...links };
+    if (activeLeft === null) {
+      // 沒選左邊：點已連好的描述 = 取消那條連線
+      if (already !== null) {
+        delete next[already];
+        setLinks(next);
+      }
+      return;
+    }
+    if (already !== null) delete next[already];
+    next[activeLeft] = right;
+    setLinks(next);
+    setActiveLeft(null);
+  };
+
+  const handleConfirm = () => {
+    if (!allLinked) return;
+    setRevealed(true);
+    setTimeout(() => onAnswer(q.id, isCorrect), 900);
+  };
+
+  return (
+    <div className={`rounded-xl border-2 p-4 transition-all ${
+      revealed
+        ? isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'
+        : 'border-border bg-card'
+    }`}>
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold">{q.block}</span>
+        <span className="text-xs text-muted-foreground">Q{q.id} · 配對題</span>
+      </div>
+      <p className="text-sm font-bold text-foreground leading-snug mb-1">{q.question}</p>
+      <p className="text-xs text-muted-foreground mb-3">先點一個詞，再點它的描述，把它們連起來。</p>
+
+      {/* 左邊：詞 */}
+      <div className="flex flex-wrap gap-2 mb-3">
+        {q.pairs.map((p, i) => {
+          const linked = links[i] != null;
+          const active = activeLeft === i;
+          return (
+            <button
+              key={p.left}
+              onClick={() => tapLeft(i)}
+              className={`rounded-xl border-2 px-3 py-1.5 text-sm font-bold transition-all ${
+                active
+                  ? 'border-foreground bg-foreground text-background'
+                  : linked
+                  ? 'border-violet-300 bg-violet-50 text-violet-700'
+                  : 'border-border bg-card text-foreground'
+              }`}
+            >
+              {p.left}{linked ? ' ✓' : ''}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* 右邊：描述 */}
+      <div className="space-y-2">
+        {rights.map((right) => {
+          const leftIdx = linkedLeftOf(right);
+          const truePair = q.pairs.find((p) => p.right === right);
+          const rightIsCorrect = leftIdx !== null && q.pairs[leftIdx]?.right === truePair?.right && q.pairs[leftIdx]?.left === truePair?.left;
+          let style = 'border-border bg-card text-foreground';
+          if (revealed) {
+            style = rightIsCorrect
+              ? 'border-green-500 bg-green-50 text-green-800'
+              : 'border-red-400 bg-red-50 text-red-700';
+          } else if (leftIdx !== null) {
+            style = 'border-violet-300 bg-violet-50 text-foreground';
+          }
+          return (
+            <button
+              key={right}
+              onClick={() => tapRight(right)}
+              className={`w-full text-left rounded-xl border-2 px-3 py-2 text-sm font-medium transition-all flex items-center gap-2 ${style}`}
+            >
+              <span className={`shrink-0 text-xs font-black rounded-lg px-2 py-0.5 ${
+                leftIdx !== null ? 'bg-violet-600 text-white' : 'bg-muted text-muted-foreground'
+              }`}>
+                {leftIdx !== null ? q.pairs[leftIdx].left : '？'}
+              </span>
+              <span>{right}</span>
+              {revealed && !rightIsCorrect && truePair && (
+                <span className="ml-auto text-xs text-green-700 shrink-0">→ {truePair.left}</span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {!revealed && allLinked && (
+        <Button onClick={handleConfirm} className="w-full mt-3" size="sm">確認答案</Button>
+      )}
+      {revealed && (
+        <motion.p
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-2 text-xs text-slate-600 leading-relaxed"
+        >
+          {isCorrect ? '✓ ' : '✗ '}{q.explanation}
+        </motion.p>
+      )}
+    </div>
+  );
+}
+
+// ==================
+// 簡答題元件（送出後進老師批改）
+// ==================
+function TextQuestion({ q, onAnswer, initialPayload }) {
+  const [text, setText] = useState(initialPayload?.answer || '');
+  const [submitted, setSubmitted] = useState(!!initialPayload);
+  const min = q.minChars || 10;
+
+  const handleSubmit = () => {
+    if (text.trim().length < min) return;
+    setSubmitted(true);
+    onAnswer(q.id, true, { question: q.question, answer: text.trim() });
+  };
+
+  return (
+    <div className={`rounded-xl border-2 p-4 transition-all ${
+      submitted ? 'border-green-300 bg-green-50' : 'border-border bg-card'
+    }`}>
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold">{q.block}</span>
+        <span className="text-xs text-muted-foreground">Q{q.id} · 簡答題</span>
+        <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-semibold">✍️ 老師會親自看</span>
+      </div>
+      <p className="text-sm font-bold text-foreground leading-snug mb-3">{q.question}</p>
+
+      {!submitted && (
+        <div className="space-y-2">
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder={q.placeholder || '寫下你的想法...'}
+            rows={3}
+            className="w-full border-2 border-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-foreground resize-none leading-relaxed bg-white"
+          />
+          <div className="flex items-center justify-between">
+            <span className={`text-xs ${text.trim().length >= min ? 'text-green-600' : 'text-muted-foreground'}`}>
+              {text.trim().length} / {min} 字
+            </span>
+            <Button onClick={handleSubmit} disabled={text.trim().length < min} size="sm" className="px-5">送出</Button>
+          </div>
+        </div>
+      )}
+
+      {submitted && (
+        <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
+          <div className="bg-white/70 rounded-xl p-3">
+            <p className="text-xs text-muted-foreground font-semibold mb-1">你的回答</p>
+            <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{text}</p>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">✓ 已送出，這題沒有標準答案，老師會看到你的想法。{q.explanation}</p>
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
+// ==================
+// 圖文題元件（文字 + 可附照片，送出後進老師批改）
+// ==================
+function TextOrImageQuestion({ q, onAnswer, uploader, initialPayload }) {
+  const [text, setText] = useState(initialPayload?.answer || '');
+  const [files, setFiles] = useState([]);
+  const [submitted, setSubmitted] = useState(!!initialPayload);
+  const [busy, setBusy] = useState(false);
+  const [savedUrls, setSavedUrls] = useState(initialPayload?.imageUrls || []);
+  const min = q.minChars || 20;
+
+  const pickFiles = (e) => {
+    const picked = Array.from(e.target.files);
+    if (files.length + picked.length > 2) { alert('這題最多附 2 張圖'); return; }
+    const valid = picked.filter((f) => {
+      if (f.size > 5 * 1024 * 1024) { alert(`${f.name} 超過 5MB 限制`); return false; }
+      return true;
+    });
+    setFiles((prev) => [...prev, ...valid]);
+  };
+
+  const handleSubmit = async () => {
+    if (text.trim().length < min || busy) return;
+    setBusy(true);
+    try {
+      const urls = files.length > 0 ? await uploader(q.id, files) : [];
+      setSavedUrls(urls);
+      setSubmitted(true);
+      onAnswer(q.id, true, { question: q.question, answer: text.trim(), imageUrls: urls });
+    } catch (err) {
+      console.error('圖片上傳失敗', err);
+      alert('上傳失敗，請再試一次');
+    }
+    setBusy(false);
+  };
+
+  return (
+    <div className={`rounded-xl border-2 p-4 transition-all ${
+      submitted ? 'border-green-300 bg-green-50' : 'border-border bg-card'
+    }`}>
+      <div className="flex items-center gap-2 mb-2 flex-wrap">
+        <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold">{q.block}</span>
+        <span className="text-xs text-muted-foreground">Q{q.id} · 圖文題</span>
+        <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-semibold">✍️ 老師會親自回覆</span>
+      </div>
+      <p className="text-sm font-bold text-foreground leading-snug mb-3">{q.question}</p>
+
+      {!submitted && (
+        <div className="space-y-3">
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder={q.placeholder || '寫下你的觀察...'}
+            rows={4}
+            className="w-full border-2 border-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-foreground resize-none leading-relaxed bg-white"
+          />
+          <div className="flex flex-wrap gap-2">
+            {files.map((file, idx) => (
+              <div key={idx} className="relative">
+                <img src={URL.createObjectURL(file)} alt={`附圖 ${idx + 1}`} className="w-16 h-16 object-cover rounded-xl border border-border" />
+                <button onClick={() => setFiles((prev) => prev.filter((_, i) => i !== idx))} className="absolute -top-1.5 -right-1.5 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  <X className="w-3 h-3" />
+                </button>
+              </div>
+            ))}
+            {files.length < 2 && (
+              <label className="w-16 h-16 border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-foreground transition-colors">
+                <Upload className="w-4 h-4 text-muted-foreground" />
+                <span className="text-[10px] text-muted-foreground mt-0.5">拍照/畫圖</span>
+                <input type="file" accept="image/jpeg,image/png" multiple className="hidden" onChange={pickFiles} />
+              </label>
+            )}
+          </div>
+          <div className="flex items-center justify-between">
+            <span className={`text-xs ${text.trim().length >= min ? 'text-green-600' : 'text-muted-foreground'}`}>
+              {text.trim().length} / {min} 字
+            </span>
+            <Button onClick={handleSubmit} disabled={text.trim().length < min || busy} size="sm" className="px-5">
+              {busy ? '上傳中...' : '送出'}
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {submitted && (
+        <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
+          <div className="bg-white/70 rounded-xl p-3">
+            <p className="text-xs text-muted-foreground font-semibold mb-1">你的回答</p>
+            <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{text}</p>
+            {savedUrls.length > 0 && (
+              <div className="flex gap-2 mt-2">
+                {savedUrls.map((u, i) => (
+                  <img key={u} src={u} alt={`附圖 ${i + 1}`} className="w-16 h-16 object-cover rounded-xl border border-border" />
+                ))}
+              </div>
+            )}
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">✓ 已送出，老師會親自回覆這題。{q.explanation}</p>
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
+// ==================
+// 題型分派器
+// ==================
+function QuizQuestion({ q, onAnswer, uploader, initialPayload }) {
+  switch (q.type) {
+    case 'true_false':
+      return <TrueFalseQuestion q={q} onAnswer={onAnswer} />;
+    case 'matching':
+      return <MatchingQuestion q={q} onAnswer={onAnswer} />;
+    case 'text':
+      return <TextQuestion q={q} onAnswer={onAnswer} initialPayload={initialPayload} />;
+    case 'text_or_image':
+      return <TextOrImageQuestion q={q} onAnswer={onAnswer} uploader={uploader} initialPayload={initialPayload} />;
+    default:
+      return <MultipleChoiceQuestion q={q} onAnswer={onAnswer} />;
+  }
+}
+
 // ==================
 // 對話元件（雙向對話 thread + 回覆框）
 // ==================
@@ -215,7 +602,7 @@ function ConversationThread({ conversation, onReply }) {
 export default function WeekLearning() {
   const { weekNumber } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, userData } = useAuth();
   const brand = useBrand();
   const weekNum = parseInt(weekNumber);
 
@@ -227,6 +614,8 @@ export default function WeekLearning() {
 
   // 練習題狀態
   const [quizAnswers, setQuizAnswers] = useState({});
+  const [textAnswers, setTextAnswers] = useState({}); // 簡答/圖文題的內容（進老師批改）
+  const [quizRound, setQuizRound] = useState(0); // 重新挑戰時 +1，強制題目重置
   const [quizAllCorrect, setQuizAllCorrect] = useState(false);
 
   // 開放題狀態（Week 5+）
@@ -257,6 +646,13 @@ export default function WeekLearning() {
     load();
   }, [user, weekNum]);
 
+  // 主題週（例如學習道路的週次）要先開通該主題才能進來（防網址直接輸入）
+  useEffect(() => {
+    if (weekData?.themeId && userData && !hasThemeAccess(userData, weekData.themeId)) {
+      navigate('/arena');
+    }
+  }, [weekData, userData, navigate]);
+
   // 內容還在抓 / 學員進度還在抓 → 全頁 loading
   if (weekLoading || loading) {
     return (
@@ -279,10 +675,14 @@ export default function WeekLearning() {
     );
   }
 
-  // 答題處理
-  const handleQuizAnswer = async (questionId, correct) => {
+  // 答題處理（payload = 簡答/圖文題的回答內容，會存進進度給老師看）
+  const handleQuizAnswer = async (questionId, correct, payload) => {
     const newAnswers = { ...quizAnswers, [questionId]: correct };
+    const newTextAnswers = payload
+      ? { ...textAnswers, [questionId]: payload }
+      : textAnswers;
     setQuizAnswers(newAnswers);
+    if (payload) setTextAnswers(newTextAnswers);
 
     const quizCount = weekData.quizQuestions.length;
     const answeredAll = Object.keys(newAnswers).length === quizCount;
@@ -291,7 +691,11 @@ export default function WeekLearning() {
     if (answeredAll && allCorrect) {
       setQuizAllCorrect(true);
       if (!progress?.quizCompleted) {
-        await markQuizCompleted(user.uid, weekNum);
+        await markQuizCompleted(
+          user.uid,
+          weekNum,
+          Object.keys(newTextAnswers).length > 0 ? newTextAnswers : null
+        );
         setProgress((prev) => ({ ...prev, quizCompleted: true }));
       }
       // W1-W4：答對之後不再自動滾動 — 孩子先看到「等老師審核」的訊息
@@ -305,8 +709,29 @@ export default function WeekLearning() {
   };
 
   const handleRetryQuiz = () => {
-    setQuizAnswers({});
+    // 簡答/圖文題已送出的答案保留，不用重寫；其他題重來
+    const kept = {};
+    (weekData?.quizQuestions || []).forEach((q) => {
+      if ((q.type === 'text' || q.type === 'text_or_image') && textAnswers[q.id]) {
+        kept[q.id] = true;
+      }
+    });
+    setQuizAnswers(kept);
     setQuizAllCorrect(false);
+    setQuizRound((r) => r + 1);
+  };
+
+  // 圖文題的附圖上傳（與任務區同一個 storage 路徑規則）
+  const uploadQuizImages = async (qid, files) => {
+    const urls = await Promise.all(
+      files.map(async (file) => {
+        const timestamp = Date.now();
+        const storageRef = ref(storage, `submissions/${user.uid}/week-${weekNum}/quiz-q${qid}-${timestamp}_${file.name}`);
+        await uploadBytes(storageRef, file);
+        return getDownloadURL(storageRef);
+      })
+    );
+    return urls;
   };
 
   // 提交開放題（Week 5+）
@@ -404,7 +829,7 @@ export default function WeekLearning() {
 
         {/* Header */}
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate('/Home')} className="w-9 h-9 rounded-xl border border-border flex items-center justify-center hover:bg-muted transition-colors">
+          <button onClick={() => navigate(weekData?.themeId ? `/arena/road/${weekData.themeId}` : '/Home')} className="w-9 h-9 rounded-xl border border-border flex items-center justify-center hover:bg-muted transition-colors">
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div>
@@ -450,13 +875,15 @@ export default function WeekLearning() {
           {!quizDone && (
             <div className="space-y-3">
               <p className="text-xs text-muted-foreground">
-                {weekData.quizQuestions.length} 題選擇題，全對才能繼續 ✓
+                {weekData.quizQuestions.length} 題全部完成才能繼續 ✓（簡答題沒有標準答案，寫下想法就算完成）
               </p>
               {weekData.quizQuestions.map((q) => (
-                <MultipleChoiceQuestion
-                  key={q.id}
+                <QuizQuestion
+                  key={`${quizRound}-${q.id}`}
                   q={q}
                   onAnswer={handleQuizAnswer}
+                  uploader={uploadQuizImages}
+                  initialPayload={textAnswers[q.id]}
                 />
               ))}
               {Object.keys(quizAnswers).length === weekData.quizQuestions.length && !quizAllCorrect && (

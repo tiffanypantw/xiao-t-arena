@@ -1,26 +1,46 @@
-// 加購主題課的「學習道路」資料（逐週 Bloom 堆疊 × 我能）
-// 取自 bible《L1-L2 加購主題課 逐週 Bloom 堆疊》。練習題之後逐週長上去。
+// 加購主題課的「學習道路」資料
+// 2026-07-10:原本的 G1「價值與交換」換成新課程「我的零用錢,我作主(第一季)」。
+// themeId 沿用 "l1-g1"(路由、已開通的帳號都不用動),但名稱、內容、開通碼 prefix 都是新的。
+//
+// 每一關的欄位:
+//   n          — 道路上的第幾關(學生看到的 W{n})
+//   weekNumber — 對應 weeks collection 的系統編號(道路週 = 100 + n),有內容才填
+//   badgeId    — 這一關的徽章 rewardId(用來判斷「已完成」+ 解鎖下一關)
+//   bloom      — Bloom 階段(記憶/理解/應用/里程碑),還沒公開的關卡不填
+//   mystery    — true = 內容還沒公開,道路上顯示「?」
+//
+// 之後每上架一關,就把那一關的 mystery 拿掉、補上 topic/iCan/weekNumber/badgeId。
 
 export const ROAD_THEMES = {
   "l1-g1": {
     band: "L1 體驗",
-    emoji: "🟢",
-    themeName: "G1 價值與交換",
-    coreQ: "什麼叫有價值？為什麼有人願意付錢？",
-    milestone: "第一張價值地圖",
+    emoji: "💰",
+    themeName: "我的零用錢,我作主",
+    season: "第一季",
+    coreQ: "零用錢在我手上 — 每一筆,我都能自己想清楚、自己作主嗎?",
+    milestone: "12 關陸續公開",
     weeks: [
-      { n: 1, bloom: "記憶", topic: "什麼是「價值」", iCan: "我能說出「價值」是「它幫我解決／滿足了什麼」。", act: "配對：價值/價格/交換/稀缺 ↔ 圖" },
-      { n: 2, bloom: "記憶", topic: "價格 vs 價值", iCan: "我能分辨「價格＝付出去的錢」「價值＝它對我的意義」。", act: "選擇：這句在講價格還是價值？" },
-      { n: 3, bloom: "記憶", topic: "稀缺與交換", iCan: "我能說出「稀缺＝要的人多、東西少」「交換＝用我有的換我要的」。", act: "找找看：生活中一樣稀缺的東西" },
-      { n: 4, bloom: "理解", topic: "為什麼有人願意付錢", iCan: "我能解釋一樣東西「解決了什麼／滿足了什麼」才有人付錢。", act: "舉例：寫一樣有價值的東西+它解決什麼" },
-      { n: 5, bloom: "理解", topic: "價值因人而異", iCan: "我能舉例說明「同一個東西對不同人價值不同」。", act: "解釋：一瓶水在超商 vs 在沙漠" },
-      { n: 6, bloom: "理解", topic: "稀缺如何推高價值", iCan: "我能用例子解釋「越稀缺、越多人要，越貴」。", act: "預測：限量球鞋為什麼貴？" },
-      { n: 7, bloom: "理解→應用", topic: "實際 vs 感覺價值", iCan: "我能分辨一個價格裡多少是「真解決問題」、多少是「感覺/品牌」。", act: "情境入門：拆一個價格的兩種價值" },
-      { n: 8, bloom: "應用", topic: "用價值評估購買", iCan: "我能對一項購買說出「我願意付多少、為什麼」。", act: "情境：手搖飲 50 元你願付多少？" },
-      { n: 9, bloom: "應用", topic: "比較兩個價格", iCan: "我能比較兩樣價格不同的東西，貴的多解決了什麼。", act: "比較：30 vs 80 元雨傘" },
-      { n: 10, bloom: "應用", topic: "找出「值得」的證據", iCan: "我能為「值得／不值得」找出能說服人的理由。", act: "判斷+寫理由：你會買嗎？" },
-      { n: 11, bloom: "應用→分析", topic: "我生活裡的價值盤點", iCan: "我能找出生活中最有價值的 5 樣東西並分析各解決什麼。", act: "上傳：拍 5 樣+分析" },
-      { n: 12, bloom: "里程碑", topic: "第一張價值地圖", iCan: "我能把價值盤點畫成一張價值地圖並說明。", act: "里程碑作品：價值地圖（上傳批改）" },
+      {
+        n: 1,
+        weekNumber: 101,
+        badgeId: "B-L1S1-W01",
+        bloom: "記憶",
+        topic: "新鮮感觀察員",
+        sub: "新鮮感的保存期限",
+        iCan: "我能幫「超想要」量體溫,說出新鮮感會退燒、每樣東西的保存期限不一樣。",
+        act: "10 題概念練習 + 新鮮感追蹤卡任務",
+      },
+      { n: 2, mystery: true },
+      { n: 3, mystery: true },
+      { n: 4, mystery: true },
+      { n: 5, mystery: true },
+      { n: 6, mystery: true },
+      { n: 7, mystery: true },
+      { n: 8, mystery: true },
+      { n: 9, mystery: true },
+      { n: 10, mystery: true },
+      { n: 11, mystery: true },
+      { n: 12, mystery: true },
     ],
   },
 };
@@ -35,11 +55,12 @@ const BLOOM = {
 };
 
 export function bloomKey(b) {
+  if (!b) return null;
   if (b.includes("里程碑")) return "mile";
   if (b.startsWith("應用")) return "app";
   if (b.startsWith("理解")) return "und";
   return "rem";
 }
-export const bloomColor = (b) => BLOOM[bloomKey(b)].color;
+export const bloomColor = (b) => (bloomKey(b) ? BLOOM[bloomKey(b)].color : "#B9B3C6");
 export const bloomLabel = (k) => BLOOM[k].label;
 export const BLOOM_STAGES = ["rem", "und", "app", "mile"].map((k) => ({ key: k, ...BLOOM[k] }));

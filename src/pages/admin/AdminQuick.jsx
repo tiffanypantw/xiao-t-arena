@@ -163,7 +163,7 @@ export default function AdminQuick() {
                   {/* 週次 */}
                   <td className="px-4 py-3">
                     <span className="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-0.5 rounded-full">
-                      W{record.weekNumber}
+                      {record.weekNumber > 100 ? `零用錢W${record.weekNumber - 100}` : `W${record.weekNumber}`}
                     </span>
                   </td>
 
@@ -194,6 +194,28 @@ export default function AdminQuick() {
                           </>
                         )
                       }
+                      {/* 簡答/圖文題的回答（新題型週次才有）*/}
+                      {record.quizTextAnswers && (
+                        <div className="mt-2 space-y-1.5">
+                          {Object.entries(record.quizTextAnswers)
+                            .sort((a, b) => Number(a[0]) - Number(b[0]))
+                            .map(([qid, a]) => (
+                              <div key={qid} className="bg-amber-50/60 border border-amber-100 rounded-lg px-2.5 py-1.5">
+                                <p className="text-[11px] text-slate-400 leading-snug">✍️ Q{qid}｜{a.question}</p>
+                                <p className="text-xs text-slate-800 mt-0.5 whitespace-pre-wrap leading-relaxed">{a.answer}</p>
+                                {Array.isArray(a.imageUrls) && a.imageUrls.length > 0 && (
+                                  <div className="flex gap-2 mt-1">
+                                    {a.imageUrls.map((u, i) => (
+                                      <a key={u} href={u} target="_blank" rel="noreferrer">
+                                        <img src={u} alt={`Q${qid} 附圖 ${i + 1}`} className="w-12 h-12 object-cover rounded border border-slate-200" />
+                                      </a>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                        </div>
+                      )}
                     </div>
                   </td>
 

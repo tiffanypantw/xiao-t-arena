@@ -62,14 +62,18 @@ export const getOrCreateProgress = async (userId, weekNumber) => {
 };
 
 // 標記練習題完成
-export const markQuizCompleted = async (userId, weekNumber) => {
+// quizTextAnswers（選填）：簡答/圖文題的回答 { [questionId]: { question, answer, imageUrls? } }
+// 會存進進度，讓老師在後台審核時看得到孩子寫了什麼
+export const markQuizCompleted = async (userId, weekNumber, quizTextAnswers = null) => {
   const id = getProgressId(userId, weekNumber);
   const ref = doc(db, "weeklyProgress", id);
-  await updateDoc(ref, {
+  const payload = {
     quizCompleted: true,
     quizCompletedAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-  });
+  };
+  if (quizTextAnswers) payload.quizTextAnswers = quizTextAnswers;
+  await updateDoc(ref, payload);
 };
 
 // 提交開放題

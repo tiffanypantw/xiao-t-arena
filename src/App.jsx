@@ -25,6 +25,7 @@ import AdminUploadW8 from './pages/admin/AdminUploadW8';
 import AdminUploadW9 from './pages/admin/AdminUploadW9';
 import AdminUploadW10 from './pages/admin/AdminUploadW10';
 import AdminUploadW11 from './pages/admin/AdminUploadW11';
+import AdminUploadL1S1W1 from './pages/admin/AdminUploadL1S1W1';
 import WeekLearning from './pages/WeekLearning';
 import Profile from './pages/Profile';
 import MoneyJars from './pages/MoneyJars';
@@ -101,6 +102,7 @@ function App() {
               <Route path="upload-w9" element={<AdminUploadW9 />} />
               <Route path="upload-w10" element={<AdminUploadW10 />} />
               <Route path="upload-w11" element={<AdminUploadW11 />} />
+              <Route path="upload-l1s1-w1" element={<AdminUploadL1S1W1 />} />
             </Route>
 
             {/* 學生端路由 */}

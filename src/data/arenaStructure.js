@@ -30,7 +30,9 @@ export const ARENA_BANDS = [
     iconColor: "text-violet-600",
     themes: [
       { id: "l1-season1", name: "第一季", weeks: "W1–W12", live: true, gated: true, codePrefix: "S1", route: "/arena/weeks" },
-      { id: "l1-g1", name: "G1 價值與交換", weeks: "12 週主題", live: true, gated: true, codePrefix: "G1", route: "/arena/road/l1-g1" },
+      // 2026-07-10:原 G1「價值與交換」改為新課程「我的零用錢,我作主(第一季)」。
+      // themeId 沿用 l1-g1(已開通的帳號不受影響),開通碼改用新 prefix L1S1。
+      { id: "l1-g1", name: "我的零用錢,我作主", weeks: "第一季 · 12 週", live: true, gated: true, codePrefix: "L1S1", route: "/arena/road/l1-g1" },
     ],
   },
   {
