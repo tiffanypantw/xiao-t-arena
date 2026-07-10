@@ -11,12 +11,12 @@ export default function AdminQuick() {
   const [processing, setProcessing] = useState(null);
   const [selectedMessages, setSelectedMessages] = useState({});
 
-  // 從 brand.encouragementMessages 取對應週次的鼓勵語
-  // 保持原本「W1-W4 用 quiz 版、W5+ 用 open 版」的 heuristic
-  const getMessages = (weekNumber) => {
+  // 從 brand.encouragementMessages 取鼓勵語：
+  // 有實際提交開放題 → open 版，否則（純練習題全對）→ quiz 版
+  const getMessages = (record) => {
     const messages = brand?.encouragementMessages;
     if (!messages) return [];
-    return weekNumber <= 4 ? (messages.quiz || []) : (messages.open || []);
+    return record.openAnswerSubmittedAt ? (messages.open || []) : (messages.quiz || []);
   };
 
   const loadRecords = async () => {
@@ -60,7 +60,7 @@ export default function AdminQuick() {
     const defaults = {};
     records.forEach((r) => {
       if (!selectedMessages[r.id]) {
-        const list = getMessages(r.weekNumber);
+        const list = getMessages(r);
         if (list.length > 0) defaults[r.id] = list[0];
       }
     });
@@ -68,7 +68,7 @@ export default function AdminQuick() {
   }, [records, brand]);
 
   const handleApprove = async (record) => {
-    const list = getMessages(record.weekNumber);
+    const list = getMessages(record);
     const message = selectedMessages[record.id] || list[0] || '';
     setProcessing(record.id);
     try {
@@ -92,8 +92,9 @@ export default function AdminQuick() {
     });
   };
 
-  // 判斷是 Week 1-4 還是 Week 5+
-  const isEarlyWeek = (record) => record.weekNumber <= 4;
+  // 判斷類型：看這筆紀錄有沒有實際提交開放題（不能用週次猜，
+  // 因為 W5+ 也可能是 hasOpenQuestion: false 的純練習題週）
+  const isQuizOnly = (record) => !record.openAnswerSubmittedAt;
 
   if (loading) {
     return (
@@ -168,7 +169,7 @@ export default function AdminQuick() {
 
                   {/* 類型 */}
                   <td className="px-4 py-3">
-                    {isEarlyWeek(record) ? (
+                    {isQuizOnly(record) ? (
                       <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-full">
                         練習題全對
                       </span>
@@ -182,7 +183,7 @@ export default function AdminQuick() {
                   {/* 內容 */}
                   <td className="px-4 py-3 text-slate-700 leading-relaxed">
                     <div className="max-w-md">
-                      {isEarlyWeek(record)
+                      {isQuizOnly(record)
                         ? `練習題於 ${formatTime(record.quizCompletedAt)} 全部答對 ✓`
                         : (
                           <>
@@ -198,7 +199,7 @@ export default function AdminQuick() {
 
                   {/* 時間 */}
                   <td className="px-4 py-3 text-slate-500 text-xs">
-                    {isEarlyWeek(record)
+                    {isQuizOnly(record)
                       ? formatTime(record.quizCompletedAt)
                       : formatTime(record.openAnswerSubmittedAt)
                     }
@@ -207,7 +208,7 @@ export default function AdminQuick() {
                   {/* 鼓勵語選單 */}
                   <td className="px-4 py-3">
                     <select
-                      value={selectedMessages[record.id] || getMessages(record.weekNumber)[0] || ''}
+                      value={selectedMessages[record.id] || getMessages(record)[0] || ''}
                       onChange={(e) =>
                         setSelectedMessages((prev) => ({
                           ...prev,
@@ -216,7 +217,7 @@ export default function AdminQuick() {
                       }
                       className="w-full text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white focus:outline-none focus:border-violet-400"
                     >
-                      {getMessages(record.weekNumber).map((msg) => (
+                      {getMessages(record).map((msg) => (
                         <option key={msg} value={msg}>{msg}</option>
                       ))}
                     </select>
