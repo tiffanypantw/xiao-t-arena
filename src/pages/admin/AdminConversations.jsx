@@ -150,7 +150,7 @@ export default function AdminConversations() {
                     )}
                     <span className="font-bold text-slate-900">{record.userName}</span>
                     <span className="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-0.5 rounded-full">
-                      W{record.weekNumber}
+                      {record.weekNumber > 100 ? `零用錢W${record.weekNumber - 100}` : `W${record.weekNumber}`}
                     </span>
                     <span className="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-0.5 rounded-full">
                       💬 等待回覆
@@ -173,6 +173,34 @@ export default function AdminConversations() {
                 {/* 展開的完整對話 */}
                 {isExpanded && (
                   <div className="border-t border-slate-100 p-5 space-y-4 bg-slate-50/50">
+                    {/* 簡答/圖文題回答（小參考，回覆時看得到孩子寫了什麼） */}
+                    {record.quizTextAnswers && (
+                      <details className="bg-white rounded-lg border border-slate-200">
+                        <summary className="px-3 py-2 text-xs font-semibold text-slate-600 cursor-pointer">
+                          ✍️ 查看孩子的簡答題回答
+                        </summary>
+                        <div className="px-3 pb-3 pt-1 space-y-2">
+                          {Object.entries(record.quizTextAnswers)
+                            .sort((a, b) => Number(a[0]) - Number(b[0]))
+                            .map(([qid, a]) => (
+                              <div key={qid} className="border-b border-slate-100 last:border-0 pb-2 last:pb-0">
+                                <p className="text-[11px] text-slate-400 leading-snug">Q{qid}｜{a.question}</p>
+                                <p className="text-xs text-slate-700 mt-0.5 whitespace-pre-wrap leading-relaxed">{a.answer}</p>
+                                {Array.isArray(a.imageUrls) && a.imageUrls.length > 0 && (
+                                  <div className="flex gap-2 mt-1">
+                                    {a.imageUrls.map((u, i) => (
+                                      <a key={u} href={u} target="_blank" rel="noreferrer">
+                                        <img src={u} alt={`Q${qid} 附圖 ${i + 1}`} className="w-12 h-12 object-cover rounded border border-slate-200" />
+                                      </a>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                        </div>
+                      </details>
+                    )}
+
                     {/* 任務內容（小參考） */}
                     {record.taskText && (
                       <details className="bg-white rounded-lg border border-slate-200">

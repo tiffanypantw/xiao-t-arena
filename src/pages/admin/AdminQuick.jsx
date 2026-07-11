@@ -69,7 +69,11 @@ export default function AdminQuick() {
 
   const handleApprove = async (record) => {
     const list = getMessages(record);
-    const message = selectedMessages[record.id] || list[0] || '';
+    const raw =
+      selectedMessages[record.id] !== undefined
+        ? selectedMessages[record.id]
+        : list[0] || '';
+    const message = raw.trim(); // 清空 = 只發徽章、不留言
     setProcessing(record.id);
     try {
       await approveOpenAnswer(record.id, message);
@@ -140,7 +144,7 @@ export default function AdminQuick() {
                 <th className="text-left px-4 py-3 font-semibold text-slate-600 w-24">類型</th>
                 <th className="text-left px-4 py-3 font-semibold text-slate-600">內容</th>
                 <th className="text-left px-4 py-3 font-semibold text-slate-600 w-28">時間</th>
-                <th className="text-left px-4 py-3 font-semibold text-slate-600 w-48">鼓勵語</th>
+                <th className="text-left px-4 py-3 font-semibold text-slate-600 w-64">回覆孩子（會開啟對話串）</th>
                 <th className="px-4 py-3 w-36"></th>
               </tr>
             </thead>
@@ -227,22 +231,37 @@ export default function AdminQuick() {
                     }
                   </td>
 
-                  {/* 鼓勵語選單 */}
+                  {/* 回覆孩子：模板一鍵帶入 + 可自由改寫，會成為本週對話串的開頭 */}
                   <td className="px-4 py-3">
                     <select
-                      value={selectedMessages[record.id] || getMessages(record)[0] || ''}
+                      value=""
+                      onChange={(e) => {
+                        if (!e.target.value) return;
+                        setSelectedMessages((prev) => ({
+                          ...prev,
+                          [record.id]: e.target.value,
+                        }));
+                      }}
+                      className="w-full text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white focus:outline-none focus:border-violet-400"
+                    >
+                      <option value="">⚡ 帶入鼓勵語模板...</option>
+                      {getMessages(record).map((msg) => (
+                        <option key={msg} value={msg}>{msg}</option>
+                      ))}
+                    </select>
+                    <textarea
+                      value={selectedMessages[record.id] ?? (getMessages(record)[0] || '')}
                       onChange={(e) =>
                         setSelectedMessages((prev) => ({
                           ...prev,
                           [record.id]: e.target.value,
                         }))
                       }
-                      className="w-full text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white focus:outline-none focus:border-violet-400"
-                    >
-                      {getMessages(record).map((msg) => (
-                        <option key={msg} value={msg}>{msg}</option>
-                      ))}
-                    </select>
+                      rows={4}
+                      placeholder="回覆孩子的話（可以直接用模板、也可以改寫回應他的簡答）"
+                      className="w-full mt-1.5 text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white focus:outline-none focus:border-violet-400 resize-none leading-relaxed"
+                    />
+                    <p className="text-[10px] text-slate-400 mt-1">這段話會開啟本週對話串，孩子可以回覆你</p>
                   </td>
 
                   {/* 審核按鈕 */}

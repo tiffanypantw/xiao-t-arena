@@ -229,20 +229,37 @@ export const getPendingBadges = async () => {
   return results;
 };
 
-// 審核開放題（老師看見）
+// 審核練習題/開放題（老師看見）
+// 老師的留言同時成為「本週對話串」的開頭（孩子可以回覆、之後任務回饋接在同一條）
 export const approveOpenAnswer = async (progressId, encouragementMessage) => {
   const ref = doc(db, "weeklyProgress", progressId);
   const snap = await getDoc(ref);
   if (!snap.exists()) throw new Error("找不到該筆進度紀錄");
   const { userId, weekNumber } = snap.data();
+  const existingConversation = snap.data().conversation || [];
 
-  await updateDoc(ref, {
+  const updates = {
     openAnswerSeenAt: serverTimestamp(),
     encouragementMessage,
     badgeEarned: true,
     badgeEarnedAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-  });
+  };
+
+  // 有留言才寫進對話串（清空留言 = 只發徽章）
+  if (encouragementMessage && encouragementMessage.trim().length > 0) {
+    updates.conversation = [
+      ...existingConversation,
+      {
+        role: "teacher",
+        content: encouragementMessage.trim(),
+        timestamp: new Date().toISOString(),
+      },
+    ];
+    updates.hasUnreadChildReply = false;
+  }
+
+  await updateDoc(ref, updates);
 
   // 從 week doc 反查 badgeId（取代舊的 weekToBadge 對照表）
   const weekSnap = await getDoc(doc(db, "weeks", String(weekNumber)));
@@ -284,8 +301,9 @@ export const approveTask = async (progressId, feedback, cardCode) => {
   if (!snap.exists()) throw new Error("找不到該筆進度紀錄");
   const { userId, weekNumber } = snap.data();
 
-  // 同時把 feedback 寫進 conversation 陣列（變成對話起點）
-  const firstMessage = {
+  // feedback 接在本週對話串後面（練習題審核可能已經開場，不能覆蓋）
+  const existingConversation = snap.data().conversation || [];
+  const taskMessage = {
     role: "teacher",
     content: feedback,
     timestamp: new Date().toISOString(),
@@ -297,7 +315,7 @@ export const approveTask = async (progressId, feedback, cardCode) => {
     taskApprovedAt: serverTimestamp(),
     cardEarned: true,
     cardEarnedAt: serverTimestamp(),
-    conversation: [firstMessage],
+    conversation: [...existingConversation, taskMessage],
     hasUnreadChildReply: false,
     updatedAt: serverTimestamp(),
   });

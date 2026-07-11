@@ -1111,19 +1111,8 @@ export default function WeekLearning() {
                 </div>
               )}
 
-              {/* 對話 thread */}
-              {progress?.conversation && progress.conversation.length > 0 ? (
-                <ConversationThread
-                  conversation={progress.conversation}
-                  onReply={async (content) => {
-                    await submitChildReply(progress.id, content);
-                    // 重新讀取進度
-                    const updated = await getOrCreateProgress(user.uid, weekNum);
-                    setProgress(updated);
-                  }}
-                />
-              ) : progress?.taskFeedback && (
-                // 舊資料相容：如果是舊版只有 taskFeedback、沒有 conversation
+              {/* 舊資料相容：舊版只有 taskFeedback、沒有 conversation（對話統一顯示在下方對話區塊） */}
+              {(!progress?.conversation || progress.conversation.length === 0) && progress?.taskFeedback && (
                 <div className="bg-violet-50 border border-violet-100 rounded-xl p-4 space-y-1">
                   <p className="text-xs text-violet-700 font-semibold">👩‍🏫 Tiffany 老師的回饋</p>
                   <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap break-words">{progress.taskFeedback}</p>
@@ -1132,6 +1121,24 @@ export default function WeekLearning() {
             </div>
           )}
         </div>
+
+        {/* ==================
+            本週對話區（老師在練習題/任務審核留言後出現，孩子可以回覆）
+        ================== */}
+        {progress?.conversation && progress.conversation.length > 0 && (
+          <div className="bg-card border-2 border-border rounded-2xl p-5 space-y-4">
+            <h2 className="font-black text-foreground">💬 跟{brand?.teacherName || 'Tiffany 老師'}的對話</h2>
+            <ConversationThread
+              conversation={progress.conversation}
+              onReply={async (content) => {
+                await submitChildReply(progress.id, content);
+                // 重新讀取進度
+                const updated = await getOrCreateProgress(user.uid, weekNum);
+                setProgress(updated);
+              }}
+            />
+          </div>
+        )}
 
       </div>
     </div>
