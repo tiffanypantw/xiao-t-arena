@@ -331,6 +331,7 @@ export default function Passport() {
   const [selectedDomain, setSelectedDomain] = useState(null);
   const [peek, setPeek] = useState(null);
   const [expandedBands, setExpandedBands] = useState(null); // null = 還沒初始化
+  const [mapBandId, setMapBandId] = useState(null); // 能力地圖看哪個年齡段（null = 最高段）
 
   useEffect(() => {
     if (!user?.uid) return;
@@ -484,6 +485,12 @@ export default function Passport() {
   const { bandModels, currentBandIdx } = model;
   const currentBand = bandModels[currentBandIdx];
 
+  // 能力地圖可以切換的年齡段（有解鎖課程的段；一段都沒有就只剩目前的段）
+  const selectableBands = bandModels.filter((b) => b.unlockedAny);
+  const mapBand =
+    bandModels.find((b) => b.band.id === mapBandId && b.unlockedAny) || currentBand;
+  const mapBandIdx = bandModels.indexOf(mapBand);
+
   // 章的展開狀態：預設只展開目前的章
   const isBandExpanded = (bandId) => {
     if (expandedBands === null) return bandId === currentBand?.band?.id;
@@ -498,14 +505,14 @@ export default function Passport() {
     });
   };
 
-  // ── 能力地圖統計（以目前的章為準）──
+  // ── 能力地圖統計（以地圖目前選的年齡段為準）──
   const domainStats = useMemo(() => {
     const stats = {};
     DOMAINS.forEach((d) => {
       stats[d.name] = { total: 0, done: 0 };
     });
-    if (!currentBand) return stats;
-    currentBand.themes.forEach((t) => {
+    if (!mapBand) return stats;
+    mapBand.themes.forEach((t) => {
       t.rows.forEach((r) => {
         if (!r.iCan || !r.domain || !stats[r.domain]) return;
         stats[r.domain].total += 1;
@@ -513,7 +520,7 @@ export default function Passport() {
       });
     });
     return stats;
-  }, [currentBand]);
+  }, [mapBand]);
 
   // ── 全部統計 ──
   const totals = useMemo(() => {
@@ -638,13 +645,13 @@ export default function Passport() {
               />
             </div>
             <p className="text-xs font-extrabold text-violet-700 mt-2">
-              {currentBand?.band?.name} 已點亮 {stat.done} / {stat.total}
+              {mapBand?.band?.name} 已點亮 {stat.done} / {stat.total}
             </p>
           </div>
 
           {bandSections.map(({ bandModel, idx, lines }) => {
-            const isFuture = idx > currentBandIdx && !bandModel.unlockedAny;
-            const isCurrent = idx === currentBandIdx;
+            const isFuture = idx > mapBandIdx && !bandModel.unlockedAny;
+            const isCurrent = idx === mapBandIdx;
             return (
               <div key={bandModel.band.id} className="bg-white rounded-3xl p-4 mb-3">
                 <div className="flex items-center gap-2 mb-2">
@@ -668,7 +675,7 @@ export default function Passport() {
                       : isFuture
                       ? currentDomainComplete
                         ? '✨ 預告點亮'
-                        : `🔒 走滿${currentBand?.band?.name}後點亮`
+                        : `🔒 走滿${mapBand?.band?.name}後點亮`
                       : '✓'}
                   </span>
                 </div>
@@ -787,10 +794,28 @@ export default function Passport() {
         <div className="bg-white rounded-3xl p-4 mb-6">
           <div className="flex items-center gap-2 mb-3">
             <p className="text-sm font-black text-foreground">🧭 我的能力地圖</p>
-            {currentBand && (
-              <span className="ml-auto text-[10px] font-extrabold bg-violet-100 text-violet-700 px-2.5 py-[3px] rounded-full">
-                {currentBand.band.name} {currentBand.band.age}
-              </span>
+            {selectableBands.length > 1 ? (
+              <div className="ml-auto flex gap-1">
+                {selectableBands.map((b) => (
+                  <button
+                    key={b.band.id}
+                    onClick={() => setMapBandId(b.band.id)}
+                    className={`text-[10px] font-extrabold px-2.5 py-[3px] rounded-full transition-colors ${
+                      mapBand?.band?.id === b.band.id
+                        ? 'bg-violet-600 text-white'
+                        : 'bg-[#f0ebe3] text-muted-foreground hover:bg-violet-100'
+                    }`}
+                  >
+                    {b.band.name}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              mapBand && (
+                <span className="ml-auto text-[10px] font-extrabold bg-violet-100 text-violet-700 px-2.5 py-[3px] rounded-full">
+                  {mapBand.band.name} {mapBand.band.age}
+                </span>
+              )
             )}
           </div>
           {DOMAINS.map((d) => {
