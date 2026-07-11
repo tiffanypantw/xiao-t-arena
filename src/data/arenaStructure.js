@@ -42,7 +42,10 @@ export const ARENA_BANDS = [
     emoji: "🚀",
     iconBg: "bg-sky-50",
     iconColor: "text-sky-600",
-    themes: [],
+    themes: [
+      // 2026-07-11:L2 第一季「商業與市場」上架(W1 價格偵探)。道路週 = 200 + n。
+      { id: "l2-s1", name: "商業與市場", weeks: "第一季 · 12 週", live: true, gated: true, codePrefix: "L2S1", route: "/arena/road/l2-s1" },
+    ],
   },
   {
     id: "l3",
