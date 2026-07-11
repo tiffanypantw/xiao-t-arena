@@ -23,16 +23,20 @@ export default function LearningRoad() {
   const { data: allWeeks = [] } = useWeeks();
   const [openN, setOpenN] = useState(null);
 
+  // 這個主題屬於哪個分齡 band(退回鍵 + 沒開通時的導回目標)
+  const bandPath = theme?.bandId ? `/arena/band/${theme.bandId}` : "/arena";
+  const bandLabel = theme?.band || "概念競技場";
+
   // 沒開通這個主題的帳號退回主題列表
   useEffect(() => {
-    if (userData && !hasThemeAccess(userData, themeId)) navigate("/arena/band/l1");
-  }, [userData, themeId, navigate]);
+    if (userData && !hasThemeAccess(userData, themeId)) navigate(bandPath);
+  }, [userData, themeId, navigate, bandPath]);
 
   if (!theme) {
     return (
       <div className="min-h-screen bg-background">
         <div className="max-w-md mx-auto px-4 py-6">
-          <PageHeader backTo="/arena/band/l1" backLabel="L1 體驗" />
+          <PageHeader backTo="/arena" backLabel="概念競技場" />
           <p className="text-sm text-muted-foreground mt-8 text-center">找不到這個主題。</p>
         </div>
       </div>
@@ -61,7 +65,7 @@ export default function LearningRoad() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-md mx-auto px-4 py-6">
-        <PageHeader backTo="/arena/band/l1" backLabel="L1 體驗" />
+        <PageHeader backTo={bandPath} backLabel={bandLabel} />
 
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-3">
           <h1 className="text-xl font-black text-foreground">{theme.emoji} {theme.themeName}</h1>

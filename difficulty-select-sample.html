@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>選難度入口 — 冷知識競技場</title>
+<style>
+  :root{
+    --brand:#6d4aff;
+    --ink:#1f2430;
+    --ink-soft:#5a6172;
+    --card:#ffffff;
+    --line:#e6e8ee;
+    /* 四個難度色 */
+    --easy:#2faa6e;     --easy-soft:#e8f7ee;
+    --inter:#3b82f6;    --inter-soft:#e8f1ff;
+    --hard:#f59e0b;     --hard-soft:#fff4e0;
+    --chal:#e0457b;     --chal-soft:#fdeaf1;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{
+    margin:0;background:#f3f4f8;color:var(--ink);
+    font-family:"PingFang TC","Noto Sans TC","Segoe UI",system-ui,sans-serif;
+    display:flex;justify-content:center;padding:24px 12px 60px;
+  }
+  .phone{width:100%;max-width:430px;}
+
+  .topbar{display:flex;align-items:center;gap:6px;color:var(--ink-soft);font-size:17px;margin-bottom:22px;}
+  .topbar .back{font-weight:600;}
+
+  .hero-title{font-size:27px;font-weight:900;line-height:1.35;margin:0 0 6px;}
+  .hero-title .spark{color:var(--brand);}
+  .hero-sub{font-size:16px;color:var(--ink-soft);line-height:1.6;margin:0 0 22px;}
+
+  .stack{display:flex;flex-direction:column;gap:14px;}
+
+  .lvl{
+    position:relative;display:flex;align-items:center;gap:15px;
+    background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:17px 18px;text-decoration:none;color:inherit;
+    transition:transform .06s ease;
+  }
+  .lvl:active{transform:scale(.99);}
+  .lvl .icon{
+    width:52px;height:52px;flex:0 0 52px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;font-size:26px;
+  }
+  .lvl .text{flex:1;min-width:0;}
+  .lvl .name{font-size:19px;font-weight:800;line-height:1.2;margin-bottom:3px;display:flex;align-items:center;gap:8px;}
+  .lvl .en{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;opacity:.85;}
+  .lvl .desc{font-size:14px;color:var(--ink-soft);line-height:1.5;}
+  .lvl .go{font-size:22px;color:var(--ink-soft);opacity:.5;}
+  /* 進度小點：示意孩子玩過多少 */
+  .dots{display:flex;gap:4px;margin-top:7px;}
+  .dots i{width:7px;height:7px;border-radius:99px;background:var(--line);}
+  .dots i.on{background:currentColor;}
+
+  .lvl.easy{border-color:var(--easy);} .easy .icon{background:var(--easy-soft);} .easy .en{color:var(--easy);} .easy .dots{color:var(--easy);}
+  .lvl.inter .icon{background:var(--inter-soft);} .inter .en{color:var(--inter);} .inter .dots{color:var(--inter);}
+  .lvl.hard .icon{background:var(--hard-soft);} .hard .en{color:var(--hard);} .hard .dots{color:var(--hard);}
+  .lvl.chal .icon{background:var(--chal-soft);} .chal .en{color:var(--chal);} .chal .dots{color:var(--chal);}
+
+  .tagline{margin:24px 4px 0;font-size:13px;color:#9095a4;line-height:1.7;text-align:center;}
+
+  .note{max-width:430px;margin:26px auto 0;font-size:13px;line-height:1.7;color:#8b90a0;}
+  .note b{color:#5a6172;}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="topbar"><span>‹</span><span class="back">首頁</span></div>
+
+  <h1 class="hero-title">冷知識競技場 <span class="spark">⚡</span></h1>
+  <p class="hero-sub">選一個難度，挑戰你的腦袋。猜錯也沒關係，每一題都帶走一個冷知識！</p>
+
+  <div class="stack">
+
+    <a class="lvl easy" href="#">
+      <div class="icon">🌱</div>
+      <div class="text">
+        <div class="name">入門</div>
+        <div class="en">Easy</div>
+        <div class="desc">輕鬆上手，剛開始玩最適合</div>
+        <div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="go">›</div>
+    </a>
+
+    <a class="lvl inter" href="#">
+      <div class="icon">🌿</div>
+      <div class="text">
+        <div class="name">進階</div>
+        <div class="en">Intermediate</div>
+        <div class="desc">開始有點難度，要想一下才答得出來</div>
+        <div class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="go">›</div>
+    </a>
+
+    <a class="lvl hard" href="#">
+      <div class="icon">🔥</div>
+      <div class="text">
+        <div class="name">高手</div>
+        <div class="en">Hard</div>
+        <div class="desc">真的需要動腦，答對很有成就感</div>
+        <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="go">›</div>
+    </a>
+
+    <a class="lvl chal" href="#">
+      <div class="icon">👑</div>
+      <div class="text">
+        <div class="name">挑戰王 <span style="font-size:13px;font-weight:700;color:var(--chal)">想被考倒嗎？</span></div>
+        <div class="en">Challenge</div>
+        <div class="desc">超冷門、超刁鑽，連大人都不一定會</div>
+        <div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="go">›</div>
+    </a>
+
+  </div>
+
+  <p class="tagline">⬤ 點點代表你在這個難度玩過多少題 — 累積起來看得到自己的進度</p>
+
+  <p class="note">
+    <b>給你看的重點：</b>① 四個難度＝四張卡，孩子自己選（sudoku 式入口）　② 每個難度一個顏色，視覺好分　③ 卡片右側的小圓點＝你說的「看到自己玩了多少」——累積感＋突破感都在這條　資料面：每題只要一個 <code>difficulty</code> 欄位就能歸到對的卡。
+  </p>
+
+</div>
+</body>
+</html>

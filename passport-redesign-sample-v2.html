@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>學習護照・多年後的樣子（15 歲視角）</title>
+<style>
+  :root{
+    --bg:#f5f0eb; --ink:#1f1b16; --muted:#8b8578;
+    --violet:#7c3aed; --violet-soft:#ede9fe;
+    --teal:#0d9488; --teal-soft:#ccfbf1;
+    --sky:#0369a1; --sky-soft:#e0f2fe;
+    --gold:#b8862b;
+    --rem:#E0892F; --und:#2F9E7E; --app:#3E7BD0; --mile:#B8862B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg); color:var(--ink); padding:24px 16px 64px;
+  }
+  .phone{max-width:420px; margin:0 auto;}
+  .note{
+    background:#fff7e6; border:1.5px dashed #e0b25a; border-radius:14px;
+    padding:10px 14px; font-size:12px; color:#8a6516; margin-bottom:18px; line-height:1.6;
+  }
+
+  .top{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .iconbtn{width:36px;height:36px;border-radius:12px;border:1px solid #e5ded4;background:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .top .title p:first-child{font-size:11px;color:var(--muted);}
+  .top .title p:last-child{font-size:14px;font-weight:900;}
+  .top-left{display:flex;align-items:center;gap:10px;}
+
+  .hero{text-align:center;margin-bottom:18px;}
+  .hero .pill{display:inline-block;background:#fdeecd;color:#a16207;font-size:11px;font-weight:700;
+    padding:4px 12px;border-radius:999px;margin-bottom:10px;}
+  .hero h1{font-size:22px;font-weight:900;letter-spacing:.5px;}
+  .hero p{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.7;}
+
+  .stats{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px;margin-bottom:14px;}
+  .stat{background:#fff;border-radius:18px;padding:14px 8px;text-align:center;}
+  .stat .num{font-size:26px;font-weight:900;}
+  .stat .lab{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .stat.main{background:linear-gradient(135deg,#7c3aed,#9d5cf5);color:#fff;}
+  .stat.main .lab{color:#e6dcff;}
+
+  .years{background:#fff;border-radius:18px;padding:12px 16px;margin-bottom:22px;
+    font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;line-height:1.6;}
+  .years b{color:var(--ink);}
+
+  /* chapter */
+  .chapter{margin-bottom:18px;}
+  details.chap{background:#fff;border-radius:22px;overflow:hidden;}
+  details.chap>summary{
+    list-style:none;cursor:pointer;padding:16px 16px;display:flex;align-items:center;gap:12px;
+  }
+  details.chap>summary::-webkit-details-marker{display:none;}
+  .chap-emoji{width:44px;height:44px;border-radius:15px;display:flex;align-items:center;
+    justify-content:center;font-size:22px;flex:none;}
+  .chap-title h2{font-size:16px;font-weight:900;}
+  .chap-title p{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .chap-right{margin-left:auto;text-align:right;flex:none;}
+  .chap-right .status{font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:99px;}
+  .status.donech{background:#e8f6ee;color:#15803d;}
+  .status.now{background:var(--violet-soft);color:#6d28d9;}
+  .status.future{background:#f0ebe3;color:#8b8578;}
+  .chap-right .hint{display:block;font-size:10px;color:#b6ad9d;margin-top:5px;}
+  details.chap[open] .hint .closed-txt{display:none;}
+  details.chap:not([open]) .hint .open-txt{display:none;}
+  .chap-body{padding:0 14px 16px;}
+
+  .chap-summary-line{display:flex;gap:14px;padding:0 16px 14px 72px;margin-top:-4px;
+    font-size:11.5px;color:var(--muted);font-weight:700;}
+
+  /* theme inside chapter */
+  .theme{border:1px solid #eee7db;border-radius:18px;padding:14px 12px;margin-top:12px;}
+  .theme-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px;}
+  .theme-emoji{width:36px;height:36px;border-radius:12px;background:var(--violet-soft);
+    display:flex;align-items:center;justify-content:center;font-size:18px;flex:none;}
+  .theme-head h3{font-size:14.5px;font-weight:900;line-height:1.3;}
+  .theme-head .sub{font-size:11px;color:var(--muted);margin-top:2px;}
+  .theme-head .count{margin-left:auto;text-align:right;flex:none;}
+  .theme-head .count b{font-size:14px;color:var(--violet);}
+  .theme-head .count span{font-size:10px;color:var(--muted);display:block;}
+  .bar{height:6px;background:#f0ebe3;border-radius:99px;margin:8px 0 2px;overflow:hidden;}
+  .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#7c3aed,#a78bfa);}
+
+  .path{margin-top:8px;}
+  .row{display:flex;gap:11px;position:relative;padding:9px 2px;}
+  .row:not(:last-child):before{
+    content:"";position:absolute;left:19px;top:48px;bottom:-9px;width:2px;
+    background:#eee7db;border-radius:2px;
+  }
+  .dot{width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;
+    justify-content:center;font-size:17px;position:relative;z-index:1;background:#fff;}
+  .dot.done{box-shadow:0 0 0 3px var(--ring,#E0892F) inset;}
+  .dot.go{border:2.5px dashed var(--violet);color:var(--violet);font-size:10px;font-weight:900;}
+  .dot.lock{background:#f3efe8;color:#c4bcae;}
+
+  .row .body{flex:1;min-width:0;}
+  .wk{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.5px;}
+  .wk .bloom{display:inline-block;padding:1px 7px;border-radius:99px;color:#fff;font-size:9px;
+    margin-left:6px;vertical-align:1px;}
+  .topic{font-size:13.5px;font-weight:800;margin-top:1px;}
+  .ican{font-size:12px;line-height:1.65;margin-top:3px;}
+  .ican .tag{display:inline-block;font-size:9px;font-weight:800;padding:1.5px 7px;border-radius:99px;
+    background:#f0ebe3;color:#7a7261;margin-right:5px;vertical-align:1.5px;}
+  .row.done .ican{color:#3d382f;}
+  .row.locked .topic{color:#a89f8f;}
+  .row.locked .ican{color:#b6ad9d;}
+  .rewards-mini{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;}
+  .chip{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;
+    padding:3px 9px;border-radius:99px;}
+  .chip.badge{background:var(--violet-soft);color:#6d28d9;}
+  .chip.card{background:var(--teal-soft);color:#0f766e;}
+  .row.next-cta .topic{color:var(--violet);}
+  .more{margin:4px 0 2px 50px;font-size:11px;color:var(--muted);
+    background:#faf7f2;border-radius:12px;padding:7px 11px;display:inline-block;}
+
+  .teaser{background:#efe9e0;border-radius:16px;padding:13px 15px;
+    display:flex;align-items:center;gap:10px;font-size:12.5px;color:#7a7261;font-weight:700;}
+  .teaser .arrow{margin-left:auto;color:#b6ad9d;}
+
+  .sec-label{font-size:12px;font-weight:900;color:var(--muted);letter-spacing:1px;
+    margin:22px 4px 10px;}
+
+  .special-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+  .sp-wrap{background:#fff;border-radius:22px;padding:14px;}
+  .sp-card{border:1px solid #eee7db;border-radius:16px;overflow:hidden;text-align:center;}
+  .sp-card .img{aspect-ratio:1/1;background:linear-gradient(135deg,#fdf2d5,#fbe3ee);
+    display:flex;align-items:center;justify-content:center;font-size:34px;}
+  .sp-card p{font-size:11px;font-weight:800;padding:8px 6px;}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="note">🔍 這是「同一頁」在孩子 <b>15 歲</b>時的樣子（10 歲加入、跟了五年）。年齡段＝章，主題課＝章裡的路。<b>每一章都點得開，過去點亮的「我能」全文永遠翻得回去。</b>內容為示意。</div>
+
+  <div class="top">
+    <div class="top-left">
+      <div class="iconbtn">←</div>
+      <div class="title"><p>學習護照</p><p>我的成長路</p></div>
+    </div>
+    <div class="iconbtn">⚙️</div>
+  </div>
+
+  <div class="hero">
+    <span class="pill">✨ 學習護照</span>
+    <h1>嗨，詩天！</h1>
+    <p>從 10 歲到現在，你已經點亮 <b>78</b> 個「我能」。<br>這本護照記著你每一步。</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat main"><div class="num">78</div><div class="lab">💪 點亮的「我能」</div></div>
+    <div class="stat"><div class="num">62</div><div class="lab">🎖 徽章</div></div>
+    <div class="stat"><div class="num">71</div><div class="lab">🃏 卡片</div></div>
+  </div>
+
+  <div class="years">📅 <span><b>2026 年出發</b> · L1 走完 3 條路 · 現在走在 L2 第 2 條路上</span></div>
+
+  <!-- ═══ 章 1：L1 已完成（收合，點開全部都在） ═══ -->
+  <div class="sec-label">我的成長章節</div>
+
+  <div class="chapter">
+    <details class="chap">
+      <summary>
+        <div class="chap-emoji" style="background:var(--violet-soft)">🛠</div>
+        <div class="chap-title">
+          <h2>第一章 · L1 體驗</h2>
+          <p>10–12 歲 · 2026–2028</p>
+        </div>
+        <div class="chap-right">
+          <span class="status donech">✓ 走完了</span>
+          <span class="hint"><span class="closed-txt">點開回顧 ▾</span><span class="open-txt">收起來 ▴</span></span>
+        </div>
+      </summary>
+      <div class="chap-body">
+        <!-- 已完成主題（展開後每一條我能都在） -->
+        <div class="theme">
+          <div class="theme-head">
+            <div class="theme-emoji">🎯</div>
+            <div>
+              <h3>第一季・看懂世界的語言</h3>
+              <p class="sub">W1–W12 · 2026 完成</p>
+            </div>
+            <div class="count"><b>12</b><span>/ 12 關 ✓</span></div>
+          </div>
+          <div class="bar"><i style="width:100%"></i></div>
+          <div class="path">
+            <div class="row done">
+              <div class="dot done" style="--ring:var(--rem)">🤝</div>
+              <div class="body">
+                <p class="wk">W1 <span class="bloom" style="background:var(--rem)">記憶</span></p>
+                <p class="topic">交換提問者</p>
+                <p class="ican"><span class="tag">財務心理</span>我能說出「交換」為什麼會發生：因為兩邊都覺得換到的更有價值。</p>
+                <div class="rewards-mini"><span class="chip badge">🎖</span><span class="chip card">🃏</span></div>
+              </div>
+            </div>
+            <div class="row done">
+              <div class="dot done" style="--ring:var(--und)">⚖️</div>
+              <div class="body">
+                <p class="wk">W3 <span class="bloom" style="background:var(--und)">理解</span></p>
+                <p class="topic">價格與價值（示意）</p>
+                <p class="ican"><span class="tag">財務心理</span>我能分辨「價格」和「價值」是兩件事。</p>
+                <div class="rewards-mini"><span class="chip badge">🎖</span><span class="chip card">🃏</span></div>
+              </div>
+            </div>
+            <div class="row done">
+              <div class="dot done" style="--ring:var(--app)">🏗️</div>
+              <div class="body">
+                <p class="wk">W7 <span class="bloom" style="background:var(--app)">應用</span></p>
+                <p class="topic">五罐子建築師</p>
+                <p class="ican"><span class="tag">預算</span>我能運用預算表（五罐子），規劃金錢的分配與使用。</p>
+                <div class="rewards-mini"><span class="chip badge">🎖</span><span class="chip card">🃏</span></div>
+              </div>
+            </div>
+            <div class="row done">
+              <div class="dot done" style="--ring:var(--app)">🧭</div>
+              <div class="body">
+                <p class="wk">W11 <span class="bloom" style="background:var(--app)">應用</span></p>
+                <p class="topic">取捨領航員</p>
+                <p class="ican"><span class="tag">財務心理</span>我能解釋什麼是機會成本，並在生活中舉例應用。</p>
+                <div class="rewards-mini"><span class="chip badge">🎖</span><span class="chip card">🃏</span></div>
+              </div>
+            </div>
+          </div>
+          <span class="more">⋯ 其餘 8 關的「我能」也都在這裡（示意省略）</span>
+        </div>
+
+        <div class="theme">
+          <div class="theme-head">
+            <div class="theme-emoji" style="background:#fdeecd">💰</div>
+            <div>
+              <h3>我的零用錢，我作主</h3>
+              <p class="sub">12 關 · 2027 完成</p>
+            </div>
+            <div class="count"><b>12</b><span>/ 12 關 ✓</span></div>
+          </div>
+          <div class="bar"><i style="width:100%"></i></div>
+          <div class="path">
+            <div class="row done">
+              <div class="dot done" style="--ring:var(--rem)">🌡️</div>
+              <div class="body">
+                <p class="wk">W1 <span class="bloom" style="background:var(--rem)">記憶</span></p>
+                <p class="topic">新鮮感觀察員</p>
+                <p class="ican"><span class="tag">財務心理</span>我能幫「超想要」量體溫，說出新鮮感會退燒、每樣東西的保存期限不一樣。</p>
+                <div class="rewards-mini"><span class="chip badge">🎖</span><span class="chip card">🃏</span></div>
+              </div>
+            </div>
+          </div>
+          <span class="more">⋯ 其餘 11 關（示意省略）</span>
+        </div>
+      </div>
+    </details>
+    <div class="chap-summary-line" style="background:#fff;border-radius:0 0 22px 22px;margin-top:-14px;padding-top:0;">
+    </div>
+  </div>
+
+  <!-- ═══ 章 2：L2 進行中（預設展開） ═══ -->
+  <div class="chapter">
+    <details class="chap" open>
+      <summary>
+        <div class="chap-emoji" style="background:var(--sky-soft)">🚀</div>
+        <div class="chap-title">
+          <h2>第二章 · L2 創造</h2>
+          <p>12–15 歲 · 走到第 2 條路</p>
+        </div>
+        <div class="chap-right">
+          <span class="status now">進行中</span>
+          <span class="hint"><span class="closed-txt">點開 ▾</span><span class="open-txt">收起來 ▴</span></span>
+        </div>
+      </summary>
+      <div class="chap-body">
+        <div class="theme">
+          <div class="theme-head">
+            <div class="theme-emoji" style="background:var(--sky-soft)">🏪</div>
+            <div>
+              <h3>看懂市場的運作（示意）</h3>
+              <p class="sub">L2 第二季 · 12 關</p>
+            </div>
+            <div class="count"><b>4</b><span>/ 12 關</span></div>
+          </div>
+          <div class="bar"><i style="width:33%;background:linear-gradient(90deg,#0369a1,#38bdf8)"></i></div>
+          <div class="path">
+            <div class="row done">
+              <div class="dot done" style="--ring:var(--und)">📈</div>
+              <div class="body">
+                <p class="wk">W4 <span class="bloom" style="background:var(--und)">理解</span></p>
+                <p class="topic">供需偵察兵（示意）</p>
+                <p class="ican"><span class="tag">經濟與政府影響</span>我能解釋供給與需求如何影響價格，並舉一個生活例子。</p>
+                <div class="rewards-mini"><span class="chip badge">🎖</span><span class="chip card">🃏</span></div>
+              </div>
+            </div>
+            <div class="row next-cta">
+              <div class="dot go">GO</div>
+              <div class="body">
+                <p class="wk">W5 <span class="bloom" style="background:var(--app)">應用</span></p>
+                <p class="topic">下一關等你來挑戰 →</p>
+                <p class="ican"><span class="tag">職涯與收入</span>我能為一個小生意設計簡單的商業模式：誰是顧客、提供什麼價值、怎麼收錢。</p>
+              </div>
+            </div>
+            <div class="row locked">
+              <div class="dot lock">🔒</div>
+              <div class="body">
+                <p class="wk">W6</p>
+                <p class="topic">定價實驗室（示意）</p>
+                <p class="ican"><span class="tag">職涯與收入</span>我能用成本＋價值感為產品定價，並說明理由。</p>
+              </div>
+            </div>
+          </div>
+          <span class="more">⋯ 還有 6 關在這條路上 🔒</span>
+        </div>
+
+        <div class="theme" style="opacity:.75">
+          <div class="theme-head">
+            <div class="theme-emoji" style="background:#e8f6ee">✅</div>
+            <div>
+              <h3>我的第一次損益（示意）</h3>
+              <p class="sub">L2 第一季 · 2028 完成</p>
+            </div>
+            <div class="count"><b>12</b><span>/ 12 關 ✓</span></div>
+          </div>
+          <div class="bar"><i style="width:100%"></i></div>
+          <span class="more">✓ 12 個「我能」都在這裡，點主題可展開（示意）</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ═══ 章 3：L3 未來 ═══ -->
+  <div class="chapter">
+    <div class="teaser" style="border-radius:22px;padding:16px;">
+      <span style="font-size:20px">🏛</span>
+      <span><b>第三章 · L3 資本</b>（15–18 歲）<br><span style="font-weight:400;font-size:11.5px">投資、信用、稅務⋯的「我能」在前面等你</span></span>
+      <span class="arrow">🔒</span>
+    </div>
+  </div>
+
+  <!-- special -->
+  <div class="sec-label">特別收藏（跨章節，一直都在）</div>
+  <div class="sp-wrap">
+    <div class="special-grid">
+      <div class="sp-card"><div class="img">⚽️</div><p>世界盃金錢流限定卡</p></div>
+      <div class="sp-card"><div class="img">🚀</div><p>起步紀念卡</p></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

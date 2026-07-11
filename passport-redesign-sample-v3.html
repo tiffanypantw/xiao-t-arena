@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>學習護照 v3・成長路 × 領域進度</title>
+<style>
+  :root{
+    --bg:#f5f0eb; --ink:#1f1b16; --muted:#8b8578;
+    --violet:#7c3aed; --violet-soft:#ede9fe;
+    --teal:#0d9488; --teal-soft:#ccfbf1;
+    --gold:#b8862b;
+    --rem:#E0892F; --und:#2F9E7E; --app:#3E7BD0; --mile:#B8862B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg); color:var(--ink); padding:24px 16px 64px;
+  }
+  .phone{max-width:420px; margin:0 auto;}
+  .note{
+    background:#fff7e6; border:1.5px dashed #e0b25a; border-radius:14px;
+    padding:10px 14px; font-size:12px; color:#8a6516; margin-bottom:18px; line-height:1.6;
+  }
+  .hidden{display:none;}
+
+  .top{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .iconbtn{width:36px;height:36px;border-radius:12px;border:1px solid #e5ded4;background:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;}
+  .top .title p:first-child{font-size:11px;color:var(--muted);}
+  .top .title p:last-child{font-size:14px;font-weight:900;}
+  .top-left{display:flex;align-items:center;gap:10px;}
+
+  .hero{text-align:center;margin-bottom:16px;}
+  .hero .pill{display:inline-block;background:#fdeecd;color:#a16207;font-size:11px;font-weight:700;
+    padding:4px 12px;border-radius:999px;margin-bottom:10px;}
+  .hero h1{font-size:22px;font-weight:900;}
+  .hero p{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.7;}
+
+  .stats{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px;margin-bottom:14px;}
+  .stat{background:#fff;border-radius:18px;padding:14px 8px;text-align:center;}
+  .stat .num{font-size:26px;font-weight:900;}
+  .stat .lab{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .stat.main{background:linear-gradient(135deg,#7c3aed,#9d5cf5);color:#fff;}
+  .stat.main .lab{color:#e6dcff;}
+
+  /* ══ 領域總覽 ══ */
+  .domains{background:#fff;border-radius:22px;padding:16px 14px;margin-bottom:22px;}
+  .domains-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+  .domains-head h2{font-size:14.5px;font-weight:900;}
+  .domains-head .lv{margin-left:auto;font-size:10.5px;font-weight:800;background:var(--violet-soft);
+    color:#6d28d9;padding:3px 10px;border-radius:99px;}
+  .dom-row{display:flex;align-items:center;gap:10px;padding:7px 2px;cursor:pointer;border-radius:12px;}
+  .dom-row:hover{background:#faf7f2;}
+  .dom-row .ic{width:26px;text-align:center;font-size:15px;flex:none;}
+  .dom-row .nm{font-size:12.5px;font-weight:800;width:108px;flex:none;}
+  .dom-row .track{flex:1;height:8px;background:#f0ebe3;border-radius:99px;overflow:hidden;}
+  .dom-row .track i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#7c3aed,#a78bfa);}
+  .dom-row .ct{font-size:11px;font-weight:800;color:var(--muted);width:44px;text-align:right;flex:none;}
+  .dom-row.dim .nm{color:#b6ad9d;}
+  .dom-row.dim .ic{opacity:.45;}
+  .dom-row .arrow{color:#d5cdc0;font-size:12px;flex:none;}
+  .domains .foot{font-size:11px;color:var(--muted);margin-top:10px;padding-top:10px;
+    border-top:1px dashed #eee7db;line-height:1.7;}
+
+  /* ══ 成長路（縮簡示意） ══ */
+  .sec-label{font-size:12px;font-weight:900;color:var(--muted);letter-spacing:1px;margin:22px 4px 10px;}
+  .theme{background:#fff;border-radius:22px;padding:16px 14px;margin-bottom:14px;}
+  .theme-head{display:flex;align-items:flex-start;gap:10px;}
+  .theme-emoji{width:38px;height:38px;border-radius:13px;background:var(--violet-soft);
+    display:flex;align-items:center;justify-content:center;font-size:19px;flex:none;}
+  .theme-head h3{font-size:14.5px;font-weight:900;}
+  .theme-head .sub{font-size:11px;color:var(--muted);margin-top:2px;}
+  .theme-head .count{margin-left:auto;text-align:right;flex:none;}
+  .theme-head .count b{font-size:14px;color:var(--violet);}
+  .theme-head .count span{font-size:10px;color:var(--muted);display:block;}
+  .bar{height:6px;background:#f0ebe3;border-radius:99px;margin-top:10px;overflow:hidden;}
+  .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#7c3aed,#a78bfa);}
+  .theme .hint{font-size:11.5px;color:var(--muted);margin-top:8px;}
+
+  /* ══ 領域細節頁 ══ */
+  .dt-hero{background:#fff;border-radius:22px;padding:18px 16px;margin-bottom:14px;text-align:center;}
+  .dt-hero .big{font-size:34px;}
+  .dt-hero h2{font-size:18px;font-weight:900;margin-top:6px;}
+  .dt-hero p{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.7;}
+  .dt-hero .track{height:10px;background:#f0ebe3;border-radius:99px;overflow:hidden;margin-top:12px;}
+  .dt-hero .track i{display:block;height:100%;background:linear-gradient(90deg,#7c3aed,#a78bfa);border-radius:99px;}
+  .dt-hero .ct{font-size:12px;font-weight:800;color:#6d28d9;margin-top:8px;}
+
+  .band{background:#fff;border-radius:20px;padding:14px;margin-bottom:12px;}
+  .band-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .band-head .bh-emoji{font-size:16px;}
+  .band-head h3{font-size:13.5px;font-weight:900;}
+  .band-head .st{margin-left:auto;font-size:10px;font-weight:800;padding:3px 9px;border-radius:99px;}
+  .st.now{background:var(--violet-soft);color:#6d28d9;}
+  .st.lock{background:#f0ebe3;color:#8b8578;}
+  .st.donech{background:#e8f6ee;color:#15803d;}
+
+  .ican-li{display:flex;gap:9px;padding:8px 2px;font-size:12.5px;line-height:1.65;}
+  .ican-li .mk{flex:none;width:20px;height:20px;border-radius:50%;font-size:11px;
+    display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .ican-li.on .mk{background:#e8f6ee;color:#15803d;}
+  .ican-li.off .mk{background:#f3efe8;color:#c4bcae;}
+  .ican-li.off{color:#a89f8f;}
+  .ican-li .from{display:block;font-size:10px;color:#b6ad9d;margin-top:2px;}
+  .band.locked .ican-li{color:#b6ad9d;}
+  .band .band-note{font-size:11px;color:var(--muted);background:#faf7f2;border-radius:10px;
+    padding:8px 10px;margin-top:6px;line-height:1.6;}
+  .band.locked{position:relative;}
+  .unlock-line{display:flex;align-items:center;gap:8px;margin:14px 4px;font-size:11.5px;
+    font-weight:800;color:#b8862b;}
+  .unlock-line:before,.unlock-line:after{content:"";flex:1;height:1.5px;background:#ecd9ac;border-radius:2px;}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="note">🔍 v3 樣品（可以點！）：首頁多了「能力領域總覽」，<b>點「財務心理」那一條</b>可以進到領域細節頁，再點 ← 回來。內容為示意。</div>
+
+  <!-- ═══════════ 首頁 ═══════════ -->
+  <div id="home">
+    <div class="top">
+      <div class="top-left">
+        <div class="iconbtn">←</div>
+        <div class="title"><p>學習護照</p><p>我的成長路</p></div>
+      </div>
+      <div class="iconbtn">⚙️</div>
+    </div>
+
+    <div class="hero">
+      <span class="pill">✨ 學習護照</span>
+      <h1>嗨，詩天！</h1>
+      <p>每完成一關，就點亮一個「我能」。</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat main"><div class="num">4</div><div class="lab">💪 點亮的「我能」</div></div>
+      <div class="stat"><div class="num">4</div><div class="lab">🎖 徽章</div></div>
+      <div class="stat"><div class="num">6</div><div class="lab">🃏 卡片</div></div>
+    </div>
+
+    <!-- 領域總覽 -->
+    <div class="domains">
+      <div class="domains-head">
+        <h2>🧭 我的能力地圖</h2>
+        <span class="lv">L1 體驗 10–12</span>
+      </div>
+
+      <div class="dom-row" onclick="show('detail')">
+        <span class="ic">🧠</span><span class="nm">財務心理</span>
+        <div class="track"><i style="width:50%"></i></div>
+        <span class="ct">3 / 6</span><span class="arrow">›</span>
+      </div>
+      <div class="dom-row">
+        <span class="ic">🏺</span><span class="nm">預算</span>
+        <div class="track"><i style="width:33%"></i></div>
+        <span class="ct">1 / 3</span><span class="arrow">›</span>
+      </div>
+      <div class="dom-row">
+        <span class="ic">🏦</span><span class="nm">帳戶管理</span>
+        <div class="track"><i style="width:0%"></i></div>
+        <span class="ct">0 / 3</span><span class="arrow">›</span>
+      </div>
+      <div class="dom-row">
+        <span class="ic">💼</span><span class="nm">職涯與收入</span>
+        <div class="track"><i style="width:0%"></i></div>
+        <span class="ct">0 / 3</span><span class="arrow">›</span>
+      </div>
+      <div class="dom-row">
+        <span class="ic">🌱</span><span class="nm">投資與理財規劃</span>
+        <div class="track"><i style="width:0%"></i></div>
+        <span class="ct">0 / 3</span><span class="arrow">›</span>
+      </div>
+      <div class="dom-row">
+        <span class="ic">🛡</span><span class="nm">風險與保險</span>
+        <div class="track"><i style="width:0%"></i></div>
+        <span class="ct">0 / 1</span><span class="arrow">›</span>
+      </div>
+      <div class="dom-row">
+        <span class="ic">⚖️</span><span class="nm">貸款與債務</span>
+        <div class="track"><i style="width:0%"></i></div>
+        <span class="ct">0 / 1</span><span class="arrow">›</span>
+      </div>
+      <div class="dom-row">
+        <span class="ic">🎓</span><span class="nm">教育與技能發展</span>
+        <div class="track"><i style="width:0%"></i></div>
+        <span class="ct">0 / 2</span><span class="arrow">›</span>
+      </div>
+      <div class="dom-row">
+        <span class="ic">🏛</span><span class="nm">經濟與政府影響</span>
+        <div class="track"><i style="width:66%"></i></div>
+        <span class="ct">2 / 3</span><span class="arrow">›</span>
+      </div>
+      <div class="dom-row dim">
+        <span class="ic">💳</span><span class="nm">信用紀錄</span>
+        <div class="track"></div>
+        <span class="ct" style="width:auto">L2 才開放</span>
+      </div>
+
+      <p class="foot">分母是「L1 課程會教到的我能」。走滿一條，L2 的那條就亮起來 ✨（點任何一條看細節）</p>
+    </div>
+
+    <!-- 成長路（縮簡示意，完整版同 v2） -->
+    <div class="sec-label">我的成長章節</div>
+    <div class="theme">
+      <div class="theme-head">
+        <div class="theme-emoji">🎯</div>
+        <div><h3>第一季・看懂世界的語言</h3><p class="sub">L1 體驗 · W1–W12</p></div>
+        <div class="count"><b>3</b><span>/ 12 關</span></div>
+      </div>
+      <div class="bar"><i style="width:25%"></i></div>
+      <p class="hint">▾ 點開就是 v2 那條路（每一關的我能、徽章、卡片）——此處示意省略</p>
+    </div>
+    <div class="theme">
+      <div class="theme-head">
+        <div class="theme-emoji" style="background:#fdeecd">💰</div>
+        <div><h3>我的零用錢，我作主</h3><p class="sub">L1 體驗 · 12 關</p></div>
+        <div class="count"><b>1</b><span>/ 12 關</span></div>
+      </div>
+      <div class="bar"><i style="width:8.3%"></i></div>
+      <p class="hint">▾ 同上，路徑收在裡面</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ 領域細節頁：財務心理 ═══════════ -->
+  <div id="detail" class="hidden">
+    <div class="top">
+      <div class="top-left">
+        <div class="iconbtn" onclick="show('home')">←</div>
+        <div class="title"><p>能力地圖</p><p>財務心理</p></div>
+      </div>
+      <div class="iconbtn">⚙️</div>
+    </div>
+
+    <div class="dt-hero">
+      <div class="big">🧠</div>
+      <h2>財務心理</h2>
+      <p>看懂自己為什麼想買、怎麼選、值不值得——<br>金錢決定背後的那顆腦袋。</p>
+      <div class="track"><i style="width:50%"></i></div>
+      <p class="ct">L1 已點亮 3 / 6</p>
+    </div>
+
+    <div class="band">
+      <div class="band-head">
+        <span class="bh-emoji">🛠</span><h3>L1 體驗（10–12 歲）</h3>
+        <span class="st now">進行中</span>
+      </div>
+      <div class="ican-li on"><span class="mk">✓</span><div>我能分辨「價格」和「價值」是兩件事。<span class="from">🎯 第一季 W3 · 價值分辨者</span></div></div>
+      <div class="ican-li on"><span class="mk">✓</span><div>我能區分需要與想要，並在購物時做出優先排序。<span class="from">🎯 第一季 W5 · 需求拆解員</span></div></div>
+      <div class="ican-li on"><span class="mk">✓</span><div>我能幫「超想要」量體溫，說出新鮮感會退燒、每樣東西的保存期限不一樣。<span class="from">💰 零用錢 W1 · 新鮮感觀察員</span></div></div>
+      <div class="ican-li off"><span class="mk">🔒</span><div>我能分辨「便宜」和「划算」不一樣，用價值判斷值不值得買。<span class="from">🎯 第一季 W10 · 等你來挑戰</span></div></div>
+      <div class="ican-li off"><span class="mk">🔒</span><div>我能解釋什麼是機會成本，並在生活中舉例應用。<span class="from">🎯 第一季 W11 · 等你來挑戰</span></div></div>
+      <div class="ican-li off"><span class="mk">🔒</span><div>我能說出「交換」為什麼會發生。<span class="from">🎯 第一季 W1 · 等你來挑戰</span></div></div>
+      <div class="band-note">💡 這 6 個是目前 L1 課程教到的。bible 裡 L1 財務心理還有更多「我能」，會跟著未來的新課陸續加進來。</div>
+    </div>
+
+    <div class="unlock-line">走滿 L1，下一段就亮起來</div>
+
+    <div class="band locked">
+      <div class="band-head">
+        <span class="bh-emoji">🚀</span><h3>L2 創造（12–15 歲）</h3>
+        <span class="st lock">🔒 完成 L1 後點亮</span>
+      </div>
+      <div class="ican-li off"><span class="mk">🔒</span><div>我能辨識行銷手法怎麼影響我的購買慾望。</div></div>
+      <div class="ican-li off"><span class="mk">🔒</span><div>我能在同儕壓力下，說出自己的消費決定和理由。</div></div>
+      <div class="band-note">先偷看兩句 👀 —— 更多在 L2 等你。</div>
+    </div>
+
+    <div class="band locked">
+      <div class="band-head">
+        <span class="bh-emoji">🏛</span><h3>L3 資本（15–18 歲）</h3>
+        <span class="st lock">🔒</span>
+      </div>
+      <div class="band-note">投資心理、長期決策⋯⋯留到你 15 歲。</div>
+    </div>
+  </div>
+
+</div>
+<script>
+  function show(id){
+    document.getElementById('home').classList.toggle('hidden', id!=='home');
+    document.getElementById('detail').classList.toggle('hidden', id!=='detail');
+    window.scrollTo(0,0);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "xiao-t-functions",
+  "description": "小T思考夥伴 後端",
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-functions": "^5.0.0"
+  },
+  "private": true
+}

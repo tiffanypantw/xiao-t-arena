@@ -167,7 +167,7 @@ export default function AdminQuick() {
                   {/* 週次 */}
                   <td className="px-4 py-3">
                     <span className="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-0.5 rounded-full">
-                      {record.weekNumber > 100 ? `零用錢W${record.weekNumber - 100}` : `W${record.weekNumber}`}
+                      {record.weekNumber > 300 ? `投資W${record.weekNumber - 300}` : record.weekNumber > 200 ? `商業W${record.weekNumber - 200}` : record.weekNumber > 100 ? `零用錢W${record.weekNumber - 100}` : `W${record.weekNumber}`}
                     </span>
                   </td>
 

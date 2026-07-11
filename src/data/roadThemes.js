@@ -77,6 +77,39 @@ export const ROAD_THEMES = {
       { n: 12, mystery: true },
     ],
   },
+  // 2026-07-11:L3 第一季「投資與理財規劃」。道路週編號 = 300 + n(週 doc 301–312)。
+  "l3-s1": {
+    band: "L3 資本",
+    bandId: "l3",
+    emoji: "⚖️",
+    themeName: "投資與理財規劃",
+    season: "第一季",
+    coreQ: "花錢看現在,投資看未來 — 同一筆錢,我能不能替它排出最好的一條路?",
+    milestone: "12 關陸續公開",
+    weeks: [
+      {
+        n: 1,
+        weekNumber: 301,
+        badgeId: "B-L3S1-W01",
+        bloom: "記憶",
+        topic: "投資價值鑑定者",
+        sub: "價值與投資價值",
+        iCan: "我能用價值、價格、機會成本分析任何一個花費或選擇是否划算。",
+        act: "10 題概念練習 + 論證題 + 真實預算任務",
+      },
+      { n: 2, mystery: true },
+      { n: 3, mystery: true },
+      { n: 4, mystery: true },
+      { n: 5, mystery: true },
+      { n: 6, mystery: true },
+      { n: 7, mystery: true },
+      { n: 8, mystery: true },
+      { n: 9, mystery: true },
+      { n: 10, mystery: true },
+      { n: 11, mystery: true },
+      { n: 12, mystery: true },
+    ],
+  },
 };
 
 export const getRoadTheme = (id) => ROAD_THEMES[id];

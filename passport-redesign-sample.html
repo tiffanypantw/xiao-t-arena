@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>學習護照・新版面樣品</title>
+<style>
+  :root{
+    --bg:#f5f0eb; --ink:#1f1b16; --muted:#8b8578;
+    --violet:#7c3aed; --violet-soft:#ede9fe;
+    --teal:#0d9488; --teal-soft:#ccfbf1;
+    --gold:#b8862b;
+    --rem:#E0892F; --und:#2F9E7E; --app:#3E7BD0; --mile:#B8862B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg); color:var(--ink); padding:24px 16px 64px;
+  }
+  .phone{max-width:420px; margin:0 auto;}
+  .note{
+    background:#fff7e6; border:1.5px dashed #e0b25a; border-radius:14px;
+    padding:10px 14px; font-size:12px; color:#8a6516; margin-bottom:18px; line-height:1.6;
+  }
+
+  /* header */
+  .top{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .iconbtn{width:36px;height:36px;border-radius:12px;border:1px solid #e5ded4;background:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .top .title p:first-child{font-size:11px;color:var(--muted);}
+  .top .title p:last-child{font-size:14px;font-weight:900;}
+  .top-left{display:flex;align-items:center;gap:10px;}
+
+  .hero{text-align:center;margin-bottom:18px;}
+  .hero .pill{display:inline-block;background:#fdeecd;color:#a16207;font-size:11px;font-weight:700;
+    padding:4px 12px;border-radius:999px;margin-bottom:10px;}
+  .hero h1{font-size:22px;font-weight:900;letter-spacing:.5px;}
+  .hero p{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.7;}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px;margin-bottom:14px;}
+  .stat{background:#fff;border-radius:18px;padding:14px 8px;text-align:center;}
+  .stat .num{font-size:26px;font-weight:900;}
+  .stat .lab{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .stat.main{background:linear-gradient(135deg,#7c3aed,#9d5cf5);color:#fff;}
+  .stat.main .lab{color:#e6dcff;}
+  .stat .emoji{font-size:15px;}
+
+  .redeem{width:100%;background:#fff;border:1.5px solid #e5ded4;color:var(--ink);
+    font-weight:800;font-size:13.5px;border-radius:16px;padding:12px;margin-bottom:22px;
+    display:flex;align-items:center;justify-content:center;gap:8px;}
+
+  /* theme section */
+  .theme{background:#fff;border-radius:22px;padding:16px 14px;margin-bottom:16px;}
+  .theme-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px;}
+  .theme-emoji{width:40px;height:40px;border-radius:14px;background:var(--violet-soft);
+    display:flex;align-items:center;justify-content:center;font-size:20px;flex:none;}
+  .theme-head h2{font-size:15.5px;font-weight:900;line-height:1.3;}
+  .theme-head .sub{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .theme-head .count{margin-left:auto;text-align:right;flex:none;}
+  .theme-head .count b{font-size:15px;color:var(--violet);}
+  .theme-head .count span{font-size:10.5px;color:var(--muted);display:block;}
+  .bar{height:7px;background:#f0ebe3;border-radius:99px;margin:10px 0 4px;overflow:hidden;}
+  .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#7c3aed,#a78bfa);}
+
+  /* path rows */
+  .path{margin-top:10px;}
+  .row{display:flex;gap:12px;position:relative;padding:10px 2px;}
+  .row:not(:last-child):before{
+    content:"";position:absolute;left:21px;top:52px;bottom:-10px;width:2px;
+    background:#eee7db;border-radius:2px;
+  }
+  .dot{width:42px;height:42px;border-radius:50%;flex:none;display:flex;align-items:center;
+    justify-content:center;font-size:19px;position:relative;z-index:1;background:#fff;}
+  .dot.done{box-shadow:0 0 0 3px var(--ring,#E0892F) inset;}
+  .dot.go{border:2.5px dashed var(--violet);color:var(--violet);font-size:11px;font-weight:900;}
+  .dot.lock{background:#f3efe8;color:#c4bcae;}
+  .dot img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+
+  .row .body{flex:1;min-width:0;}
+  .wk{font-size:10.5px;font-weight:800;color:var(--muted);letter-spacing:.5px;}
+  .wk .bloom{display:inline-block;padding:1px 7px;border-radius:99px;color:#fff;font-size:9.5px;
+    margin-left:6px;vertical-align:1px;}
+  .topic{font-size:14px;font-weight:800;margin-top:1px;}
+  .ican{font-size:12.5px;line-height:1.65;margin-top:4px;}
+  .ican .tag{display:inline-block;font-size:9.5px;font-weight:800;padding:1.5px 7px;border-radius:99px;
+    background:#f0ebe3;color:#7a7261;margin-right:5px;vertical-align:1.5px;}
+  .row.done .ican{color:#3d382f;}
+  .row.locked .topic{color:#a89f8f;}
+  .row.locked .ican{color:#b6ad9d;}
+  .rewards-mini{display:flex;gap:6px;margin-top:7px;}
+  .chip{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;
+    padding:3px 9px;border-radius:99px;}
+  .chip.badge{background:var(--violet-soft);color:#6d28d9;}
+  .chip.card{background:var(--teal-soft);color:#0f766e;}
+
+  .row.next-cta .topic{color:var(--violet);}
+  .more{margin:4px 0 2px 54px;font-size:11.5px;color:var(--muted);
+    background:#faf7f2;border-radius:12px;padding:8px 12px;display:inline-block;}
+
+  /* special */
+  .special-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+  .sp-card{border:1px solid #eee7db;border-radius:16px;overflow:hidden;text-align:center;}
+  .sp-card .img{aspect-ratio:1/1;background:linear-gradient(135deg,#fdf2d5,#fbe3ee);
+    display:flex;align-items:center;justify-content:center;font-size:38px;}
+  .sp-card p{font-size:11.5px;font-weight:800;padding:8px 6px;}
+
+  /* teasers */
+  .teaser{background:#efe9e0;border-radius:16px;padding:13px 15px;margin-bottom:10px;
+    display:flex;align-items:center;gap:10px;font-size:12.5px;color:#7a7261;font-weight:700;}
+  .teaser .arrow{margin-left:auto;color:#b6ad9d;}
+
+  .sec-label{font-size:12px;font-weight:900;color:var(--muted);letter-spacing:1px;
+    margin:22px 4px 10px;}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="note">🔍 版面樣品（內容為示意，正式版會讀 Firestore 真實資料＋孩子自己的進度）</div>
+
+  <!-- header -->
+  <div class="top">
+    <div class="top-left">
+      <div class="iconbtn">←</div>
+      <div class="title"><p>學習護照</p><p>我的成長路</p></div>
+    </div>
+    <div class="iconbtn">⚙️</div>
+  </div>
+
+  <!-- hero -->
+  <div class="hero">
+    <span class="pill">✨ 學習護照</span>
+    <h1>嗨，詩天！</h1>
+    <p>每完成一關，就點亮一個「我能」。<br>這一頁就是你的財商成長路。</p>
+  </div>
+
+  <!-- stats -->
+  <div class="stats">
+    <div class="stat main"><div class="num">4</div><div class="lab">💪 點亮的「我能」</div></div>
+    <div class="stat"><div class="num">4</div><div class="lab">🎖 徽章</div></div>
+    <div class="stat"><div class="num">6</div><div class="lab">🃏 卡片</div></div>
+  </div>
+
+  <button class="redeem">🔑 輸入兌換碼</button>
+
+  <!-- theme 1 -->
+  <div class="sec-label">我的學習道路</div>
+  <div class="theme">
+    <div class="theme-head">
+      <div class="theme-emoji">🎯</div>
+      <div>
+        <h2>第一季・看懂世界的語言</h2>
+        <p class="sub">L1 體驗 10–12 歲 · W1–W12</p>
+      </div>
+      <div class="count"><b>3</b><span>/ 12 關</span></div>
+    </div>
+    <div class="bar"><i style="width:25%"></i></div>
+
+    <div class="path">
+      <div class="row done">
+        <div class="dot done" style="--ring:var(--rem)">🤝</div>
+        <div class="body">
+          <p class="wk">W1 <span class="bloom" style="background:var(--rem)">記憶</span></p>
+          <p class="topic">交換提問者</p>
+          <p class="ican"><span class="tag">財務心理</span>我能說出「交換」為什麼會發生：因為兩邊都覺得換到的更有價值。</p>
+          <div class="rewards-mini">
+            <span class="chip badge">🎖 交換提問者</span>
+            <span class="chip card">🃏 已收藏</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row done">
+        <div class="dot done" style="--ring:var(--rem)">🧭</div>
+        <div class="body">
+          <p class="wk">W2 <span class="bloom" style="background:var(--rem)">記憶</span></p>
+          <p class="topic">想要與需要（示意）</p>
+          <p class="ican"><span class="tag">財務心理</span>我能區分需要與想要，並在購物時做出優先排序。</p>
+          <div class="rewards-mini">
+            <span class="chip badge">🎖 已獲得</span>
+            <span class="chip card">🃏 已收藏</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row done">
+        <div class="dot done" style="--ring:var(--und)">⚖️</div>
+        <div class="body">
+          <p class="wk">W3 <span class="bloom" style="background:var(--und)">理解</span></p>
+          <p class="topic">價格與價值（示意）</p>
+          <p class="ican"><span class="tag">財務心理</span>我能分辨「價格」和「價值」是兩件事。</p>
+          <div class="rewards-mini">
+            <span class="chip badge">🎖 已獲得</span>
+            <span class="chip card">🃏 已收藏</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row next-cta">
+        <div class="dot go">GO</div>
+        <div class="body">
+          <p class="wk">W4 <span class="bloom" style="background:var(--und)">理解</span></p>
+          <p class="topic">下一關等你來挑戰 →</p>
+          <p class="ican"><span class="tag">預算</span>我能把零用錢分到不同用途，說出每一份是做什麼的。</p>
+        </div>
+      </div>
+
+      <div class="row locked">
+        <div class="dot lock">🔒</div>
+        <div class="body">
+          <p class="wk">W5</p>
+          <p class="topic">五罐子建築師</p>
+          <p class="ican"><span class="tag">預算</span>我能運用預算表，規劃金錢的分配與使用。</p>
+        </div>
+      </div>
+    </div>
+    <span class="more">⋯ 還有 7 關在這條路上等你 🔒</span>
+  </div>
+
+  <!-- theme 2 -->
+  <div class="theme">
+    <div class="theme-head">
+      <div class="theme-emoji" style="background:#fdeecd">💰</div>
+      <div>
+        <h2>我的零用錢，我作主</h2>
+        <p class="sub">L1 體驗 10–12 歲 · 第一季 12 關</p>
+      </div>
+      <div class="count"><b>1</b><span>/ 12 關</span></div>
+    </div>
+    <div class="bar"><i style="width:8.3%"></i></div>
+
+    <div class="path">
+      <div class="row done">
+        <div class="dot done" style="--ring:var(--rem)">🌡️</div>
+        <div class="body">
+          <p class="wk">W1 <span class="bloom" style="background:var(--rem)">記憶</span></p>
+          <p class="topic">新鮮感觀察員</p>
+          <p class="ican"><span class="tag">財務心理</span>我能幫「超想要」量體溫，說出新鮮感會退燒、每樣東西的保存期限不一樣。</p>
+          <div class="rewards-mini">
+            <span class="chip badge">🎖 新鮮感觀察員</span>
+            <span class="chip card">🃏 觀察員的溫度計</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row locked">
+        <div class="dot lock">?</div>
+        <div class="body">
+          <p class="wk">W2</p>
+          <p class="topic">即將公開</p>
+          <p class="ican">下一個「我能」還是祕密，完成 W1 之後等它出現！</p>
+        </div>
+      </div>
+    </div>
+    <span class="more">⋯ 還有 10 關即將陸續公開 ✨</span>
+  </div>
+
+  <!-- special -->
+  <div class="sec-label">特別收藏</div>
+  <div class="theme">
+    <div class="theme-head">
+      <div class="theme-emoji" style="background:#fbe3ee">🌟</div>
+      <div>
+        <h2>限定卡片</h2>
+        <p class="sub">直播、活動限定，錯過就要等下一次</p>
+      </div>
+      <div class="count"><b>2</b><span>張</span></div>
+    </div>
+    <div class="special-grid">
+      <div class="sp-card"><div class="img">⚽️</div><p>世界盃金錢流限定卡</p></div>
+      <div class="sp-card"><div class="img">🚀</div><p>起步紀念卡</p></div>
+    </div>
+  </div>
+
+  <!-- teasers -->
+  <div class="sec-label">更多學習道路</div>
+  <div class="teaser">🔒 下一季主題課 · 12 個新的「我能」準備中 <span class="arrow">›</span></div>
+  <div class="teaser">🔒 L2 創造 12–15 歲 · 敬請期待 <span class="arrow">›</span></div>
+
+</div>
+</body>
+</html>

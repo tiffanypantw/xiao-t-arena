@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小T思考夥伴</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
+    background: #fafaf7;
+    color: #2a2a2a;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 16px; min-height: 100vh; display:flex; flex-direction:column; }
+  .head { display: flex; align-items: center; gap: 10px; padding: 6px 4px 12px; }
+  .dot {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffd66b, #f3a712);
+    flex: 0 0 auto; box-shadow: 0 2px 6px rgba(243,167,18,0.3);
+  }
+  .head h1 { font-size: 17px; margin: 0; font-weight: 700; }
+  .head p { font-size: 12px; margin: 2px 0 0; color: #8a8a82; }
+  .scene {
+    font-size: 12px; color: #6b6b63; background:#f1efe6;
+    border:1px solid #e6e3d6; border-radius: 8px; padding: 6px 10px; margin: 0 4px 12px;
+  }
+  .scene b { color:#b8770c; }
+  #log { display: flex; flex-direction: column; gap: 12px; padding: 4px; flex:1; }
+  .row { display: flex; }
+  .row.ai { justify-content: flex-start; }
+  .row.me { justify-content: flex-end; }
+  .bubble { max-width: 78%; padding: 11px 14px; border-radius: 16px; font-size: 15px; line-height: 1.55; white-space: pre-wrap; }
+  .ai .bubble { background: #fff; border: 1px solid #ece9dd; border-bottom-left-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+  .me .bubble { background: #f3a712; color: #fff; border-bottom-right-radius: 4px; }
+  .typing .bubble { color:#b5b2a6; font-style: italic; }
+  .composer { display: flex; gap: 8px; margin-top: 14px; padding: 4px; position: sticky; bottom: 0; background: #fafaf7; }
+  textarea {
+    flex: 1; resize: none; font-size: 15px; font-family: inherit;
+    padding: 11px 14px; border: 1px solid #ddd9cc; border-radius: 14px;
+    background:#fff; max-height: 120px; line-height:1.4;
+  }
+  textarea:focus { outline: none; border-color: #f3a712; }
+  button.send {
+    border: none; background: #f3a712; color: #fff; border-radius: 50%;
+    width: 44px; height: 44px; flex: 0 0 auto; font-size: 18px; cursor: pointer; align-self: flex-end;
+  }
+  button.send:disabled { background: #e8e4d6; cursor: default; }
+  .bar { display:flex; gap:8px; margin: 0 4px 4px; flex-wrap: wrap; }
+  .bar button { font-size:12px; background:#fff; border:1px solid #e2dece; color:#7a7a70; border-radius: 20px; padding:5px 12px; cursor:pointer; }
+  .bar button:hover { border-color:#f3a712; color:#b8770c; }
+  .note { font-size:11px; color:#a8a89e; text-align:center; margin-top:10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="dot"></div>
+    <div>
+      <h1>小T思考夥伴</h1>
+      <p>它只做一件事：問一個問題，然後把舞台留給你。</p>
+    </div>
+  </div>
+  <div class="scene">今天一起看的：<b>價格 vs 價值</b></div>
+  <div class="bar">
+    <button onclick="restart()">↺ 重新開始</button>
+  </div>
+  <div id="log"></div>
+  <div class="composer">
+    <textarea id="inp" rows="1" placeholder="像跟朋友講話一樣，打字回它…"></textarea>
+    <button class="send" id="send" onclick="onSend()">↑</button>
+  </div>
+  <div class="note">小T思考夥伴</div>
+</div>
+
+<script>
+// 後端 endpoint（由 firebase.json 的 rewrite 導到 Cloud Function）
+const API_URL = "/api/ask";
+
+const OPENER = "在你決定買之前，我們先一起看一件事，好嗎？\n\n先考考你一個簡單的：商店裡，標在商品上的那個「多少錢」，我們叫它什麼？";
+
+const log = document.getElementById('log');
+const inp = document.getElementById('inp');
+const sendBtn = document.getElementById('send');
+let history = [];   // {role:'me'|'ai', text}
+let busy = false;
+
+function bubble(role, text, typing) {
+  const row = document.createElement('div');
+  row.className = 'row ' + (role === 'me' ? 'me' : 'ai') + (typing ? ' typing' : '');
+  const b = document.createElement('div');
+  b.className = 'bubble';
+  b.textContent = text;
+  row.appendChild(b);
+  log.appendChild(row);
+  row.scrollIntoView({behavior:'smooth', block:'end'});
+  return row;
+}
+
+function restart() {
+  log.innerHTML = '';
+  history = [];
+  bubble('ai', OPENER);
+  history.push({role:'ai', text: OPENER});
+  inp.value = '';
+  inp.focus();
+}
+
+inp.addEventListener('input', () => {
+  inp.style.height = 'auto';
+  inp.style.height = Math.min(inp.scrollHeight, 120) + 'px';
+});
+inp.addEventListener('keydown', (e) => {
+  // 中文輸入法選字時按 Enter 不要送出，避免殘留文字
+  if (e.isComposing || e.keyCode === 229) return;
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); onSend(); }
+});
+
+// 只把最近 WINDOW 則訊息送給後端，避免對話一長 token 就滾雪球。
+// 分階段的設計不需要記得最開頭幾句，最近幾輪就夠小T判斷現在在哪。
+const WINDOW = 8;
+function transcript() {
+  return history.slice(-WINDOW).map(h => (h.role === 'me' ? '孩子' : '小T') + '：' + h.text).join('\n');
+}
+
+async function onSend() {
+  if (busy) return;
+  const text = inp.value.trim();
+  if (!text) return;
+  bubble('me', text);
+  history.push({role:'me', text});
+  inp.value = ''; inp.style.height = 'auto';
+  busy = true; sendBtn.disabled = true;
+  const t = bubble('ai', '在想一個問題…', true);
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ transcript: transcript(), turns: history.length })
+    });
+    const data = await res.json();
+    let q = (data && data.text ? data.text : '').trim();
+    q = q.replace(/^["「『]/,'').replace(/["」』]$/,'').trim();
+    if (!q) q = '嗯，那你願意多跟我說一點嗎？';
+    t.remove();
+    bubble('ai', q);
+    history.push({role:'ai', text: q});
+  } catch (e) {
+    t.remove();
+    bubble('ai', '（連線出了點狀況，再試一次看看？）');
+  } finally {
+    busy = false; sendBtn.disabled = false; inp.focus();
+  }
+}
+
+restart();
+</script>
+</body>
+</html>

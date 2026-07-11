@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>答對揭曉卡片 — 新版小樣</title>
+<style>
+  :root{
+    --brand:#6d4aff;        /* 品牌紫 */
+    --brand-soft:#efeaff;   /* 淺紫底 */
+    --ok:#2faa6e;           /* 答對綠 */
+    --ok-soft:#e8f7ee;      /* 淺綠底 */
+    --ink:#1f2430;          /* 主文字 */
+    --ink-soft:#5a6172;     /* 次文字 */
+    --card:#ffffff;
+    --line:#e6e8ee;
+    --amber:#f4b400;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{
+    margin:0;background:#f3f4f8;color:var(--ink);
+    font-family:"PingFang TC","Noto Sans TC","Segoe UI",system-ui,sans-serif;
+    display:flex;justify-content:center;padding:24px 12px 60px;
+  }
+  .phone{width:100%;max-width:430px;}
+
+  /* 頂部列 */
+  .topbar{display:flex;align-items:center;gap:6px;color:var(--ink-soft);font-size:17px;margin-bottom:18px;}
+  .topbar .back{font-weight:600;}
+  .meta{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .streak{color:var(--amber);font-weight:800;font-size:18px;display:flex;align-items:center;gap:4px;}
+  .bar{flex:1;height:10px;border-radius:99px;background:#e7e9f1;overflow:hidden;}
+  .bar > i{display:block;height:100%;width:62%;border-radius:99px;background:var(--brand);}
+  .score{color:var(--brand);font-weight:800;font-size:18px;}
+
+  .chip{display:inline-flex;align-items:center;gap:6px;background:var(--brand-soft);color:var(--brand);
+    font-weight:700;font-size:14px;padding:7px 13px;border-radius:99px;margin-bottom:14px;}
+  .q{font-size:23px;line-height:1.45;font-weight:800;margin:0 0 18px;}
+
+  /* === 新版答對揭曉卡片 === */
+  .reveal{
+    background:var(--card);border:1px solid var(--ok);border-radius:22px;overflow:hidden;
+    box-shadow:0 10px 30px rgba(47,170,110,.12);
+  }
+  /* 1. 主視覺 SVG */
+  .hero{
+    background:var(--ok-soft);padding:22px 0 16px;display:flex;justify-content:center;
+  }
+  .hero svg{width:120px;height:120px;display:block;}
+  /* 2. 答對列 + 大字金句 */
+  .reveal-body{padding:20px 20px 22px;}
+  .ok-row{display:flex;align-items:center;gap:8px;color:var(--ok);font-weight:800;font-size:17px;margin-bottom:10px;}
+  .ok-row .plus{background:var(--ok);color:#fff;border-radius:99px;font-size:14px;padding:2px 10px;}
+  .punch{font-size:24px;font-weight:900;line-height:1.4;margin:0 0 14px;}
+  .punch mark{background:linear-gradient(transparent 55%, #d8ccff 55%);color:var(--brand);padding:0 2px;border-radius:3px;}
+  /* 3. 放大的說明 */
+  .explain{font-size:17px;line-height:1.7;color:var(--ink);margin:0 0 18px;}
+  .explain b{color:var(--brand);}
+  /* 4. 冷知識標籤區 */
+  .trivia{
+    background:var(--brand-soft);border-radius:14px;padding:14px 15px;margin-bottom:16px;
+  }
+  .trivia .tag{display:inline-flex;align-items:center;gap:6px;color:var(--brand);font-weight:800;font-size:14px;margin-bottom:6px;}
+  .trivia p{margin:0;font-size:16px;line-height:1.65;color:var(--ink);}
+  /* 5. 回故事冊按鈕（選填） */
+  .story-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+    background:var(--brand);color:#fff;text-decoration:none;font-weight:800;font-size:17px;
+    padding:15px;border-radius:14px;
+  }
+  .story-btn:active{transform:translateY(1px);}
+
+  .note{max-width:430px;margin:26px auto 0;font-size:13px;line-height:1.7;color:#8b90a0;}
+  .note b{color:#5a6172;}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="topbar"><span>‹</span><span class="back">首頁</span></div>
+
+  <div class="meta">
+    <span class="streak">🔥 1</span>
+    <span class="bar"><i></i></span>
+    <span class="score">10 分</span>
+  </div>
+
+  <span class="chip">📈 經濟大事件</span>
+  <h1 class="q">400 年前的荷蘭，曾經有一場有名的「泡沫」，大家瘋狂搶買的是什麼？</h1>
+
+  <!-- 新版揭曉卡片 -->
+  <div class="reveal">
+
+    <!-- 1. SVG 主視覺：鬱金香 -->
+    <div class="hero">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="鬱金香">
+        <!-- 莖 -->
+        <path d="M50 55 C50 70 50 80 50 92" stroke="#2faa6e" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- 葉子 -->
+        <path d="M50 78 C36 74 30 64 31 54 C42 56 49 64 50 78 Z" fill="#3cc081"/>
+        <path d="M50 84 C64 82 71 73 71 63 C60 64 52 71 50 84 Z" fill="#2faa6e"/>
+        <!-- 花瓣 -->
+        <path d="M50 54 C40 54 33 46 33 36 C33 28 39 24 43 27 C44 20 56 20 57 27 C61 24 67 28 67 36 C67 46 60 54 50 54 Z" fill="#7a52ff"/>
+        <path d="M50 54 C50 40 50 30 50 24" stroke="#5a35e0" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M41 50 C41 42 44 33 50 26" stroke="#9b7dff" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/>
+        <path d="M59 50 C59 42 56 33 50 26" stroke="#9b7dff" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/>
+      </svg>
+    </div>
+
+    <div class="reveal-body">
+      <!-- 2. 答對列 + 金句 -->
+      <div class="ok-row"><span>答對！</span><span class="plus">+10</span></div>
+      <p class="punch">這就是歷史上有名的 <mark>「泡沫」</mark></p>
+
+      <!-- 3. 放大的說明 -->
+      <p class="explain">1630 年代荷蘭爆發「<b>鬱金香狂熱</b>」，一顆稀有球根被炒到天價，後來突然崩盤。價格被炒得遠遠超過它真正的價值——這就是「泡沫」。</p>
+
+      <!-- 4. 冷知識標籤區 -->
+      <div class="trivia">
+        <span class="tag">💡 冷知識</span>
+        <p>最瘋的時候，一顆鬱金香球根的價格，可以換一棟房子！🏠</p>
+      </div>
+
+      <!-- 5. 回故事冊按鈕（只有相關題目才出現） -->
+      <a class="story-btn" href="#">📖 回故事冊看更多</a>
+    </div>
+
+  </div>
+
+  <p class="note">
+    <b>給你看的重點：</b>① 頂部 SVG 主視覺（可一鍵換品牌色，沒圖的題目自動隱藏）　② 大字金句先抓住重心　③ 說明字級從原本放大到 17px　④ 「💡冷知識」獨立區塊，餵養「學到冷知識」那條線　⑤ 「回故事冊」按鈕只在有 <code>storyLink</code> 的題目出現。
+  </p>
+
+</div>
+</body>
+</html>

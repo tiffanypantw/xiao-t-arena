@@ -54,7 +54,10 @@ export const ARENA_BANDS = [
     emoji: "🏛",
     iconBg: "bg-slate-100",
     iconColor: "text-slate-600",
-    themes: [],
+    themes: [
+      // 2026-07-11:L3 第一季「投資與理財規劃」上架(W1 投資價值鑑定者)。道路週 = 300 + n。
+      { id: "l3-s1", name: "投資與理財規劃", weeks: "第一季 · 12 週", live: true, gated: true, codePrefix: "L3S1", route: "/arena/road/l3-s1" },
+    ],
   },
 ];
 
