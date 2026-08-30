@@ -27,6 +27,7 @@ import AdminUploadW10 from './pages/admin/AdminUploadW10';
 import AdminUploadW11 from './pages/admin/AdminUploadW11';
 import AdminUploadL1S1W1 from './pages/admin/AdminUploadL1S1W1';
 import AdminUploadL1S1W2 from './pages/admin/AdminUploadL1S1W2';
+import AdminUploadL1S1W3 from './pages/admin/AdminUploadL1S1W3';
 import AdminUploadL2S1W1 from './pages/admin/AdminUploadL2S1W1';
 import AdminUploadL2S1W2 from './pages/admin/AdminUploadL2S1W2';
 import AdminUploadL3S1W1 from './pages/admin/AdminUploadL3S1W1';
@@ -109,6 +110,7 @@ function App() {
               <Route path="upload-w11" element={<AdminUploadW11 />} />
               <Route path="upload-l1s1-w1" element={<AdminUploadL1S1W1 />} />
               <Route path="upload-l1s1-w2" element={<AdminUploadL1S1W2 />} />
+              <Route path="upload-l1s1-w3" element={<AdminUploadL1S1W3 />} />
               <Route path="upload-l2s1-w1" element={<AdminUploadL2S1W1 />} />
               <Route path="upload-l2s1-w2" element={<AdminUploadL2S1W2 />} />
               <Route path="upload-l3s1-w1" element={<AdminUploadL3S1W1 />} />
