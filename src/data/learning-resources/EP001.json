@@ -2,19 +2,19 @@
   "episode_id": "EP001",
   "title_zh": "颱風來了，青菜為什麼變貴？",
   "comment_keyword": "颱風",
-  "status": "preview",
-  "release_date": null,
+  "status": "published",
+  "release_date": "2026-10-24",
   "exploration_sheet": {
     "title_zh": "蔬菜供需學習探索單",
-    "description_zh": "已製作的一頁蔬菜供需探索圖片，檔案待匯入。",
-    "status": "pending",
-    "asset": null,
-    "format": null
+    "description_zh": "從颱風、蔬菜運送與市場價格，認識供給與需求；附餐廳決策與延伸思考。",
+    "status": "ready",
+    "asset": "/learning-resources/ep001/sheet.png",
+    "format": "image"
   },
   "concept_card": {
     "card_id": "MTT-FL-EP001-SUPPLY",
-    "title_zh": "供給",
-    "title_en": "Supply",
-    "status": "pending"
+    "title_zh": "供給衝擊",
+    "title_en": "Supply Shock",
+    "status": "ready"
   }
 }

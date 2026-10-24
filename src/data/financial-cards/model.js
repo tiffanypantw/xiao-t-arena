@@ -12,6 +12,7 @@ export function validateCard(card) {
  if(!/^EP\d{3}$/.test(card.episode_id||'')) errors.push('Invalid episode_id');
  if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(card.slug||'')) errors.push('Invalid slug');
  if(!CARD_STATUSES.includes(card.status))errors.push('Invalid status');
+ if(card.image_layout!==undefined&&!['single','duo'].includes(card.image_layout))errors.push('Invalid image_layout');
  const date=card.release_date;
  if(date!==null&&(!/^\d{4}-\d{2}-\d{2}$/.test(date)||Number.isNaN(Date.parse(date+'T00:00:00Z'))||new Date(date+'T00:00:00Z').toISOString().slice(0,10)!==date))errors.push('Invalid release_date');
  if(['published','scheduled'].includes(card.status)&&!date)errors.push('Release date required');

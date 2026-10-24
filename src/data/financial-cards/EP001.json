@@ -4,13 +4,14 @@
   "slug": "supply",
   "category": "供需與價格",
   "card_type": "concept",
-  "title_zh": "供給",
-  "title_en": "Supply",
-  "definition_zh": "正式定義待匯入。",
-  "example_zh": "正式生活例子待匯入。",
+  "title_zh": "供給衝擊",
+  "title_en": "Supply Shock",
+  "definition_zh": "供給（Supply）是指賣方願意且能夠提供的商品數量。",
+  "example_zh": "颱風讓農作物受損，市場上的青菜變少。當其他條件大致不變時，價格就可能上漲。",
   "challenge": null,
-  "front_image": null,
-  "back_image": null,
-  "release_date": null,
-  "status": "demo"
+  "front_image": "/financial-cards/ep001/duo.png",
+  "back_image": "/financial-cards/ep001/duo.png",
+  "release_date": "2026-10-24",
+  "status": "published",
+  "image_layout": "duo"
 }
