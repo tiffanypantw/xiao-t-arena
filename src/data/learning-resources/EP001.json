@@ -1,0 +1,20 @@
+{
+  "episode_id": "EP001",
+  "title_zh": "颱風來了，青菜為什麼變貴？",
+  "comment_keyword": "颱風",
+  "status": "preview",
+  "release_date": null,
+  "exploration_sheet": {
+    "title_zh": "蔬菜供需學習探索單",
+    "description_zh": "已製作的一頁蔬菜供需探索圖片，檔案待匯入。",
+    "status": "pending",
+    "asset": null,
+    "format": null
+  },
+  "concept_card": {
+    "card_id": "MTT-FL-EP001-SUPPLY",
+    "title_zh": "供給",
+    "title_en": "Supply",
+    "status": "pending"
+  }
+}

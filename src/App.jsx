@@ -1,11 +1,17 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import CardIsland from '@/pages/CardIsland';
 import FinancialCard from '@/pages/FinancialCard';
 import PublicIslands from '@/pages/PublicIslands';
+import EpisodeResources, { ResourceIndex } from '@/pages/EpisodeResources';
+import ExplorationSheet from '@/pages/ExplorationSheet';
 // Public card routes never mount Firebase auth, brand settings, or student-data providers.
 const ArenaApplication = lazy(() => import('./ArenaApplication'));
 export default function App(){return <BrowserRouter><Routes>
+ <Route path="/resources" element={<ResourceIndex/>}/>
+ <Route path="/resources/:episodeId" element={<EpisodeResources/>}/>
+ <Route path="/resources/:episodeId/exploration-sheet" element={<ExplorationSheet/>}/>
+ <Route path="/card-island/ep001/opportunity-cost" element={<Navigate replace to="/resources/ep001"/>}/>
  <Route path="/islands" element={<PublicIslands/>}/>
  <Route path="/card-island" element={<CardIsland/>}/>
  <Route path="/card-island/:episodeId/:slug" element={<FinancialCard/>}/>

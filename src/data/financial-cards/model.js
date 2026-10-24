@@ -15,6 +15,7 @@ export function validateCard(card) {
  const date=card.release_date;
  if(date!==null&&(!/^\d{4}-\d{2}-\d{2}$/.test(date)||Number.isNaN(Date.parse(date+'T00:00:00Z'))||new Date(date+'T00:00:00Z').toISOString().slice(0,10)!==date))errors.push('Invalid release_date');
  if(['published','scheduled'].includes(card.status)&&!date)errors.push('Release date required');
+ if(['published','scheduled'].includes(card.status)&&[card.definition_zh,card.example_zh].some(value=>/待匯入|尚未提供/.test(value||'')))errors.push('Final card content required before publication');
  for(const key of ['front_image','back_image'])if(card[key]!==null&&(typeof card[key]!=='string'||!/^\/financial-cards\/[a-zA-Z0-9/_-]+\.(webp|png|jpg|jpeg|svg)$/.test(card[key])))errors.push(`Invalid ${key}`);
  if(card.challenge!==null){
   const c=card.challenge;
