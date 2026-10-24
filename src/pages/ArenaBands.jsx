@@ -1,3 +1,5 @@
+import ArenaBandsClassic from './ArenaBandsClassic';
+import { BRAND } from '@/lib/firebase';
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronRight, Award } from "lucide-react";
@@ -5,7 +7,7 @@ import PageHeader from "@/components/PageHeader";
 import { ARENA_BANDS } from "@/data/arenaStructure";
 
 // 概念競技場第一層：選年齡段（分齡）。可自由瀏覽，鎖在各主題課程上。
-export default function ArenaBands() {
+function ArenaBandsIslands() {
   const navigate = useNavigate();
 
   return (
@@ -21,8 +23,8 @@ export default function ArenaBands() {
 
         <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="mb-5">
           <div className="text-3xl mb-2">🏆</div>
-          <h1 className="text-2xl font-black text-foreground tracking-tight">概念競技場</h1>
-          <p className="text-sm text-muted-foreground mt-1">選你的年齡段，開始你的學習階段</p>
+          <h1 className="text-2xl font-black text-foreground tracking-tight">冒險學院</h1>
+          <p className="text-sm text-muted-foreground mt-1">選擇你的年齡段，找到適合自己的冒險航線。</p>
         </motion.div>
 
         <div className="space-y-3">
@@ -35,7 +37,7 @@ export default function ArenaBands() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.06 + 0.05 }}
                 onClick={() => navigate(`/arena/band/${b.id}`)}
-                className="w-full text-left rounded-2xl border-2 border-border bg-card p-4 flex items-center gap-3 hover:opacity-90 active:scale-[0.98] transition-all"
+                className="xt-band-card w-full text-left rounded-2xl border-2 border-border bg-card p-4 flex items-center gap-3 hover:opacity-90 active:scale-[0.98] transition-all"
               >
                 <div className={`w-12 h-12 rounded-2xl ${b.iconBg} flex items-center justify-center text-2xl shrink-0`}>{b.emoji}</div>
                 <div className="flex-1">
@@ -56,3 +58,5 @@ export default function ArenaBands() {
     </div>
   );
 }
+
+export default function ArenaBands(){ return BRAND === 'tiffany' ? <ArenaBandsIslands/> : <ArenaBandsClassic/>; }

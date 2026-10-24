@@ -8,6 +8,8 @@ import { BrandProvider } from '@/lib/BrandContext';
 import AdminRoute from '@/components/AdminRoute';
 import Login from '@/pages/Login';
 import Home from './pages/Home';
+import HomeClassic from './pages/HomeClassic';
+import StudentShell from '@/components/islands/StudentShell';
 import Passport from './pages/Passport';
 import VDPractice from './pages/VDPractice';
 import AdminLogin from './pages/admin/AdminLogin';
@@ -64,9 +66,11 @@ const StudentApp = () => {
   if (!user) return <Login />;
 
   return (
+    <StudentShell>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Home" element={<Home />} />
+      <Route path="/classic" element={<HomeClassic />} />
       <Route path="/Passport" element={<Passport />} />
       <Route path="/Profile" element={<Profile />} />
       <Route path="/week/:weekNumber" element={<WeekLearning />} />
@@ -81,6 +85,7 @@ const StudentApp = () => {
       <Route path="/leaderboard" element={<Leaderboard />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
+    </StudentShell>
   );
 };
 
