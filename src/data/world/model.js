@@ -18,3 +18,5 @@ export function validateStories(stories){
  return errors;
 }
 export function dailyNews(stories,now=new Date()){return stories.filter(s=>isStoryVisible(s,now)&&s.content_type==='news'&&s.published_date===localDate(now)).sort((a,b)=>(a.editorial_order??99)-(b.editorial_order??99)).slice(0,3);}
+
+export function formatLearningDate(date){if(!/^\d{4}-\d{2}-\d{2}$/.test(date||''))return '';const [y,m,d]=date.split('-');return `${y} 年 ${Number(m)} 月 ${Number(d)} 日`;}

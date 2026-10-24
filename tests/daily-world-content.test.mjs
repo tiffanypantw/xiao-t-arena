@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {dailyNews,isStoryVisible,validateStories} from '../src/data/world/model.js';
+import {dailyNews,isStoryVisible,validateStories,formatLearningDate} from '../src/data/world/model.js';
 const folder=new URL('../src/data/world/',import.meta.url);
 const news=fs.readdirSync(folder).filter(n=>/^NEWS-20261024-\d{2}\.json$/.test(n)).map(n=>JSON.parse(fs.readFileSync(new URL(n,folder))));
+const episode=JSON.parse(fs.readFileSync(new URL('EP001.json',folder)));
 const now=new Date('2026-10-24T12:00:00Z');
-test('the October 24 edition contains three independently sourced, geographically distinct stories',()=>{assert.equal(news.length,3);assert.deepEqual(validateStories(news),[]);assert.deepEqual(dailyNews([...news].reverse(),now).map(s=>s.country),['肯亞','阿根廷','英國']);assert.equal(new Set(news.map(s=>s.region)).size,3);for(const s of news){assert.equal(s.verified_date,'2026-10-24');assert.ok(s.sources.some(v=>v.url.startsWith('https://')));assert.equal(s.resource_path,null);assert.equal(s.image,null);assert.ok(s.news_facts.length>=2);assert.ok(s.reading_notes.length>=2);}});
-test('news does not overwrite the video series or fabricate worksheet assets',()=>{const episode=JSON.parse(fs.readFileSync(new URL('EP001.json',folder)));assert.equal(episode.episode_id,'EP001');for(const n of news){assert.notEqual(n.id,episode.id);assert.ok(n.episode_id.startsWith('WORLD-'));assert.equal(n.resource_path,null);}});
-test('edition leaves the daily slots after midnight but remains in the exploration archive',()=>{const next=new Date('2026-10-24T16:00:00Z');assert.equal(dailyNews(news,next).length,0);assert.equal(news.filter(s=>isStoryVisible(s,next)).length,3);});
+test('withdrawn news is absent from public lists, daily selection and direct story lookup',()=>{assert.equal(news.length,3);assert.deepEqual(validateStories(news),[]);assert.equal(news.filter(s=>isStoryVisible(s,now)).length,0);assert.deepEqual(dailyNews(news,now),[]);for(const s of news)assert.equal(s.status,'archived');});
+test('only the original typhoon lesson remains visible and its resources retain their URL',()=>{assert.deepEqual([episode,...news].filter(s=>isStoryVisible(s,now)).map(s=>s.id),['ep001']);assert.equal(episode.resource_path,'/resources/ep001');assert.equal(episode.episode_id,'EP001');});
+test('lesson date preserves year month day as the content accumulates, rather than advancing daily',()=>{assert.equal(episode.learning_date,'2026-10-24');assert.equal(formatLearningDate(episode.learning_date),'2026 年 10 月 24 日');assert.equal(isStoryVisible(episode,new Date('2026-11-10T08:00:00Z')),true);assert.equal(formatLearningDate(episode.learning_date),'2026 年 10 月 24 日');});
