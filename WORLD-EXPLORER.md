@@ -43,3 +43,20 @@ https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_land
 ## 尚未串接
 
 ChatGPT「圈粉選題雷達」不會自動將內容送到網站。現階段需編輯、查證與匯入 JSON，再部署；沒有新增排程、Discord 或匿名統計收集端。網站不要求孩子提交立場、輸入個資或完成評分。
+
+## 互動地球升級（2026-10-24）
+
+ExplorerMap 現在延遲載入 MapLibre GL JS 6.15.0（獨立程式與 Worker）；FlatExplorerMap 保留原 SVG 作為手動／載入失敗備援。互動版提供 globe / mercator、縮放 0.5–16、傾斜 0–70 度、台灣定位與立體山地模式；Mapterhorn DEM 高度視覺放大 1.5 倍，並以 hillshade 輔助觀察。數位地圖不是實際測量工具。
+
+自訂樣式 explorer-style.json 取自 OpenFreeMap Liberty，保留原本的版權與來源標示、國界／爭議界線篩選，修改為柔和配色與中文優先地名。底圖資料由 OpenFreeMap/OpenMapTiles/OpenStreetMap 提供；爭議線條依上游資料，不能保證所有爭議皆已完整標示或等同官方立場。地名可能依來源顯示中文或其他語言。縮放後可見更多國家與城市，地圖上只有實際教材有故事地標。
+
+- 地圖接法與樣式來源：https://openfreemap.org/quick_start/
+- 地球投影：https://maplibre.org/maplibre-gl-js/docs/examples/display-a-globe-with-a-vector-map/
+- 高程來源與授權：https://mapterhorn.com/attribution
+- DEM TileJSON：https://tiles.mapterhorn.com/tilejson.json
+
+地圖會向上述服務請求圖磚、字型與高程；未使用定位權限，未傳送學生帳號、收藏或學習紀錄。沒有新增收費金鑰或更動 Firebase。
+
+操作：桌面可拖曳、以按鈕或 Ctrl/⌘＋滾輪縮放；手機使用兩指操作地圖，一指上下滑動頁面。使用 cooperative gestures，避免卡住頁面捲動；亦有按鈕與下方故事卡可供鍵盤操作。減少動畫偏好會取消鏡頭移動動畫。地圖樣式／圖磚未完成載入超過 25 秒或 WebGL 不可用時改用簡易版，仍可閱讀故事。
+
+依賴外部地圖服務與裝置 WebGL，載入速度與細節可能不同；簡易版仍只有陸地輪廓，不能提供詳細國界。
