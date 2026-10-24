@@ -1,0 +1,35 @@
+{
+  "id": "ep001",
+  "episode_id": "EP001",
+  "status": "published",
+  "content_type": "evergreen",
+  "published_date": "2026-10-24",
+  "event_date": null,
+  "country": "台灣",
+  "region": "亞洲",
+  "latitude": 23.7,
+  "longitude": 121,
+  "title": "颱風來了，青菜為什麼變貴？",
+  "summary": "跟著一籃青菜，從農田走到市場，認識天氣、運輸與價格的關係。",
+  "image": "/learning-resources/ep001/sheet.png",
+  "resource_path": "/resources/ep001",
+  "concepts": [
+    {"zh": "供給", "en": "Supply", "definition": "賣方願意且能夠提供的商品數量。", "application": "颱風可能使農作物受損，也可能影響運輸，讓市場上的青菜供給減少。"},
+    {"zh": "供給衝擊", "en": "Supply Shock", "definition": "事件造成商品或服務的供給突然改變，可能增加，也可能減少。", "application": "這份教材觀察的是供給減少的情境；當其他條件大致不變時，價格可能上漲。"}
+  ],
+  "background": "市場上的青菜需要經過種植、採收與運輸。颱風帶來的強風與豪雨，可能影響這些環節。不同作物、地區與時間受到的影響並不相同。",
+  "subjects": [
+    {"name": "自然", "text": "強風與豪雨可能如何影響作物？認識天氣與農業的關係。"},
+    {"name": "地理", "text": "青菜從產地到市場，需要經過哪些地方與運輸路線？"},
+    {"name": "數學", "text": "假設一把青菜由 30 元變成 45 元，增加 15 元，相較原價增加 50%。這是練習數字，不是實際市場報價。"}
+  ],
+  "perspectives": [
+    {"role": "農民", "text": "可能面對作物損失、採收延誤與復耕成本。"},
+    {"role": "運輸與店家", "text": "需要留意道路、到貨數量、進貨成本及保存時間。"},
+    {"role": "家庭與餐廳", "text": "可能調整菜單、份量或食材選擇，以安排有限的預算。"}
+  ],
+  "curiosity": "你家今天吃的青菜，是從哪裡來的？還想知道它旅程中的哪一件事？",
+  "sources": [
+    {"title": "More Than Tiffany｜EP001 原創探索單與概念牌卡", "url": "/resources/ep001", "kind": "原創教材"}
+  ]
+}

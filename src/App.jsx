@@ -5,9 +5,14 @@ import FinancialCard from '@/pages/FinancialCard';
 import PublicIslands from '@/pages/PublicIslands';
 import EpisodeResources, { ResourceIndex } from '@/pages/EpisodeResources';
 import ExplorationSheet from '@/pages/ExplorationSheet';
+import WorldExplorer from '@/pages/WorldExplorer';
+import WorldStory from '@/pages/WorldStory';
 // Public card routes never mount Firebase auth, brand settings, or student-data providers.
 const ArenaApplication = lazy(() => import('./ArenaApplication'));
 export default function App(){return <BrowserRouter><Routes>
+ <Route path="/" element={<WorldExplorer/>}/>
+ <Route path="/world" element={<WorldExplorer/>}/>
+ <Route path="/world/:storyId" element={<WorldStory/>}/>
  <Route path="/resources" element={<ResourceIndex/>}/>
  <Route path="/resources/:episodeId" element={<EpisodeResources/>}/>
  <Route path="/resources/:episodeId/exploration-sheet" element={<ExplorationSheet/>}/>
