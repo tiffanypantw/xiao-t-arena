@@ -12,7 +12,7 @@ export default function WorldMap({ selected = 'academy', onSelect, growth = fals
   const [night, setNight] = useState(false);
   const gesture = useRef(null);
   const shadowId = useId().replace(/:/g, '');
-  const p = (x, y, z) => point(x, y, z, angle, zoom);
+  const p = (x, y, z) => point(x - 85, y, z, angle, zoom * .78);
   const points = (vs) => vs.map(v => p(...v).join(',')).join(' ');
   const poly = (vs, fill, key, props = {}) => <polygon key={key} points={points(vs)} fill={fill} {...props} />;
   const box = (x, z, w, d, h, color, key, base = 16) => {
@@ -37,7 +37,7 @@ export default function WorldMap({ selected = 'academy', onSelect, growth = fals
         {order.map((i,idx)=>{
           const ring=Array.from({length:6},(_,j)=>[i.x+Math.cos(j*Math.PI/3)*116,16,i.z+Math.sin(j*Math.PI/3)*116]);
           const low=ring.map(([x,,z])=>[x,-5,z]);
-          const structures=i.kind==='museum'?[{x:0,z:-10,w:80,d:50,h:51}]:i.kind==='tower'?[{x:0,z:-15,w:30,d:30,h:94},{x:42,z:23,w:34,d:30,h:28}]:i.kind==='dock'?[{x:-20,z:-10,w:44,d:38,h:48},{x:35,z:15,w:29,d:31,h:28}]:[{x:-33,z:-13,w:39,d:33,h:45},{x:28,z:11,w:33,d:30,h:32},{x:6,z:-43,w:28,d:25,h:i.kind==='academy'?65:39}];
+          const structures=(i.kind==='museum'||i.kind==='cards')?[{x:0,z:-10,w:80,d:50,h:51}]:i.kind==='tower'?[{x:0,z:-15,w:30,d:30,h:94},{x:42,z:23,w:34,d:30,h:28}]:i.kind==='dock'?[{x:-20,z:-10,w:44,d:38,h:48},{x:35,z:15,w:29,d:31,h:28}]:[{x:-33,z:-13,w:39,d:33,h:45},{x:28,z:11,w:33,d:30,h:32},{x:6,z:-43,w:28,d:25,h:i.kind==='academy'?65:39}];
           return <g key={i.id}>
             {poly(low,'#b9cbbd','shadow',{filter:`url(#${shadowId})`})}
             {ring.map((v,j)=>{const k=(j+1)%6;return p(...v)[1]+p(...ring[k])[1]>p(i.x,16,i.z)[1]*2?poly([v,ring[k],low[k],low[j]],j%2?'#c7b893':'#ded0ac',`edge-${j}`):null;})}
@@ -46,7 +46,7 @@ export default function WorldMap({ selected = 'academy', onSelect, growth = fals
             {structures.sort((a,b)=>p(i.x+a.x,0,i.z+a.z)[1]-p(i.x+b.x,0,i.z+b.z)[1]).map((b,n)=>{
               const x=i.x+b.x,z=i.z+b.z,y=16+b.h;
               return <g key={`building-${n}`}>{box(x,z,b.w,b.d,b.h,i.color,'body')}
-                {i.kind==='museum'?box(x,z,b.w+9,b.d+8,6,'#ded3b6','roof',y):<>
+                {(i.kind==='museum'||i.kind==='cards')?box(x,z,b.w+9,b.d+8,6,'#ded3b6','roof',y):<>
                   {poly([[x-b.w/2-3,y,z-b.d/2-3],[x+b.w/2+3,y,z-b.d/2-3],[x+b.w/2+3,y+14,z],[x-b.w/2-3,y+14,z]],'#d9b28a','roof1')}
                   {poly([[x-b.w/2-3,y,z+b.d/2+3],[x+b.w/2+3,y,z+b.d/2+3],[x+b.w/2+3,y+14,z],[x-b.w/2-3,y+14,z]],'#ac7959','roof2')}
                 </>}

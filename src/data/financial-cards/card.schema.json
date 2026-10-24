@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "More Than Tiffany Financial Literacy Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "episode_id",
+    "card_id",
+    "slug",
+    "category",
+    "card_type",
+    "title_zh",
+    "title_en",
+    "definition_zh",
+    "example_zh",
+    "front_image",
+    "back_image",
+    "release_date",
+    "status",
+    "challenge"
+  ],
+  "properties": {
+    "episode_id": {
+      "type": "string",
+      "pattern": "^EP[0-9]{3}$"
+    },
+    "card_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1
+    },
+    "card_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title_zh": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title_en": {
+      "type": "string",
+      "minLength": 1
+    },
+    "definition_zh": {
+      "type": "string",
+      "minLength": 1
+    },
+    "example_zh": {
+      "type": "string",
+      "minLength": 1
+    },
+    "front_image": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^/financial-cards/[a-zA-Z0-9/_-]+\\.(webp|png|jpg|jpeg|svg)$"
+        }
+      ]
+    },
+    "back_image": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^/financial-cards/[a-zA-Z0-9/_-]+\\.(webp|png|jpg|jpeg|svg)$"
+        }
+      ]
+    },
+    "release_date": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "format": "date"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "demo",
+        "scheduled",
+        "published",
+        "archived"
+      ]
+    },
+    "challenge": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "prompt",
+            "options",
+            "correct_option_id",
+            "explanation"
+          ],
+          "properties": {
+            "prompt": {
+              "type": "string",
+              "minLength": 1
+            },
+            "options": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "text"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "text": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "correct_option_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "explanation": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "episode_id": "EP001",
+  "card_id": "MTT-FL-001",
+  "slug": "opportunity-cost",
+  "category": "選擇與取捨",
+  "card_type": "concept",
+  "title_zh": "機會成本",
+  "title_en": "Opportunity Cost",
+  "definition_zh": "做出選擇時，放棄的下一個最佳選項的價值，就是機會成本。",
+  "example_zh": "星期六下午，你最想去游泳，其次想和朋友打球，第三才是看電影。如果你選擇游泳，機會成本是放棄打球的價值，而不是把所有沒做的事加起來。",
+  "challenge": {
+    "prompt": "你最想用 100 元買一本書，第二想買一份點心，第三想買貼紙。最後選了書，機會成本是什麼？",
+    "options": [
+      { "id": "snack", "text": "放棄點心的價值" },
+      { "id": "all", "text": "點心和貼紙的價值加總" },
+      { "id": "price", "text": "只有書的標價 100 元" }
+    ],
+    "correct_option_id": "snack",
+    "explanation": "比較的是你放棄的「下一個最佳選項」。依題目的偏好排序，這裡是點心；你的生活中，不同人的下一個最佳選項也可能不同。"
+  },
+  "front_image": null,
+  "back_image": null,
+  "release_date": null,
+  "status": "demo"
+}

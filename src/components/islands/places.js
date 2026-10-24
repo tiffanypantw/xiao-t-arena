@@ -7,4 +7,5 @@ export const PLACES = [
   { id: 'world', name: '世界探索島', subtitle: '金錢冷知識', description: '原來錢還有這些故事！帶著好奇，認識更大的世界。', route: '/trivia', color: '#be9661', land: '#e7dfbe', x: -194, z: 112, kind: 'tower', number: '04' },
   { id: 'shop', name: '選擇商店', subtitle: '買之前先停一下', description: '想買的時候，先用四個問題替自己想清楚。', route: '/stop', color: '#bd8473', land: '#e9d6c5', x: 194, z: 112, kind: 'shop', number: '05' },
   { id: 'lab', name: '生活實驗屋', subtitle: '每週生活任務', description: '到冒險學院選擇週次，帶著任務走進真實生活。', route: '/arena', color: '#8eaa74', land: '#d7e4bf', x: 0, z: 224, kind: 'lab', number: '06' },
+  { id: 'financial-cards', name: '財商牌卡島', subtitle: '小 T 帶你看世界 · 免登入', description: '翻開財商概念牌卡，讀一個生活例子，試著做出自己的選擇。', route: '/card-island', color: '#225258', land: '#dadfc9', x: 388, z: 0, kind: 'cards', number: '07' },
 ];
