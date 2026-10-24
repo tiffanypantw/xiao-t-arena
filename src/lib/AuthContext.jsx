@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth, googleProvider, db } from "./firebase";
+import { runGoogleLogin } from "./googleLogin";
 import {
   signInWithPopup,
   signOut,
@@ -143,11 +144,11 @@ export function AuthProvider({ children }) {
     return true;
   };
 
-  const loginWithGoogle = () => {
-    signInWithPopup(auth, googleProvider).catch((error) => {
-      console.error("Google 登入失敗：", error);
+  const loginWithGoogle = () =>
+    runGoogleLogin(() => signInWithPopup(auth, googleProvider)).then((result) => {
+      if (!result.success) console.error("Google 登入失敗：", result.code);
+      return result;
     });
-  };
 
   const loginWithEmail = async (email, password) => {
     try {

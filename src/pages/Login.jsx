@@ -4,12 +4,28 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Login() {
   const { loginWithGoogle, loginWithEmail, registerWithEmail } = useAuth();
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [googleError, setGoogleError] = useState("");
   const [mode, setMode] = useState("main"); // main | login | register
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handleGoogleLogin = async () => {
+    if (googleLoading) return;
+    setGoogleLoading(true);
+    setGoogleError("");
+    try {
+      const result = await loginWithGoogle();
+      if (!result.success) setGoogleError(result.error);
+    } catch {
+      setGoogleError("Google 登入暫時無法完成，請稍後重試。");
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
 
   const handleEmailLogin = async () => {
     if (!email || !password) { setError("請填寫電子郵件和密碼"); return; }
@@ -56,12 +72,17 @@ export default function Login() {
               </div>
 
               <button
-                onClick={loginWithGoogle}
+                onClick={handleGoogleLogin}
+                disabled={googleLoading}
+                aria-busy={googleLoading}
                 className="w-full bg-foreground text-background font-black text-base rounded-2xl py-4 px-8 hover:opacity-90 transition-all active:scale-[0.98] shadow-lg flex items-center justify-center gap-3"
               >
                 <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5" />
-                用 Google 帳號登入
+                {googleLoading ? "正在開啟 Google 登入…" : "用 Google 帳號登入"}
               </button>
+
+              {googleError && <p role="alert" className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl p-3 leading-relaxed">{googleError}</p>}
+              <p className="text-xs text-muted-foreground leading-relaxed">若使用 App 內建瀏覽器，請改用 Chrome 或 Safari 開啟。</p>
 
               <div className="flex items-center gap-3">
                 <div className="flex-1 h-px bg-border" />
