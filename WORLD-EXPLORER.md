@@ -60,3 +60,19 @@ ExplorerMap 現在延遲載入 MapLibre GL JS 6.15.0（獨立程式與 Worker）
 操作：桌面可拖曳、以按鈕或 Ctrl/⌘＋滾輪縮放；手機使用兩指操作地圖，一指上下滑動頁面。使用 cooperative gestures，避免卡住頁面捲動；亦有按鈕與下方故事卡可供鍵盤操作。減少動畫偏好會取消鏡頭移動動畫。地圖樣式／圖磚未完成載入超過 25 秒或 WebGL 不可用時改用簡易版，仍可閱讀故事。
 
 依賴外部地圖服務與裝置 WebGL，載入速度與細節可能不同；簡易版仍只有陸地輪廓，不能提供詳細國界。
+
+## 每日世界新聞匯入（首版：2026-10-24）
+
+新聞採用 `NEWS-YYYYMMDD-01.json`、`-02.json`、`-03.json`，與 EP001–EP030 的短影音教材分開編號。id 是獨立網址 slug，episode_id 可用 WORLD-20261024-01，edition_label 是畫面顯示名稱。
+
+- editorial_order：當日 1–3 的顯示順序；每日區最多三則。
+- report_date、verified_date：報導日期與編輯核對日期。
+- period_label：統計期間，例如 2026 年 9 月。
+- location_note：定位精度與範圍；城市定位不假裝是整項計畫所在地。
+- news_facts：以 label/text 列出新聞小卡；計畫與預期不寫成已完成。
+- reading_notes：需要保留的限制與背景提醒。
+- visual：conservation / copper / winter-shop，使用原創程式插畫，不是新聞現場照片；無圖時可用一般圖樣。
+
+與其他世界故事相同，resource_path=null 代表沒有兩份完整教材，不會出現假下載或牌卡入口。既有 EP001 不受影響。到下一個台北日期，當日新聞會離開每日三題區，仍保留於地圖與探索館。沒有自動匯入 ChatGPT 排程。
+
+首頁新增國家捷徑；選擇其他地點時，互動地圖會移到該故事所在地。故事頁新增插畫、新聞小卡、日期與閱讀提醒。這次未製作完整遊戲、PDF 或正式概念牌卡。

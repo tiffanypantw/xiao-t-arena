@@ -6,6 +6,7 @@ import style from '@/data/world/explorer-style.json';
 setWorkerUrl(workerUrl);
 export default function InteractiveMap({stories,selected,onSelect,onFallback}){
  const container=useRef(null),mapRef=useRef(null),markers=useRef([]),selectRef=useRef(onSelect);selectRef.current=onSelect;
+ const previousSelection=useRef(selected);
  const [ready,setReady]=useState(false),[notice,setNotice]=useState(''),[globe,setGlobe]=useState(true),[tilted,setTilted]=useState(false),[terrain,setTerrain]=useState(false),[zoom,setZoom]=useState(1.4);
  const reduced=useRef(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
  function camera(options){mapRef.current?.easeTo({...options,duration:reduced.current?0:800});}
@@ -30,12 +31,13 @@ export default function InteractiveMap({stories,selected,onSelect,onFallback}){
   markers.current.forEach(m=>m.remove());
   markers.current=stories.map(s=>{
    const button=document.createElement('button');button.type='button';button.className=`wg-live-pin ${selected===s.id?'is-selected':''}`;button.setAttribute('aria-label',`${s.country}：${s.title}`);button.setAttribute('aria-pressed',String(selected===s.id));
-   const icon=document.createElement('span');icon.textContent='✦';const label=document.createElement('b');label.textContent=`${s.country} · ${s.episode_id}`;button.append(icon,label);
+   const icon=document.createElement('span');icon.textContent='✦';const label=document.createElement('b');label.textContent=`${s.country} · ${s.edition_label||s.episode_id}`;button.append(icon,label);
    button.addEventListener('click',()=>{selectRef.current(s.id);camera({center:[s.longitude,s.latitude],zoom:Math.max(4.5,map.getZoom())});});
    return new Marker({element:button,anchor:'bottom'}).setLngLat([s.longitude,s.latitude]).addTo(map);
   });
   return()=>{markers.current.forEach(m=>m.remove());markers.current=[];};
  },[ready,stories,selected]);
+ useEffect(()=>{if(!ready||selected===previousSelection.current)return;previousSelection.current=selected;const story=stories.find(s=>s.id===selected);if(story)camera({center:[story.longitude,story.latitude],zoom:4.5,pitch:0,bearing:0});},[ready,selected,stories]);
  useEffect(()=>{const map=mapRef.current;if(!ready||!map)return;map.setProjection({type:globe?'globe':'mercator'});},[ready,globe]);
  useEffect(()=>{const map=mapRef.current;if(!ready||!map)return;try{map.setTerrain(terrain?{source:'mtt-terrain',exaggeration:1.5}:null);map.setLayoutProperty('mtt-hillshade','visibility',terrain?'visible':'none');}catch{setNotice('山地資料暫時無法載入，可繼續使用一般地圖。');}},[ready,terrain]);
  function world(){setTerrain(false);camera({center:[65,20],zoom:1.4,pitch:0,bearing:0});}

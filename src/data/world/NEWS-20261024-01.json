@@ -1,0 +1,92 @@
+{
+  "id": "20261024-kenya-conservation",
+  "episode_id": "WORLD-20261024-01",
+  "edition_label": "10/24 第 1 站",
+  "editorial_order": 1,
+  "status": "published",
+  "content_type": "news",
+  "published_date": "2026-10-24",
+  "event_date": "2026-10-21",
+  "report_date": "2026-10-21",
+  "verified_date": "2026-10-24",
+  "country": "肯亞",
+  "region": "非洲",
+  "latitude": -3.1,
+  "longitude": 38.1,
+  "location_note": "地標約位於肯亞察沃地區，用來認識事件所在區域，並非計畫的全部範圍。",
+  "title": "保護大象，為什麼需要十年的資金？",
+  "summary": "從肯亞的自然保育計畫，認識公共財與長期資金：保護棲地，也需要照顧住在附近的人。",
+  "visual": "conservation",
+  "image": null,
+  "resource_path": null,
+  "news_facts": [
+    {
+      "label": "發生了什麼",
+      "text": "肯亞政府與保育夥伴啟動 Thamani Asili 計畫，規劃十年、合計約 1.6 億美元的保育資金安排。"
+    },
+    {
+      "label": "想做到什麼",
+      "text": "官方介紹涵蓋 31 個郡，希望保護棲地，同時支持社區的生計與經濟機會。這些是計畫目標。"
+    }
+  ],
+  "background": "在肯亞，大象、斑馬和人們生活在相鄰的土地上。動物需要水、食物和可以移動的空間；居民也需要農地、收入與安全。\n\n保護一片棲地，並不是立一塊告示牌就完成了。巡護、管理、與居民合作，都需要人力與持續的經費。這次的十年計畫，試著讓這些工作有較長期的資金支持。\n\n想像我們熟悉的社區公園：蓋好之後，還需要清潔、修繕和照顧植物。自然保育的規模更大，但也有同樣的「持續照顧」需求。",
+  "concepts": [
+    {
+      "zh": "公共財",
+      "en": "Public Goods",
+      "definition": "有些好處不容易把別人排除在外，也不會因為一個人享用，就讓另一個人少一份。經濟學用「非排他性」與「非競爭性」描述這兩個特徵。",
+      "application": "自然保育帶來的部分生態利益具有公共財性質；但土地、野生動物與需要門票的觀光服務，不能全部直接叫做公共財。"
+    },
+    {
+      "zh": "長期資金",
+      "en": "Long-term Financing",
+      "definition": "為需要多年才能完成的目標，安排能持續支持工作的資金。它不只是一筆錢的大小，也關係到何時到位、如何使用。",
+      "application": "Thamani Asili 以十年為期。承諾的總額並不表示所有錢都已經支付，也不保證所有預期成果都會實現。"
+    }
+  ],
+  "subjects": [
+    {
+      "name": "自然｜棲地",
+      "text": "棲地提供動物食物、水源與活動空間。認識一種動物時，也可以看看牠需要什麼樣的環境。"
+    },
+    {
+      "name": "地理｜跨越地圖上的線",
+      "text": "先找肯亞，再找南邊的坦尚尼亞。動物活動與生態系的範圍，不一定剛好和行政區或國界重合。"
+    },
+    {
+      "name": "數學｜總額與每年不同",
+      "text": "十年的總預算和某一年的支出，是不同的數字。即使把總額除以十得到平均，也不能假定每年一定花同樣多。"
+    }
+  ],
+  "perspectives": [
+    {
+      "role": "當地居民",
+      "text": "可能獲得觀光或棲地管理的工作，也可能面對野生動物接近農田、土地使用與生活安全的問題。"
+    },
+    {
+      "role": "政府與資金夥伴",
+      "text": "需要安排資金、訂出目標並追蹤進度，讓長期承諾逐步落實。"
+    },
+    {
+      "role": "保育工作者",
+      "text": "關心動物與棲地，也需要與生活在附近的社區合作。保護自然不能忽略人的處境。"
+    }
+  ],
+  "curiosity": "你去過的公園，除了最初興建的費用，還有哪些事情需要一直有人照顧？",
+  "reading_notes": [
+    "1.6 億美元是多年計畫的資金安排，不是已經花完的金額。",
+    "就業與受益人數屬於預期目標；本頁不把它們當成已完成成果。"
+  ],
+  "sources": [
+    {
+      "title": "Kenya Wildlife Service｜Thamani Asili 計畫啟動公告",
+      "url": "https://kws.go.ke/thamani-asili-launched-a-new-chapter-for-conservation-and-community-prosperity/",
+      "kind": "官方計畫介紹"
+    },
+    {
+      "title": "The Nature Conservancy｜肯亞長期保育資金計畫",
+      "url": "https://www.nature.org/en-us/newsroom/thamani-asili-pfp-kenya/",
+      "kind": "計畫合作方公告"
+    }
+  ]
+}

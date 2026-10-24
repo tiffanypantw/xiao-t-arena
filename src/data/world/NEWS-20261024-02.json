@@ -1,0 +1,93 @@
+{
+  "id": "20261024-argentina-copper",
+  "episode_id": "WORLD-20261024-02",
+  "edition_label": "10/24 第 2 站",
+  "editorial_order": 2,
+  "status": "published",
+  "content_type": "news",
+  "published_date": "2026-10-24",
+  "event_date": "2026-10-23",
+  "report_date": "2026-10-23",
+  "verified_date": "2026-10-24",
+  "country": "阿根廷",
+  "region": "南美洲",
+  "latitude": -24.78,
+  "longitude": -65.41,
+  "location_note": "地標位於薩爾塔地區，用來認識計畫所在省分，並非礦區的精確位置。",
+  "title": "一座還沒生產的銅礦，為什麼需要先花大錢？",
+  "summary": "從阿根廷 Taca Taca 銅礦計畫，認識資本投資與投資誘因，看看一條電線背後的世界。",
+  "visual": "copper",
+  "image": null,
+  "resource_path": null,
+  "news_facts": [
+    {
+      "label": "最新進展",
+      "text": "Reuters 10 月 23 日引述阿根廷外長說法：First Quantum 計畫在年底前，為 Taca Taca 銅礦申請大型投資優惠制度 RIGI。"
+    },
+    {
+      "label": "金額代表什麼",
+      "text": "官員提到初期投資約 42 億美元，後續可能達 52.5 億美元；這是開發計畫的預估，並非已投入金額。"
+    }
+  ],
+  "background": "家裡的電線、電力設備和許多電子產品，都會用到銅。銅能良好地傳導電流，但從地下礦藏到可用的材料，需要經過許多步驟。\n\n在阿根廷西北部的薩爾塔省，Taca Taca 是一個銅礦開發計畫。在賣出第一批產品之前，企業就可能需要先準備道路、機械、加工與供電設施，並處理許可與融資。\n\n先支出、後生產，表示資金要等一段時間才可能帶來收入。未來的成本、價格、許可與環境條件，也可能和原先預期不同。",
+  "concepts": [
+    {
+      "zh": "資本投資",
+      "en": "Capital Investment",
+      "definition": "把資金投入能長期使用的設備、設施或生產能力，例如機器與加工廠。",
+      "application": "礦場開始生產前，就可能需要先建設與採購。投入大筆資金不等於未來一定賺錢。"
+    },
+    {
+      "zh": "投資誘因",
+      "en": "Investment Incentive",
+      "definition": "為了鼓勵投資而提供的條件，例如稅務或制度安排。",
+      "application": "RIGI 是阿根廷的大型投資優惠制度。準備申請、正式核准、取得資金和開始生產，是不同的階段。"
+    }
+  ],
+  "subjects": [
+    {
+      "name": "自然｜銅與電",
+      "text": "銅的導電性良好，因此常用於電線和電力設備。材料的特性，會影響人們如何使用它。"
+    },
+    {
+      "name": "地理｜原料的旅程",
+      "text": "在地圖上找阿根廷西北部的薩爾塔省，再看鄰近的智利。原料、加工與產品製造，可能發生在不同地方。"
+    },
+    {
+      "name": "科技｜一條供應鏈",
+      "text": "從礦石、加工材料、零件到成品，需要多種工作接力。一支手機的背後，可能連著許多國家的產業。"
+    }
+  ],
+  "perspectives": [
+    {
+      "role": "開發企業",
+      "text": "需要安排許可、資金與建設，並承擔成本變動及未來銅價的不確定性。"
+    },
+    {
+      "role": "政府與地方產業",
+      "text": "可能期待工作機會、供應商合作與未來稅收，也需要評估優惠與公共資源的使用。"
+    },
+    {
+      "role": "當地居民",
+      "text": "可能關心工作、用水、環境與生活方式。實際影響要看項目資料、審查與後續執行情況。"
+    }
+  ],
+  "curiosity": "一塊地下的銅礦石，要經過哪些人的工作，才會變成家裡的電線？",
+  "reading_notes": [
+    "本頁依 10 月 23 日的報導介紹申請規劃，不把計畫寫成已獲核准或已全面投產。",
+    "投資額是規劃中的金額，不是企業獲利，也不是政府一定能收到的稅金。",
+    "企業的項目介紹反映開發方資訊；環境與用水影響仍需查閱審查及其他相關資料。"
+  ],
+  "sources": [
+    {
+      "title": "Reuters｜Taca Taca 投資與 RIGI 申請規劃（StreetInsider 轉載）",
+      "url": "https://www.streetinsider.com/Reuters/First%2BQuantum%2Breadies%2BArgentina%2Btax-break%2Bplans%2Bfor%2B%245.3%2Bbillion%2BTaca%2BTaca%2Bcopper%2Bproject/27226942.html",
+      "kind": "2026-10-23 新聞報導"
+    },
+    {
+      "title": "First Quantum Minerals｜Taca Taca 項目介紹",
+      "url": "https://www.first-quantum.com/operations/taca-taca/",
+      "kind": "企業原始資料"
+    }
+  ]
+}

@@ -17,4 +17,4 @@ export function validateStories(stories){
  if(new Set(stories.map(s=>s.id)).size!==stories.length)errors.push('Duplicate story id');
  return errors;
 }
-export function dailyNews(stories,now=new Date()){return stories.filter(s=>isStoryVisible(s,now)&&s.content_type==='news'&&s.published_date===localDate(now)).slice(0,3);}
+export function dailyNews(stories,now=new Date()){return stories.filter(s=>isStoryVisible(s,now)&&s.content_type==='news'&&s.published_date===localDate(now)).sort((a,b)=>(a.editorial_order??99)-(b.editorial_order??99)).slice(0,3);}
