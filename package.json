@@ -7,15 +7,16 @@
     "dev": "vite",
     "dev:tiffany": "vite --mode tiffany",
     "dev:ngfa": "vite --mode ngfa",
-    "build": "node scripts/validate-financial-cards.mjs && node scripts/validate-world.mjs && vite build",
-    "build:tiffany": "node scripts/validate-financial-cards.mjs && node scripts/validate-world.mjs && vite build --mode tiffany",
-    "build:ngfa": "node scripts/validate-financial-cards.mjs && node scripts/validate-world.mjs && vite build --mode ngfa",
+    "build": "node scripts/validate-missions.mjs && node scripts/validate-financial-cards.mjs && node scripts/validate-world.mjs && vite build && node scripts/build-mission-pages.mjs",
+    "build:tiffany": "node scripts/validate-missions.mjs && node scripts/validate-financial-cards.mjs && node scripts/validate-world.mjs && vite build --mode tiffany && node scripts/build-mission-pages.mjs",
+    "build:ngfa": "node scripts/validate-missions.mjs && node scripts/validate-financial-cards.mjs && node scripts/validate-world.mjs && vite build --mode ngfa && node scripts/build-mission-pages.mjs",
     "lint": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc -p ./jsconfig.json",
     "preview": "vite preview",
     "validate:cards": "node scripts/validate-financial-cards.mjs",
-    "validate:world": "node scripts/validate-world.mjs"
+    "validate:world": "node scripts/validate-world.mjs",
+    "validate:missions": "node scripts/validate-missions.mjs"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^17.0.0",
@@ -81,11 +82,14 @@
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.21.0",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "eslint-plugin-unused-imports": "^4.4.1",
     "globals": "^15.15.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.3",
     "vite": "^6.2.0"
   }
 }

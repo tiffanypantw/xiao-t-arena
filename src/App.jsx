@@ -1,5 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import MoneyMission, {MissionDirectory} from '@/pages/MoneyMissions';
+import LocaleMetadata from '@/components/missions/LocaleMetadata';
 import CardIsland from '@/pages/CardIsland';
 import FinancialCard from '@/pages/FinancialCard';
 import PublicIslands from '@/pages/PublicIslands';
@@ -9,7 +11,13 @@ import WorldExplorer from '@/pages/WorldExplorer';
 import WorldStory from '@/pages/WorldStory';
 // Public card routes never mount Firebase auth, brand settings, or student-data providers.
 const ArenaApplication = lazy(() => import('./ArenaApplication'));
-export default function App(){return <BrowserRouter><Routes>
+export default function App(){return <BrowserRouter><LocaleMetadata/><Routes>
+ <Route path="/en" element={<MissionDirectory home/>}/>
+ <Route path="/en/missions" element={<MissionDirectory/>}/>
+ <Route path="/en/*" element={<MissionDirectory/>}/>
+ <Route path="/en/missions/:missionId" element={<MoneyMission/>}/>
+ <Route path="/missions" element={<MissionDirectory locale="zh-TW"/>}/>
+ <Route path="/missions/:missionSlug" element={<MoneyMission locale="zh-TW"/>}/>
  <Route path="/" element={<WorldExplorer/>}/>
  <Route path="/world" element={<WorldExplorer/>}/>
  <Route path="/world/:storyId" element={<WorldStory/>}/>

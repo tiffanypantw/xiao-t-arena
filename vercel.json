@@ -1,5 +1,32 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    {
+      "source": "/en/missions/001",
+      "destination": "/en/missions/001/index.html"
+    },
+    {
+      "source": "/en/missions/002",
+      "destination": "/en/missions/002/index.html"
+    },
+    {
+      "source": "/missions/vegetable-market",
+      "destination": "/missions/vegetable-market/index.html"
+    },
+    {
+      "source": "/en/missions",
+      "destination": "/en/missions/index.html"
+    },
+    {
+      "source": "/missions",
+      "destination": "/missions/index.html"
+    },
+    {
+      "source": "/en",
+      "destination": "/en/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
   ]
 }

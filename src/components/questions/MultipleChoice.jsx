@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, XCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 export default function MultipleChoice({ question, onAnswer }) {
   const [selected, setSelected] = useState(null);
